@@ -1,0 +1,9 @@
+/* domain platform enhancements — scroll anchors only (header styles in css/site-header.css) */
+
+#section-fields,
+#section-certificates,
+#section-diplomas,
+#section-fellowships,
+#section-mahara {
+    scroll-margin-top: 110px;
+}

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <script src="../assets/no-ajax.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>الخريجون | لوحة تحكم مركز التعلم المستمر</title>
+    <link rel="icon" href="../assets/ba5c2cc1-5c62-4b77-8607-bead454d224e.png" type="image/png">
+    <link rel="stylesheet" href="../assets/vendor/fonts/google-fonts-local.css">
+    <link rel="stylesheet" href="./css/admin.css">
+</head>
+<body class="admin-dashboard-body" data-admin-title="الخريجون" data-admin-desc="مؤشرات التخرج والشهادات والرضا" data-admin-sidebar-active="graduates.html">
+    <div class="admin-app admin-app--dashboard">
+        <aside class="admin-sidebar" aria-label="القائمة الجانبية">
+                                    <div class="admin-sidebar__brand">
+                <a href="index.html" class="admin-sidebar__logo-link">
+                    <img src="../assets/ba5c2cc1-5c62-4b77-8607-bead454d224e.png" alt="مركز التعلم المستمر — معهد البحوث بجامعة الامير مقرن">
+                </a>
+                <p class="admin-sidebar__org">مركز التعلم المستمر</p>
+                <p class="admin-sidebar__org-sub">معهد البحوث والدراسات الاستشارية — جامعة الامير مقرن</p>
+            </div>
+            <div class="admin-sidebar__scroll">
+                <ul class="admin-side-nav"></ul>
+            </div>
+            <div class="admin-sidebar__foot"><a href="../index.html">← الموقع العام</a></div>
+        </aside>
+
+        <div class="admin-main">
+            <header class="admin-header">
+                <button type="button" class="admin-sidebar-toggle" id="admin-sidebar-toggle" aria-label="فتح القائمة">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+                </button>
+                <div class="admin-header__start">
+                    <div class="admin-user-pill">
+                        <div class="admin-avatar" id="admin-avatar">م</div>
+                        <span id="admin-user-name">مسؤول المنصة</span>
+                    </div>
+                    <form class="admin-search" role="search" onsubmit="return false;">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3-3"/></svg>
+                        <input type="search" placeholder="بحث..." aria-label="بحث">
+                    </form>
+                </div>
+                <nav class="admin-header__links" aria-label="روابط عليا">
+                    <a href="index.html">الرئيسية</a>
+                    <a href="index.html" class="is-active">الإحصائيات</a>
+                    <a href="#">المشروعات</a>
+                </nav>
+                <button type="button" class="admin-btn-outline" id="admin-logout">تسجيل الخروج</button>
+            </header>
+
+            <nav class="admin-subnav" aria-label="أقسام الإحصائيات">
+                <ul class="admin-subnav__list"></ul>
+            </nav>
+
+            <div class="admin-content admin-content--dashboard">
+                <div class="dash-grid dash-fin-top">
+                    <div class="dash-hero-card">
+                        <span>الطلاب الخريجون (الشهادات الصادرة)</span>
+                        <strong>0</strong>
+                        <div class="dash-hero-card__stats">
+                            <span>المتوقعون للتخرج: 0</span>
+                            <span>المؤهلون للتخرج: 0</span>
+                            <span>إجمالي الشهادات: 0</span>
+                        </div>
+                    </div>
+                    <div class="dash-side-rates">
+                        <div class="dash-progress-row">
+                            <div class="head"><span>نسبة إنجاز المراجعة</span><span>0%</span></div>
+                            <div class="dash-rate-bar"><span style="width:0%"></span></div>
+                        </div>
+                        <div class="dash-progress-row">
+                            <div class="head"><span>نسبة إنجاز الاعتماد</span><span>0%</span></div>
+                            <div class="dash-rate-bar"><span style="width:0%"></span></div>
+                        </div>
+                        <div class="dash-progress-row">
+                            <div class="head"><span>نسبة إنجاز الإصدار</span><span>0%</span></div>
+                            <div class="dash-rate-bar"><span style="width:0%"></span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="dash-block-title">مسار التخرج</h3>
+                <div class="dash-metric-grid">
+                    <div class="dash-metric-card">
+                        <div class="dash-metric-card__icon dash-metric-card__icon--teal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/></svg></div>
+                        <div><span class="label">متوقع التخرج</span><strong>0</strong><span class="hint">في الفصل الحالي</span></div>
+                    </div>
+                    <div class="dash-metric-card">
+                        <div class="dash-metric-card__icon dash-metric-card__icon--green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg></div>
+                        <div><span class="label">مؤهل للتخرج</span><strong>0</strong><span class="hint">استوفى المتطلبات</span></div>
+                    </div>
+                    <div class="dash-metric-card">
+                        <div class="dash-metric-card__icon dash-metric-card__icon--blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+                        <div><span class="label">أكمل المسار</span><strong>0</strong><span class="hint">جاهز للشهادة</span></div>
+                    </div>
+                    <div class="dash-metric-card">
+                        <div class="dash-metric-card__icon dash-metric-card__icon--purple"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div>
+                        <div><span class="label">خريج عام — نقطة خروج</span><strong>0</strong><span class="hint">خريجون بدون برنامج محدد</span></div>
+                    </div>
+                </div>
+
+                <h3 class="dash-block-title">خط إنتاج الشهادات</h3>
+                <div class="dash-metric-grid">
+                    <div class="dash-metric-card">
+                        <div class="dash-metric-card__icon dash-metric-card__icon--teal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.12 2.12 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></div>
+                        <div><span class="label">اكتمل إدخال البيانات</span><strong>0</strong><span class="hint">جاهز للمراجعة</span></div>
+                    </div>
+                    <div class="dash-metric-card">
+                        <div class="dash-metric-card__icon dash-metric-card__icon--orange"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 16h.01"/></svg></div>
+                        <div><span class="label">قيد المراجعة</span><strong>0</strong><span class="hint">تحت الفحص</span></div>
+                    </div>
+                    <div class="dash-metric-card">
+                        <div class="dash-metric-card__icon dash-metric-card__icon--green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></div>
+                        <div><span class="label">تمت المراجعة</span><strong>0</strong><span class="hint">بانتظار الاعتماد</span></div>
+                    </div>
+                    <div class="dash-metric-card">
+                        <div class="dash-metric-card__icon dash-metric-card__icon--blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+                        <div><span class="label">قيد الاعتماد</span><strong>0</strong><span class="hint">لدى مسؤول الاعتماد</span></div>
+                    </div>
+                </div>
+                <div class="dash-metric-grid dash-metric-grid--2" style="margin-top:0.75rem;">
+                    <div class="dash-metric-card">
+                        <div class="dash-metric-card__icon dash-metric-card__icon--green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg></div>
+                        <div><span class="label">معتمد</span><strong>0</strong><span class="hint">جاهز للإصدار</span></div>
+                    </div>
+                    <div class="dash-metric-card">
+                        <div class="dash-metric-card__icon dash-metric-card__icon--purple"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg></div>
+                        <div><span class="label">قيد الإصدار</span><strong>0</strong><span class="hint">بانتظار الطباعة / التسليم</span></div>
+                    </div>
+                </div>
+
+                <div class="dash-panel" style="margin-top:1rem;">
+                    <h3 class="dash-panel__title">نسب إنجاز الشهادات</h3>
+                    <div class="dash-side-rates" style="box-shadow:none;border:none;padding:0.5rem 0 0;">
+                        <div class="dash-progress-row">
+                            <div class="head"><span>إدخال البيانات</span><span>0%</span></div>
+                            <div class="dash-rate-bar"><span style="width:0%"></span></div>
+                        </div>
+                        <div class="dash-progress-row">
+                            <div class="head"><span>المراجعة</span><span>0%</span></div>
+                            <div class="dash-rate-bar"><span style="width:0%"></span></div>
+                        </div>
+                        <div class="dash-progress-row">
+                            <div class="head"><span>الاعتماد</span><span>0%</span></div>
+                            <div class="dash-rate-bar"><span style="width:0%"></span></div>
+                        </div>
+                        <div class="dash-progress-row">
+                            <div class="head"><span>الإصدار والتسليم</span><span>0%</span></div>
+                            <div class="dash-rate-bar"><span style="width:0%"></span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dash-charts-2x2">
+                    <div class="dash-panel dash-chart-panel">
+                        <h3 class="dash-panel__title">الطلاب الذين صدرت شهاداتهم</h3>
+                        <div class="dash-chart-wrap"><canvas id="chart-issued" aria-label="الشهادات الصادرة حسب البرنامج"></canvas></div>
+                    </div>
+                    <div class="dash-panel dash-chart-panel">
+                        <h3 class="dash-panel__title">خريجو البرامج</h3>
+                        <div class="dash-chart-wrap"><canvas id="chart-program-grads" aria-label="خريجو البرامج"></canvas></div>
+                    </div>
+                    <div class="dash-panel dash-chart-panel">
+                        <h3 class="dash-panel__title">مسؤولو الاعتماد</h3>
+                        <div class="dash-chart-empty" id="chart-accreditors-empty">لا توجد بيانات</div>
+                        <div class="dash-chart-wrap" style="display:none"><canvas id="chart-accreditors"></canvas></div>
+                    </div>
+                    <div class="dash-panel dash-chart-panel">
+                        <h3 class="dash-panel__title">مسؤولو المراجعة</h3>
+                        <div class="dash-chart-empty" id="chart-reviewers-empty">لا توجد بيانات</div>
+                        <div class="dash-chart-wrap" style="display:none"><canvas id="chart-reviewers"></canvas></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="./js/admin-auth.js"></script>
+    <script src="./js/admin-shell.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <script src="./js/admin-graduates.js"></script>
+    <script></script>
+</body>
+</html>

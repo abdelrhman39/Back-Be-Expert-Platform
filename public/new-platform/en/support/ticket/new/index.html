@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html class="no-js use-domain-a11y" lang="en" dir="ltr">
+
+<head>
+    <script src="../../../../assets/no-ajax.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../../../../assets/vendor/images/site-favicon.png" type="image/x-icon">
+    <title>Open a ticket | Continuing Learning Center</title>
+    <meta name="description" content="Submit a support ticket to the platform team.">
+    <link rel="canonical" href="./">
+    <link rel="alternate" hreflang="ar" href="../../../../ar/support/ticket/new/index.html">
+
+    <link rel="stylesheet" href="../../../../assets/all.css">
+    <link rel="stylesheet" href="../../../../assets/vendor/fonts/google-fonts-local.css">
+    <link rel="stylesheet" media="all" href="../../../../assets/muneer.min.css">
+    <link rel="stylesheet" href="../../../../assets/toastr.min.css">
+    <link rel="stylesheet" href="../../../../assets/style.css">
+    <link rel="stylesheet" href="../../../../assets/components.css">
+    <link rel="stylesheet" href="../../../../css/site-enhancements.css">
+    <link rel="stylesheet" href="../../../../css/portal-shell.css">
+    <link rel="stylesheet" href="../../../../assets/domain-a11y-panel.css">
+</head>
+
+<body class="portal-body d-flex flex-column min-vh-100 bg-white">
+    <header class="portal-header">
+        <div class="portal-header__inner">
+            <a class="portal-logo" href="../../../../index.html">
+                <img src="../../../../assets/vendor/images/site-favicon.png" alt="" width="48" height="48">
+                <span>Continuing Learning Center</span>
+            </a>
+            <nav class="portal-nav" aria-label="Support">
+                <a href="./index.html" class="is-active">Open a ticket</a>
+                <a href="../search/index.html">Track ticket</a>
+                <a href="../../faq/index.html">FAQ</a>
+                <a href="../../contact/index.html">Contact channels</a>
+            </nav>
+            <div class="portal-actions align-items-center gap-2">
+                <a class="small text-decoration-none" href="../../../../ar/support/ticket/new/index.html" hreflang="ar">العربية</a>
+                <a class="portal-btn-solid portal-btn-teal" href="../../../login/index.html">Sign in</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="portal-bg-support flex-grow-1 py-4 py-lg-5">
+        <div class="container" style="max-width:1100px;">
+            <div class="row g-4 align-items-start">
+                <div class="col-lg-7 order-1">
+                    <h1 class="h3 fw-bold mb-1">Welcome</h1>
+                    <p class="text-muted mb-4">Please fill in the required information so we can help you faster.</p>
+
+                    <form action="#" method="post" enctype="multipart/form-data" novalidate class="bg-white p-3 p-md-4 rounded-3 shadow-sm border">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label" for="t-name">Name</label>
+                                <input type="text" class="form-control" id="t-name" name="name" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label" for="t-email">Email</label>
+                                <input type="email" class="form-control" id="t-email" name="email" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label" for="t-nid">National ID</label>
+                                <input type="text" class="form-control" id="t-nid" name="national_id" placeholder="1xxxxxxxx or 2xxxxxxxx" inputmode="numeric">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label" for="t-mobile">Mobile</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">+966</span>
+                                    <input type="tel" class="form-control" id="t-mobile" name="mobile" inputmode="numeric">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label" for="t-cat">Category</label>
+                                <select class="form-select" id="t-cat" name="category" required>
+                                    <option value="" disabled selected>Select</option>
+                                    <option value="tech">Technical</option>
+                                    <option value="account">Account</option>
+                                    <option value="course">Course / content</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label" for="t-spec">Specialization / topic</label>
+                                <input type="text" class="form-control" id="t-spec" name="specialization">
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label" for="t-subj">Subject</label>
+                                <input type="text" class="form-control" id="t-subj" name="subject" required>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label" for="t-desc">Description</label>
+                                <textarea class="form-control" id="t-desc" name="description" rows="7" required placeholder="Describe your issue or question in detail…"></textarea>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label">Attachments <span class="text-muted small">(multiple files allowed)</span></label>
+                                <input type="file" class="form-control" name="files[]" multiple>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-lg w-100 mt-4">Send ticket</button>
+                    </form>
+                </div>
+                <div class="col-lg-5 order-2">
+                    <aside class="portal-aside-card h-100">
+                        <div class="text-center mb-3 fs-1" aria-hidden="true">💻</div>
+                        <h2 class="text-center">Open a ticket</h2>
+                        <p class="mb-0 text-center text-muted small">Create a support ticket to reach our team for technical issues or questions about the platform.</p>
+                    </aside>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="portal-footer">
+        <div class="container text-center portal-footer-bottom border-0 mt-0 pt-2 pb-3" style="max-width:1100px;">
+            <a href="../../../../index.html">Home</a>
+        </div>
+    </footer>
+
+    <div id="portal-cookie" class="portal-cookie" role="dialog" aria-label="Cookies">
+        <strong class="d-block mb-2">We use cookies</strong>
+        <p class="mb-3 text-muted small">This website uses essential cookies where needed. Optional analytics may be offered.</p>
+        <div class="d-flex gap-2 flex-wrap">
+            <button type="button" id="portal-cookie-accept" class="btn btn-sm btn-primary text-white">Accept all</button>
+            <button type="button" id="portal-cookie-reject" class="btn btn-sm btn-light border">Reject all</button>
+        </div>
+    </div>
+
+    <script src="../../../../assets/portal-shell.js" defer></script>
+    <script src="../../../../assets/domain-a11y-panel.js" defer></script>
+</body>
+
+</html>

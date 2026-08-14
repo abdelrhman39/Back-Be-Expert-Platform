@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <script src="../assets/no-ajax.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>المستويات الدراسية | لوحة تحكم مركز التعلم المستمر</title>
+    <link rel="icon" href="../assets/ba5c2cc1-5c62-4b77-8607-bead454d224e.png" type="image/png">
+    <link rel="stylesheet" href="../assets/vendor/fonts/google-fonts-local.css">
+    <link rel="stylesheet" href="./css/admin.css">
+</head>
+<body class="admin-dashboard-body" data-admin-layout="app" data-admin-sidebar-active="levels.html"
+    data-admin-breadcrumb='[{"href":"index.html","label":"الرئيسية"},{"label":"المستويات الدراسية"}]'>
+
+    <div class="admin-app admin-app--dashboard">
+        <aside class="admin-sidebar" aria-label="القائمة الجانبية">
+            <div class="admin-sidebar__brand">
+                <a href="index.html" class="admin-sidebar__logo-link">
+                    <img src="../assets/ba5c2cc1-5c62-4b77-8607-bead454d224e.png" alt="مركز التعلم المستمر">
+                </a>
+                <p class="admin-sidebar__org">مركز التعلم المستمر</p>
+                <p class="admin-sidebar__org-sub">معهد البحوث والدراسات الاستشارية — جامعة الامير مقرن</p>
+            </div>
+            <div class="admin-sidebar__scroll"><ul class="admin-side-nav"></ul></div>
+            <div class="admin-sidebar__foot"><a href="../index.html">← الموقع العام</a></div>
+        </aside>
+        <div class="admin-main">
+            <header class="admin-header admin-header--app">
+                <button type="button" class="admin-sidebar-toggle" id="admin-sidebar-toggle" aria-label="فتح القائمة">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+                </button>
+                <nav class="admin-breadcrumb" id="admin-breadcrumb" aria-label="مسار التنقل"></nav>
+                <div class="admin-header__tools">
+                    <form class="admin-search" role="search" onsubmit="return false;">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3-3"/></svg>
+                        <input type="search" placeholder="بحث..." aria-label="بحث">
+                    </form>
+                    <div class="admin-user-pill"><div class="admin-avatar" id="admin-avatar">م</div><span id="admin-user-name">مسؤول المنصة</span></div>
+                    <button type="button" class="admin-btn-outline" id="admin-logout">خروج</button>
+                </div>
+            </header>
+            <div class="admin-content admin-content--app">
+                <section class="admin-crud-card admin-crud-card--filter">
+                    <div class="admin-crud-card__head">
+                        <h2>بحث متقدم <span class="admin-crud-card__meta" id="filter-result-meta">(نتائج البحث 6 مستوى دراسي)</span></h2>
+                    </div>
+                    <form id="levels-filter-form" class="admin-filter-grid admin-filter-grid--levels">
+                        <div class="admin-field">
+                            <label for="f-title">عنوان المستوى الدراسي</label>
+                            <input type="search" class="admin-control" id="f-title" name="title" placeholder="ابحث بعنوان المستوى">
+                        </div>
+                        <div class="admin-field">
+                            <label for="f-status">الحالة</label>
+                            <select class="admin-control" id="f-status" name="status">
+                                <option value="">الكل</option>
+                                <option value="active">مفعل</option>
+                                <option value="inactive">غير مفعل</option>
+                            </select>
+                        </div>
+                        <div class="admin-filter-actions">
+                            <button type="submit" class="admin-btn-primary admin-btn-primary--sm">تصفية</button>
+                            <button type="reset" class="admin-btn-secondary admin-btn-secondary--sm">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16" aria-hidden="true"><path d="M3 12a9 9 0 0115-6.7L21 8"/><path d="M21 12a9 9 0 01-15 6.7L3 16"/></svg>
+                                إعادة تعيين
+                            </button>
+                        </div>
+                    </form>
+                </section>
+                <section class="admin-crud-card">
+                    <div class="admin-crud-card__head"><h2>عرض كافة المستويات الدراسية</h2></div>
+                    <div class="admin-table-wrap">
+                        <table class="admin-data-table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">اسم المستوى الدراسي</th>
+                                    <th scope="col">الحالة</th>
+                                    <th scope="col"><span class="visually-hidden">إجراءات</span></th>
+                                </tr>
+                            </thead>
+                            <tbody id="levels-tbody"></tbody>
+                        </table>
+                    </div>
+                    <nav class="admin-pagination" id="levels-pagination" aria-label="ترقيم الصفحات"></nav>
+                </section>
+            </div>
+        </div>
+    </div>
+    <script src="./js/admin-auth.js"></script>
+    <script src="./js/admin-levels-data.js"></script>
+    <script src="./js/admin-shell.js"></script>
+    <script src="./js/admin-table-actions.js"></script>
+    <script src="./js/admin-levels.js"></script>
+    <script></script>
+</body>
+</html>

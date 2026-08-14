@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html class="no-js use-domain-a11y" lang="en" dir="ltr">
+
+<head>
+    <script src="../../assets/no-ajax.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../../assets/vendor/images/site-favicon.png" type="image/x-icon">
+    <title>Sign in | Continuing Learning Center</title>
+    <meta name="description" content="Sign in with your national ID or mobile number.">
+    <link rel="canonical" href="./">
+    <link rel="alternate" hreflang="ar" href="../../ar/login/index.html">
+
+    <link rel="stylesheet" href="../../assets/all.css">
+    <link rel="stylesheet" href="../../assets/vendor/fonts/google-fonts-local.css">
+    <link rel="stylesheet" media="all" href="../../assets/muneer.min.css">
+    <link rel="stylesheet" href="../../assets/toastr.min.css">
+    <link rel="stylesheet" href="../../assets/style.css">
+    <link rel="stylesheet" href="../../assets/components.css">
+    <link rel="stylesheet" href="../../css/site-enhancements.css">
+    <link rel="stylesheet" href="../../css/portal-shell.css">
+    <link rel="stylesheet" href="../../assets/domain-a11y-panel.css">
+</head>
+
+<body class="portal-body d-flex flex-column min-vh-100">
+    <header class="portal-header">
+        <div class="portal-header__inner">
+            <a class="portal-logo" href="../../index.html">
+                <img src="../../assets/vendor/images/site-favicon.png" alt="" width="48" height="48">
+                <span>Continuing Learning Center</span>
+            </a>
+            <nav class="portal-nav portal-nav--main" aria-label="Main navigation">
+                <a href="../../index.html">Home</a>
+                <a href="../../index.html#about">About</a>
+                <a href="../../../en-version/courses.html">Programs &amp; courses</a>
+                <a href="../../../en-version/contact.html">Work statement</a>
+                <a href="../support/contact/index.html">Contact</a>
+            </nav>
+            <div class="portal-actions align-items-center gap-2">
+                <a class="small text-decoration-none" href="../../ar/login/index.html" hreflang="ar">العربية</a>
+                <a class="portal-btn-outline" href="./index.html">Sign in</a>
+                <a class="portal-btn-solid" href="../register/index.html">Register</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="portal-bg-pattern flex-grow-1 py-5 d-flex align-items-center">
+        <div class="container" style="max-width: 460px;">
+            <div class="portal-card card border-0 p-4 p-md-5">
+                <h1 class="h4 fw-bold text-center mb-2">Sign in to your account</h1>
+                <p class="text-muted text-center small mb-4">Use your national ID or mobile number to access our services.</p>
+
+                <div class="portal-tabs" role="tablist">
+                    <button type="button" class="portal-tab is-active" role="tab" aria-selected="true" data-portal-tab="id">Sign in with ID</button>
+                    <button type="button" class="portal-tab" role="tab" aria-selected="false" data-portal-tab="mobile">Sign in with mobile</button>
+                </div>
+
+                <div class="portal-panel" data-portal-panel="id" id="panel-id">
+                    <form action="#" method="post" novalidate>
+                        <div class="mb-3">
+                            <label class="form-label" for="login-id">National ID</label>
+                            <input type="text" class="form-control form-control-lg" id="login-id" name="national_id" inputmode="numeric" autocomplete="username" placeholder="National ID">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="login-pass-id">Password</label>
+                            <div class="input-group input-group-lg">
+                                <input type="password" class="form-control" id="login-pass-id" name="password" autocomplete="current-password" placeholder="••••••••">
+                                <button type="button" class="btn btn-outline-secondary" data-password-toggle="login-pass-id" aria-label="Show password" aria-pressed="false"><i class="fa-solid fa-eye"></i></button>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-4">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="remember-id" name="remember">
+                                <label class="form-check-label" for="remember-id">Remember me</label>
+                            </div>
+                            <a href="../password/reset/index.html" class="small text-primary">Forgot password?</a>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-lg w-100">Sign in</button>
+                    </form>
+                </div>
+
+                <div class="portal-panel" data-portal-panel="mobile" id="panel-mobile" hidden>
+                    <form action="#" method="post" novalidate>
+                        <label class="form-label" for="login-mobile">Mobile number</label>
+                        <div class="input-group input-group-lg mb-3">
+                            <span class="input-group-text">🇸🇦 +966</span>
+                            <input type="tel" class="form-control" id="login-mobile" name="mobile" inputmode="numeric" autocomplete="tel" placeholder="5xxxxxxxx">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="login-pass-m">Password</label>
+                            <div class="input-group input-group-lg">
+                                <input type="password" class="form-control" id="login-pass-m" name="password" autocomplete="current-password" placeholder="••••••••">
+                                <button type="button" class="btn btn-outline-secondary" data-password-toggle="login-pass-m" aria-label="Show password" aria-pressed="false"><i class="fa-solid fa-eye"></i></button>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-4">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="remember-m" name="remember">
+                                <label class="form-check-label" for="remember-m">Remember me</label>
+                            </div>
+                            <a href="../password/reset/index.html" class="small text-primary">Forgot password?</a>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-lg w-100">Sign in</button>
+                    </form>
+                </div>
+
+                <p class="text-center mt-4 mb-0 small text-muted">
+                    Don’t have an account yet?
+                    <a href="../register/index.html" class="fw-semibold text-primary">Create an account</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <footer class="portal-footer">
+        <div class="container" style="max-width:1100px;">
+            <div class="row g-4">
+                <div class="col-md-3">
+                    <h6>Main links</h6>
+                    <ul class="list-unstyled mb-0">
+                        <li><a href="../../index.html">Home</a></li>
+                        <li><a href="../../../en-version/courses.html">Programs</a></li>
+                        <li><a href="../register/index.html">Register</a></li>
+                        <li><a href="../support/contact/index.html">Contact us</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h6>Policies</h6>
+                    <ul class="list-unstyled mb-0">
+                        <li><a href="../../index.html">Privacy</a></li>
+                        <li><a href="../../index.html">Terms</a></li>
+                        <li><a href="../support/faq/index.html">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h6>Support</h6>
+                    <ul class="list-unstyled mb-0">
+                        <li><a href="../support/faq/index.html">FAQ</a></li>
+                        <li><a href="../support/contact/index.html">Support channels</a></li>
+                        <li><a href="../support/ticket/new/index.html">Open a ticket</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h6>Follow us</h6>
+                    <div class="portal-social">
+                        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                        <a href="#" aria-label="X"><i class="fab fa-x-twitter"></i></a>
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="portal-footer-bottom text-center">
+                All rights reserved © 2026 — Continuing Learning Center · <a href="../../index.html">Sitemap</a>
+            </div>
+        </div>
+    </footer>
+
+    <div id="portal-cookie" class="portal-cookie" role="dialog" aria-label="Cookies">
+        <strong class="d-block mb-2">We use cookies</strong>
+        <p class="mb-3 text-muted small">This site uses essential cookies to operate correctly. You may choose whether to allow optional analytics cookies.</p>
+        <div class="d-flex gap-2 flex-wrap">
+            <button type="button" id="portal-cookie-accept" class="btn btn-sm btn-primary text-white">Accept all</button>
+            <button type="button" id="portal-cookie-reject" class="btn btn-sm btn-light border">Reject all</button>
+        </div>
+    </div>
+
+    <a class="portal-fab" href="../support/ticket/new/index.html"><i class="fa-solid fa-headset"></i> Technical support</a>
+
+    <script src="../../assets/portal-shell.js" defer></script>
+    <script src="../../assets/domain-a11y-panel.js" defer></script>
+</body>
+
+</html>

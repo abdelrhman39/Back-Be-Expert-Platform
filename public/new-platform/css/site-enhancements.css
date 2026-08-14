@@ -1,0 +1,133 @@
+/* domain platform enhancements */
+
+#section-fields,
+#section-certificates,
+#section-diplomas,
+#section-fellowships,
+#section-mahara {
+    scroll-margin-top: 110px;
+}
+
+/* ── شريط الأزرار العائمة (واتساب / بريد / وصول / أعلى) ── */
+:root {
+    --float-rail-edge: 14px;
+    --float-rail-bottom: 18px;
+    --float-btn-size: 44px;
+    --float-btn-gap: 12px;
+}
+
+.float-actions-rail {
+    position: fixed;
+    inset-inline-end: var(--float-rail-edge);
+    bottom: var(--float-rail-bottom);
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--float-btn-gap);
+    pointer-events: none;
+}
+
+.float-actions-rail > * {
+    pointer-events: auto;
+}
+
+.float-actions-rail__a11y-slot {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--float-btn-size);
+    height: var(--float-btn-size);
+}
+
+.float-actions-rail .float-mail,
+.float-actions-rail .float-call,
+.float-actions-rail .float-whts,
+.float-actions-rail .back-to-top-icon,
+.float-actions-rail .ai-chat-fab {
+    position: static !important;
+    inset: auto !important;
+    bottom: auto !important;
+    width: var(--float-btn-size) !important;
+    height: var(--float-btn-size) !important;
+    min-width: var(--float-btn-size);
+    padding: 0 !important;
+    margin: 0 !important;
+    border-radius: 12px !important;
+    font-size: 18px !important;
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 14px rgba(22, 93, 49, 0.28);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.float-actions-rail .float-whts {
+    background-color: #25d366 !important;
+    border-color: #25d366 !important;
+}
+
+.float-actions-rail .float-mail,
+.float-actions-rail .float-call,
+.float-actions-rail .back-to-top-icon {
+    background-color: var(--primary, #1b8354) !important;
+    border-color: var(--primary, #1b8354) !important;
+}
+
+.float-actions-rail .float-mail:hover,
+.float-actions-rail .float-call:hover,
+.float-actions-rail .float-whts:hover,
+.float-actions-rail .back-to-top-icon:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(22, 93, 49, 0.32);
+    color: #fff !important;
+}
+
+.float-actions-rail .back-to-top-icon {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(8px);
+    transition: opacity 0.25s ease, visibility 0.25s ease, transform 0.25s ease, box-shadow 0.2s ease;
+}
+
+.float-actions-rail .back-to-top-icon.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.float-actions-rail .float-mail svg,
+.float-actions-rail .float-call svg,
+.float-actions-rail .float-whts svg {
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
+}
+
+html.use-domain-a11y .float-actions-rail .domain-a11y-fab {
+    position: static !important;
+    inset: auto !important;
+    left: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    width: var(--float-btn-size) !important;
+    height: var(--float-btn-size) !important;
+    min-width: var(--float-btn-size);
+    margin: 0 !important;
+    border-radius: 12px !important;
+    box-shadow: 0 4px 14px rgba(22, 93, 49, 0.28);
+}
+
+html.use-domain-a11y .float-actions-rail .domain-a11y-fab svg {
+    width: 22px;
+    height: 22px;
+}
+
+@media (max-width: 767.98px) {
+    :root {
+        --float-rail-edge: 10px;
+        --float-rail-bottom: 14px;
+        --float-btn-size: 42px;
+        --float-btn-gap: 10px;
+    }
+}

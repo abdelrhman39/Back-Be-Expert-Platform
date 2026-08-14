@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <script src="../assets/no-ajax.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>التحليلات المالية | لوحة تحكم مركز التعلم المستمر</title>
+    <link rel="icon" href="../assets/ba5c2cc1-5c62-4b77-8607-bead454d224e.png" type="image/png">
+    <link rel="stylesheet" href="../assets/vendor/fonts/google-fonts-local.css">
+    <link rel="stylesheet" href="./css/admin.css">
+</head>
+<body class="admin-dashboard-body" data-admin-title="التحليلات المالية" data-admin-desc="إيرادات، مدفوعات، وطرق السداد" data-admin-sidebar-active="financial.html">
+    <div class="admin-app admin-app--dashboard">
+        <aside class="admin-sidebar" aria-label="القائمة الجانبية">
+                                    <div class="admin-sidebar__brand">
+                <a href="index.html" class="admin-sidebar__logo-link">
+                    <img src="../assets/ba5c2cc1-5c62-4b77-8607-bead454d224e.png" alt="مركز التعلم المستمر — معهد البحوث بجامعة الامير مقرن">
+                </a>
+                <p class="admin-sidebar__org">مركز التعلم المستمر</p>
+                <p class="admin-sidebar__org-sub">معهد البحوث والدراسات الاستشارية — جامعة الامير مقرن</p>
+            </div>
+            <div class="admin-sidebar__scroll">
+                <ul class="admin-side-nav"></ul>
+            </div>
+            <div class="admin-sidebar__foot"><a href="../index.html">← الموقع العام</a></div>
+        </aside>
+
+        <div class="admin-main">
+            <header class="admin-header">
+                <button type="button" class="admin-sidebar-toggle" id="admin-sidebar-toggle" aria-label="فتح القائمة">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+                </button>
+                <div class="admin-header__start">
+                    <div class="admin-user-pill">
+                        <div class="admin-avatar" id="admin-avatar">م</div>
+                        <span id="admin-user-name">مسؤول المنصة</span>
+                    </div>
+                    <form class="admin-search" role="search" onsubmit="return false;">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3-3"/></svg>
+                        <input type="search" placeholder="بحث..." aria-label="بحث">
+                    </form>
+                </div>
+                <nav class="admin-header__links" aria-label="روابط عليا">
+                    <a href="index.html">الرئيسية</a>
+                    <a href="index.html" class="is-active">الإحصائيات</a>
+                    <a href="#">المشروعات</a>
+                </nav>
+                <button type="button" class="admin-btn-outline" id="admin-logout">تسجيل الخروج</button>
+            </header>
+
+            <nav class="admin-subnav" aria-label="أقسام الإحصائيات">
+                <ul class="admin-subnav__list"></ul>
+            </nav>
+
+            <div class="admin-content admin-content--dashboard">
+                <div class="dash-grid dash-fin-top">
+                    <div class="dash-hero-card dash-hero-card--finance">
+                        <span>صافي الإيرادات</span>
+                        <strong>1,576,348 <small style="font-size:0.55em;font-weight:600">ر.س</small></strong>
+                        <p class="dash-hero-card__sub">الإيراد قبل المسترد: 1,622,842 ر.س — إجمالي المسترد: 46,494 ر.س</p>
+                    </div>
+                    <div class="dash-fin-mini-stack">
+                        <div class="dash-fin-mini"><span>متوسط النقاط</span><strong>639</strong></div>
+                        <div class="dash-fin-mini"><span>نسبة الاسترداد</span><strong>3.1%</strong></div>
+                        <div class="dash-fin-mini"><span>عدد المدفوعين الفريدين</span><strong>2,304</strong></div>
+                    </div>
+                </div>
+
+                <div class="dash-panel" style="margin-top:1rem;">
+                    <div class="dash-section-head">
+                        <h3>الإيرادات والمدفوعات</h3>
+                        <p>نظرة شاملة على حركة السداد خلال الفترة الحالية</p>
+                    </div>
+                    <div class="dash-revenue-grid">
+                        <div class="dash-revenue-card">
+                            <div class="dash-revenue-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div>
+                            <div>
+                                <span class="label">الإيراد الإجمالي (قبل الخصم / الاسترداد)</span>
+                                <strong>1,669,336 ر.س</strong>
+                                <span class="hint">مجموع كل عمليات الدفع</span>
+                            </div>
+                        </div>
+                        <div class="dash-revenue-card">
+                            <div class="dash-revenue-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div>
+                            <div>
+                                <span class="label">عدد عمليات الدفع</span>
+                                <strong>2,612</strong>
+                                <span class="hint">إجمالي العمليات المسجلة</span>
+                            </div>
+                        </div>
+                        <div class="dash-revenue-card">
+                            <div class="dash-revenue-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+                            <div>
+                                <span class="label">عدد المدفوعين الفريدين</span>
+                                <strong>2,304</strong>
+                                <span class="hint">الذين قاموا بعملية واحدة على الأقل</span>
+                            </div>
+                        </div>
+                        <div class="dash-revenue-card">
+                            <div class="dash-revenue-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg></div>
+                            <div>
+                                <span class="label">الإيراد المحصل (بعد استبعاد المسترد)</span>
+                                <strong>1,622,842 ر.س</strong>
+                                <span class="hint">المحصل من العمليات</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dash-panel" style="margin-top:1rem;">
+                    <div class="dash-section-head">
+                        <h3>توزيع طرق الدفع</h3>
+                        <p>معرفة كل قناة دفع من إجمالي الإيراد المحصل</p>
+                    </div>
+                    <div class="dash-pay-methods">
+                        <div class="dash-pay-item">
+                            <div class="dash-pay-ring" style="--pct:100"><div class="dash-pay-ring-inner">100%</div></div>
+                            <div>
+                                <strong>Moyasar</strong>
+                                <span>1,622,842 ر.س</span>
+                            </div>
+                        </div>
+                        <div class="dash-pay-item">
+                            <div class="dash-pay-ring" style="--pct:0"><div class="dash-pay-ring-inner">0%</div></div>
+                            <div>
+                                <strong>Tabby</strong>
+                                <span>0 ر.س</span>
+                            </div>
+                        </div>
+                        <div class="dash-pay-item">
+                            <div class="dash-pay-ring" style="--pct:0"><div class="dash-pay-ring-inner">0%</div></div>
+                            <div>
+                                <strong>Tamara</strong>
+                                <span>0 ر.س</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="./js/admin-auth.js"></script>
+    <script src="./js/admin-shell.js"></script>
+    <script></script>
+</body>
+</html>

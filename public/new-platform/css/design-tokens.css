@@ -1,0 +1,124 @@
+/**
+ * مركز التعلم المستمر — مصدر واحد لمتغيرات الهوية (الموقع + البوابة + لوحة التحكم)
+ */
+:root {
+  /* ——— العلامة ——— */
+  --sa-flag-green: #165d31;
+  --sa-green: #1b8354;
+  --sa-green-dark: #135f3d;
+  --sa-green-light: #2d9a6a;
+  --sa-green-soft: #e8f4ee;
+  --sa-gold: #b8943f;
+  --sa-gold-light: #f3ead8;
+  --sa-mist: #f7faf8;
+  --sa-ink: #1a1a1a;
+  --sa-muted: #5c6b64;
+  --sa-border: rgba(22, 93, 49, 0.12);
+  --sa-border-strong: rgba(22, 93, 49, 0.2);
+
+  /* ——— Bootstrap / قديم ——— */
+  --primary: var(--sa-green);
+  --secondary: var(--sa-gold);
+  --bs-primary: var(--sa-green);
+  --bs-primary-rgb: 27, 131, 84;
+
+  /* ——— البوابة (توافق) ——— */
+  --portal-navy: var(--sa-ink);
+  --portal-navy-mid: var(--sa-green);
+  --portal-teal: var(--sa-green);
+  --portal-teal-light: var(--sa-green-light);
+  --portal-footer-end: var(--sa-green-dark);
+  --portal-card-shadow: 0 4px 24px rgba(22, 93, 49, 0.08);
+
+  /* ——— دلالية ——— */
+  --color-success: #22c55e;
+  --color-warning: #d97706;
+  --color-warning-light: #f59e0b;
+  --color-danger: #dc3545;
+  --color-danger-bg: #fef2f2;
+  --color-danger-border: #fecaca;
+  --color-danger-text: #991b1b;
+  --color-info: #2563eb;
+  --color-neutral: #94a3b8;
+  --color-accent-chart: #38b2ac;
+  --color-accent-chart-end: #5bb98a;
+
+  /* ——— أسطح ——— */
+  --surface-page: var(--sa-mist);
+  --surface-dashboard: #f0f4f4;
+  --surface-card: #ffffff;
+  --surface-input: #ffffff;
+  --surface-input-border: #d8e2dc;
+  --surface-track: #eef2f6;
+  --surface-ring-track: #e2e8f0;
+  --surface-demo: #f8faf9;
+  --surface-map: linear-gradient(180deg, var(--sa-green-soft) 0%, #d4ebe4 100%);
+  --color-on-primary: #ffffff;
+  --color-on-dark-muted: rgba(255, 255, 255, 0.88);
+  --color-on-dark-faint: rgba(255, 255, 255, 0.8);
+  --color-sidebar-divider: rgba(255, 255, 255, 0.12);
+
+  /* ——— تفاعل ——— */
+  --focus-ring: 0 0 0 3px rgba(27, 131, 84, 0.15);
+  --shadow-sm: 0 2px 14px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 4px 20px rgba(22, 93, 49, 0.08);
+  --shadow-lg: 0 12px 40px rgba(22, 93, 49, 0.12);
+  --shadow-dash: 0 4px 14px rgba(15, 23, 42, 0.06);
+  --shadow-sidebar: -2px 0 12px rgba(0, 0, 0, 0.04);
+  --shadow-dot: 0 2px 6px rgba(0, 0, 0, 0.2);
+  --radius-sm: 8px;
+  --radius-md: 10px;
+  --radius-lg: 12px;
+  --radius-xl: 14px;
+  --radius-pill: 999px;
+
+  /* ——— لوحة التحكم ——— */
+  --admin-sidebar-w: 280px;
+  --dash-sidebar-w: 292px;
+  --sidebar-active-bg: var(--sa-green-soft);
+  --sidebar-active-border: var(--sa-green);
+  --sidebar-hover-bg: rgba(27, 131, 84, 0.06);
+  --sidebar-group-bg: rgba(27, 131, 84, 0.04);
+  --sidebar-pad-outer: 0.75rem;
+  --sidebar-pad-main-end: 1rem;
+  --sidebar-pad-sub-end: 1.85rem;
+  --sidebar-pad-sub-start: 0.5rem;
+  --sidebar-indent-l1: 0.5rem;
+  --sidebar-indent-l2: 1.65rem;
+  --sidebar-indent-l3: 2.55rem;
+  --sidebar-text-main: #1a3352;
+  --sidebar-text-section: #3d5268;
+  --sidebar-text-link: #6b7c93;
+  --sidebar-text-muted: #6b7c93;
+  --sidebar-text-disabled: #a8b5c4;
+  --sidebar-tree-line: rgba(27, 131, 84, 0.18);
+  --dash-bg: var(--surface-dashboard);
+  --dash-card: var(--surface-card);
+  --dash-teal: var(--sa-green);
+  --dash-teal-soft: var(--sa-green-soft);
+  --dash-navy: var(--sa-flag-green);
+  --dash-navy-mid: var(--sa-green);
+  --dash-blue: var(--sa-green-light);
+  --dash-pink: var(--sa-gold);
+  --dash-shadow: var(--shadow-dash);
+  --admin-radius: var(--radius-xl);
+  --admin-shadow: var(--shadow-lg);
+
+  /* تدرجات البطاقات البارزة */
+  --gradient-hero: linear-gradient(
+    135deg,
+    var(--sa-flag-green) 0%,
+    var(--sa-green) 48%,
+    var(--sa-green-dark) 100%
+  );
+  --gradient-hero-dashboard: linear-gradient(
+    135deg,
+    var(--sa-flag-green) 0%,
+    var(--sa-green) 55%,
+    var(--sa-green-dark) 100%
+  );
+  --gradient-avatar: linear-gradient(135deg, var(--sa-green), var(--sa-green-dark));
+  --gradient-bar: linear-gradient(90deg, var(--sa-green), var(--color-accent-chart-end));
+  --gradient-bar-warn: linear-gradient(90deg, var(--color-warning-light), #fbbf24);
+  --gradient-bar-chart: linear-gradient(90deg, var(--sa-green), var(--color-accent-chart));
+}

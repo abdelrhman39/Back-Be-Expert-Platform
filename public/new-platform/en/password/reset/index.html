@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html class="no-js use-domain-a11y" lang="en" dir="ltr">
+
+<head>
+    <script src="../../../assets/no-ajax.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../../../assets/vendor/images/site-favicon.png" type="image/x-icon">
+    <title>Forgot password | Continuing Learning Center</title>
+    <meta name="description" content="Enter your email or mobile number to receive a reset link or code.">
+    <link rel="canonical" href="./">
+    <link rel="alternate" hreflang="ar" href="../../../ar/password/reset/index.html">
+
+    <link rel="stylesheet" href="../../../assets/all.css">
+    <link rel="stylesheet" href="../../../assets/vendor/fonts/google-fonts-local.css">
+    <link rel="stylesheet" media="all" href="../../../assets/muneer.min.css">
+    <link rel="stylesheet" href="../../../assets/toastr.min.css">
+    <link rel="stylesheet" href="../../../assets/style.css">
+    <link rel="stylesheet" href="../../../assets/components.css">
+    <link rel="stylesheet" href="../../../css/site-enhancements.css">
+    <link rel="stylesheet" href="../../../css/portal-shell.css">
+    <link rel="stylesheet" href="../../../assets/domain-a11y-panel.css">
+</head>
+
+<body class="portal-body d-flex flex-column min-vh-100">
+    <header class="portal-header">
+        <div class="portal-header__inner">
+            <a class="portal-logo" href="../../../index.html">
+                <img src="../../../assets/vendor/images/site-favicon.png" alt="" width="48" height="48">
+                <span>Continuing Learning Center</span>
+            </a>
+            <nav class="portal-nav portal-nav--main" aria-label="Main navigation">
+                <a href="../../../index.html">Home</a>
+                <a href="../../../index.html#about">About</a>
+                <a href="../../../../en-version/courses.html">Programs &amp; courses</a>
+                <a href="../../../../en-version/contact.html">Work statement</a>
+                <a href="../../support/contact/index.html">Contact</a>
+            </nav>
+            <div class="portal-actions align-items-center gap-2">
+                <a class="small text-decoration-none" href="../../../ar/password/reset/index.html" hreflang="ar">العربية</a>
+                <a class="portal-btn-outline" href="../../login/index.html">Sign in</a>
+                <a class="portal-btn-solid" href="../../register/index.html">Register</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="portal-bg-pattern flex-grow-1 py-5 d-flex align-items-center">
+        <div class="container" style="max-width: 460px;">
+            <div class="portal-card card border-0 p-4 p-md-5">
+                <h1 class="h4 fw-bold text-center mb-2">Reset your password</h1>
+                <p class="text-muted text-center small mb-4">Enter the email or mobile number on file to receive a reset link or verification code.</p>
+
+                <div class="portal-tabs" role="tablist">
+                    <button type="button" class="portal-tab is-active" role="tab" aria-selected="true" data-portal-tab="email">By email</button>
+                    <button type="button" class="portal-tab" role="tab" aria-selected="false" data-portal-tab="phone">By mobile</button>
+                </div>
+
+                <div class="portal-panel" data-portal-panel="email">
+                    <form action="#" method="post" novalidate>
+                        <div class="mb-4">
+                            <label class="form-label" for="reset-email">Email</label>
+                            <input type="email" class="form-control form-control-lg" id="reset-email" name="email" autocomplete="email" required placeholder="you@example.com">
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-lg w-100">Send link</button>
+                    </form>
+                </div>
+
+                <div class="portal-panel" data-portal-panel="phone" hidden>
+                    <form action="#" method="post" novalidate>
+                        <label class="form-label" for="reset-mobile">Mobile number</label>
+                        <div class="input-group input-group-lg mb-4">
+                            <span class="input-group-text">🇸🇦 +966</span>
+                            <input type="tel" class="form-control" id="reset-mobile" name="mobile" inputmode="numeric" placeholder="5xxxxxxxx">
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-lg w-100">Send code</button>
+                    </form>
+                </div>
+
+                <p class="text-center mt-4 mb-0 small text-muted">
+                    Remember your password?
+                    <a href="../../login/index.html" class="fw-semibold text-primary">Sign in</a>
+                </p>
+                <p class="text-center mt-2 mb-0 small">
+                    <a href="../../register/index.html" class="text-muted">Create an account</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <footer class="portal-footer">
+        <div class="container" style="max-width:1100px;">
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <h6>Quick links</h6>
+                    <ul class="list-unstyled mb-0">
+                        <li><a href="../../../index.html">Home</a></li>
+                        <li><a href="../../support/faq/index.html">FAQ</a></li>
+                        <li><a href="../../support/contact/index.html">Support</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h6>Account</h6>
+                    <ul class="list-unstyled mb-0">
+                        <li><a href="../../login/index.html">Sign in</a></li>
+                        <li><a href="../../register/index.html">Register</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h6>Follow us</h6>
+                    <div class="portal-social">
+                        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                        <a href="#" aria-label="X"><i class="fab fa-x-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="portal-footer-bottom text-center">All rights reserved © 2026 — Continuing Learning Center</div>
+        </div>
+    </footer>
+
+    <div id="portal-cookie" class="portal-cookie" role="dialog" aria-label="Cookies">
+        <strong class="d-block mb-2">We use cookies</strong>
+        <p class="mb-3 text-muted small">This site uses essential cookies to operate correctly.</p>
+        <div class="d-flex gap-2 flex-wrap">
+            <button type="button" id="portal-cookie-accept" class="btn btn-sm btn-primary text-white">Accept all</button>
+            <button type="button" id="portal-cookie-reject" class="btn btn-sm btn-light border">Reject all</button>
+        </div>
+    </div>
+
+    <a class="portal-fab" href="../../support/ticket/new/index.html"><i class="fa-solid fa-headset"></i> Technical support</a>
+
+    <script src="../../../assets/portal-shell.js" defer></script>
+    <script src="../../../assets/domain-a11y-panel.js" defer></script>
+</body>
+
+</html>

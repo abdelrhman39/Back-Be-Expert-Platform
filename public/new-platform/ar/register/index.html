@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html class="no-js use-domain-a11y" lang="ar" dir="rtl">
+
+<head>
+    <script src="../../assets/no-ajax.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../../assets/vendor/images/site-favicon.png" type="image/x-icon">
+    <title>إنشاء حساب جديد | مركز التعلم المستمر</title>
+    <meta name="description" content="التسجيل في البرامج المعتمدة — أدخل بياناتك لإكمال الطلب.">
+    <link rel="canonical" href="./">
+
+    <link rel="stylesheet" href="../../assets/all.css">
+    <link rel="stylesheet" href="../../assets/vendor/fonts/google-fonts-local.css">
+    <link rel="stylesheet" media="all" href="../../assets/muneer.min.css">
+    <link rel="stylesheet" href="../../assets/toastr.min.css">
+    <link rel="stylesheet" href="../../assets/style.css">
+    <link rel="stylesheet" href="../../assets/components.css">
+    <link rel="stylesheet" href="../../css/site-enhancements.css">
+    <link rel="stylesheet" href="../../css/portal-shell.css">
+    <link rel="stylesheet" href="../../assets/domain-a11y-panel.css">
+</head>
+
+<body class="portal-body d-flex flex-column min-vh-100">
+    <header class="portal-header">
+        <div class="portal-header__inner">
+            <a class="portal-logo" href="../../index.html">
+                <img src="../../assets/vendor/images/site-favicon.png" alt="" width="48" height="48">
+                <span>مركز التعلم المستمر</span>
+            </a>
+            <nav class="portal-nav portal-nav--main" aria-label="التنقل الرئيسي">
+                <a href="../../index.html">الرئيسية</a>
+                <a href="../../index.html#about">من نحن</a>
+                <a href="../../courses.html">برامج الدبلومات والدورات</a>
+                <a href="../../contact.html">إفادة العمل</a>
+                <a href="../support/contact/index.html">تواصل معنا</a>
+            </nav>
+            <div class="portal-actions align-items-center gap-2">
+                <a class="small text-decoration-none" href="../../en/register/index.html" hreflang="en">English</a>
+                <a class="portal-btn-outline" href="../login/index.html">تسجيل الدخول</a>
+                <a class="portal-btn-solid" href="./index.html">تسجيل جديد</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="portal-bg-pattern flex-grow-1 py-4 py-md-5">
+        <div class="container" style="max-width: 720px;">
+            <div class="portal-card card border-0 p-4 p-md-5">
+                <h1 class="h4 fw-bold mb-2">إنشاء حساب جديد 👋</h1>
+                <p class="text-muted small mb-4">هذا النموذج مخصص للتسجيل في البرامج المعتمدة عبر المنصة. يرجى تعبئة جميع الحقول المطلوبة بدقة.</p>
+
+                <h2 class="h6 fw-bold border-bottom pb-2 mb-4">المعلومات الأساسية</h2>
+
+                <form action="#" method="post" novalidate>
+                    <div class="mb-3">
+                        <label class="form-label" for="reg-name">اسمك بالكامل باللغة العربية <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control form-control-lg" id="reg-name" name="name_ar" required autocomplete="name">
+                    </div>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label" for="reg-nid">رقم الهوية <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control form-control-lg" id="reg-nid" name="national_id" inputmode="numeric" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label" for="reg-mobile">رقم الجوال <span class="text-danger">*</span></label>
+                            <div class="input-group input-group-lg">
+                                <span class="input-group-text">🇸🇦 +966</span>
+                                <input type="tel" class="form-control" id="reg-mobile" name="mobile" inputmode="numeric" required placeholder="5xxxxxxxx">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3 mt-3">
+                        <label class="form-label" for="reg-email">البريد الإلكتروني <span class="text-danger">*</span></label>
+                        <input type="email" class="form-control form-control-lg" id="reg-email" name="email" required autocomplete="email">
+                    </div>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label" for="reg-nat">الجنسية <span class="text-danger">*</span></label>
+                            <select class="form-select form-select-lg" id="reg-nat" name="nationality" required>
+                                <option value="" selected disabled>اختر الجنسية</option>
+                                <option value="sa">سعودي / سعودية</option>
+                                <option value="other">غير سعودي</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label" for="reg-city">المدينة <span class="text-danger">*</span></label>
+                            <select class="form-select form-select-lg" id="reg-city" name="city" required>
+                                <option value="" selected disabled>اختر المدينة</option>
+                                <option value="riyadh">الرياض</option>
+                                <option value="jeddah">جدة</option>
+                                <option value="dammam">الدمام</option>
+                                <option value="hail">الامير مقرن</option>
+                                <option value="other">أخرى</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="mt-4 mb-2">
+                        <span class="form-label d-block">الجنس <span class="text-danger">*</span></span>
+                        <div class="d-flex gap-4 flex-wrap">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="gender" id="g-m" value="male" required>
+                                <label class="form-check-label" for="g-m">ذكر</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="gender" id="g-f" value="female">
+                                <label class="form-check-label" for="g-f">أنثى</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <span class="form-label d-block">الحالة الوظيفية <span class="text-danger">*</span></span>
+                        <div class="d-flex gap-4 flex-wrap">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="employment" id="emp-y" value="employed" required>
+                                <label class="form-check-label" for="emp-y">موظف</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="employment" id="emp-n" value="unemployed">
+                                <label class="form-check-label" for="emp-n">غير موظف</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <span class="form-label d-block">فترة الدراسة <span class="text-danger">*</span></span>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="study_period" id="study-eve" value="evening" required checked>
+                            <label class="form-check-label" for="study-eve">مسائي</label>
+                        </div>
+                    </div>
+
+                    <div class="row g-3 mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label" for="reg-duration">مدة البرنامج <span class="text-danger">*</span></label>
+                            <select class="form-select form-select-lg" id="reg-duration" name="duration" required>
+                                <option value="" disabled selected>اختر المدة</option>
+                                <option value="1">سنة واحدة</option>
+                                <option value="2">سنتان</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label" for="reg-program">البرنامج <span class="text-danger">*</span></label>
+                            <select class="form-select form-select-lg" id="reg-program" name="program" required>
+                                <option value="" disabled selected>اختر البرنامج</option>
+                                <option value="p1">برنامج إداري</option>
+                                <option value="p2">برنامج تقني</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label" for="reg-pass">كلمة المرور <span class="text-danger">*</span></label>
+                        <div class="input-group input-group-lg">
+                            <input type="password" class="form-control" id="reg-pass" name="password" autocomplete="new-password" required minlength="8">
+                            <button type="button" class="btn btn-outline-secondary" data-password-toggle="reg-pass" aria-label="إظهار كلمة المرور"><i class="fa-solid fa-eye"></i></button>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <label class="form-label" for="reg-pass2">تأكيد كلمة المرور <span class="text-danger">*</span></label>
+                        <div class="input-group input-group-lg">
+                            <input type="password" class="form-control" id="reg-pass2" name="password_confirmation" autocomplete="new-password" required>
+                            <button type="button" class="btn btn-outline-secondary" data-password-toggle="reg-pass2" aria-label="إظهار كلمة المرور"><i class="fa-solid fa-eye"></i></button>
+                        </div>
+                    </div>
+
+                    <div class="form-check mb-4">
+                        <input class="form-check-input" type="checkbox" id="terms" name="terms" required>
+                        <label class="form-check-label small" for="terms">عند الضغط هنا فإنك توافق على جميع الشروط والأحكام وسياسة الخصوصية.</label>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-lg w-100">تقديم الطلب</button>
+                </form>
+
+                <p class="text-center mt-4 mb-0 small text-muted">
+                    لديك حساب بالفعل؟
+                    <a href="../login/index.html" class="fw-semibold text-primary">تسجيل الدخول</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <footer class="portal-footer">
+        <div class="container" style="max-width:1100px;">
+            <div class="row g-4">
+                <div class="col-md-3">
+                    <h6>الروابط الرئيسية</h6>
+                    <ul class="list-unstyled mb-0">
+                        <li><a href="../../index.html">الرئيسية</a></li>
+                        <li><a href="../../courses.html">البرامج المعتمدة</a></li>
+                        <li><a href="./index.html">التسجيل</a></li>
+                        <li><a href="../support/contact/index.html">اتصل بنا</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h6>السياسات</h6>
+                    <ul class="list-unstyled mb-0">
+                        <li><a href="../../index.html">سياسة الخصوصية</a></li>
+                        <li><a href="../../index.html">الشروط والأحكام</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h6>خدمة العملاء</h6>
+                    <ul class="list-unstyled mb-0">
+                        <li><a href="../support/faq/index.html">الأسئلة الشائعة</a></li>
+                        <li><a href="../support/ticket/new/index.html">فتح تذكرة</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h6>تابعنا</h6>
+                    <div class="portal-social">
+                        <a href="#" aria-label="يوتيوب"><i class="fab fa-youtube"></i></a>
+                        <a href="#" aria-label="إكس"><i class="fab fa-x-twitter"></i></a>
+                        <a href="#" aria-label="فيسبوك"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="لنكد إن"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="portal-footer-bottom text-center">
+                جميع الحقوق محفوظة © 2026 — مركز التعلم المستمر
+            </div>
+        </div>
+    </footer>
+
+    <div id="portal-cookie" class="portal-cookie" role="dialog" aria-label="ملفات تعريف الارتباط">
+        <strong class="d-block mb-2">We use cookies</strong>
+        <p class="mb-3 text-muted small">يستخدم هذا الموقع ملفات تعريف ارتباط ضرورية لتشغيله بشكل صحيح.</p>
+        <div class="d-flex gap-2 flex-wrap">
+            <button type="button" id="portal-cookie-accept" class="btn btn-sm btn-primary text-white">قبول الكل</button>
+            <button type="button" id="portal-cookie-reject" class="btn btn-sm btn-light border">رفض الكل</button>
+        </div>
+    </div>
+
+    <a class="portal-fab" href="../support/ticket/new/index.html"><i class="fa-solid fa-headset"></i> الدعم الفني والاستفسارات</a>
+
+    <script src="../../assets/portal-shell.js" defer></script>
+    <script src="../../assets/domain-a11y-panel.js" defer></script>
+</body>
+
+</html>

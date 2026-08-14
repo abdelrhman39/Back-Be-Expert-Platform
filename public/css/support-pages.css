@@ -1,0 +1,333 @@
+/**
+ * Support section pages
+ */
+.support-page {
+    padding: 1.5rem 0 3rem;
+    background: #f7faf8;
+    min-height: 60vh;
+}
+
+.support-page__container {
+    max-width: 1100px;
+}
+
+.support-page__container--narrow {
+    max-width: 920px;
+}
+
+.support-subnav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem 1rem;
+    justify-content: center;
+    padding: 0.75rem 1rem;
+    background: #fff;
+    border-bottom: 1px solid rgba(22, 93, 49, 0.1);
+    margin-bottom: 1.5rem;
+}
+
+.support-subnav__link {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #5c6b64;
+    text-decoration: none;
+    padding: 0.35rem 0.65rem;
+    border-radius: 8px;
+    transition: color 0.15s, background 0.15s;
+}
+
+.support-subnav__link:hover {
+    color: #1b8354;
+}
+
+.support-subnav__link.is-active {
+    color: #135f3d;
+    background: #e8f4ee;
+}
+
+.support-page__title {
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: #1a1a1a;
+}
+
+.support-page__lead {
+    color: #5c6b64;
+    font-size: 0.92rem;
+}
+
+.support-form-card {
+    background: #fff;
+    border: 1px solid rgba(22, 93, 49, 0.1);
+    border-radius: 12px;
+    padding: 1.25rem 1.35rem;
+    box-shadow: 0 4px 20px rgba(22, 93, 49, 0.06);
+}
+
+.support-aside {
+    background: linear-gradient(145deg, #135f3d, #1b8354);
+    color: #fff;
+    border-radius: 12px;
+    padding: 1.75rem 1.5rem;
+    text-align: center;
+    box-shadow: 0 8px 28px rgba(19, 95, 61, 0.2);
+}
+
+.support-aside__icon {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.support-aside h2 {
+    font-size: 1.1rem;
+    font-weight: 800;
+    margin-bottom: 0.65rem;
+}
+
+.support-aside p {
+    font-size: 0.85rem;
+    opacity: 0.9;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.support-success {
+    text-align: center;
+    background: #fff;
+    border-radius: 16px;
+    padding: 2.5rem 1.5rem;
+    box-shadow: 0 8px 32px rgba(22, 93, 49, 0.08);
+    max-width: 520px;
+    margin: 0 auto;
+}
+
+.support-success__icon {
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 50%;
+    background: #e8f4ee;
+    color: #1b8354;
+    display: grid;
+    place-items: center;
+    font-size: 1.5rem;
+    font-weight: 800;
+    margin: 0 auto 1rem;
+}
+
+.support-success__ref {
+    display: block;
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: #135f3d;
+    margin: 0.5rem 0;
+    padding: 0.5rem 1rem;
+    background: #f7faf8;
+    border-radius: 8px;
+}
+
+.support-success__hint {
+    font-size: 0.82rem;
+    color: #5c6b64;
+}
+
+.support-success__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+    margin-top: 1.25rem;
+}
+
+.support-ticket-view {
+    background: #fff;
+    border-radius: 16px;
+    border: 1px solid rgba(22, 93, 49, 0.1);
+    padding: 1.25rem 1.5rem;
+    box-shadow: 0 4px 24px rgba(22, 93, 49, 0.06);
+}
+
+.support-ticket-view__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(22, 93, 49, 0.08);
+    margin-bottom: 1rem;
+}
+
+.support-back {
+    display: inline-block;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: #1b8354;
+    text-decoration: none;
+    margin-bottom: 0.35rem;
+}
+
+.support-back:hover {
+    text-decoration: underline;
+}
+
+.support-thread {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+}
+
+.support-msg {
+    padding: 0.85rem 1rem;
+    border-radius: 12px;
+    background: #f7faf8;
+    border: 1px solid rgba(22, 93, 49, 0.06);
+}
+
+.support-msg--staff {
+    background: #e8f4ee;
+    border-color: rgba(27, 131, 84, 0.15);
+}
+
+.support-msg__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.35rem;
+    margin-bottom: 0.45rem;
+    font-size: 0.78rem;
+}
+
+.support-msg__head strong {
+    color: #135f3d;
+}
+
+.support-msg__head time {
+    color: #5c6b64;
+}
+
+.support-msg__body {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: #1a1a1a;
+}
+
+.support-reply-form {
+    padding-top: 1rem;
+    border-top: 1px solid rgba(22, 93, 49, 0.08);
+}
+
+.support-faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+}
+
+.support-faq-item {
+    background: #fff;
+    border: 1px solid rgba(22, 93, 49, 0.1);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.support-faq-item summary {
+    padding: 0.85rem 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+}
+
+.support-faq-item summary::-webkit-details-marker {
+    display: none;
+}
+
+.support-faq-num {
+    color: #1b8354;
+    font-weight: 800;
+    flex-shrink: 0;
+}
+
+.support-faq-body {
+    padding: 0 1rem 1rem;
+    font-size: 0.88rem;
+    line-height: 1.7;
+    color: #5c6b64;
+}
+
+.support-faq-body a {
+    color: #1b8354;
+    font-weight: 600;
+}
+
+@media (max-width: 768px) {
+    .support-subnav {
+        justify-content: flex-start;
+        overflow-x: auto;
+        flex-wrap: nowrap;
+    }
+}
+
+.support-channels-hero {
+    background: linear-gradient(135deg, #135f3d, #1b8354);
+    color: #fff;
+    padding: 2rem 0;
+    margin-bottom: 1.5rem;
+}
+
+.support-channels-hero .support-page__title,
+.support-channels-hero .support-page__lead {
+    color: #fff;
+}
+
+.support-channels-hero .support-page__lead {
+    opacity: 0.88;
+    max-width: 36rem;
+}
+
+.support-channel-card {
+    background: #fff;
+    border: 1px solid rgba(22, 93, 49, 0.1);
+    border-radius: 14px;
+    padding: 1.35rem;
+    height: 100%;
+    box-shadow: 0 4px 18px rgba(22, 93, 49, 0.06);
+}
+
+.support-channel-card__icon {
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 12px;
+    background: #e8f4ee;
+    color: #1b8354;
+    display: grid;
+    place-items: center;
+    font-size: 1.1rem;
+    margin-bottom: 0.75rem;
+}
+
+.support-channel-card h2 {
+    font-size: 1rem;
+    font-weight: 800;
+    margin-bottom: 0.35rem;
+}
+
+.support-channel-card p {
+    font-size: 0.82rem;
+    color: #5c6b64;
+    line-height: 1.55;
+    margin-bottom: 0.75rem;
+}
+
+.support-channel-card a:not(.btn) {
+    color: #1b8354;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.support-channel-card a:not(.btn):hover {
+    text-decoration: underline;
+}

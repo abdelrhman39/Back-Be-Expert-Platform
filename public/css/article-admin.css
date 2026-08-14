@@ -1,0 +1,223 @@
+/* Article admin — edit form & categories */
+
+.article-admin-form .admin-crud-card__head h2 {
+    font-size: 1.15rem;
+}
+
+.article-admin-head-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    align-items: center;
+}
+
+.article-admin-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 300px;
+    gap: 1.25rem;
+    align-items: start;
+}
+
+@media (max-width: 1024px) {
+    .article-admin-layout {
+        grid-template-columns: 1fr;
+    }
+}
+
+.article-admin-main {
+    min-width: 0;
+}
+
+.article-admin-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    position: sticky;
+    top: 1rem;
+}
+
+@media (max-width: 1024px) {
+    .article-admin-sidebar {
+        position: static;
+    }
+}
+
+.article-admin-panel {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 0.9rem 1rem;
+}
+
+.article-admin-panel__title {
+    margin: 0 0 0.75rem;
+    font-size: 0.82rem;
+    font-weight: 800;
+    color: #334155;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+.article-admin-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.article-admin-tab {
+    border: 1px solid #e2e8f0;
+    background: #f8fafc;
+    color: #475569;
+    font-size: 0.82rem;
+    font-weight: 700;
+    padding: 0.4rem 0.85rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+
+.article-admin-tab.is-active,
+.article-admin-tab:hover {
+    background: #ecfdf5;
+    border-color: #86efac;
+    color: #166534;
+}
+
+.article-admin-tab-panel {
+    padding: 0.25rem 0 0.5rem;
+}
+
+.article-admin-locale-block {
+    margin-bottom: 1.25rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px dashed #e2e8f0;
+}
+
+.article-admin-locale-block:last-of-type {
+    border-bottom: none;
+}
+
+.article-admin-form-actions {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    padding-top: 1rem;
+    border-top: 1px solid #e2e8f0;
+    margin-top: 1rem;
+}
+
+.article-badge {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 800;
+    padding: 0.2rem 0.55rem;
+    border-radius: 999px;
+}
+
+.article-badge--published {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.article-badge--draft {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.article-badge--archived {
+    background: #f1f5f9;
+    color: #64748b;
+}
+
+.article-poster-drop {
+    border: 2px dashed #cbd5e1;
+    border-radius: 10px;
+    padding: 0.85rem;
+    text-align: center;
+    background: #fff;
+    transition: border-color 0.15s, background 0.15s;
+}
+
+.article-poster-drop:hover,
+.article-poster-drop.is-dragover {
+    border-color: #86efac;
+    background: #f0fdf4;
+}
+
+.article-poster-preview {
+    position: relative;
+    margin-bottom: 0.65rem;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #e2e8f0;
+}
+
+.article-poster-preview img {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 180px;
+    object-fit: cover;
+}
+
+.article-poster-preview__remove {
+    position: absolute;
+    top: 0.35rem;
+    inset-inline-start: 0.35rem;
+    border: none;
+    background: rgba(15, 23, 42, 0.75);
+    color: #fff;
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 0.25rem 0.5rem;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.article-poster-drop__hint {
+    margin: 0.35rem 0 0;
+    font-size: 0.75rem;
+    color: #64748b;
+}
+
+.article-category-dot {
+    display: inline-block;
+    width: 0.65rem;
+    height: 0.65rem;
+    border-radius: 50%;
+    margin-inline-end: 0.35rem;
+    vertical-align: middle;
+}
+
+.article-admin-hint {
+    margin-top: 0.5rem;
+    padding: 0.55rem 0.75rem;
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 0.78rem;
+    color: #64748b;
+    line-height: 1.5;
+}
+
+.article-cat-table .admin-data-table td {
+    vertical-align: middle;
+}
+
+.article-cat-color {
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 6px;
+    border: 1px solid #e2e8f0;
+}
+
+.cms-admin-grid-2 { grid-template-columns: repeat(2, 1fr) !important; }
+.cms-admin-grid-3 { grid-template-columns: repeat(3, 1fr) !important; }
+
+@media (max-width: 768px) {
+    .cms-admin-grid-2,
+    .cms-admin-grid-3 { grid-template-columns: 1fr !important; }
+}

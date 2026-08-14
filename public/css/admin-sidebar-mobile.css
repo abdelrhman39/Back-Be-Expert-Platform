@@ -1,0 +1,248 @@
+/* Admin sidebar — clear off-canvas drawer on tablet/mobile */
+
+.admin-sidebar-backdrop {
+  display: none;
+}
+
+.admin-sidebar__close {
+  display: none;
+}
+
+@media (max-width: 991.98px) {
+  /* Keep dashboard layout horizontal; drawer is fixed overlay */
+  .admin-app--dashboard {
+    flex-direction: row !important;
+  }
+
+  .admin-app--dashboard .admin-main {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .admin-sidebar-toggle {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    flex: 0 0 auto;
+    border: 1px solid var(--sa-border, #dbe3ec);
+    background: var(--surface-card, #fff);
+    border-radius: 10px;
+    color: var(--sa-ink, #1a3352);
+    cursor: pointer;
+  }
+
+  .admin-sidebar-backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 1090;
+    background: rgba(15, 23, 42, 0.48);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.22s ease, visibility 0.22s ease;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body.admin-sidebar-mobile-open .admin-sidebar-backdrop {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  body.admin-sidebar-mobile-open {
+    overflow: hidden;
+    touch-action: none;
+  }
+
+  /* Never apply desktop "collapsed icons-only" mode on small screens */
+  html.admin-sidebar-is-collapsed .admin-app--dashboard .admin-sidebar {
+    width: min(22rem, 88vw) !important;
+  }
+
+  html.admin-sidebar-is-collapsed .admin-sidebar__org,
+  html.admin-sidebar-is-collapsed .admin-sidebar__org-sub,
+  html.admin-sidebar-is-collapsed .admin-side-nav__label,
+  html.admin-sidebar-is-collapsed .admin-side-nav__angle,
+  html.admin-sidebar-is-collapsed .admin-side-nav__child-menu,
+  html.admin-sidebar-is-collapsed .admin-sidebar__foot {
+    display: revert !important;
+  }
+
+  html.admin-sidebar-is-collapsed .admin-side-nav__link,
+  html.admin-sidebar-is-collapsed .admin-side-nav__toggle {
+    justify-content: flex-start !important;
+    padding-inline: var(--sidebar-pad-outer, 0.75rem) var(--sidebar-pad-main-end, 1rem) !important;
+  }
+
+  .admin-app--dashboard .admin-sidebar {
+    position: fixed !important;
+    inset-block: 0 !important;
+    inset-inline-start: 0 !important;
+    inset-inline-end: auto !important;
+    top: 0 !important;
+    bottom: 0 !important;
+    width: min(22rem, 88vw) !important;
+    max-width: 22rem !important;
+    height: 100dvh !important;
+    max-height: 100dvh !important;
+    margin: 0 !important;
+    z-index: 1100 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    background: var(--dash-card, #fff) !important;
+    border: 0 !important;
+    border-inline-end: 1px solid rgba(15, 23, 42, 0.08);
+    box-shadow: -12px 0 40px rgba(15, 23, 42, 0.18) !important;
+    transition: transform 0.26s ease, visibility 0.26s ease !important;
+    visibility: hidden;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  html[dir="rtl"] .admin-app--dashboard .admin-sidebar {
+    transform: translateX(110%);
+    box-shadow: 12px 0 40px rgba(15, 23, 42, 0.18) !important;
+  }
+
+  html[dir="ltr"] .admin-app--dashboard .admin-sidebar {
+    transform: translateX(-110%);
+  }
+
+  .admin-app--dashboard .admin-sidebar.is-mobile-open {
+    transform: translateX(0) !important;
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  .admin-app--dashboard .admin-sidebar__brand {
+    position: relative;
+    text-align: center;
+    padding: 1rem 2.75rem 0.95rem 1rem;
+    flex-shrink: 0;
+  }
+
+  .admin-app--dashboard .admin-sidebar__brand img,
+  .admin-app--dashboard .admin-sidebar__logo-link img {
+    filter: none !important;
+    max-height: 56px;
+    max-width: min(100%, 180px);
+  }
+
+  html[dir="ltr"] .admin-app--dashboard .admin-sidebar__brand {
+    padding: 1rem 1rem 0.95rem 2.75rem;
+  }
+
+  .admin-sidebar__org {
+    font-size: 0.86rem !important;
+    line-height: 1.45 !important;
+    padding-inline: 0.25rem;
+  }
+
+  .admin-sidebar__org-sub {
+    font-size: 0.74rem !important;
+  }
+
+  .admin-sidebar__close {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0.7rem;
+    inset-inline-start: 0.7rem;
+    width: 2.25rem;
+    height: 2.25rem;
+    border: 1px solid var(--sa-border, #dbe3ec);
+    border-radius: 10px;
+    background: #fff;
+    color: var(--sa-ink, #1a3352);
+    cursor: pointer;
+    z-index: 2;
+  }
+
+  .admin-sidebar__close:hover {
+    background: var(--sa-green-soft, #e8f4ee);
+    color: var(--sa-green-dark, #14532d);
+  }
+
+  .admin-sidebar__scroll {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    padding-block: 0.75rem 1rem;
+    padding-inline: 0.85rem 0.75rem !important;
+  }
+
+  .admin-side-nav__link,
+  .admin-side-nav__toggle {
+    min-height: 2.7rem;
+    font-size: 0.9rem !important;
+    padding-block: 0.7rem !important;
+    padding-inline: 0.75rem 0.65rem !important;
+    gap: 0.7rem !important;
+  }
+
+  .admin-side-nav__label {
+    white-space: normal;
+    overflow-wrap: anywhere;
+    line-height: 1.4;
+  }
+
+  .admin-side-nav__child-menu {
+    margin-inline-start: 0.55rem !important;
+    padding-inline: 0.35rem 0.15rem !important;
+  }
+
+  .admin-side-nav__section-head-text {
+    font-size: 0.78rem !important;
+    padding-inline: 0.85rem 0.5rem !important;
+  }
+
+  .admin-side-nav__child-link {
+    font-size: 0.84rem !important;
+    min-height: 2.35rem;
+    display: flex;
+    align-items: center;
+    padding-block: 0.55rem !important;
+    padding-inline: 1.35rem 0.55rem !important;
+    line-height: 1.4;
+  }
+
+  .admin-side-nav__child-link::before {
+    inset-inline-start: 0.45rem !important;
+  }
+
+  .admin-app--dashboard .admin-sidebar__foot {
+    flex-shrink: 0;
+    padding: 0.9rem 1rem calc(0.9rem + env(safe-area-inset-bottom, 0px));
+  }
+
+  .admin-app--dashboard .admin-sidebar__foot a {
+    font-size: 0.86rem !important;
+    font-weight: 600;
+  }
+
+  /* Keep page content from sitting under sticky header awkwardly */
+  .admin-app--dashboard .admin-main {
+    padding-top: 0;
+  }
+
+  .admin-header {
+    box-shadow: 0 1px 0 rgba(15, 23, 42, 0.04);
+  }
+}
+
+@media (max-width: 575.98px) {
+  .admin-app--dashboard .admin-sidebar {
+    width: min(100vw - 2.5rem, 20.5rem) !important;
+  }
+
+  .admin-side-nav__link,
+  .admin-side-nav__toggle {
+    font-size: 0.92rem !important;
+  }
+}

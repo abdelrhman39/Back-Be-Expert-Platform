@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <script src="../assets/no-ajax.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>طلبات الانسحاب | لوحة تحكم مركز التعلم المستمر</title>
+    <link rel="icon" href="../assets/ba5c2cc1-5c62-4b77-8607-bead454d224e.png" type="image/png">
+    <link rel="stylesheet" href="../assets/vendor/fonts/google-fonts-local.css">
+    <link rel="stylesheet" href="./css/admin.css">
+</head>
+<body class="admin-dashboard-body" data-admin-layout="app" data-admin-sidebar-active="requests-withdrawal.html"
+    data-request-page="withdrawal"
+    data-admin-breadcrumb='[{"href":"index.html","label":"الرئيسية"},{"label":"طلبات الانسحاب"}]'>
+
+    <div class="admin-app admin-app--dashboard">
+        <aside class="admin-sidebar" aria-label="القائمة الجانبية">
+            <div class="admin-sidebar__brand">
+                <a href="index.html" class="admin-sidebar__logo-link"><img src="../assets/ba5c2cc1-5c62-4b77-8607-bead454d224e.png" alt="مركز التعلم المستمر"></a>
+                <p class="admin-sidebar__org">مركز التعلم المستمر</p>
+                <p class="admin-sidebar__org-sub">معهد البحوث والدراسات الاستشارية — جامعة الامير مقرن</p>
+            </div>
+            <div class="admin-sidebar__scroll"><ul class="admin-side-nav"></ul></div>
+            <div class="admin-sidebar__foot"><a href="../index.html">← الموقع العام</a></div>
+        </aside>
+        <div class="admin-main">
+            <header class="admin-header admin-header--app">
+                <button type="button" class="admin-sidebar-toggle" id="admin-sidebar-toggle" aria-label="فتح القائمة">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+                </button>
+                <nav class="admin-breadcrumb" id="admin-breadcrumb"></nav>
+                <div class="admin-header__tools">
+                    <form class="admin-search" role="search" onsubmit="return false;">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3-3"/></svg>
+                        <input type="search" placeholder="بحث..." aria-label="بحث">
+                    </form>
+                    <div class="admin-user-pill"><div class="admin-avatar" id="admin-avatar">م</div><span id="admin-user-name">مسؤول المنصة</span></div>
+                    <button type="button" class="admin-btn-outline" id="admin-logout">خروج</button>
+                </div>
+            </header>
+            <div class="admin-content admin-content--app">
+                <section class="admin-crud-card admin-crud-card--filter">
+                    <div class="admin-crud-card__head">
+                        <h2>بحث متقدم <span class="admin-crud-card__meta" id="filter-result-meta">(نتائج البحث 93 طلب انسحاب)</span></h2>
+                    </div>
+                    <form id="requests-filter-form" class="admin-filter-grid admin-filter-grid--requests">
+                        <div class="admin-field admin-field--wide">
+                            <label for="f-search">البحث</label>
+                            <input type="search" class="admin-control" id="f-search" name="search" placeholder="ابحث بالاسم، البريد، رقم الجوال، رقم الهوية">
+                        </div>
+                        <div class="admin-field">
+                            <label for="f-status">الحالة</label>
+                            <select class="admin-control" id="f-status" name="status"><option value="">الكل</option><option value="processing">جاري العمل عليه</option></select>
+                        </div>
+                        <div class="admin-field">
+                            <label for="f-paymentType">نوع الدفع</label>
+                            <select class="admin-control" id="f-paymentType" name="paymentType"><option value="">الكل</option><option value="دفع إلكتروني">دفع إلكتروني</option></select>
+                        </div>
+                        <div class="admin-field">
+                            <label for="f-date-from">تاريخ من</label>
+                            <input type="date" class="admin-control" id="f-date-from" name="dateFrom">
+                        </div>
+                        <div class="admin-field">
+                            <label for="f-date-to">تاريخ إلى</label>
+                            <input type="date" class="admin-control" id="f-date-to" name="dateTo">
+                        </div>
+                        <div class="admin-field">
+                            <label for="f-semester">فصل القبول</label>
+                            <select class="admin-control" id="f-semester" name="semester"><option value="">اختر فصل القبول</option></select>
+                        </div>
+                        <div class="admin-field">
+                            <label for="f-pay-from">تاريخ الدفع من</label>
+                            <input type="date" class="admin-control" id="f-pay-from" name="paymentDateFrom">
+                        </div>
+                        <div class="admin-field">
+                            <label for="f-pay-to">تاريخ الدفع إلى</label>
+                            <input type="date" class="admin-control" id="f-pay-to" name="paymentDateTo">
+                        </div>
+                        <div class="admin-filter-actions">
+                            <button type="submit" class="admin-btn-primary admin-btn-primary--sm">تصفية</button>
+                            <button type="reset" class="admin-btn-secondary admin-btn-secondary--sm">إعادة تعيين</button>
+                        </div>
+                    </form>
+                </section>
+                <section class="admin-crud-card">
+                    <div class="admin-crud-card__head admin-crud-card__head--row">
+                        <h2>عرض كافة الطلبات الانسحاب</h2>
+                        <button type="button" class="admin-btn-export" id="requests-export-excel">تصدير اكسيل</button>
+                    </div>
+                    <div class="admin-table-wrap">
+                        <table class="admin-data-table">
+                            <thead>
+                                <tr>
+                                    <th>#</th><th>الطالب</th><th>البرنامج</th><th>طريقة الدفع</th><th>الحالة</th><th>التاريخ</th><th><span class="visually-hidden">إجراءات</span></th>
+                                </tr>
+                            </thead>
+                            <tbody id="requests-tbody"></tbody>
+                        </table>
+                    </div>
+                    <nav class="admin-pagination" id="requests-pagination"></nav>
+                </section>
+            </div>
+        </div>
+    </div>
+    <script src="./js/admin-auth.js"></script>
+    <script src="./js/admin-requests-data.js"></script>
+    <script src="./js/admin-shell.js"></script>
+    <script src="./js/admin-table-actions.js"></script>
+    <script src="./js/admin-requests-filters.js"></script>
+    <script src="./js/admin-requests-page.js"></script>
+    <script></script>
+</body>
+</html>

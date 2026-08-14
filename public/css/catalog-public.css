@@ -1,0 +1,445 @@
+.catalog-page__body { padding: 1.5rem 0 3rem; }
+.catalog-toolbar { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-bottom: 1.5rem; align-items: center; }
+.catalog-toolbar__search { flex: 1; min-width: 220px; }
+.catalog-toolbar__sort { max-width: 200px; }
+.catalog-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.25rem; }
+.catalog-empty { text-align: center; padding: 3rem 1rem; color: #5c6b64; }
+.catalog-pagination { margin-top: 2rem; }
+
+.catalog-card { border: 1px solid rgba(22, 93, 49, 0.1); border-radius: 14px; overflow: hidden; background: #fff; display: flex; flex-direction: column; height: 100%; transition: box-shadow .2s; }
+.catalog-card:hover { box-shadow: 0 8px 24px rgba(22, 93, 49, 0.08); }
+.catalog-card__image-link { position: relative; display: block; aspect-ratio: 16/10; overflow: hidden; background: #f7faf8; }
+.catalog-card__image { width: 100%; height: 100%; object-fit: cover; }
+.catalog-card__image--placeholder { display: grid; place-items: center; font-size: 2.5rem; height: 100%; }
+.catalog-card__badge { position: absolute; top: 0.65rem; inset-inline-start: 0.65rem; background: #1b8354; color: #fff; font-size: 0.68rem; font-weight: 700; padding: 0.15rem 0.5rem; border-radius: 999px; }
+.catalog-card__body { padding: 1rem; display: flex; flex-direction: column; gap: 0.65rem; flex: 1; }
+.catalog-card__title { margin: 0; font-size: 0.95rem; font-weight: 800; line-height: 1.45; }
+.catalog-card__title a { color: inherit; text-decoration: none; }
+.catalog-card__title a:hover { color: #1b8354; }
+.catalog-card__meta { display: flex; justify-content: space-between; gap: 0.5rem; font-size: 0.78rem; color: #5c6b64; }
+.catalog-card__meta strong { color: #135f3d; font-size: 0.9rem; }
+.catalog-card__actions { display: flex; gap: 0.5rem; margin-top: auto; }
+
+.catalog-show__layout { display: grid; grid-template-columns: 1fr 320px; gap: 1.5rem; padding: 1.5rem 0 3rem; align-items: start; }
+.catalog-show__hero { display: flex; gap: 1rem; margin-bottom: 1.25rem; align-items: flex-start; }
+.catalog-show__image { width: 140px; height: 100px; object-fit: cover; border-radius: 12px; flex-shrink: 0; }
+.catalog-show__title { margin: 0 0 0.5rem; font-size: 1.35rem; font-weight: 800; line-height: 1.35; }
+.catalog-show__chips { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.catalog-show__chips span { font-size: 0.72rem; font-weight: 700; background: #e8f4ee; color: #135f3d; padding: 0.15rem 0.55rem; border-radius: 999px; }
+
+.catalog-tabs { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-bottom: 1rem; border-bottom: 1px solid rgba(22, 93, 49, 0.1); padding-bottom: 0.65rem; }
+.catalog-tabs__btn { border: 1px solid rgba(22, 93, 49, 0.12); background: #fff; border-radius: 999px; padding: 0.35rem 0.75rem; font-size: 0.78rem; font-weight: 700; cursor: pointer; color: #5c6b64; }
+.catalog-tabs__btn--active { background: #1b8354; border-color: #1b8354; color: #fff; }
+.catalog-tab-content { background: #fff; border: 1px solid rgba(22, 93, 49, 0.1); border-radius: 14px; padding: 1.25rem; line-height: 1.75; }
+.catalog-tab-content--empty { color: #5c6b64; text-align: center; }
+.catalog-tab-content ul { padding-inline-start: 1.25rem; }
+.catalog-tab-content p { margin-bottom: 0.75rem; }
+
+.catalog-preview { margin-top: 1.5rem; }
+.catalog-preview h2 { font-size: 1rem; font-weight: 800; margin-bottom: 0.75rem; }
+.catalog-preview__list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.65rem; }
+.catalog-preview__list li { border: 1px solid rgba(22, 93, 49, 0.1); border-radius: 10px; padding: 0.75rem; background: #f7faf8; }
+.catalog-preview__list p { margin: 0.25rem 0 0; font-size: 0.78rem; color: #5c6b64; }
+
+.catalog-sidebar-card { position: sticky; top: 1rem; border: 1px solid rgba(22, 93, 49, 0.12); border-radius: 14px; padding: 1.25rem; background: #fff; box-shadow: 0 4px 20px rgba(22, 93, 49, 0.06); }
+.catalog-sidebar-card__price { font-size: 1.5rem; font-weight: 800; color: #135f3d; margin-bottom: 0.35rem; }
+.catalog-sidebar-card__hint { font-size: 0.78rem; color: #5c6b64; margin-bottom: 1rem; }
+
+.catalog-preview__body { padding: 1.5rem 0 3rem; max-width: 900px; }
+.catalog-preview__banner { margin-bottom: 1.25rem; }
+.catalog-preview__badge { display: inline-block; background: #fce7f3; color: #be185d; font-size: 0.72rem; font-weight: 700; padding: 0.2rem 0.55rem; border-radius: 999px; margin-bottom: 0.5rem; }
+.catalog-preview__banner h1 { margin: 0 0 0.35rem; font-size: 1.35rem; font-weight: 800; }
+.catalog-preview__course { margin: 0; color: #5c6b64; font-size: 0.88rem; }
+.catalog-preview__video { position: relative; padding-bottom: 56.25%; height: 0; margin-bottom: 1rem; border-radius: 12px; overflow: hidden; }
+.catalog-preview__video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.catalog-preview__cta { margin-top: 2rem; padding: 1.25rem; background: #e8f4ee; border-radius: 14px; }
+.catalog-preview__cta p { margin-bottom: 0.75rem; }
+
+@media (max-width: 960px) {
+    .catalog-show__layout { grid-template-columns: 1fr; }
+    .catalog-show__hero { flex-direction: column; }
+    .catalog-show__image { width: 100%; height: auto; max-height: 220px; }
+    .catalog-sidebar-card { position: static; }
+}
+
+/* Course card action bar (home slider + courses index) */
+.course-card-price-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.55rem;
+    width: 100%;
+    margin-top: 0.55rem;
+    padding: 0.55rem 0.65rem;
+    border-radius: 12px;
+    background: rgba(27, 131, 84, 0.06);
+    border: 1px solid rgba(27, 131, 84, 0.12);
+}
+
+.course-card-price-row__info {
+    flex: 1;
+    min-width: 0;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    text-align: start;
+}
+
+.course-card-price-row__info .course_type {
+    font-size: 0.68rem;
+    font-weight: 700;
+    color: #5c6b64;
+    line-height: 1.3;
+}
+
+.course-card-price-row__info .course_price {
+    font-size: 1rem;
+    font-weight: 800;
+    color: #0f3d2a;
+    line-height: 1.25;
+}
+
+.course-card-price-row .course-card-actions__wish {
+    flex-shrink: 0;
+    width: 40px;
+    min-height: 40px;
+    border-radius: 10px;
+}
+
+.course-card-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: stretch;
+    gap: 0.5rem;
+    width: 100%;
+    margin-top: 0.55rem;
+}
+
+.course-card-actions__enroll,
+.course-card-actions__details {
+    min-width: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    font-size: 0.78rem;
+    font-weight: 700;
+    padding: 0.58rem 0.65rem;
+    line-height: 1.2;
+    text-align: center;
+    border-radius: 10px;
+    min-height: 42px;
+}
+
+.course-card-actions__details {
+    border: 1px solid var(--primary, #197a86);
+    background: #fff;
+    color: var(--primary, #197a86);
+}
+
+.course-card-actions__details:hover {
+    background: rgba(25, 122, 134, 0.08);
+    color: var(--primary, #197a86);
+}
+
+.course-card-actions__wish {
+    flex: 0 0 42px;
+    width: 42px;
+    min-height: 42px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #dbe3ea;
+    border-radius: 8px;
+    background: #fff;
+    cursor: pointer;
+    padding: 0;
+    transition: border-color 0.2s, background 0.2s;
+}
+
+.course-card-actions__wish:hover {
+    border-color: var(--primary, #197a86);
+    background: rgba(25, 122, 134, 0.06);
+}
+
+.course-card-actions__wish.active,
+.course-card-actions__wish.favourite {
+    border-color: var(--primary, #197a86);
+    background: rgba(25, 122, 134, 0.1);
+}
+
+.course-card-actions--compact {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.course-card-actions--compact .course-card-actions__enroll,
+.course-card-actions--compact .course-card-actions__details {
+    flex: 1 1 0;
+}
+
+.tooltip-coursecard .gigs-content > .course-card-actions {
+    margin-top: 0.5rem;
+}
+
+.tooltip-coursecard .gigs-card-footer:has(.course-card-actions) {
+    display: block;
+    width: 100%;
+}
+
+.tooltip-coursecard .gigs-card-footer:has(.course-card-actions) .course-card-actions__enroll {
+    width: auto;
+}
+
+@media (max-width: 576px) {
+    .course-card-actions:not(.course-card-actions--compact) {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .course-card-actions__enroll,
+    .course-card-actions__details {
+        font-size: 0.74rem;
+        padding: 0.52rem 0.45rem;
+    }
+
+    .course-card-price-row {
+        padding: 0.5rem 0.6rem;
+    }
+
+    .course-card-price-row__info .course_price {
+        font-size: 0.95rem;
+    }
+}
+
+/* Diploma listing cards (courses index) */
+.diploma-list-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    border: 1px solid rgba(22, 93, 49, 0.12);
+    border-radius: 16px;
+    overflow: hidden;
+    background: linear-gradient(180deg, #fff 0%, #f7fbf8 100%);
+    transition: transform .28s ease, box-shadow .28s ease, border-color .28s ease;
+    margin-bottom: 1.25rem;
+}
+
+.diploma-list-card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(27, 131, 84, 0.28);
+    box-shadow: 0 12px 28px rgba(19, 95, 61, 0.1);
+}
+
+.diploma-list-card__media {
+    position: relative;
+    display: block;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    background: linear-gradient(135deg, #0f3d2a 0%, #1b8354 55%, #145c3c 100%);
+}
+
+.diploma-list-card__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+    padding: 1rem 1.2rem;
+    background: rgba(255, 255, 255, 0.94);
+    transition: transform .4s ease;
+}
+
+.diploma-list-card:hover .diploma-list-card__media img {
+    transform: scale(1.03);
+}
+
+.diploma-list-card__pill {
+    position: absolute;
+    top: .65rem;
+    inset-inline-start: .65rem;
+    z-index: 1;
+    display: inline-flex;
+    padding: .18rem .55rem;
+    border-radius: 999px;
+    background: rgba(15, 61, 42, .88);
+    color: #fff;
+    font-size: .68rem;
+    font-weight: 800;
+}
+
+.diploma-list-card__pill--featured {
+    inset-inline-start: auto;
+    inset-inline-end: .65rem;
+    background: #1b8354;
+}
+
+.diploma-list-card__body {
+    display: flex;
+    flex-direction: column;
+    gap: .65rem;
+    padding: 1rem 1.05rem 1.1rem;
+    flex: 1;
+}
+
+.diploma-list-card__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .4rem .75rem;
+    color: #5c6b64;
+    font-size: .76rem;
+    font-weight: 700;
+}
+
+.diploma-list-card__meta span {
+    display: inline-flex;
+    align-items: center;
+    gap: .28rem;
+}
+
+.diploma-list-card__meta i {
+    color: var(--primary, #1b8354);
+    width: .85rem;
+    text-align: center;
+    font-size: .78rem;
+}
+
+.diploma-list-card__title {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 800;
+    line-height: 1.45;
+    color: #123528;
+}
+
+.diploma-list-card__title a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.diploma-list-card__title a:hover {
+    color: var(--primary, #1b8354);
+}
+
+.diploma-list-card__summary {
+    margin: 0;
+    color: #5c6b64;
+    font-size: .82rem;
+    line-height: 1.6;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.diploma-list-card__price {
+    margin-top: auto;
+    padding: .65rem .75rem;
+    border-radius: 12px;
+    background: rgba(27, 131, 84, .07);
+    border: 1px solid rgba(27, 131, 84, .1);
+}
+
+.diploma-list-card__price-label {
+    display: block;
+    font-size: .7rem;
+    font-weight: 700;
+    color: #5c6b64;
+    margin-bottom: .2rem;
+}
+
+.diploma-list-card__price strong {
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: #0f3d2a;
+}
+
+.diploma-list-card__price strong span {
+    font-size: .78rem;
+}
+
+.diploma-list-card__installment {
+    display: inline-flex;
+    margin-inline-start: .45rem;
+    padding: .12rem .45rem;
+    border-radius: 999px;
+    background: #fff;
+    border: 1px solid rgba(27, 131, 84, .18);
+    color: #1b8354;
+    font-size: .7rem;
+    font-style: normal;
+    font-weight: 800;
+}
+
+.diploma-list-card__actions {
+    display: grid;
+    grid-template-columns: 42px 1fr 1.2fr;
+    gap: .45rem;
+    align-items: stretch;
+}
+
+.diploma-list-card__wish {
+    width: 42px;
+    min-height: 42px;
+    border: 1px solid #dbe3ea;
+    border-radius: 10px;
+    background: #fff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 0;
+}
+
+.diploma-list-card__wish:hover,
+.diploma-list-card__wish.active {
+    border-color: var(--primary, #1b8354);
+    background: rgba(27, 131, 84, .06);
+}
+
+.diploma-list-card__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 42px;
+    padding: .4rem .55rem;
+    border-radius: 10px;
+    font-size: .76rem;
+    font-weight: 800;
+    text-decoration: none;
+    line-height: 1.2;
+}
+
+.diploma-list-card__btn--ghost {
+    background: #fff;
+    color: var(--primary, #1b8354);
+    border: 1px solid rgba(27, 131, 84, .35);
+}
+
+.diploma-list-card__btn--ghost:hover {
+    background: rgba(27, 131, 84, .08);
+    color: var(--primary, #1b8354);
+}
+
+.diploma-list-card__btn--solid {
+    background: var(--primary, #1b8354);
+    color: #fff;
+    border: 1px solid var(--primary, #1b8354);
+    box-shadow: 0 6px 14px rgba(27, 131, 84, .2);
+}
+
+.diploma-list-card__btn--solid:hover {
+    background: #146944;
+    border-color: #146944;
+    color: #fff;
+}
+
+@media (max-width: 575.98px) {
+    .diploma-list-card__actions {
+        grid-template-columns: 42px 1fr;
+    }
+
+    .diploma-list-card__btn--solid {
+        grid-column: 1 / -1;
+    }
+}

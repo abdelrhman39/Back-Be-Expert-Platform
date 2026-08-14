@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html class="no-js use-domain-a11y" lang="ar" dir="rtl">
+
+<head>
+    <script src="../../assets/no-ajax.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../../assets/vendor/images/site-favicon.png" type="image/x-icon">
+    <title>تسجيل الدخول | مركز التعلم المستمر</title>
+    <meta name="description" content="سجّل الدخول باستخدام رقم الهوية أو رقم الجوال.">
+    <link rel="canonical" href="./">
+
+    <link rel="stylesheet" href="../../assets/all.css">
+    <link rel="stylesheet" href="../../assets/vendor/fonts/google-fonts-local.css">
+    <link rel="stylesheet" media="all" href="../../assets/muneer.min.css">
+    <link rel="stylesheet" href="../../assets/toastr.min.css">
+    <link rel="stylesheet" href="../../assets/style.css">
+    <link rel="stylesheet" href="../../assets/components.css">
+    <link rel="stylesheet" href="../../css/site-enhancements.css">
+    <link rel="stylesheet" href="../../css/portal-shell.css">
+    <link rel="stylesheet" href="../../assets/domain-a11y-panel.css">
+</head>
+
+<body class="portal-body d-flex flex-column min-vh-100">
+    <header class="portal-header">
+        <div class="portal-header__inner">
+            <a class="portal-logo" href="../../index.html">
+                <img src="../../assets/vendor/images/site-favicon.png" alt="" width="48" height="48">
+                <span>مركز التعلم المستمر</span>
+            </a>
+            <nav class="portal-nav portal-nav--main" aria-label="التنقل الرئيسي">
+                <a href="../../index.html">الرئيسية</a>
+                <a href="../../index.html#about">من نحن</a>
+                <a href="../../courses.html">برامج الدبلومات والدورات</a>
+                <a href="../../contact.html">إفادة العمل</a>
+                <a href="../support/contact/index.html">تواصل معنا</a>
+            </nav>
+            <div class="portal-actions align-items-center gap-2">
+                <a class="small text-decoration-none" href="../../en/login/index.html" hreflang="en">English</a>
+                <a class="portal-btn-outline is-active" href="./index.html">تسجيل الدخول</a>
+                <a class="portal-btn-solid" href="../register/index.html">تسجيل جديد</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="portal-bg-pattern flex-grow-1 py-5 d-flex align-items-center">
+        <div class="container" style="max-width: 460px;">
+            <div class="portal-card card border-0 p-4 p-md-5">
+                <h1 class="h4 fw-bold text-center mb-2">تسجيل الدخول إلى الحساب</h1>
+                <p class="text-muted text-center small mb-4">يمكنك استخدام رقم الهوية الوطنية أو رقم الجوال للوصول إلى خدماتنا.</p>
+
+                <div class="portal-tabs" role="tablist">
+                    <button type="button" class="portal-tab is-active" role="tab" aria-selected="true" data-portal-tab="id">سجل دخولك برقم الهوية</button>
+                    <button type="button" class="portal-tab" role="tab" aria-selected="false" data-portal-tab="mobile">سجل دخولك برقم الجوال</button>
+                </div>
+
+                <div class="portal-panel" data-portal-panel="id" id="panel-id">
+                    <form action="#" method="post" novalidate>
+                        <div class="mb-3">
+                            <label class="form-label" for="login-id">رقم الهوية</label>
+                            <input type="text" class="form-control form-control-lg" id="login-id" name="national_id" inputmode="numeric" autocomplete="username" placeholder="رقم الهوية">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="login-pass-id">كلمة السر</label>
+                            <div class="input-group input-group-lg">
+                                <input type="password" class="form-control" id="login-pass-id" name="password" autocomplete="current-password" placeholder="••••••••">
+                                <button type="button" class="btn btn-outline-secondary" id="toggle-pass-id" data-password-toggle="login-pass-id" aria-label="إظهار كلمة المرور" aria-pressed="false"><i class="fa-solid fa-eye"></i></button>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-4">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="remember-id" name="remember">
+                                <label class="form-check-label" for="remember-id">تذكرني</label>
+                            </div>
+                            <a href="../password/reset/index.html" class="small text-primary">نسيت كلمة السر؟</a>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-lg w-100">تسجيل الدخول</button>
+                    </form>
+                </div>
+
+                <div class="portal-panel" data-portal-panel="mobile" id="panel-mobile" hidden>
+                    <form action="#" method="post" novalidate>
+                        <label class="form-label" for="login-mobile">رقم الجوال</label>
+                        <div class="input-group input-group-lg mb-3">
+                            <span class="input-group-text">🇸🇦 +966</span>
+                            <input type="tel" class="form-control" id="login-mobile" name="mobile" inputmode="numeric" autocomplete="tel" placeholder="5xxxxxxxx">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="login-pass-m">كلمة السر</label>
+                            <div class="input-group input-group-lg">
+                                <input type="password" class="form-control" id="login-pass-m" name="password" autocomplete="current-password" placeholder="••••••••">
+                                <button type="button" class="btn btn-outline-secondary" data-password-toggle="login-pass-m" aria-label="إظهار كلمة المرور" aria-pressed="false"><i class="fa-solid fa-eye"></i></button>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-4">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="remember-m" name="remember">
+                                <label class="form-check-label" for="remember-m">تذكرني</label>
+                            </div>
+                            <a href="../password/reset/index.html" class="small text-primary">نسيت كلمة السر؟</a>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-lg w-100">تسجيل الدخول</button>
+                    </form>
+                </div>
+
+                <p class="text-center mt-4 mb-0 small text-muted">
+                    ليس لديك حساب بعد؟
+                    <a href="../register/index.html" class="fw-semibold text-primary">إنشاء حساب جديد</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <footer class="portal-footer">
+        <div class="container" style="max-width:1100px;">
+            <div class="row g-4">
+                <div class="col-md-3">
+                    <h6>الروابط الرئيسية</h6>
+                    <ul class="list-unstyled mb-0">
+                        <li><a href="../../index.html">الرئيسية</a></li>
+                        <li><a href="../../courses.html">البرامج المعتمدة</a></li>
+                        <li><a href="../register/index.html">التسجيل</a></li>
+                        <li><a href="../support/contact/index.html">اتصل بنا</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h6>السياسات</h6>
+                    <ul class="list-unstyled mb-0">
+                        <li><a href="../../index.html">سياسة الخصوصية</a></li>
+                        <li><a href="../../index.html">الشروط والأحكام</a></li>
+                        <li><a href="../support/faq/index.html">الأسئلة الشائعة</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h6>خدمة العملاء</h6>
+                    <ul class="list-unstyled mb-0">
+                        <li><a href="../support/faq/index.html">الأسئلة الشائعة</a></li>
+                        <li><a href="../support/contact/index.html">قنوات الدعم</a></li>
+                        <li><a href="../support/ticket/new/index.html">فتح تذكرة</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h6>تابعنا</h6>
+                    <div class="portal-social">
+                        <a href="#" aria-label="يوتيوب"><i class="fab fa-youtube"></i></a>
+                        <a href="#" aria-label="إكس"><i class="fab fa-x-twitter"></i></a>
+                        <a href="#" aria-label="فيسبوك"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="لنكد إن"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="portal-footer-bottom text-center">
+                جميع الحقوق محفوظة © 2026 — مركز التعلم المستمر · <a href="../../index.html">خريطة الموقع</a>
+            </div>
+        </div>
+    </footer>
+
+    <div id="portal-cookie" class="portal-cookie" role="dialog" aria-label="ملفات تعريف الارتباط">
+        <strong class="d-block mb-2">We use cookies</strong>
+        <p class="mb-3 text-muted small">يستخدم هذا الموقع ملفات تعريف ارتباط ضرورية لتشغيله بشكل صحيح، ويمكن اختيار ملفات تتبع لفهم تفاعلك مع الموقع.</p>
+        <div class="d-flex gap-2 flex-wrap">
+            <button type="button" id="portal-cookie-accept" class="btn btn-sm btn-primary text-white">قبول الكل</button>
+            <button type="button" id="portal-cookie-reject" class="btn btn-sm btn-light border">رفض الكل</button>
+        </div>
+    </div>
+
+    <a class="portal-fab" href="../support/ticket/new/index.html"><i class="fa-solid fa-headset"></i> الدعم الفني والاستفسارات</a>
+
+    <script src="../../assets/portal-shell.js" defer></script>
+    <script src="../../assets/domain-a11y-panel.js" defer></script>
+</body>
+
+</html>

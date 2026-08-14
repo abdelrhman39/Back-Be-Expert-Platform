@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <script src="../assets/no-ajax.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>عرض البرنامج | لوحة تحكم مركز التعلم المستمر</title>
+    <link rel="icon" href="../assets/ba5c2cc1-5c62-4b77-8607-bead454d224e.png" type="image/png">
+    <link rel="stylesheet" href="../assets/vendor/fonts/google-fonts-local.css">
+    <link rel="stylesheet" href="./css/admin.css">
+</head>
+<body class="admin-dashboard-body admin-layout-app"
+    data-admin-layout="app"
+    data-admin-sidebar-active="programs.html">
+
+    <div class="admin-app admin-app--dashboard">
+        <aside class="admin-sidebar" aria-label="القائمة الجانبية">
+                        <div class="admin-sidebar__brand">
+                <a href="index.html" class="admin-sidebar__logo-link">
+                    <img src="../assets/ba5c2cc1-5c62-4b77-8607-bead454d224e.png" alt="مركز التعلم المستمر — معهد البحوث بجامعة الامير مقرن">
+                </a>
+                <p class="admin-sidebar__org">مركز التعلم المستمر</p>
+                <p class="admin-sidebar__org-sub">معهد البحوث والدراسات الاستشارية — جامعة الامير مقرن</p>
+            </div>
+            <div class="admin-sidebar__scroll">
+                <ul class="admin-side-nav"></ul>
+            </div>
+            <div class="admin-sidebar__foot">
+                <a href="../index.html">← الموقع العام</a>
+            </div>
+        </aside>
+
+        <div class="admin-main">
+            <header class="admin-header admin-header--app">
+                <button type="button" class="admin-sidebar-toggle" id="admin-sidebar-toggle" aria-label="فتح القائمة">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+                </button>
+                <nav class="admin-breadcrumb" id="admin-breadcrumb" aria-label="مسار التنقل"></nav>
+                <div class="admin-header__tools">
+                    <form class="admin-search" role="search" onsubmit="return false;">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3-3"/></svg>
+                        <input type="search" placeholder="بحث..." aria-label="بحث">
+                    </form>
+                    <div class="admin-user-pill">
+                        <div class="admin-avatar" id="admin-avatar">م</div>
+                        <span id="admin-user-name">مسؤول المنصة</span>
+                    </div>
+                    <button type="button" class="admin-btn-outline" id="admin-logout">خروج</button>
+                </div>
+            </header>
+
+            <div class="admin-content admin-content--app" id="program-view-root">
+                <div class="admin-view-loading" id="program-view-loading">جاري التحميل...</div>
+                <div class="admin-view-missing" id="program-view-missing" hidden>
+                    <p>البرنامج غير موجود.</p>
+                    <a href="programs.html" class="admin-btn-primary--sm">العودة للقائمة</a>
+                </div>
+
+                <div id="program-view-content" hidden>
+                    <div class="admin-crud-card admin-view-card">
+                        <div class="admin-view-tabs" role="tablist" aria-label="أقسام البرنامج">
+                            <button type="button" class="admin-view-tab is-active" role="tab" aria-selected="true" data-tab="details" id="tab-details">التفاصيل</button>
+                            <button type="button" class="admin-view-tab" role="tab" aria-selected="false" data-tab="levels" id="tab-levels">المستويات</button>
+                            <button type="button" class="admin-view-tab" role="tab" aria-selected="false" data-tab="courses" id="tab-courses">المقررات</button>
+                        </div>
+
+                        <!-- تبويب التفاصيل -->
+                        <div class="admin-view-panel is-active" id="panel-details" role="tabpanel" aria-labelledby="tab-details">
+                            <div class="admin-detail-grid" id="program-details-root"></div>
+                        </div>
+
+                        <!-- تبويب المستويات -->
+                        <div class="admin-view-panel" id="panel-levels" role="tabpanel" aria-labelledby="tab-levels" hidden>
+                            <div class="admin-table-wrap">
+                                <table class="admin-data-table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">اسم المستوى الدراسي</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="levels-tbody"></tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- تبويب المقررات -->
+                        <div class="admin-view-panel" id="panel-courses" role="tabpanel" aria-labelledby="tab-courses" hidden>
+                            <div class="admin-table-toolbar">
+                                <label class="admin-table-toolbar__label">
+                                    عدد الصفوف
+                                    <select class="admin-control admin-control--inline" id="courses-page-size">
+                                        <option value="10" selected>10</option>
+                                        <option value="5">5</option>
+                                    </select>
+                                </label>
+                            </div>
+                            <div class="admin-table-wrap">
+                                <table class="admin-data-table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">اسم المقرر</th>
+                                            <th scope="col">رمز المقرر</th>
+                                            <th scope="col">كود المقرر</th>
+                                            <th scope="col">المستوى الدراسي</th>
+                                            <th scope="col">الحالة</th>
+                                            <th scope="col"><span class="visually-hidden">إجراءات</span></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="courses-tbody"></tbody>
+                                </table>
+                            </div>
+                            <nav class="admin-pagination" id="courses-pagination" aria-label="ترقيم المقررات"></nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="./js/admin-auth.js"></script>
+    <script src="./js/admin-programs-data.js"></script>
+    <script src="./js/admin-shell.js"></script>
+    <script src="./js/admin-program-view.js"></script>
+    <script></script>
+</body>
+</html>

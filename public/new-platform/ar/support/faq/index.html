@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html class="no-js use-domain-a11y" lang="ar" dir="rtl">
+
+<head>
+    <script src="../../../assets/no-ajax.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../../../assets/vendor/images/site-favicon.png" type="image/x-icon">
+    <title>الأسئلة الشائعة | مركز التعلم المستمر</title>
+    <meta name="description" content="إجابات عن أكثر الأسئلة شيوعاً بخصوص البرامج والدراسة عبر المنصة.">
+    <link rel="canonical" href="./">
+
+    <link rel="stylesheet" href="../../../assets/all.css">
+    <link rel="stylesheet" href="../../../assets/vendor/fonts/google-fonts-local.css">
+    <link rel="stylesheet" media="all" href="../../../assets/muneer.min.css">
+    <link rel="stylesheet" href="../../../assets/toastr.min.css">
+    <link rel="stylesheet" href="../../../assets/style.css">
+    <link rel="stylesheet" href="../../../assets/components.css">
+    <link rel="stylesheet" href="../../../css/site-enhancements.css">
+    <link rel="stylesheet" href="../../../css/portal-shell.css">
+    <link rel="stylesheet" href="../../../assets/domain-a11y-panel.css">
+</head>
+
+<body class="portal-body d-flex flex-column min-vh-100 bg-light">
+    <header class="portal-header">
+        <div class="portal-header__inner">
+            <a class="portal-logo" href="../../../index.html">
+                <img src="../../../assets/vendor/images/site-favicon.png" alt="" width="48" height="48">
+                <span>مركز التعلم المستمر</span>
+            </a>
+            <nav class="portal-nav" aria-label="قسم الدعم">
+                <a href="../ticket/new/index.html">إنشاء تذكرة</a>
+                <a href="../ticket/search/index.html">البحث عن تذكرة</a>
+                <a href="./index.html" class="is-active">الأسئلة الشائعة</a>
+                <a href="../contact/index.html">قنوات التواصل</a>
+            </nav>
+            <div class="portal-actions align-items-center gap-2">
+                <a class="small text-decoration-none" href="../../../en/support/faq/index.html" hreflang="en">English</a>
+                <a class="portal-btn-solid portal-btn-teal" href="../../login/index.html">تسجيل الدخول</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow-1 py-4 py-lg-5">
+        <div class="container rounded-4 p-4 p-lg-5 bg-light" style="max-width:920px;">
+            <h1 class="h2 fw-bold text-center mb-2">الأسئلة الشائعة</h1>
+            <p class="text-center text-muted mb-4 mb-lg-5">قمنا بتجميع أكثر الأسئلة شيوعاً لمساعدتك في العثور على الإجابات التي تحتاجها بسرعة وسهولة.</p>
+
+            <div class="portal-accordion" id="faq-list">
+                <details class="portal-faq-item" open>
+                    <summary><span class="portal-faq-num">1.</span> كم عدد الفصول الدراسية في الدبلوم وهل الدراسة تتم بنظام الفصلين أو الثلاثة فصول؟</summary>
+                    <div class="portal-accordion-body">يعتمد عدد الفصول وسياسة التقويم الدراسي على البرنامج المحدد في الدليل الأكاديمي. راجع صفحة البرنامج أو تواصل مع الإرشاد الأكاديمي لمعرفة التقويم الحالي (فصلان أو ثلاثة) لبرنامجك.</div>
+                </details>
+                <details class="portal-faq-item">
+                    <summary><span class="portal-faq-num">2.</span> هل يحصل الطالب على سجل أكاديمي عند التخرج من الدبلوم؟</summary>
+                    <div class="portal-accordion-body">نعم، عادة ما يُصدر سجل أكاديمي رسمي يوثّق المقررات والدرجات بعد إتمام متطلبات التخرج، وفق سياسة الجهة المانحة للشهادة.</div>
+                </details>
+                <details class="portal-faq-item">
+                    <summary><span class="portal-faq-num">3.</span> هل يلزم حضور المحاضرات بشكل يومي ومباشر مع المدرسين أم يكتفي بحضور المحاضرات المسجلة؟</summary>
+                    <div class="portal-accordion-body">تختلف متطلبات الحضور حسب المقرر والبرنامج (مزامن / تسجيلي / مختلط). راجع دليل المقرر وإشعارات المعلّم في بداية كل فصل.</div>
+                </details>
+                <details class="portal-faq-item">
+                    <summary><span class="portal-faq-num">4.</span> كيف يتم الوصول لروابط المحاضرات؟</summary>
+                    <div class="portal-accordion-body">تُنشر الروابط عادة ضمن صفحة المقرر على المنصة، أو عبر بريد إشعار من المعلّم، أو ضمن تقويم الجلسات المباشرة.</div>
+                </details>
+                <details class="portal-faq-item">
+                    <summary><span class="portal-faq-num">5.</span> ما هو التطبيق المستخدم لحضور المحاضرات؟</summary>
+                    <div class="portal-accordion-body">يعتمد ذلك على إعدادات المؤسسة؛ قد تكون الجلسات عبر منصة التعلّم نفسها أو تكاملاً مع أدوات مؤتمرات vídeo يحددها البرنامج.</div>
+                </details>
+                <details class="portal-faq-item">
+                    <summary><span class="portal-faq-num">6.</span> كيف يتم الوصول للمادة العلمية الخاصة بالمقرر؟</summary>
+                    <div class="portal-accordion-body">من خلال قسم «المحتوى» أو «الموارد» داخل صفحة المقرر بعد تسجيل الدخول، وقد يتضمن ملفات، روابط، أو تسجيلات.</div>
+                </details>
+                <details class="portal-faq-item">
+                    <summary><span class="portal-faq-num">7.</span> كيف يمكن الحصول على جدول الاختبارات النصفية لإرفاقه لجهة العمل؟</summary>
+                    <div class="portal-accordion-body">يُعلن الجدول في الصفحة الرئيسية للمقرر أو عبر الرسائل الرسمية. يمكن تصديق الجدول أو طلب مستند رسمي من الشؤون الأكاديمية إن وجدت.</div>
+                </details>
+                <details class="portal-faq-item">
+                    <summary><span class="portal-faq-num">8.</span> ما هي المواد في كل دبلوم والساعات لها وكيف موزعة على الفصول الدراسية؟</summary>
+                    <div class="portal-accordion-body">تفاصيل الخطة الدراسية والساعات معروضة في «دليل البرنامج» أو صفحة البرنامج على الموقع؛ قد تختلف التوزيعات سنوياً.</div>
+                </details>
+                <details class="portal-faq-item">
+                    <summary><span class="portal-faq-num">9.</span> كيف أعرف المقررات أو الجدول الدراسي عند بداية الفصل؟</summary>
+                    <div class="portal-accordion-body">عند بداية الفصل، راجع لوحة الطالب، ورسائل البريد الداخلي، وإعلانات المقرر؛ ويُحدّث الجدول رسمياً من الجهة الأكاديمية.</div>
+                </details>
+                <details class="portal-faq-item">
+                    <summary><span class="portal-faq-num">10.</span> في حال نسيان كلمة المرور لحسابي كطالب هل يمكن إعادة تغييرها من قبل الدعم الفني؟</summary>
+                    <div class="portal-accordion-body">يُفضّل استخدام صفحة «نسيت كلمة المرور» لاستلام رابط أو رمز التحقق. الدعم الفني يساعد عند تعذر ذلك دون مشاركة كلمة المرور نفسها.</div>
+                </details>
+                <details class="portal-faq-item">
+                    <summary><span class="portal-faq-num">11.</span> الدبلومات — هل تخص الجامعيين الذين لديهم وظيفة أم الخريجين من الثانوية؟</summary>
+                    <div class="portal-accordion-body">تختلف شروط القبول لكل برنامج؛ راجع متطلبات كل دبلوم في صفحة البرنامج (المؤهل المطلوب، الخبرة، إن وجدت).</div>
+                </details>
+                <details class="portal-faq-item">
+                    <summary><span class="portal-faq-num">12.</span> هل الشهادات يكتب فيها «عن بعد» أو «حضوري» أو لا يُذكر؟</summary>
+                    <div class="portal-accordion-body">يعتمد الصياغة الرسمية على سياسة الجهة المانحة؛ راجع نموذج الشهادة أو قسم الاعتماد للبرنامج.</div>
+                </details>
+                <details class="portal-faq-item">
+                    <summary><span class="portal-faq-num">13.</span> هل يتم كتابة «دبلوم متوسط» أو «مشارك» بالشهادة؟</summary>
+                    <div class="portal-accordion-body">يحدد المستوى المعتمد للمؤهل وفق الاعتماد الرسمي للبرنامج؛ يُشار إليه في نص الشهادة الصادرة عن الجهة.</div>
+                </details>
+                <details class="portal-faq-item">
+                    <summary><span class="portal-faq-num">14.</span> من كم المعدل أو الدرجة في شهادة الدبلوم؟</summary>
+                    <div class="portal-accordion-body">معايير التقدير والدرجة النهائية تُنشر في اللوائح الأكاديمية للبرنامج وتظهر في السجل الأكاديمي والشهادة.</div>
+                </details>
+                <details class="portal-faq-item">
+                    <summary><span class="portal-faq-num">15.</span> هل الدبلوم يمنح الطالب شهادات مهنية أو اعترافاً مهنياً محدداً؟</summary>
+                    <div class="portal-accordion-body">يعتمد على البرنامج والشراكات المهنية؛ راجع صفحة البرنامج أو الجهات المهنية ذات العلاقة لمعرفة إن كان البرنامج مرتبطاً باعتماد أو امتحان مهني.</div>
+                </details>
+            </div>
+        </div>
+    </main>
+
+    <footer class="portal-footer">
+        <div class="container text-center portal-footer-bottom border-0" style="max-width:1100px;">
+            <a href="../../../index.html">الرئيسية</a> ·
+            <a href="../ticket/new/index.html">فتح تذكرة</a>
+        </div>
+    </footer>
+
+    <div id="portal-cookie" class="portal-cookie" role="dialog" aria-label="ملفات تعريف الارتباط">
+        <strong class="d-block mb-2">We use cookies</strong>
+        <p class="mb-3 text-muted small">This website uses essential cookies to ensure its proper operation.</p>
+        <div class="d-flex gap-2 flex-wrap">
+            <button type="button" id="portal-cookie-accept" class="btn btn-sm btn-primary text-white">قبول الكل</button>
+            <button type="button" id="portal-cookie-reject" class="btn btn-sm btn-light border">رفض الكل</button>
+        </div>
+    </div>
+
+    <script src="../../../assets/portal-shell.js" defer></script>
+    <script src="../../../assets/domain-a11y-panel.js" defer></script>
+</body>
+
+</html>

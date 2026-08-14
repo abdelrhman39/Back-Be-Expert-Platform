@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html class="no-js use-domain-a11y" lang="ar" dir="rtl">
+
+<head>
+    <script src="../../../../assets/no-ajax.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../../../../assets/vendor/images/site-favicon.png" type="image/x-icon">
+    <title>إنشاء تذكرة | مركز التعلم المستمر</title>
+    <meta name="description" content="أرسل تذكرة دعم فني لفريق المنصة.">
+    <link rel="canonical" href="./">
+
+    <link rel="stylesheet" href="../../../../assets/all.css">
+    <link rel="stylesheet" href="../../../../assets/vendor/fonts/google-fonts-local.css">
+    <link rel="stylesheet" media="all" href="../../../../assets/muneer.min.css">
+    <link rel="stylesheet" href="../../../../assets/toastr.min.css">
+    <link rel="stylesheet" href="../../../../assets/style.css">
+    <link rel="stylesheet" href="../../../../assets/components.css">
+    <link rel="stylesheet" href="../../../../css/site-enhancements.css">
+    <link rel="stylesheet" href="../../../../css/portal-shell.css">
+    <link rel="stylesheet" href="../../../../assets/domain-a11y-panel.css">
+</head>
+
+<body class="portal-body d-flex flex-column min-vh-100 bg-white">
+    <header class="portal-header">
+        <div class="portal-header__inner">
+            <a class="portal-logo" href="../../../../index.html">
+                <img src="../../../../assets/vendor/images/site-favicon.png" alt="" width="48" height="48">
+                <span>مركز التعلم المستمر</span>
+            </a>
+            <nav class="portal-nav" aria-label="قسم الدعم">
+                <a href="./index.html" class="is-active">إنشاء تذكرة</a>
+                <a href="../search/index.html">البحث عن تذكرة</a>
+                <a href="../../faq/index.html">الأسئلة الشائعة</a>
+                <a href="../../contact/index.html">قنوات التواصل</a>
+            </nav>
+            <div class="portal-actions align-items-center gap-2">
+                <a class="small text-decoration-none" href="../../../../en/support/ticket/new/index.html" hreflang="en">English</a>
+                <a class="portal-btn-solid portal-btn-teal" href="../../../login/index.html">تسجيل الدخول</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="portal-bg-support flex-grow-1 py-4 py-lg-5">
+        <div class="container" style="max-width:1100px;">
+            <div class="row g-4 align-items-start">
+                <div class="col-lg-7 order-2 order-lg-1">
+                    <h1 class="h3 fw-bold mb-1">مرحباً</h1>
+                    <p class="text-muted mb-4">برجاء إملاء البيانات المطلوبة لتسهيل حل المشكلة.</p>
+
+                    <form action="#" method="post" enctype="multipart/form-data" novalidate class="bg-white p-3 p-md-4 rounded-3 shadow-sm border">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label" for="t-name">الاسم</label>
+                                <input type="text" class="form-control" id="t-name" name="name" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label" for="t-email">البريد الإلكتروني</label>
+                                <input type="email" class="form-control" id="t-email" name="email" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label" for="t-nid">رقم الهوية</label>
+                                <input type="text" class="form-control" id="t-nid" name="national_id" placeholder="1xxxxxxxx أو 2xxxxxxxx" inputmode="numeric">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label" for="t-mobile">رقم الجوال</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">+966</span>
+                                    <input type="tel" class="form-control" id="t-mobile" name="mobile" inputmode="numeric">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label" for="t-cat">الفئة</label>
+                                <select class="form-select" id="t-cat" name="category" required>
+                                    <option value="" disabled selected>اختر</option>
+                                    <option value="tech">تقني</option>
+                                    <option value="account">حساب مستخدم</option>
+                                    <option value="course">مقرر أو محتوى</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label" for="t-spec">التخصص</label>
+                                <input type="text" class="form-control" id="t-spec" name="specialization">
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label" for="t-subj">الموضوع</label>
+                                <input type="text" class="form-control" id="t-subj" name="subject" required>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label" for="t-desc">الوصف</label>
+                                <textarea class="form-control" id="t-desc" name="description" rows="7" required placeholder="صف المشكلة أو الاستفسار بتفصيل..."></textarea>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label">المرفقات <span class="text-muted small">(يمكنك اختيار أكثر من ملف)</span></label>
+                                <input type="file" class="form-control" name="files[]" multiple>
+                                <p class="small text-muted mt-1 mb-0">أو اسحب الملفات إلى الحقل أعلاه.</p>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-lg w-100 mt-4">إرسال التذكرة</button>
+                    </form>
+                </div>
+                <div class="col-lg-5 order-1 order-lg-2">
+                    <aside class="portal-aside-card h-100">
+                        <div class="text-center mb-3 fs-1" aria-hidden="true">💻</div>
+                        <h2 class="text-center">إنشاء تذكرة</h2>
+                        <p class="mb-0 text-center text-muted small">تتيح لك هذه الخدمة إنشاء تذكرة دعم فني بسهولة للتواصل مع فريق الدعم وحل المشكلات التقنية أو الاستفسارات المتعلقة بالمنصة.</p>
+                    </aside>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="portal-footer">
+        <div class="container text-center portal-footer-bottom border-0 mt-0 pt-2 pb-3" style="max-width:1100px;">
+            <a href="../../../../index.html">الرئيسية</a>
+        </div>
+    </footer>
+
+    <div id="portal-cookie" class="portal-cookie" role="dialog" aria-label="ملفات تعريف الارتباط">
+        <strong class="d-block mb-2">We use cookies</strong>
+        <p class="mb-3 text-muted small">Hi, this website uses essential cookies to ensure its proper operation and optional tracking cookies.</p>
+        <div class="d-flex gap-2 flex-wrap">
+            <button type="button" id="portal-cookie-accept" class="btn btn-sm btn-primary text-white">قبول الكل</button>
+            <button type="button" id="portal-cookie-reject" class="btn btn-sm btn-light border">رفض الكل</button>
+        </div>
+    </div>
+
+    <script src="../../../../assets/portal-shell.js" defer></script>
+    <script src="../../../../assets/domain-a11y-panel.js" defer></script>
+</body>
+
+</html>

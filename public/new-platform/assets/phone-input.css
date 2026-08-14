@@ -1,0 +1,225 @@
+/* 
+    Website Phone Input - Base Styles 
+    file: public/assets/css/website/phone-input.css
+*/
+
+:root {
+    /* Mapped to Project Design System */
+    --wpi-primary: var(--primary, #0d6efd);
+    --wpi-secondary: var(--secondary, #6c757d);
+
+    --wpi-border-color: #ced4da;
+    --wpi-bg-color: #fff;
+    --wpi-text-color: #212529;
+    --wpi-placeholder-color: #6c757d;
+    --wpi-error-color: #dc3545;
+    
+    /* Derived Colors */
+    --wpi-focus-border: var(--wpi-primary);
+    /* Simple focus shadow using primary color with opacity if possible, or fallback */
+    --wpi-focus-shadow: rgba(0, 0, 0, 0.1); 
+
+    --wpi-hover-bg: #f8f9fa;
+    --wpi-selected-bg: var(--wpi-primary);
+    --wpi-selected-text: #fff;
+    
+    --wpi-height: 50px;
+    --wpi-radius: 0.375rem;
+}
+
+.website-phone-input-root {
+    position: relative;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.website-phone-input-group {
+    display: flex;
+    position: relative;
+    width: 100%;
+    background-color: var(--wpi-bg-color);
+    border: 1px solid var(--wpi-border-color);
+    border-radius: var(--wpi-radius);
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    height: var(--wpi-height);
+}
+
+.website-phone-input-group:focus-within {
+    border-color: var(--wpi-focus-border);
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem var(--wpi-focus-shadow); 
+    z-index: 2;
+}
+
+.website-phone-input-group.has-error {
+    border-color: var(--wpi-error-color);
+}
+
+/* Country Trigger */
+.website-phone-country-trigger {
+    display: flex;
+    align-items: center;
+    padding: 0 1rem;
+    cursor: pointer;
+    background-color: #eeeeee4a;
+    border-right: 1px solid var(--wpi-border-color);
+    user-select: none;
+    height: 100%;
+}
+
+[dir="rtl"] .website-phone-country-trigger {
+    border-right: none;
+    border-left: 1px solid var(--wpi-border-color);
+}
+
+.website-phone-country-trigger:hover {
+    background-color: rgba(0,0,0,0.02);
+}
+
+.phone-flag-icon {
+    width: 24px;
+    height: 16px;
+    object-fit: cover;
+    border-radius: 2px;
+}
+
+.phone-dial-text {
+    margin: 0 8px;
+    font-weight: 500;
+    color: var(--wpi-text-color);
+    font-size: 0.95rem;
+}
+
+.phone-chevron {
+    width: 0; 
+    height: 0; 
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid #6c757d;
+    transition: transform 0.2s ease;
+}
+
+.website-phone-country-trigger[aria-expanded="true"] .phone-chevron {
+    transform: rotate(180deg);
+}
+
+/* Input Control */
+.website-phone-input-control {
+    flex: 1;
+    display: block;
+    width: 100%;
+    padding: 0 1rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--wpi-text-color);
+    background-color: #eeeeee4a;
+    border: none;
+    outline: none;
+    height: 100%;
+    min-width: 0;
+}
+
+/* Dropdown */
+.website-phone-dropdown {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    z-index: 1000;
+    display: none;
+    min-width: 300px;
+    background-color: #fff;
+    border: 1px solid rgba(0,0,0,.15);
+    border-radius: 0.375rem;
+    box-shadow: 0 0.5rem 1rem rgba(0,0,0,.175);
+    overflow: hidden;
+    flex-direction: column;
+}
+
+[dir="rtl"] .website-phone-dropdown {
+    left: auto;
+    right: 0;
+    text-align: right;
+}
+
+.website-phone-country-trigger[aria-expanded="true"] ~ .website-phone-dropdown {
+    display: flex;
+}
+
+/* Search Box */
+.phone-search-box {
+    padding: 10px;
+    background: var(--wpi-hover-bg);
+    border-bottom: 1px solid #dee2e6;
+}
+
+.phone-search-input {
+    width: 100%;
+    padding: 6px 12px;
+    font-size: 0.875rem;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    outline: none;
+}
+
+.phone-search-input:focus {
+    border-color: var(--wpi-focus-border);
+}
+
+/* List */
+.phone-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    max-height: 250px;
+    overflow-y: auto;
+}
+
+.phone-item {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-bottom: 1px solid #f1f1f1;
+    transition: background 0.15s;
+}
+
+.phone-item:last-child { border-bottom: none; }
+
+.phone-item:hover {
+    background-color: var(--wpi-hover-bg);
+}
+
+.phone-item.selected {
+    background-color: var(--wpi-selected-bg);
+    color: var(--wpi-selected-text);
+}
+
+.phone-item-flag {
+    margin-right: 12px;
+    width: 24px;
+    height: 16px;
+    object-fit: cover;
+}
+
+[dir="rtl"] .phone-item-flag {
+    margin-right: 0;
+    margin-left: 12px;
+}
+
+.phone-item-name {
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 0.9rem;
+}
+
+.phone-item-dial {
+    font-size: 0.85rem;
+    color: var(--wpi-placeholder-color);
+}
+
+.phone-item.selected .phone-item-dial {
+    color: rgba(255,255,255, 0.8);
+}

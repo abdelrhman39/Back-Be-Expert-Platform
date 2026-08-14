@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <script src="../assets/no-ajax.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>التسجيل والالتحاق | لوحة تحكم مركز التعلم المستمر</title>
+    <link rel="icon" href="../assets/ba5c2cc1-5c62-4b77-8607-bead454d224e.png" type="image/png">
+    <link rel="stylesheet" href="../assets/vendor/fonts/google-fonts-local.css">
+    <link rel="stylesheet" href="./css/admin.css">
+</head>
+<body class="admin-dashboard-body" data-admin-title="التسجيل والالتحاق" data-admin-desc="متابعة المسجلين والمدفوعات وحالات الدراسة" data-admin-sidebar-active="enrollment.html">
+    <div class="admin-app admin-app--dashboard">
+        <aside class="admin-sidebar" aria-label="القائمة الجانبية">
+                                    <div class="admin-sidebar__brand">
+                <a href="index.html" class="admin-sidebar__logo-link">
+                    <img src="../assets/ba5c2cc1-5c62-4b77-8607-bead454d224e.png" alt="مركز التعلم المستمر — معهد البحوث بجامعة الامير مقرن">
+                </a>
+                <p class="admin-sidebar__org">مركز التعلم المستمر</p>
+                <p class="admin-sidebar__org-sub">معهد البحوث والدراسات الاستشارية — جامعة الامير مقرن</p>
+            </div>
+            <div class="admin-sidebar__scroll">
+                <ul class="admin-side-nav"></ul>
+            </div>
+            <div class="admin-sidebar__foot"><a href="../index.html">← الموقع العام</a></div>
+        </aside>
+
+        <div class="admin-main">
+            <header class="admin-header">
+                <button type="button" class="admin-sidebar-toggle" id="admin-sidebar-toggle" aria-label="فتح القائمة">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+                </button>
+                <div class="admin-header__start">
+                    <div class="admin-user-pill">
+                        <div class="admin-avatar" id="admin-avatar">م</div>
+                        <span id="admin-user-name">مسؤول المنصة</span>
+                    </div>
+                    <form class="admin-search" role="search" onsubmit="return false;">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3-3"/></svg>
+                        <input type="search" placeholder="بحث..." aria-label="بحث">
+                    </form>
+                </div>
+                <nav class="admin-header__links" aria-label="روابط عليا">
+                    <a href="index.html">الرئيسية</a>
+                    <a href="index.html" class="is-active">الإحصائيات</a>
+                    <a href="#">المشروعات</a>
+                </nav>
+                <button type="button" class="admin-btn-outline" id="admin-logout">تسجيل الخروج</button>
+            </header>
+
+            <nav class="admin-subnav" aria-label="أقسام الإحصائيات">
+                <ul class="admin-subnav__list"></ul>
+            </nav>
+
+            <div class="admin-content admin-content--dashboard">
+                <div class="dash-grid dash-enroll-top">
+                    <div class="dash-hero-card">
+                        <span>إجمالي المسجلين</span>
+                        <strong>2,278</strong>
+                        <div class="dash-hero-card__breakdown">
+                            <span>مؤكد: 2,130</span>
+                            <span>غير مؤكد: 148</span>
+                        </div>
+                    </div>
+                    <div class="dash-enroll-side-stats">
+                        <div class="dash-enroll-stat-lg"><span>المدفوعات الفعلية</span><strong class="currency">17,024,180 ر.س</strong></div>
+                        <div class="dash-enroll-stat-lg"><span>المتدربون المفعلون</span><strong>2,230</strong></div>
+                        <div class="dash-enroll-stat-lg"><span>البرامج المفعلة</span><strong>14</strong></div>
+                    </div>
+                </div>
+
+                <div class="dash-status-row" style="margin-top:1rem;">
+                    <div class="dash-status-pill dash-status-pill--green">
+                        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg></div>
+                        <strong>2,130</strong><span>طلاب يدرسون</span>
+                    </div>
+                    <div class="dash-status-pill dash-status-pill--orange">
+                        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 16h.01"/></svg></div>
+                        <strong>98</strong><span>بانتظار إكمال التسجيل</span>
+                    </div>
+                    <div class="dash-status-pill dash-status-pill--red">
+                        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg></div>
+                        <strong>32</strong><span>طلاب منسحبون</span>
+                    </div>
+                    <div class="dash-status-pill dash-status-pill--blue">
+                        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 6h8M6 12h12M8 18h8"/></svg></div>
+                        <strong>12</strong><span>طلاب مؤجلون</span>
+                    </div>
+                    <div class="dash-status-pill dash-status-pill--gray">
+                        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg></div>
+                        <strong>6</strong><span>طلاب متوقفون</span>
+                    </div>
+                </div>
+
+                <div class="dash-grid dash-row-enroll-charts" style="margin-top:1rem;">
+                    <div class="dash-panel">
+                        <h3 class="dash-panel__title">التوزيع حسب الجنس</h3>
+                        <div class="dash-gender-legend"><span>أنثى 81%</span><span>ذكر 19%</span></div>
+                        <div class="dash-gender-bar"><span class="female" style="width:81%"></span><span class="male" style="width:19%"></span></div>
+                        <div class="dash-gender-stats"><span class="female-t">1,845 أنثى</span><span class="male-t">433 ذكر</span></div>
+                    </div>
+                    <div class="dash-panel">
+                        <h3 class="dash-panel__title">الفئات العمرية للمسجلين</h3>
+                        <div class="dash-chart-wrap dash-chart-wrap--donut">
+                            <canvas id="chart-age" aria-label="الفئات العمرية"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dash-panel" style="margin-top:1rem;">
+                    <h3 class="dash-panel__title">أعلى البرامج في التسجيل</h3>
+                    <ul class="dash-hbar-list">
+                        <li><div class="dash-hbar-head"><span>دبلوم الأمن والسلامة</span><span>428</span></div><div class="dash-hbar-track"><div class="dash-hbar-fill" style="width:100%"></div></div></li>
+                        <li><div class="dash-hbar-head"><span>دبلوم أمن المعلومات</span><span>365</span></div><div class="dash-hbar-track"><div class="dash-hbar-fill" style="width:85%"></div></div></li>
+                        <li><div class="dash-hbar-head"><span>دبلوم إدارة الأعمال</span><span>312</span></div><div class="dash-hbar-track"><div class="dash-hbar-fill" style="width:73%"></div></div></li>
+                        <li><div class="dash-hbar-head"><span>دبلوم الموارد البشرية</span><span>278</span></div><div class="dash-hbar-track"><div class="dash-hbar-fill" style="width:65%"></div></div></li>
+                        <li><div class="dash-hbar-head"><span>ممارس الذكاء الاصطناعي AWS</span><span>241</span></div><div class="dash-hbar-track"><div class="dash-hbar-fill" style="width:56%"></div></div></li>
+                        <li><div class="dash-hbar-head"><span>شهادة إدارة المشاريع</span><span>198</span></div><div class="dash-hbar-track"><div class="dash-hbar-fill" style="width:46%"></div></div></li>
+                    </ul>
+                </div>
+
+                <div class="dash-grid dash-row-charts" style="margin-top:1rem;">
+                    <div class="dash-panel">
+                        <h3 class="dash-panel__title">المتدربون حسب المدن</h3>
+                        <ul class="dash-hbar-list dash-cities-list">
+                            <li><span>الرياض</span><span>892</span><div class="dash-hbar-track"><div class="dash-hbar-fill" style="width:100%"></div></div></li>
+                            <li><span>جدة</span><span>534</span><div class="dash-hbar-track"><div class="dash-hbar-fill" style="width:60%"></div></div></li>
+                            <li><span>مكة المكرمة</span><span>218</span><div class="dash-hbar-track"><div class="dash-hbar-fill" style="width:24%"></div></div></li>
+                            <li><span>الدمام</span><span>186</span><div class="dash-hbar-track"><div class="dash-hbar-fill" style="width:21%"></div></div></li>
+                            <li><span>المدينة المنورة</span><span>142</span><div class="dash-hbar-track"><div class="dash-hbar-fill" style="width:16%"></div></div></li>
+                            <li><span>أبها</span><span>98</span><div class="dash-hbar-track"><div class="dash-hbar-fill" style="width:11%"></div></div></li>
+                        </ul>
+                    </div>
+                    <div class="dash-panel dash-panel--map">
+                        <div class="dash-panel__head">
+                            <h3 class="dash-panel__title">خريطة المملكة — توزيع المتدربين</h3>
+                            <p class="dash-panel__sub">13 منطقة إدارية · بيانات تجريبية</p>
+                        </div>
+                        <div class="sa-map" id="saudi-enrollment-map" role="application" aria-label="خريطة توزيع المتدربين في المملكة">
+                            <div class="sa-map__layout">
+                                <div class="sa-map__viz" id="sa-map-viz" aria-hidden="false"></div>
+                                <aside class="sa-map__regions" id="sa-map-regions-list" aria-label="قائمة المناطق"></aside>
+                            </div>
+                        </div>
+                        <p class="sa-map__credit">خريطة المناطق: MapSVG / @svg-maps/saudi-arabia (CC BY 4.0)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="./js/admin-auth.js"></script>
+    <script src="./js/admin-shell.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <script src="./js/saudi-map-data.js"></script>
+    <script src="./js/admin-enrollment.js"></script>
+    <script></script>
+</body>
+</html>

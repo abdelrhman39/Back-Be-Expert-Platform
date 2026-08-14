@@ -1,0 +1,249 @@
+.admin-notif-page {
+  display: grid;
+  gap: 1rem;
+}
+
+.admin-notif-hero {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: center;
+  padding: 1.25rem 1.35rem;
+  border-radius: 16px;
+  color: #fff;
+  background:
+    radial-gradient(circle at 12% 20%, rgba(74, 222, 128, 0.18), transparent 42%),
+    linear-gradient(135deg, #0f3a28 0%, #14532d 55%, #166534 100%);
+}
+
+.admin-notif-hero__eyebrow {
+  display: block;
+  color: #bbf7d0;
+  font-size: 0.72rem;
+  font-weight: 800;
+  margin-bottom: 0.2rem;
+}
+
+.admin-notif-hero h1 {
+  margin: 0 0 0.3rem;
+  color: #fff;
+  font-size: 1.2rem;
+}
+
+.admin-notif-hero p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.74);
+  font-size: 0.8rem;
+  max-width: 36rem;
+  line-height: 1.6;
+}
+
+.admin-notif-hero__actions {
+  display: flex;
+  gap: 0.45rem;
+  flex-wrap: wrap;
+}
+
+.admin-notif-hero__actions .admin-btn-secondary--sm {
+  background: rgba(255, 255, 255, 0.95);
+  border-color: transparent;
+  color: #14532d;
+}
+
+.admin-notif-panel {
+  padding: 1.2rem;
+  border: 1px solid #e8eef4;
+  border-radius: 16px;
+  background: #fff;
+}
+
+.admin-notif-panel__head {
+  margin-bottom: 1.1rem;
+}
+
+.admin-notif-panel__head--row {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.admin-notif-panel__head h2 {
+  margin: 0 0 0.25rem;
+  font-size: 1rem;
+  color: #0f172a;
+}
+
+.admin-notif-panel__head h2 i {
+  color: #166534;
+  margin-inline-end: 0.35rem;
+}
+
+.admin-notif-panel__head p {
+  margin: 0;
+  color: #64748b;
+  font-size: 0.76rem;
+}
+
+.admin-notif-audience {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0.55rem;
+  margin-bottom: 1rem;
+}
+
+.admin-notif-audience__card {
+  display: grid;
+  gap: 0.35rem;
+  padding: 0.85rem 0.7rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  background: #fff;
+  cursor: pointer;
+  text-align: center;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.admin-notif-audience__card input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.admin-notif-audience__card strong {
+  font-size: 0.76rem;
+  color: #334155;
+}
+
+.admin-notif-audience__card.is-on {
+  border-color: #86efac;
+  background: #f0fdf4;
+}
+
+.admin-notif-audience__card.is-on strong {
+  color: #166534;
+}
+
+.admin-notif-preview {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  padding: 0.75rem 0.9rem;
+  border-radius: 10px;
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  color: #1e40af;
+  font-size: 0.78rem;
+}
+
+.admin-notif-mail {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0.75rem 0 1rem;
+  font-size: 0.8rem;
+  color: #334155;
+  cursor: pointer;
+}
+
+.admin-notif-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.admin-notif-actions button span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.admin-notif-list {
+  display: grid;
+  gap: 0.65rem;
+}
+
+.admin-notif-item {
+  display: flex;
+  gap: 0.8rem;
+  padding: 0.95rem 1rem;
+  border: 1px solid #e8eef4;
+  border-radius: 12px;
+  background: #fff;
+}
+
+.admin-notif-item.is-unread {
+  border-color: #bbf7d0;
+  background: #f7fff9;
+}
+
+.admin-notif-item__icon {
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 11px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #f0fdf4;
+  color: #166534;
+  flex: 0 0 auto;
+}
+
+.admin-notif-item__body h3 {
+  margin: 0 0 0.25rem;
+  font-size: 0.88rem;
+  color: #0f172a;
+}
+
+.admin-notif-item__body p {
+  margin: 0;
+  color: #64748b;
+  font-size: 0.78rem;
+  line-height: 1.55;
+}
+
+.admin-notif-item__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 0.55rem;
+  font-size: 0.7rem;
+  color: #94a3b8;
+}
+
+.admin-notif-item__meta a,
+.admin-notif-item__meta button {
+  border: 0;
+  background: transparent;
+  color: #166534;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 0;
+  font-size: inherit;
+  text-decoration: none;
+}
+
+.admin-notif-empty {
+  padding: 2.5rem 1rem;
+  text-align: center;
+  color: #94a3b8;
+}
+
+.admin-notif-empty i {
+  font-size: 1.5rem;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+@media (max-width: 991.98px) {
+  .admin-notif-audience {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .admin-notif-hero {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}

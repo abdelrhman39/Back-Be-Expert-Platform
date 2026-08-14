@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html class="no-js use-domain-a11y" lang="en" dir="ltr">
+
+<head>
+    <script src="../../../../assets/no-ajax.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../../../../assets/vendor/images/site-favicon.png" type="image/x-icon">
+    <title>Track ticket | Continuing Learning Center</title>
+    <meta name="description" content="Enter your ticket number and email to view status.">
+    <link rel="canonical" href="./">
+    <link rel="alternate" hreflang="ar" href="../../../../ar/support/ticket/search/index.html">
+
+    <link rel="stylesheet" href="../../../../assets/all.css">
+    <link rel="stylesheet" href="../../../../assets/vendor/fonts/google-fonts-local.css">
+    <link rel="stylesheet" media="all" href="../../../../assets/muneer.min.css">
+    <link rel="stylesheet" href="../../../../assets/toastr.min.css">
+    <link rel="stylesheet" href="../../../../assets/style.css">
+    <link rel="stylesheet" href="../../../../assets/components.css">
+    <link rel="stylesheet" href="../../../../css/site-enhancements.css">
+    <link rel="stylesheet" href="../../../../css/portal-shell.css">
+    <link rel="stylesheet" href="../../../../assets/domain-a11y-panel.css">
+</head>
+
+<body class="portal-body d-flex flex-column min-vh-100 bg-white">
+    <header class="portal-header">
+        <div class="portal-header__inner">
+            <a class="portal-logo" href="../../../../index.html">
+                <img src="../../../../assets/vendor/images/site-favicon.png" alt="" width="48" height="48">
+                <span>Continuing Learning Center</span>
+            </a>
+            <nav class="portal-nav" aria-label="Support">
+                <a href="../new/index.html">Open a ticket</a>
+                <a href="./index.html" class="is-active">Track ticket</a>
+                <a href="../../faq/index.html">FAQ</a>
+                <a href="../../contact/index.html">Contact channels</a>
+            </nav>
+            <div class="portal-actions align-items-center gap-2">
+                <a class="small text-decoration-none" href="../../../../ar/support/ticket/search/index.html" hreflang="ar">العربية</a>
+                <a class="portal-btn-solid portal-btn-teal" href="../../../login/index.html">Sign in</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="portal-bg-support flex-grow-1 py-5 d-flex align-items-center">
+        <div class="container" style="max-width:1000px;">
+            <div class="row g-4 align-items-stretch">
+                <div class="col-md-6 order-1">
+                    <div class="bg-white p-4 p-md-5 rounded-3 shadow-sm border h-100">
+                        <form action="#" method="get" novalidate>
+                            <div class="mb-4">
+                                <label class="form-label" for="ticket-id">Ticket number <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control form-control-lg" id="ticket-id" name="ticket" required placeholder="Enter ticket number">
+                            </div>
+                            <div class="mb-4">
+                                <label class="form-label" for="ticket-email">Email <span class="text-danger">*</span></label>
+                                <input type="email" class="form-control form-control-lg" id="ticket-email" name="email" required placeholder="Enter your email">
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-lg w-100">Search</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-md-6 order-2">
+                    <aside class="portal-aside-card h-100 d-flex flex-column justify-content-center text-center">
+                        <div class="fs-1 mb-2" aria-hidden="true">🔐</div>
+                        <h2 class="mb-2">Track your ticket</h2>
+                        <p class="mb-0 text-muted">Enter your ticket number and email to find your request and its status.</p>
+                    </aside>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="portal-footer">
+        <div class="container text-center portal-footer-bottom border-0" style="max-width:1100px;">
+            <a href="../../../../index.html">Home</a>
+        </div>
+    </footer>
+
+    <div id="portal-cookie" class="portal-cookie" role="dialog" aria-label="Cookies">
+        <strong class="d-block mb-2">We use cookies</strong>
+        <p class="mb-3 text-muted small">This website uses essential cookies to ensure proper operation.</p>
+        <div class="d-flex gap-2 flex-wrap">
+            <button type="button" id="portal-cookie-accept" class="btn btn-sm btn-primary text-white">Accept all</button>
+            <button type="button" id="portal-cookie-reject" class="btn btn-sm btn-light border">Reject all</button>
+        </div>
+    </div>
+
+    <script src="../../../../assets/portal-shell.js" defer></script>
+    <script src="../../../../assets/domain-a11y-panel.js" defer></script>
+</body>
+
+</html>

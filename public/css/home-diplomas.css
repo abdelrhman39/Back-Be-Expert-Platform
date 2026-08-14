@@ -1,0 +1,304 @@
+/* Home diplomas section — academic program cards */
+
+.diplomas-section {
+    position: relative;
+}
+
+.diplomas-section__head {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 0.5rem;
+}
+
+.diplomas-section__eyebrow {
+    margin: 0 0 0.4rem;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: var(--primary, #1b8354);
+    text-transform: none;
+}
+
+.diplomas-section__lead {
+    max-width: 36rem;
+    margin: 0.55rem auto 0;
+    color: #5c6b64;
+    font-size: 0.92rem;
+    line-height: 1.7;
+}
+
+.diplomas-section__grid {
+    margin-top: 1.75rem;
+}
+
+.diplomas-section__cta {
+    width: 100%;
+    text-align: center;
+    margin-top: 1.1rem;
+}
+
+.diplomas-section__all {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding-inline: 1.35rem;
+}
+
+.diploma-card {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgba(22, 93, 49, 0.12);
+    border-radius: 16px;
+    overflow: hidden;
+    background:
+        linear-gradient(180deg, #ffffff 0%, #f7fbf8 100%);
+    box-shadow: 0 2px 0 rgba(22, 93, 49, 0.03);
+    transition:
+        transform 0.28s ease,
+        box-shadow 0.28s ease,
+        border-color 0.28s ease;
+}
+
+.diploma-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(27, 131, 84, 0.28);
+    box-shadow: 0 14px 32px rgba(19, 95, 61, 0.12);
+}
+
+.diploma-card__media {
+    position: relative;
+    display: block;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    background:
+        radial-gradient(circle at 20% 20%, rgba(27, 131, 84, 0.18), transparent 45%),
+        linear-gradient(135deg, #0f3d2a 0%, #1b8354 48%, #145c3c 100%);
+}
+
+.diploma-card__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+    padding: 1.1rem 1.35rem;
+    transition: transform 0.45s ease;
+    background: rgba(255, 255, 255, 0.92);
+}
+
+.diploma-card:hover .diploma-card__media img {
+    transform: scale(1.03);
+}
+
+.diploma-card__media-shade {
+    position: absolute;
+    inset: auto 0 0;
+    height: 42%;
+    background: linear-gradient(180deg, transparent, rgba(8, 36, 24, 0.35));
+    pointer-events: none;
+}
+
+.diploma-card__pill {
+    position: absolute;
+    top: 0.7rem;
+    inset-inline-start: 0.7rem;
+    z-index: 1;
+    display: inline-flex;
+    align-items: center;
+    padding: 0.22rem 0.6rem;
+    border-radius: 999px;
+    background: rgba(15, 61, 42, 0.88);
+    color: #fff;
+    font-size: 0.68rem;
+    font-weight: 700;
+    line-height: 1.2;
+    backdrop-filter: blur(4px);
+}
+
+.diploma-card__pill--open {
+    inset-inline-start: auto;
+    inset-inline-end: 0.7rem;
+    background: #1b8354;
+    box-shadow: 0 4px 12px rgba(27, 131, 84, 0.35);
+}
+
+.diploma-card__body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+    padding: 1.05rem 1.1rem 1.15rem;
+    flex: 1;
+}
+
+.diploma-card__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem 0.85rem;
+    color: #5c6b64;
+    font-size: 0.78rem;
+    font-weight: 600;
+}
+
+.diploma-card__meta span {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.28rem;
+}
+
+.diploma-card__meta i {
+    color: var(--primary, #1b8354);
+    font-size: 0.78rem;
+    width: 0.9rem;
+    text-align: center;
+}
+
+.diploma-card__title {
+    margin: 0;
+    font-size: 1.02rem;
+    font-weight: 800;
+    line-height: 1.45;
+    color: #123528;
+}
+
+.diploma-card__title a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.diploma-card__title a:hover {
+    color: var(--primary, #1b8354);
+}
+
+.diploma-card__summary {
+    margin: 0;
+    color: #5c6b64;
+    font-size: 0.84rem;
+    line-height: 1.65;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.diploma-card__skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.diploma-card__skills li {
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: #135f3d;
+    background: #e8f4ee;
+    border-radius: 999px;
+    padding: 0.18rem 0.55rem;
+}
+
+.diploma-card__footer {
+    margin-top: auto;
+    padding-top: 0.15rem;
+}
+
+.diploma-card__price {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.35rem 0.65rem;
+    padding: 0.7rem 0.8rem;
+    border-radius: 12px;
+    background: rgba(27, 131, 84, 0.07);
+    border: 1px solid rgba(27, 131, 84, 0.1);
+}
+
+.diploma-card__price--muted {
+    background: #f3f6f4;
+    border-color: rgba(22, 93, 49, 0.08);
+}
+
+.diploma-card__price-label {
+    width: 100%;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: #5c6b64;
+}
+
+.diploma-card__price strong {
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: #0f3d2a;
+    line-height: 1;
+}
+
+.diploma-card__price strong span {
+    font-size: 0.78rem;
+    font-weight: 700;
+}
+
+.diploma-card__price em {
+    font-style: normal;
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: #1b8354;
+    background: #fff;
+    border-radius: 999px;
+    padding: 0.15rem 0.5rem;
+    border: 1px solid rgba(27, 131, 84, 0.18);
+}
+
+.diploma-card__actions {
+    display: grid;
+    grid-template-columns: 1fr 1.25fr;
+    gap: 0.5rem;
+}
+
+.diploma-card__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 42px;
+    padding: 0.45rem 0.7rem;
+    border-radius: 10px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    line-height: 1.2;
+    text-decoration: none;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.diploma-card__btn--ghost {
+    background: #fff;
+    color: var(--primary, #1b8354);
+    border: 1px solid rgba(27, 131, 84, 0.35);
+}
+
+.diploma-card__btn--ghost:hover {
+    background: rgba(27, 131, 84, 0.08);
+    color: var(--primary, #1b8354);
+}
+
+.diploma-card__btn--solid {
+    background: var(--primary, #1b8354);
+    color: #fff;
+    border: 1px solid var(--primary, #1b8354);
+    box-shadow: 0 6px 16px rgba(27, 131, 84, 0.22);
+}
+
+.diploma-card__btn--solid:hover {
+    background: #146944;
+    border-color: #146944;
+    color: #fff;
+}
+
+@media (max-width: 575.98px) {
+    .diploma-card__actions {
+        grid-template-columns: 1fr;
+    }
+
+    .diploma-card__media img {
+        padding: 0.9rem 1rem;
+    }
+}

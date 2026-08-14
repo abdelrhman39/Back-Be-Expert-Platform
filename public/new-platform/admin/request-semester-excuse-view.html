@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <script src="../assets/no-ajax.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>عرض طلب اعتذار الفصل | لوحة تحكم مركز التعلم المستمر</title>
+    <link rel="icon" href="../assets/ba5c2cc1-5c62-4b77-8607-bead454d224e.png" type="image/png">
+    <link rel="stylesheet" href="../assets/vendor/fonts/google-fonts-local.css">
+    <link rel="stylesheet" href="./css/admin.css">
+</head>
+<body class="admin-dashboard-body admin-layout-app"
+    data-admin-layout="app"
+    data-admin-sidebar-active="requests-semester-excuse.html">
+
+    <div class="admin-app admin-app--dashboard">
+        <aside class="admin-sidebar" aria-label="القائمة الجانبية">
+            <div class="admin-sidebar__brand">
+                <a href="index.html" class="admin-sidebar__logo-link">
+                    <img src="../assets/ba5c2cc1-5c62-4b77-8607-bead454d224e.png" alt="مركز التعلم المستمر">
+                </a>
+                <p class="admin-sidebar__org">مركز التعلم المستمر</p>
+                <p class="admin-sidebar__org-sub">معهد البحوث والدراسات الاستشارية — جامعة الامير مقرن</p>
+            </div>
+            <div class="admin-sidebar__scroll"><ul class="admin-side-nav"></ul></div>
+            <div class="admin-sidebar__foot"><a href="../index.html">← الموقع العام</a></div>
+        </aside>
+
+        <div class="admin-main">
+            <header class="admin-header admin-header--app">
+                <button type="button" class="admin-sidebar-toggle" id="admin-sidebar-toggle" aria-label="فتح القائمة">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+                </button>
+                <nav class="admin-breadcrumb" id="admin-breadcrumb" aria-label="مسار التنقل"></nav>
+                <div class="admin-header__tools">
+                    <form class="admin-search" role="search" onsubmit="return false;">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3-3"/></svg>
+                        <input type="search" placeholder="بحث..." aria-label="بحث">
+                    </form>
+                    <div class="admin-user-pill">
+                        <div class="admin-avatar" id="admin-avatar">م</div>
+                        <span id="admin-user-name">مسؤول المنصة</span>
+                    </div>
+                    <button type="button" class="admin-btn-outline" id="admin-logout">خروج</button>
+                </div>
+            </header>
+
+            <div class="admin-content admin-content--app">
+                <div class="admin-view-loading" id="excuse-view-loading">جاري التحميل...</div>
+                <div class="admin-view-missing" id="excuse-view-missing" hidden>
+                    <p>طلب الاعتذار غير موجود.</p>
+                    <a href="requests-semester-excuse.html" class="admin-btn-primary--sm">العودة للقائمة</a>
+                </div>
+
+                <div id="excuse-view-content" hidden>
+                    <div class="admin-crud-card admin-request-detail-card">
+                        <div class="admin-request-detail-card__head">
+                            <h1>عرض بيانات طلب إعتذار الفصل الدراسي</h1>
+                        </div>
+                        <div class="admin-request-detail-card__body" id="excuse-detail-root"></div>
+                        <div class="admin-request-detail-card__foot" id="excuse-detail-foot"></div>
+                    </div>
+                    <p class="admin-request-detail-back">
+                        <a href="requests-semester-excuse.html" class="admin-btn-secondary admin-btn-secondary--sm">← العودة لطلبات الاعتذار</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="./js/admin-auth.js"></script>
+    <script src="./js/admin-requests-data.js"></script>
+    <script src="./js/admin-shell.js"></script>
+    <script src="./js/admin-request-semester-excuse-view.js"></script>
+    <script></script>
+</body>
+</html>
