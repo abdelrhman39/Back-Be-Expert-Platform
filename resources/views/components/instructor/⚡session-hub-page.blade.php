@@ -73,14 +73,14 @@ class extends Component
         $instructors->authorizeSession(auth()->user(), $session);
 
         $this->section = $section->load(['course', 'students']);
-        $this->session = $session->load(['materials', 'recording', 'records.student', 'zoomMeeting.host']);
+        $this->session = $session->load(['materials', 'recording', 'records.student', 'zoomMeeting.host', 'zoxAgentMeeting']);
     }
 
     protected function reloadSession(): void
     {
-        unset($this->attendanceRoster, $this->attendanceSummary, $this->recording, $this->assignments, $this->zoomMeeting);
+        unset($this->attendanceRoster, $this->attendanceSummary, $this->recording, $this->assignments, $this->zoomMeeting, $this->meetingProviderLabel, $this->joinUrl);
         $this->session = AttendanceSession::query()
-            ->with(['materials', 'recording', 'records.student', 'zoomMeeting.host'])
+            ->with(['materials', 'recording', 'records.student', 'zoomMeeting.host', 'zoxAgentMeeting'])
             ->findOrFail($this->session->id);
     }
 
@@ -105,6 +105,10 @@ class extends Component
     #[Computed]
     public function meetingProviderLabel(): string
     {
+        if ($this->session->zoxAgentMeeting) {
+            return 'ZoxAgent Meet';
+        }
+
         if ($this->zoomMeeting) {
             return 'Zoom';
         }
@@ -148,6 +152,72 @@ class extends Component
     {
         if (in_array($tab, ['meeting', 'materials', 'assignments', 'recording', 'attendance'], true)) {
             $this->tab = $tab;
+        }
+    }
+
+    public function createZoxAgentMeeting(\App\Services\ZoxAgent\ZoxAgentMeetingService $meetings, InstructorService $instructors): void
+    {
+        $instructors->authorizeSession(auth()->user(), $this->session);
+
+        try {
+            $meetings->ensureMeeting($this->session);
+            $this->flash('تم إنشاء / تحديث قاعة ZoxAgent.');
+            $this->reloadSession();
+        } catch (\Throwable $e) {
+            $this->flash('تعذّر إنشاء قاعة ZoxAgent: '.$e->getMessage());
+        }
+    }
+
+    public function syncZoxAgentAttendance(\App\Services\ZoxAgent\ZoxAgentMeetingService $meetings, InstructorService $instructors): void
+    {
+        $instructors->authorizeSession(auth()->user(), $this->session);
+
+        if (! $this->session->zoxAgentMeeting) {
+            $this->flash('لا توجد قاعة ZoxAgent لهذه الحصة.');
+
+            return;
+        }
+
+        $synced = $meetings->syncAttendance($this->session);
+        $this->flash('تمت مزامنة حضور ZoxAgent ('.$synced.' طالب).');
+        $this->reloadSession();
+    }
+
+    public function endZoxAgentMeeting(\App\Services\ZoxAgent\ZoxAgentMeetingService $meetings, InstructorService $instructors): void
+    {
+        $instructors->authorizeSession(auth()->user(), $this->session);
+
+        if (! $this->session->zoxAgentMeeting) {
+            $this->flash('لا توجد قاعة ZoxAgent لهذه الحصة.');
+
+            return;
+        }
+
+        try {
+            $meetings->endRoom($this->session);
+            $this->flash('تم إنهاء قاعة ZoxAgent وإيقاف التسجيل السحابي.');
+            $this->reloadSession();
+        } catch (\Throwable $e) {
+            $this->flash('تعذّر إنهاء القاعة: '.$e->getMessage());
+        }
+    }
+
+    public function syncZoxAgentRecording(\App\Services\ZoxAgent\ZoxAgentMeetingService $meetings, InstructorService $instructors): void
+    {
+        $instructors->authorizePermission(auth()->user(), 'instructor.recordings.view');
+
+        if (! $this->session->zoxAgentMeeting) {
+            $this->flash('لا توجد قاعة ZoxAgent لهذه الحصة.');
+
+            return;
+        }
+
+        try {
+            $count = $meetings->pullRecordings($this->session);
+            $this->flash($count > 0 ? 'تمت مزامنة تسجيل ZoxAgent.' : 'لا يوجد تسجيل جاهز بعد.');
+            $this->reloadSession();
+        } catch (\Throwable $e) {
+            $this->flash('تعذّر مزامنة التسجيل: '.$e->getMessage());
         }
     }
 
@@ -362,7 +432,7 @@ class extends Component
 
         $recording = $this->recording;
 
-        if (! $recording?->recording_url) {
+        if (! $recording?->recording_url && ! $recording?->play_url) {
             $this->flash('لا يوجد تسجيل جاهز للنشر.');
 
             return;
@@ -448,7 +518,11 @@ class extends Component
         <div class="portal-inst-hub-actions">
             <span class="portal-inst-badge portal-inst-badge--{{ $state }}">{{ match($state) { 'live' => 'مباشر الآن', 'completed' => 'منتهية', 'upcoming' => 'قادمة', default => 'مجدولة' } }}</span>
             <span class="portal-inst-badge">{{ $this->meetingProviderLabel }}</span>
-            @if ($this->zoomMeeting && auth()->user()?->canInstructor('instructor.zoom.meeting.start') && \Illuminate\Support\Facades\Route::has('instructor.zoom.start'))
+            @if ($this->session->zoxAgentMeeting && \Illuminate\Support\Facades\Route::has('sessions.join'))
+                <a href="{{ route('sessions.join', ['locale' => $locale, 'session' => $session->id]) }}" class="portal-btn portal-btn--primary portal-btn--sm">
+                    <i class="fa-solid fa-video"></i> بدء قاعة ZoxAgent
+                </a>
+            @elseif ($this->zoomMeeting && auth()->user()?->canInstructor('instructor.zoom.meeting.start') && \Illuminate\Support\Facades\Route::has('instructor.zoom.start'))
                 <a href="{{ route('instructor.zoom.start', ['locale' => $locale, 'session' => $session->id]) }}" class="portal-btn portal-btn--primary portal-btn--sm">
                     <i class="fa-solid fa-video"></i> بدء اجتماع Zoom
                 </a>
@@ -497,7 +571,12 @@ class extends Component
                     <dt>المزوّد</dt>
                     <dd>{{ $this->meetingProviderLabel }}</dd>
                 </div>
-                @if ($zoom)
+                @if ($session->zoxAgentMeeting)
+                    <div class="portal-ur-detail-row">
+                        <dt>قاعة ZoxAgent</dt>
+                        <dd dir="ltr">{{ $session->zoxAgentMeeting->room_code }}</dd>
+                    </div>
+                @elseif ($zoom)
                     <div class="portal-ur-detail-row">
                         <dt>حالة Zoom</dt>
                         <dd>{{ $zoom->status ?: 'مرتبط' }}</dd>
@@ -528,6 +607,15 @@ class extends Component
             </dl>
 
             <div class="portal-inst-hub-actions">
+                @if (\App\Support\ZoxAgentSettings::enabled())
+                    <button type="button" class="portal-btn portal-btn--secondary portal-btn--sm" wire:click="createZoxAgentMeeting" wire:loading.attr="disabled">
+                        <span wire:loading.remove wire:target="createZoxAgentMeeting">{{ $session->zoxAgentMeeting ? 'تحديث قاعة ZoxAgent' : 'إنشاء قاعة ZoxAgent' }}</span>
+                        <span wire:loading wire:target="createZoxAgentMeeting">جاري الإنشاء…</span>
+                    </button>
+                    @if ($session->zoxAgentMeeting)
+                        <button type="button" class="portal-btn portal-btn--ghost portal-btn--sm" wire:click="endZoxAgentMeeting" wire:confirm="إنهاء القاعة يوقف البث والتسجيل السحابي. متابعة؟">إنهاء القاعة</button>
+                    @endif
+                @endif
                 @if (ZoomSettings::enabled() && auth()->user()?->canInstructor('instructor.zoom.meeting.create'))
                     <button type="button" class="portal-btn portal-btn--secondary portal-btn--sm" wire:click="createZoomMeeting" wire:loading.attr="disabled">
                         <span wire:loading.remove wire:target="createZoomMeeting">{{ $zoom ? 'تحديث اجتماع Zoom' : 'إنشاء اجتماع Zoom' }}</span>
@@ -760,6 +848,9 @@ class extends Component
 
             @canInstructor('instructor.recordings.view')
                 <div class="portal-inst-hub-actions" style="margin-bottom:1rem;">
+                    @if ($this->session->zoxAgentMeeting)
+                        <button type="button" class="portal-btn portal-btn--secondary portal-btn--sm" wire:click="syncZoxAgentRecording">مزامنة من ZoxAgent</button>
+                    @endif
                     @if ($this->zoomMeeting && auth()->user()?->canInstructor('instructor.zoom.recording.sync'))
                         <button type="button" class="portal-btn portal-btn--secondary portal-btn--sm" wire:click="syncZoomRecording">مزامنة من Zoom</button>
                     @endif
@@ -796,6 +887,9 @@ class extends Component
                     <p>تعديل يدوي أو تصحيح سجل المزوّد — {{ $summary['present'] + $summary['late'] }} حاضر من {{ $summary['sessions'] }} طالب.</p>
                 </div>
                 <div class="portal-inst-hub-actions">
+                    @if ($this->session->zoxAgentMeeting)
+                        <button type="button" class="portal-btn portal-btn--secondary portal-btn--sm" wire:click="syncZoxAgentAttendance">مزامنة ZoxAgent</button>
+                    @endif
                     @if ($this->zoomMeeting && auth()->user()?->canInstructor('instructor.zoom.attendance.sync'))
                         <button type="button" class="portal-btn portal-btn--secondary portal-btn--sm" wire:click="syncZoomAttendance">مزامنة Zoom</button>
                     @endif

@@ -21,7 +21,7 @@ class extends Component
     {
         abort_unless($sessions->studentCanAccess(auth()->user(), $session), 404);
 
-        $this->session = $session->load(['section.course', 'section.schedule', 'publishedMaterials', 'recording', 'zoomMeeting']);
+        $this->session = $session->load(['section.course', 'section.schedule', 'publishedMaterials', 'recording', 'zoomMeeting', 'zoxAgentMeeting']);
     }
 
     #[Computed]
@@ -40,6 +40,13 @@ class extends Component
     public function usesZoom(): bool
     {
         return (bool) $this->session->zoomMeeting;
+    }
+
+    #[Computed]
+    public function usesZoxAgent(): bool
+    {
+        return (bool) $this->session->zoxAgentMeeting?->room_code
+            && \App\Support\ZoxAgentSettings::enabled();
     }
 
     #[Computed]
@@ -155,10 +162,14 @@ class extends Component
 
             <div class="session-hero__actions">
                 @if (
-                    $this->usesZoom
+                    ($this->usesZoom || $this->usesZoxAgent)
                     && $this->hasJoinRoute
                     && in_array($state, ['upcoming', 'live'], true)
-                    && ($state === 'live' || ! $startsAt || now()->gte($startsAt->copy()->subMinutes(\App\Support\ZoomSettings::joinWindowMinutes())))
+                    && ($state === 'live' || ! $startsAt || now()->gte($startsAt->copy()->subMinutes(
+                        $this->usesZoxAgent
+                            ? \App\Support\ZoxAgentSettings::joinWindowMinutes()
+                            : \App\Support\ZoomSettings::joinWindowMinutes()
+                    )))
                 )
                     <a href="{{ route('sessions.join', ['locale' => $locale, 'session' => $this->session->id]) }}" class="btn {{ $state === 'live' ? 'btn-danger' : 'btn-light' }}">
                         <i class="fa-solid fa-video"></i> {{ $state === 'live' ? 'انضم للمحاضرة الآن' : 'رابط الانضمام' }}

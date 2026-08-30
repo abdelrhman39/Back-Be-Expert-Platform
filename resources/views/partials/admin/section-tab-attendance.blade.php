@@ -4,6 +4,7 @@
     use App\Support\RecordingOptions;
     use App\Support\TeamsSettings;
     use App\Support\ZoomSettings;
+    use App\Support\ZoxAgentSettings;
 @endphp
 
 <div class="section-attendance-tab">
@@ -82,8 +83,49 @@
             @php
                 $selected = $this->selectedAttendanceSession;
                 $zoom = $selected->zoomMeeting;
+                $zox = $selected->zoxAgentMeeting;
                 $rec = $selected->recording;
             @endphp
+
+            @if (ZoxAgentSettings::enabled() || $zox)
+                <section class="admin-crud-card admin-crud-card--filter">
+                    <div class="admin-crud-card__head">
+                        <h2>ZoxAgent Meet</h2>
+                        <p class="admin-crud-card__meta">إنشاء القاعة، دخول الطلاب من حساب المنصة، ومزامنة الحضور.</p>
+                    </div>
+                    <div class="admin-teams-session-bar">
+                        @if ($zox)
+                            <span class="admin-badge admin-badge--success">قاعة {{ $zox->room_code }}</span>
+                            @if ($zox->last_started_at)
+                                <span class="admin-crud-card__meta">آخر بدء: {{ $zox->last_started_at->diffForHumans() }}</span>
+                            @endif
+                            @if ($zox->attendance_synced_at)
+                                <span class="admin-crud-card__meta">آخر مزامنة حضور: {{ $zox->attendance_synced_at->diffForHumans() }}</span>
+                            @endif
+                            @if ($zox->last_error)
+                                <span class="admin-badge admin-badge--warn">{{ $zox->last_error }}</span>
+                            @endif
+                            <a href="{{ route('admin.sessions.zoxagent.join', $selected) }}" class="admin-btn-secondary admin-btn-secondary--sm">فتح القاعة</a>
+                        @else
+                            <span class="admin-badge admin-badge--warn">لا توجد قاعة ZoxAgent</span>
+                        @endif
+
+                        @canAdmin('attendance.manage')
+                            <button type="button" class="admin-btn-secondary admin-btn-secondary--sm" wire:click="createZoxAgentMeeting" wire:loading.attr="disabled">
+                                <span wire:loading.remove wire:target="createZoxAgentMeeting">{{ $zox ? 'تحديث قاعة ZoxAgent' : 'إنشاء قاعة ZoxAgent' }}</span>
+                                <span wire:loading wire:target="createZoxAgentMeeting">جاري الإنشاء…</span>
+                            </button>
+                            @if ($zox)
+                                <button type="button" class="admin-btn-secondary admin-btn-secondary--sm" wire:click="syncZoxAgentAttendance" wire:loading.attr="disabled">
+                                    <span wire:loading.remove wire:target="syncZoxAgentAttendance">مزامنة الحضور من ZoxAgent</span>
+                                    <span wire:loading wire:target="syncZoxAgentAttendance">جاري المزامنة…</span>
+                                </button>
+                                <button type="button" class="admin-btn-secondary admin-btn-secondary--sm" wire:click="endZoxAgentMeeting" wire:confirm="إنهاء القاعة يوقف البث والتسجيل. متابعة؟">إنهاء القاعة</button>
+                            @endif
+                        @endcanAdmin
+                    </div>
+                </section>
+            @endif
 
             @if (ZoomSettings::enabled() || $zoom)
                 <section class="admin-crud-card admin-crud-card--filter">
@@ -169,7 +211,7 @@
                 </section>
             @endif
 
-            @if (ZoomSettings::enabled() || TeamsSettings::isEnabled() || $rec)
+            @if (ZoomSettings::enabled() || TeamsSettings::isEnabled() || $rec || $zox)
                 <section class="admin-crud-card admin-crud-card--filter">
                     <div class="admin-crud-card__head">
                         <h2>تسجيل المحاضرة</h2>
@@ -196,6 +238,9 @@
                             <span class="admin-badge admin-badge--muted">لا يوجد تسجيل بعد</span>
                         @endif
                         @canAdmin('attendance.manage')
+                            @if ($zox)
+                                <button type="button" class="admin-btn-secondary admin-btn-secondary--sm" wire:click="syncZoxAgentRecording">مزامنة من ZoxAgent</button>
+                            @endif
                             @if ($zoom)
                                 <button type="button" class="admin-btn-secondary admin-btn-secondary--sm" wire:click="syncZoomRecording">مزامنة من Zoom</button>
                             @endif

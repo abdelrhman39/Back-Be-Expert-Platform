@@ -79,6 +79,11 @@ class AttendanceSession extends Model
         return $this->hasOne(ZoomMeeting::class, 'attendance_session_id');
     }
 
+    public function zoxAgentMeeting(): HasOne
+    {
+        return $this->hasOne(ZoxAgentMeeting::class, 'attendance_session_id');
+    }
+
     public function displayTitle(): string
     {
         if ($this->title) {

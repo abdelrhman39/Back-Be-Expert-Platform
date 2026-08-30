@@ -188,6 +188,7 @@ return [
                         ['route' => 'admin.system-settings', 'label' => 'إعدادات النظام'],
                         ['route' => 'admin.teams-settings', 'label' => 'Microsoft Teams'],
                         ['route' => 'admin.zoom-settings', 'label' => 'Zoom'],
+                        ['route' => 'admin.zoxagent-settings', 'label' => 'ZoxAgent Meet'],
                         ['route' => 'admin.audit-log', 'label' => 'سجل التدقيق'],
                     ],
                 ],

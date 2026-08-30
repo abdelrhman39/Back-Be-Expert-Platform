@@ -25,6 +25,7 @@ class SessionRecordingService
             ->where('status', 'published')
             ->where(fn ($query) => $query
                 ->whereNotNull('recording_url')
+                ->orWhereNotNull('play_url')
                 ->orWhereNotNull('storage_path'))
             ->where(function ($q) {
                 $q->whereNull('expires_at')->orWhere('expires_at', '>', now());
@@ -34,7 +35,7 @@ class SessionRecordingService
 
     public function studentCanView(User $user, SessionRecording $recording): bool
     {
-        if (! $recording->isPublished() || (! $recording->recording_url && ! $recording->storage_path)) {
+        if (! $recording->isPublished() || (! $recording->recording_url && ! $recording->storage_path && ! $recording->play_url)) {
             return false;
         }
 
@@ -113,7 +114,7 @@ class SessionRecordingService
 
     public function maybeAutoPublish(SessionRecording $recording): void
     {
-        if ($recording->status !== 'available' || (! $recording->recording_url && ! $recording->storage_path)) {
+                        if ($recording->status !== 'available' || (! $recording->recording_url && ! $recording->storage_path && ! $recording->play_url)) {
             return;
         }
 

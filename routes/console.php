@@ -7,6 +7,7 @@ use App\Services\ExamAttemptService;
 use App\Support\CertificateAccessSettings;
 use App\Support\InstallmentSettings;
 use App\Support\ZoomSettings;
+use App\Support\ZoxAgentSettings;
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Schedule;
@@ -67,6 +68,10 @@ Schedule::command('installments:process-overdue')
 Schedule::command('installments:process-dunning')
     ->dailyAt(InstallmentSettings::dunningProcessTime())
     ->when(fn () => InstallmentSettings::dunningEnabled())
+    ->withoutOverlapping();
+Schedule::command('zoxagent:sync-meetings')
+    ->everyMinute()
+    ->when(fn () => ZoxAgentSettings::enabled())
     ->withoutOverlapping();
 Schedule::command('sessions:generate-upcoming')->weeklyOn(0, '06:00');
 Schedule::command('exams:submit-expired')

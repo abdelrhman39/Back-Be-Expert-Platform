@@ -24,6 +24,7 @@ use App\Http\Controllers\Webhooks\MoyasarWebhookController;
 use App\Http\Controllers\Webhooks\TabbyWebhookController;
 use App\Http\Controllers\Webhooks\TamaraWebhookController;
 use App\Http\Controllers\Webhooks\ZoomWebhookController;
+use App\Http\Controllers\Webhooks\ZoxAgentWebhookController;
 use Illuminate\Support\Facades\Route;
 
 Route::redirect('/', '/ar');
@@ -37,6 +38,7 @@ Route::post('/webhooks/moyasar', MoyasarWebhookController::class)->name('webhook
 Route::post('/webhooks/tabby', TabbyWebhookController::class)->name('webhooks.tabby');
 Route::post('/webhooks/tamara', TamaraWebhookController::class)->name('webhooks.tamara');
 Route::post('/webhooks/zoom', ZoomWebhookController::class)->name('webhooks.zoom');
+Route::post('/webhooks/zoxagent', ZoxAgentWebhookController::class)->name('webhooks.zoxagent');
 
 Route::get('/integrations/microsoft/callback', [MicrosoftTeamsOAuthController::class, 'callback'])
     ->name('integrations.microsoft.callback');
@@ -222,6 +224,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::livewire('/payment-settings', 'admin.payment-settings-page')->name('payment-settings');
         Route::livewire('/teams-settings', 'admin.teams-settings-page')->name('teams-settings');
         Route::livewire('/zoom-settings', 'admin.zoom-settings-page')->name('zoom-settings');
+        Route::livewire('/zoxagent-settings', 'admin.zoxagent-settings-page')->name('zoxagent-settings');
         Route::livewire('/notifications', 'admin.notifications-page')->name('notifications');
         Route::livewire('/notification-rules', 'admin.notification-rules-page')->name('notification-rules');
         Route::livewire('/audit-log', 'admin.audit-log-page')->name('audit-log');
@@ -232,6 +235,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::livewire('/certificate-templates/{template}/builder', 'admin.certificate-template-builder-page')->name('certificate-templates.builder');
         Route::livewire('/statements', 'admin.statements-page')->name('statements');
         Route::livewire('/sessions', 'admin.sessions-page')->name('sessions');
+        Route::get('/sessions/{session}/zoxagent/join', SessionJoinController::class)->name('sessions.zoxagent.join');
         Route::livewire('/assignments', 'admin.assignments-page')->name('assignments');
         Route::livewire('/assignments/create', 'admin.assignment-form-page')->name('assignments.create');
         Route::livewire('/assignments/{assignment}/edit', 'admin.assignment-form-page')->name('assignments.edit');

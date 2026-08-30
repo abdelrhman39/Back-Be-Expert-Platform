@@ -134,7 +134,7 @@ class extends Component
         }
 
         return AttendanceSession::query()
-            ->with(['materials', 'recording', 'zoomMeeting.host', 'zoomMeeting.registrants'])
+            ->with(['materials', 'recording', 'zoomMeeting.host', 'zoomMeeting.registrants', 'zoxAgentMeeting'])
             ->where('section_id', $this->section->id)
             ->find($this->attendanceSessionId);
     }
@@ -296,6 +296,90 @@ class extends Component
         }
 
         unset($this->selectedAttendanceSession, $this->attendanceSessions);
+    }
+
+    public function createZoxAgentMeeting(\App\Services\ZoxAgent\ZoxAgentMeetingService $meetings): void
+    {
+        abort_unless(auth()->user()?->canAdmin('attendance.manage'), 403);
+
+        $session = $this->selectedAttendanceSession;
+
+        if (! $session) {
+            return;
+        }
+
+        try {
+            $meetings->ensureMeeting($session);
+            session()->flash('admin_message', 'تم إنشاء / تحديث قاعة ZoxAgent.');
+        } catch (\Throwable $e) {
+            session()->flash('admin_message', 'تعذّر إنشاء قاعة ZoxAgent: '.$e->getMessage());
+        }
+
+        unset($this->selectedAttendanceSession, $this->attendanceSessions);
+    }
+
+    public function syncZoxAgentAttendance(\App\Services\ZoxAgent\ZoxAgentMeetingService $meetings): void
+    {
+        abort_unless(auth()->user()?->canAdmin('attendance.manage'), 403);
+
+        $session = $this->selectedAttendanceSession?->loadMissing('zoxAgentMeeting');
+
+        if (! $session?->zoxAgentMeeting) {
+            session()->flash('admin_message', 'لا توجد قاعة ZoxAgent لهذه الجلسة.');
+
+            return;
+        }
+
+        try {
+            $synced = $meetings->syncAttendance($session);
+            session()->flash('admin_message', 'تمت مزامنة حضور ZoxAgent ('.$synced.' طالب).');
+        } catch (\Throwable $e) {
+            session()->flash('admin_message', 'تعذّر مزامنة حضور ZoxAgent: '.$e->getMessage());
+        }
+
+        unset($this->selectedSessionRecords, $this->attendanceSectionSummary, $this->selectedAttendanceSession);
+    }
+
+    public function endZoxAgentMeeting(\App\Services\ZoxAgent\ZoxAgentMeetingService $meetings): void
+    {
+        abort_unless(auth()->user()?->canAdmin('attendance.manage'), 403);
+
+        $session = $this->selectedAttendanceSession?->loadMissing('zoxAgentMeeting');
+        if (! $session?->zoxAgentMeeting) {
+            session()->flash('admin_message', 'لا توجد قاعة ZoxAgent لهذه الجلسة.');
+
+            return;
+        }
+
+        try {
+            $meetings->endRoom($session);
+            session()->flash('admin_message', 'تم إنهاء قاعة ZoxAgent وإيقاف التسجيل السحابي.');
+        } catch (\Throwable $e) {
+            session()->flash('admin_message', 'تعذّر إنهاء القاعة: '.$e->getMessage());
+        }
+
+        unset($this->selectedAttendanceSession, $this->attendanceSessions);
+    }
+
+    public function syncZoxAgentRecording(\App\Services\ZoxAgent\ZoxAgentMeetingService $meetings): void
+    {
+        abort_unless(auth()->user()?->canAdmin('attendance.manage'), 403);
+
+        $session = $this->selectedAttendanceSession?->loadMissing('zoxAgentMeeting');
+        if (! $session?->zoxAgentMeeting) {
+            session()->flash('admin_message', 'لا توجد قاعة ZoxAgent لهذه الجلسة.');
+
+            return;
+        }
+
+        try {
+            $count = $meetings->pullRecordings($session);
+            session()->flash('admin_message', $count > 0 ? 'تمت مزامنة تسجيل ZoxAgent.' : 'لا يوجد تسجيل جاهز بعد.');
+        } catch (\Throwable $e) {
+            session()->flash('admin_message', 'تعذّر مزامنة التسجيل: '.$e->getMessage());
+        }
+
+        unset($this->selectedAttendanceSession);
     }
 
     public function createZoomMeeting(ZoomMeetingService $meetings): void

@@ -52,6 +52,22 @@ class SessionRecordingController extends Controller
             }
         }
 
+        if ($recording->provider === 'zoxagent' && filled($recording->external_recording_id) && \App\Support\ZoxAgentSettings::enabled()) {
+            try {
+                $fresh = app(\App\Services\ZoxAgent\ZoxAgentMeetingService::class)->recordingPlayback((string) $recording->external_recording_id);
+                if (filled($fresh['url'] ?? null) && ! ($fresh['pending'] ?? false)) {
+                    $recording->update([
+                        'play_url' => $fresh['url'],
+                        'recording_url' => $fresh['url'],
+                        'status' => $recording->status === 'processing' ? 'available' : $recording->status,
+                    ]);
+                    $recording->refresh();
+                }
+            } catch (\Throwable) {
+                // fall through to stored URL
+            }
+        }
+
         $url = $recording->play_url ?: $recording->share_url ?: $recording->recording_url;
         abort_unless(filled($url), 404);
 

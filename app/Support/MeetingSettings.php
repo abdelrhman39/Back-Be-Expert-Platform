@@ -12,12 +12,12 @@ class MeetingSettings
     {
         $provider = PlatformSetting::get(self::DEFAULT_PROVIDER, 'zoom') ?: 'zoom';
 
-        return in_array($provider, ['zoom', 'teams', 'manual'], true) ? $provider : 'zoom';
+        return in_array($provider, ['zoom', 'teams', 'zoxagent', 'manual'], true) ? $provider : 'zoom';
     }
 
     public static function setDefaultProvider(string $provider): void
     {
-        if (! in_array($provider, ['zoom', 'teams', 'manual'], true)) {
+        if (! in_array($provider, ['zoom', 'teams', 'zoxagent', 'manual'], true)) {
             $provider = 'zoom';
         }
 
@@ -36,6 +36,7 @@ class MeetingSettings
         return [
             'zoom' => 'Zoom',
             'teams' => 'Microsoft Teams',
+            'zoxagent' => 'ZoxAgent Meet',
             'manual' => 'رابط يدوي',
         ];
     }

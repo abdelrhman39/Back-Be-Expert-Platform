@@ -108,12 +108,12 @@ class extends Component
                     </div>
                     <div class="portal-session-card__actions">
                         @if ($state === 'live' && $session->join_url)
-                            <a href="{{ $session->join_url }}" target="_blank" rel="noopener" class="btn btn-danger btn-sm">
+                            <a href="{{ $session->join_url }}" @if (! $session->zoxAgentMeeting) target="_blank" rel="noopener" @endif class="btn btn-danger btn-sm">
                                 <i class="fa-solid fa-video"></i> انضم الآن
                             </a>
                         @elseif ($state === 'upcoming' && $session->join_url)
-                            <a href="{{ $session->join_url }}" target="_blank" rel="noopener" class="btn btn-outline-primary btn-sm">
-                                <i class="fa-solid fa-link"></i> رابط Teams
+                            <a href="{{ $session->join_url }}" @if (! $session->zoxAgentMeeting) target="_blank" rel="noopener" @endif class="btn btn-outline-primary btn-sm">
+                                <i class="fa-solid fa-link"></i> {{ $session->zoxAgentMeeting ? 'رابط القاعة' : 'رابط Teams' }}
                             </a>
                         @endif
                         <a href="{{ route('sessions.show', ['locale' => $locale, 'session' => $session->id]) }}" class="btn btn-primary btn-sm">

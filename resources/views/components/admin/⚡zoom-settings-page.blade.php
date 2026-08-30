@@ -167,7 +167,7 @@ class extends Component
             'clientId' => ['required_if:zoomEnabled,true', 'nullable', 'string', 'max:120'],
             'clientSecret' => ['nullable', 'string', 'max:255'],
             'webhookSecret' => ['nullable', 'string', 'max:255'],
-            'defaultProvider' => ['required', 'in:zoom,teams,manual'],
+            'defaultProvider' => ['required', 'in:zoom,teams,zoxagent,manual'],
             'hostStrategy' => ['required', 'in:central,instructor,pool'],
             'defaultHost' => ['nullable', 'string', 'max:190'],
             'syncInterval' => ['required', 'integer', 'min:5', 'max:120'],

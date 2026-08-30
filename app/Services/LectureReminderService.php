@@ -84,7 +84,7 @@ class LectureReminderService
         $startsAt = $session->startsAt();
         $locale = app()->getLocale();
         $sessionUrl = route('sessions.show', ['locale' => $locale, 'session' => $session->id]);
-        $joinUrl = $session->teams_join_web_url ?? $session->meeting_url;
+        $joinUrl = app(AcademicSessionService::class)->joinUrl($session);
 
         if ($type === NotificationTypes::LECTURE_LIVE_NOW) {
             $title = 'المحاضرة جارية الآن';

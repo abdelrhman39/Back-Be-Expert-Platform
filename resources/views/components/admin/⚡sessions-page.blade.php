@@ -249,7 +249,7 @@ class extends Component
         $service = app(AcademicSessionService::class);
 
         return AttendanceSession::query()
-            ->with(['section.course', 'zoomMeeting.host'])
+            ->with(['section.course', 'zoomMeeting.host', 'zoxAgentMeeting'])
             ->withCount('materials')
             ->when($this->sectionId, fn ($q) => $q->where('section_id', (int) $this->sectionId))
             ->when($this->search, fn ($q) => $q->where(function ($q) {
@@ -267,6 +267,7 @@ class extends Component
                 $session->computed_state = $timing['state'];
                 $session->join_url = $service->joinUrl($session);
                 $session->meeting_provider_label = match (true) {
+                    (bool) $session->zoxAgentMeeting => 'ZoxAgent',
                     (bool) $session->zoomMeeting => 'Zoom',
                     filled($session->teams_join_web_url) => 'Teams',
                     filled($session->meeting_url) => 'يدوي',

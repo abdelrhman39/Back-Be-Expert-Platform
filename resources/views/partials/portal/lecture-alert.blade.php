@@ -35,7 +35,8 @@
         </div>
         <div class="portal-lecture-alert__actions">
             @if ($lecture['meeting_url'])
-                <a href="{{ $lecture['meeting_url'] }}" target="_blank" rel="noopener noreferrer"
+                <a href="{{ $lecture['meeting_url'] }}"
+                    @if (! str_contains((string) $lecture['meeting_url'], '/sessions/')) target="_blank" rel="noopener noreferrer" @endif
                     @class(['btn btn-sm', $lecture['state'] === 'live' ? 'btn-light' : 'btn-primary'])>
                     @if ($lecture['state'] === 'live')
                         <i class="fa-solid fa-right-to-bracket"></i> دخول المحاضرة

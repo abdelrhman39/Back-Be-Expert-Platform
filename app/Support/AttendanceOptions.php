@@ -31,6 +31,9 @@ class AttendanceOptions
         return [
             'manual' => 'يدوي',
             'teams_sync' => 'Microsoft Teams',
+            'zoom_sync' => 'Zoom',
+            'zoxagent_sync' => 'ZoxAgent Meet',
+            'zoxagent_join' => 'دخول ZoxAgent',
             'override' => 'تصحيح',
             'schedule' => 'جدول تلقائي',
         ];

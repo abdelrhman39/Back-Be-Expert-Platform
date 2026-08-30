@@ -58,6 +58,7 @@ class UpcomingLectureService
         $items = collect();
 
         $dated = AttendanceSession::query()
+            ->with('zoxAgentMeeting')
             ->where('section_id', $sectionId)
             ->whereIn('status', ['scheduled', 'completed'])
             ->whereDate('session_date', '>=', today())
@@ -106,13 +107,21 @@ class UpcomingLectureService
             $endsAt = $startsAt->copy()->addHours(2);
         }
 
+        $meetingUrl = $session->teams_join_web_url ?? $session->meeting_url ?? $section->schedule?->meeting_url;
+        if ($session->zoxAgentMeeting?->room_code && \App\Support\ZoxAgentSettings::enabled()) {
+            $meetingUrl = route('sessions.join', [
+                'locale' => app()->getLocale(),
+                'session' => $session->id,
+            ]);
+        }
+
         return $this->buildSlot(
             title: $session->displayTitle(),
             courseName: $section->course?->name_ar ?? $section->subtitle ?? $section->name,
             trainer: $section->schedule?->trainer_name ?? $section->supervisor,
             startsAt: $startsAt,
             endsAt: $endsAt,
-            meetingUrl: $session->teams_join_web_url ?? $session->meeting_url ?? $section->schedule?->meeting_url,
+            meetingUrl: $meetingUrl,
             source: 'session',
         );
     }

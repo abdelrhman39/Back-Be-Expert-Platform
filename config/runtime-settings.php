@@ -362,6 +362,12 @@ return [
             'description' => 'ربط Zoom، المضيفون، الحضور والتسجيلات',
         ],
         [
+            'route' => 'admin.zoxagent-settings',
+            'label' => 'ZoxAgent Meet',
+            'permission' => 'zoxagent-settings.manage',
+            'description' => 'ربط ZoxAgent، القاعات، الحضور والتسجيل التلقائي',
+        ],
+        [
             'route' => 'admin.notification-rules',
             'label' => 'قواعد الإشعارات',
             'permission' => 'notifications.manage',

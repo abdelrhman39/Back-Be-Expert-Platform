@@ -22,7 +22,7 @@ class AcademicSessionService
         }
 
         return AttendanceSession::query()
-            ->with(['section.course', 'section.schedule'])
+            ->with(['section.course', 'section.schedule', 'zoxAgentMeeting', 'zoomMeeting'])
             ->with(['publishedMaterials'])
             ->where('section_id', $student->section_id)
             ->whereIn('status', ['scheduled', 'completed'])
@@ -101,7 +101,7 @@ class AcademicSessionService
             app(MeetingProviderManager::class)->ensureMeetingForSession($session);
         }
 
-        return $session->fresh(['section.course', 'zoomMeeting']) ?? $session;
+        return $session->fresh(['section.course', 'zoomMeeting', 'zoxAgentMeeting']) ?? $session;
     }
 
     /**
@@ -172,7 +172,16 @@ class AcademicSessionService
 
         $session->update($payload);
 
-        return $session->fresh(['section.course', 'zoomMeeting']) ?? $session;
+        $session->loadMissing('zoxAgentMeeting');
+        if ($session->zoxAgentMeeting && \App\Support\ZoxAgentSettings::enabled()) {
+            try {
+                app(\App\Services\ZoxAgent\ZoxAgentMeetingService::class)->ensureMeeting($session->fresh());
+            } catch (\Throwable) {
+                // session times still saved even if the room update fails
+            }
+        }
+
+        return $session->fresh(['section.course', 'zoomMeeting', 'zoxAgentMeeting']) ?? $session;
     }
 
     public function deleteSession(AttendanceSession $session): void
@@ -242,6 +251,15 @@ class AcademicSessionService
 
     public function joinUrl(AttendanceSession $session): ?string
     {
+        $session->loadMissing('zoxAgentMeeting');
+
+        if ($session->zoxAgentMeeting?->room_code && \App\Support\ZoxAgentSettings::enabled()) {
+            return route('sessions.join', [
+                'locale' => app()->getLocale(),
+                'session' => $session->id,
+            ]);
+        }
+
         return $session->teams_join_web_url ?: $session->meeting_url ?: $session->section?->schedule?->meeting_url;
     }
 

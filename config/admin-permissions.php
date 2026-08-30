@@ -81,6 +81,7 @@ return [
         'payment-settings.manage' => ['label' => 'إعدادات الدفع', 'group' => 'finance'],
         'teams-settings.manage' => ['label' => 'إعدادات Microsoft Teams', 'group' => 'settings'],
         'zoom-settings.manage' => ['label' => 'إعدادات وربط Zoom', 'group' => 'settings'],
+        'zoxagent-settings.manage' => ['label' => 'إعدادات وربط ZoxAgent Meet', 'group' => 'settings'],
         'notifications.manage' => ['label' => 'الإشعارات وقواعدها', 'group' => 'settings'],
         'staff.view' => ['label' => 'عرض الكوادر الأكاديمية', 'group' => 'academic'],
         'staff.manage' => ['label' => 'إدارة الكوادر الأكاديمية', 'group' => 'academic'],

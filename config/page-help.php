@@ -37,6 +37,16 @@ return [
             'description' => 'اربط عدة أدوار بالمستخدم وأضف استثناءات سماح أو منع مباشرة.',
             'steps' => ['حدد أدوار المستخدم', 'استخدم السماح أو المنع للحالات الاستثنائية', 'راجع أولوية الصلاحيات ثم احفظ'],
         ],
+        'admin.zoxagent-settings' => [
+            'title' => 'دليل تكامل ZoxAgent Meet',
+            'description' => 'إنشاء قاعات المحاضرات ودخول الطلاب والمدربين من حساب المنصة دون تسجيل في ZoxAgent.',
+            'steps' => [
+                'أنشئ مفتاح API في ZoxAgent بصلاحيات rooms و embed ثم احفظه هنا مشفّراً',
+                'أضف نطاق المنصة في نطاقات الدمج داخل لوحة ZoxAgent',
+                'اختر ZoxAgent Meet كمزوّد افتراضي ثم أنشئ حصة تجريبية',
+                'ادخل كمدرب وطالب من المنصة وتأكد من مزامنة الحضور بعد الجلسة',
+            ],
+        ],
         'admin.zoom-settings' => [
             'title' => 'دليل تكامل Zoom',
             'description' => 'إعداد إنشاء المحاضرات والمضيفين والحضور والتسجيلات الآلية من حساب Zoom المؤسسي.',
@@ -136,7 +146,7 @@ return [
             'steps' => ['استخدم الفترة والفلاتر المناسبة', 'افتح السجل لمراجعة التفاصيل', 'أكد أي إجراء مالي قبل تنفيذه'],
         ],
         [
-            'patterns' => ['admin.settings*', 'admin.system-settings*', 'admin.teams-settings*', 'admin.zoom-settings*', 'admin.notification-rules*', 'admin.audit-log*'],
+            'patterns' => ['admin.settings*', 'admin.system-settings*', 'admin.teams-settings*', 'admin.zoom-settings*', 'admin.zoxagent-settings*', 'admin.notification-rules*', 'admin.audit-log*'],
             'title' => 'دليل الإعدادات والحوكمة',
             'description' => 'ضبط سلوك المنصة والتكاملات والصلاحيات ومراجعة سجل العمليات.',
             'steps' => ['راجع تأثير الإعداد', 'غيّر القيمة المطلوبة فقط', 'احفظ وتحقق من النتيجة'],

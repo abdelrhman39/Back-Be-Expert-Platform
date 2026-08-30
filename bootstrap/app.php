@@ -24,6 +24,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'webhooks/tabby',
             'webhooks/tamara',
             'webhooks/zoom',
+            'webhooks/zoxagent',
             'integrations/microsoft/callback',
         ]);
 
