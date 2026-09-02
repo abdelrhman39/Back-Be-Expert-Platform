@@ -827,10 +827,17 @@ img.platform-logo--favicon {
         transform: none !important;
     }
 
-    .header .sidebar-overlay.opened,
+    html.menu-opened .header {
+        z-index: 1200 !important;
+    }
+
     .sidebar-overlay.opened {
         display: block;
-        z-index: 1070;
+        z-index: 1100;
+    }
+
+    .header .sidebar-overlay {
+        z-index: 0;
     }
 
     .header .menu-header {

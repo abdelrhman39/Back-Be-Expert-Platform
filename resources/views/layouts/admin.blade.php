@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="{{ asset('css/admin-status-badges.css') }}?v=1">
     <link rel="stylesheet" href="{{ asset('css/admin-toast.css') }}?v=2">
     <link rel="stylesheet" href="{{ asset('css/notification-bell.css') }}?v=1">
-    <link rel="stylesheet" href="{{ asset('css/site-header.css') }}?v=16">
+    <link rel="stylesheet" href="{{ asset('css/site-header.css') }}?v=17">
     <link rel="stylesheet" href="{{ asset('css/media-picker.css') }}?v=1">
     @include('partials.platform-theme')
     @livewireStyles

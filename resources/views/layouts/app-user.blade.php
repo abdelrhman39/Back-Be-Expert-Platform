@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="{{ static_asset('assets/style.css') }}">
     <link rel="stylesheet" href="{{ static_asset('assets/components.css') }}">
     <link rel="stylesheet" href="{{ static_asset('css/site-enhancements.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/site-header.css') }}?v=16">
+    <link rel="stylesheet" href="{{ asset('css/site-header.css') }}?v=17">
     <link rel="stylesheet" href="{{ asset('css/notification-bell.css') }}?v=1">
     @include('partials.platform-theme')
     <link rel="stylesheet" href="{{ asset('css/site-footer.css') }}?v=1">

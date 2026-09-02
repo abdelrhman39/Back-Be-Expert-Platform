@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="{{ static_asset('assets/style.css') }}">
     <link rel="stylesheet" href="{{ static_asset('assets/components.css') }}">
     <link rel="stylesheet" href="{{ static_asset('css/site-enhancements.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/site-header.css') }}?v=16">
+    <link rel="stylesheet" href="{{ asset('css/site-header.css') }}?v=17">
     <link rel="stylesheet" href="{{ asset('css/home-hero.css') }}?v=12">
     <link rel="stylesheet" href="{{ asset('css/home-mvg.css') }}?v=2">
     <link rel="stylesheet" href="{{ asset('css/home-catalog-slider.css') }}?v=11">

@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="{{ static_asset('assets/style.css') }}">
     <link rel="stylesheet" href="{{ static_asset('assets/components.css') }}">
     <link rel="stylesheet" href="{{ static_asset('css/site-enhancements.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/site-header.css') }}?v=16">
+    <link rel="stylesheet" href="{{ asset('css/site-header.css') }}?v=17">
     <link rel="stylesheet" href="{{ static_asset('css/portal-shell.css') }}">
     @include('partials.platform-theme')
     <link rel="stylesheet" href="{{ static_asset('assets/domain-a11y-panel.css') }}">
