@@ -93,16 +93,19 @@ class extends Component
 
     public function mount(): void
     {
-        $this->platformNameAr = PlatformSetting::get('platform_name_ar', 'منصة مركز التعلم المستمر') ?? '';
+        $this->platformNameAr = PlatformSetting::get('platform_name_ar', 'مركز التعلم المستمر') ?? '';
         $this->platformNameEn = PlatformSetting::get('platform_name_en', 'Continuing Learning Center Platform') ?? '';
-        $this->platformOrgAr = PlatformSetting::get('platform_org_ar', 'جامعة الامير مقرن') ?? '';
-        $this->platformOrgEn = PlatformSetting::get('platform_org_en', 'Muqrin University') ?? '';
+        $this->platformOrgAr = PlatformSetting::get('platform_org_ar', 'الجامعة العربية المفتوحة') ?? '';
+        $this->platformOrgEn = PlatformSetting::get('platform_org_en', 'Arab Open University') ?? '';
         $this->supportEmail = PlatformSetting::get('support_email', '') ?? '';
         $this->supportPhone = PlatformSetting::get('support_phone', '') ?? '';
         $this->whatsappNumber = PlatformSetting::get('whatsapp_number', '') ?? '';
         $this->defaultLocale = PlatformSetting::get('default_locale', 'ar') ?? 'ar';
         $this->maintenanceMode = PlatformSetting::get('maintenance_mode', '0') === '1';
-        $this->defaultPosterImage = PlatformSetting::get('default_poster_image') ?? PosterSettings::defaultAssetPath();
+        $storedPoster = PlatformSetting::get('default_poster_image');
+        $this->defaultPosterImage = (filled($storedPoster) && ! PosterSettings::isLegacyPoster($storedPoster))
+            ? $storedPoster
+            : PosterSettings::defaultAssetPath();
         $this->footerTexts = FooterSettings::formDefaults();
         $this->footerShowPaymentIcons = FooterSettings::showPaymentIcons();
         $this->footerShowContactSection = FooterSettings::showContactSection();
@@ -201,7 +204,11 @@ class extends Component
         PlatformSetting::set('default_locale', $this->defaultLocale, 'general', 'اللغة الافتراضية');
         PlatformSetting::set('maintenance_mode', $this->maintenanceMode ? '1' : '0', 'general', 'وضع الصيانة');
         $this->saveFooterSettings();
-        PlatformSetting::set('default_poster_image', $this->defaultPosterImage ?: PosterSettings::defaultAssetPath(), 'general', 'الصورة الافتراضية للبوستر');
+        $posterImage = $this->defaultPosterImage ?: PosterSettings::defaultAssetPath();
+        if (PosterSettings::isLegacyPoster($posterImage)) {
+            $posterImage = PosterSettings::defaultAssetPath();
+        }
+        PlatformSetting::set('default_poster_image', $posterImage, 'general', 'الصورة الافتراضية للبوستر');
         PlatformSetting::set(LogoSettings::KEY_PRIMARY, $logoPrimary, 'branding', 'الشعار الرئيسي');
         PlatformSetting::set(LogoSettings::KEY_SECONDARY, $logoSecondary, 'branding', 'الشعار الثانوي (الهيدر)');
         PlatformSetting::set(LogoSettings::KEY_FOOTER, $logoFooter, 'branding', 'شعار الفوتر');
@@ -325,6 +332,31 @@ class extends Component
 @endif
 
 <div class="admin-settings-panels">
+
+<x-admin.collapsible-card title="قوالب هوية الصفحة الرئيسية" open>
+    <x-slot:meta>
+        <p>بدّل هوية الجهة (الألوان وأجواء الصفحة الرئيسية) دون المساس بالمحتوى أو العناصر الأساسية. الشعارات واسم المنصة تُضبط من الأقسام أدناه.</p>
+    </x-slot:meta>
+    @php
+        $identityActive = \App\Support\IdentityThemes::active();
+        $identitySwatches = \App\Support\IdentityThemes::swatches($identityActive);
+    @endphp
+    <div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:1rem;">
+        <div>
+            <div style="font-weight:800; color:#0f172a;">{{ $identityActive['name_ar'] }}</div>
+            <div class="admin-field-hint" style="margin:0.25rem 0 0.55rem;">{{ $identityActive['tagline_ar'] }}</div>
+            <div style="display:flex; gap:0.35rem;">
+                @foreach ($identitySwatches as $swatch)
+                    <span style="width:1.35rem; height:1.35rem; border-radius:999px; background:{{ $swatch }}; border:1px solid rgba(15,23,42,.08);"></span>
+                @endforeach
+            </div>
+        </div>
+        <div class="admin-filter-actions" style="margin:0;">
+            <a href="{{ route('admin.identity-themes') }}" class="admin-btn-primary admin-btn-primary--sm">معرض القوالب والتفعيل</a>
+            <a href="{{ route('home', ['locale' => 'ar']) }}" class="admin-btn-secondary admin-btn-secondary--sm" target="_blank" rel="noopener">معاينة الرئيسية</a>
+        </div>
+    </div>
+</x-admin.collapsible-card>
 
 <x-admin.collapsible-card title="الإعدادات العامة">
     <x-slot:meta>
@@ -517,7 +549,7 @@ class extends Component
                 'label' => 'مسار الصورة',
                 'hint' => 'مسار داخل new-platform/assets أو رابط كامل أو /storage/...',
                 'previewUrl' => resolve_poster_url($defaultPosterImage ?: null),
-                'placeholder' => 'assets/vendor/images/site-favicon.png',
+                'placeholder' => 'assets/branding/aou-logo.png',
             ])
             @error('defaultPosterImage')<div class="admin-field-hint is-visible">{{ $message }}</div>@enderror
         </div>

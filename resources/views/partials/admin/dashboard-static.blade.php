@@ -8,10 +8,10 @@
                     </svg>
                 </button>
                 <a href="{{ route('admin.dashboard') }}" class="admin-sidebar__logo-link">
-                    <img src="{{ platform_logo_url(\App\Support\LogoSettings::KEY_PRIMARY) }}" alt="{{ \App\Models\PlatformSetting::get('platform_name_ar', 'منصة مركز التعلم المستمر') }}">
+                    <img src="{{ platform_logo_url(\App\Support\LogoSettings::KEY_PRIMARY) }}" alt="{{ \App\Models\PlatformSetting::get('platform_name_ar', 'مركز التعلم المستمر') }}">
                 </a>
-                <p class="admin-sidebar__org">{{ \App\Models\PlatformSetting::get('platform_name_ar', 'منصة مركز التعلم المستمر') }}</p>
-                <p class="admin-sidebar__org-sub">{{ \App\Models\PlatformSetting::get('platform_org_ar', 'جامعة الامير مقرن') }}</p>
+                <p class="admin-sidebar__org">{{ \App\Models\PlatformSetting::get('platform_name_ar', 'مركز التعلم المستمر') }}</p>
+                <p class="admin-sidebar__org-sub">{{ platform_org('ar') }}</p>
             </div>
             <div class="admin-sidebar__scroll">
                 <ul class="admin-side-nav"></ul>

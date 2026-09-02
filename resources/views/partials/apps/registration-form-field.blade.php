@@ -1,16 +1,29 @@
 @php
     $colClass = 'col-md-'.($field['col'] ?? 6);
     $inputId = 'apply-'.$field['key'];
+    $locale = app()->getLocale();
+    $choose = \App\Support\PublicCopy::apply('choose', $locale);
+    $isTel = ($field['type'] ?? '') === 'tel';
+    $isRadio = ($field['type'] ?? '') === 'radio';
 @endphp
 
 <div class="{{ $colClass }}">
     <div class="form-group apply-form-field mb-3">
-        <label class="form-label" for="{{ $inputId }}">
-            {{ $field['label'] }}
-            @if ($field['required'] ?? false)
-                <span class="text-danger">*</span>
-            @endif
-        </label>
+        @if (! $isRadio)
+            <label class="form-label" for="{{ $inputId }}">
+                {{ $field['label'] }}
+                @if ($field['required'] ?? false)
+                    <span class="text-danger">*</span>
+                @endif
+            </label>
+        @else
+            <span class="form-label d-block">
+                {{ $field['label'] }}
+                @if ($field['required'] ?? false)
+                    <span class="text-danger">*</span>
+                @endif
+            </span>
+        @endif
 
         @if ($field['type'] === 'textarea')
             <textarea
@@ -26,22 +39,17 @@
                 class="form-select @error('formData.'.$field['key']) is-invalid @enderror"
                 wire:model="formData.{{ $field['key'] }}"
             >
-                <option value="">اختر</option>
+                <option value="">{{ $choose }}</option>
                 @foreach (($field['options'] ?? []) as $value => $label)
                     <option value="{{ $value }}">{{ $label }}</option>
                 @endforeach
             </select>
-        @elseif ($field['type'] === 'radio')
-            <div class="d-flex gap-3 flex-wrap">
+        @elseif ($isRadio)
+            <div class="apply-choice-grid">
                 @foreach (($field['options'] ?? []) as $value => $label)
-                    <label class="form-check-label d-flex align-items-center gap-2">
-                        <input
-                            type="radio"
-                            class="form-check-input"
-                            wire:model="formData.{{ $field['key'] }}"
-                            value="{{ $value }}"
-                        >
-                        {{ $label }}
+                    <label class="apply-choice">
+                        <input type="radio" wire:model="formData.{{ $field['key'] }}" value="{{ $value }}">
+                        <span>{{ $label }}</span>
                     </label>
                 @endforeach
             </div>
@@ -55,15 +63,28 @@
                 id="{{ $inputId }}"
                 type="file"
                 class="form-control @error('uploads.'.$field['key']) is-invalid @enderror"
+                @isset($field['accept']) accept="{{ $field['accept'] }}" @endisset
                 wire:model="uploads.{{ $field['key'] }}"
             >
-            <div wire:loading wire:target="uploads.{{ $field['key'] }}" class="apply-form-field__hint">جاري رفع الملف…</div>
+            <div wire:loading wire:target="uploads.{{ $field['key'] }}" class="apply-form-field__hint">{{ \App\Support\PublicCopy::apply('uploading', $locale) }}</div>
+        @elseif ($isTel)
+            <div class="apply-tel input-group">
+                <span class="input-group-text apply-tel__prefix" dir="ltr">🇸🇦 +966</span>
+                <input
+                    id="{{ $inputId }}"
+                    type="tel"
+                    class="form-control @error('formData.'.$field['key']) is-invalid @enderror"
+                    dir="ltr"
+                    placeholder="{{ $field['placeholder'] ?? '5xxxxxxxx' }}"
+                    wire:model="formData.{{ $field['key'] }}"
+                >
+            </div>
         @else
             <input
                 id="{{ $inputId }}"
                 type="{{ $field['type'] }}"
                 class="form-control @error('formData.'.$field['key']) is-invalid @enderror"
-                @if (in_array($field['type'], ['email', 'tel'], true)) dir="ltr" @endif
+                @if (($field['type'] ?? '') === 'email') dir="ltr" @endif
                 placeholder="{{ $field['placeholder'] ?? '' }}"
                 @isset($field['step']) step="{{ $field['step'] }}" @endisset
                 @isset($field['min']) min="{{ $field['min'] }}" @endisset

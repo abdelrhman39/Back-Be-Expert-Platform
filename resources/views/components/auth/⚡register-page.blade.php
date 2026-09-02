@@ -293,233 +293,380 @@ class extends Component
 
 @php
     $locale = app()->getLocale();
+    $t = fn (string $key) => \App\Support\PublicCopy::register($key, $locale);
     $registration = app(AcademicRegistrationService::class);
     $batches = $academicFlow ? $registration->openBatches() : collect();
     $plans = $academicFlow ? app(InstallmentAcademicRegistrationService::class)->availablePlans() : collect();
     $selectedBatch = $batchId ? AcademicBatch::query()->with('program')->find($batchId) : null;
-    $totalSteps = $academicFlow ? 3 : 1;
+    $steps = [
+        1 => $t('step_profile'),
+        2 => $t('step_program'),
+        3 => $t('step_plan'),
+    ];
 @endphp
 
-<div class="portal-bg-pattern py-4 py-md-5">
-    <div class="container portal-auth-wide">
-        <div class="portal-card card border-0 p-4 p-md-5">
-            <h1 class="h4 fw-bold mb-2">
-                @if ($academicFlow)
-                    التسجيل في البرامج المعتمدة
-                @else
-                    إنشاء حساب جديد
-                @endif
-            </h1>
-            <p class="text-muted small mb-4">
-                @if ($academicFlow)
-                    أكمل بياناتك، اختر البرنامج وخطة التقسيط، ثم وقّع العقد وسدّد الدفعة الأولى.
-                @else
-                    أنشئ حسابك للوصول إلى الدورات وطلبات الشراء.
-                @endif
-            </p>
+<div class="portal-bg-pattern auth-screen py-4 py-lg-5">
+    <div class="container auth-container {{ $academicFlow ? 'auth-container--register' : '' }}">
+        <div class="auth-card portal-card card border-0 overflow-hidden auth-register">
+            <div class="row g-0">
 
-            @if ($academicFlow)
-                <div class="portal-reg-steps mb-4">
-                    @foreach ([1 => 'بياناتك', 2 => 'البرنامج', 3 => 'التقسيط'] as $n => $label)
-                        <span @class(['portal-reg-step', 'is-active' => $step === $n, 'is-done' => $step > $n])>
-                            <span class="portal-reg-step__num">{{ $n }}</span>
-                            {{ $label }}
+                <div class="col-lg-4 d-none d-lg-block">
+                    <div class="auth-side h-100">
+                        <div class="auth-side__glow auth-side__glow--1"></div>
+                        <div class="auth-side__glow auth-side__glow--2"></div>
+                        <div class="auth-side__content">
+                            @if (\App\Support\LogoSettings::isVisible(\App\Support\LogoSettings::KEY_PRIMARY))
+                                <img src="{{ platform_logo_url(\App\Support\LogoSettings::KEY_PRIMARY) }}" alt="" class="auth-side__logo">
+                            @endif
+                            <span class="auth-side__eyebrow">{{ $t('eyebrow') }}</span>
+                            <h2 class="auth-side__title">{{ $t('side_title') }}</h2>
+                            <p class="auth-side__text">{{ $t('side_text') }}</p>
+                            <ul class="auth-side__features">
+                                <li>
+                                    <span class="auth-side__icon"><i class="fa-solid fa-graduation-cap"></i></span>
+                                    <span>{{ $t('feat_programs') }}</span>
+                                </li>
+                                <li>
+                                    <span class="auth-side__icon"><i class="fa-solid fa-certificate"></i></span>
+                                    <span>{{ $t('feat_certificate') }}</span>
+                                </li>
+                                @if ($academicFlow)
+                                    <li>
+                                        <span class="auth-side__icon"><i class="fa-solid fa-layer-group"></i></span>
+                                        <span>{{ $t('feat_installments') }}</span>
+                                    </li>
+                                @endif
+                                <li>
+                                    <span class="auth-side__icon"><i class="fa-solid fa-headset"></i></span>
+                                    <span>{{ $t('feat_support') }}</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-8">
+                    <div class="auth-form-pane p-4 p-md-5">
+                        <span class="auth-form-pane__eyebrow">
+                            <i class="fa-solid fa-user-plus"></i>
+                            {{ $academicFlow ? ($steps[$step] ?? $t('title_academic')) : $t('title_account') }}
                         </span>
-                    @endforeach
-                </div>
-            @endif
+                        <h1 class="h4 fw-bold mb-1">
+                            {{ $academicFlow ? $t('title_academic') : $t('title_account') }}
+                        </h1>
+                        <p class="text-muted small mb-4">
+                            {{ $academicFlow ? $t('lead_academic') : $t('lead_account') }}
+                        </p>
 
-            @if ($flowError)
-                <div class="alert alert-warning">{{ $flowError }}</div>
-            @endif
-
-            @if ($step === 1)
-                <h2 class="h6 fw-bold border-bottom pb-2 mb-4">المعلومات الأساسية</h2>
-
-                @if (auth()->check())
-                <form wire:submit="continueProfile" novalidate>
-                @else
-                <form wire:submit="createAccount" novalidate>
-                @endif
-                    <div class="mb-3">
-                        <label class="form-label" for="reg-name">الاسم بالكامل (عربي) <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control form-control-lg @error('nameAr') is-invalid @enderror" id="reg-name" wire:model="nameAr" autocomplete="name" @disabled(auth()->check())>
-                        @error('nameAr')<div class="invalid-feedback d-block">{{ $message }}</div>@enderror
-                    </div>
-
-                    <div class="row g-3">
-                        <div class="col-md-6">
-                            <label class="form-label" for="reg-nid">رقم الهوية <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control form-control-lg @error('nationalId') is-invalid @enderror" id="reg-nid" wire:model="nationalId" inputmode="numeric" @disabled(auth()->check())>
-                            @error('nationalId')<div class="invalid-feedback d-block">{{ $message }}</div>@enderror
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label" for="reg-mobile">رقم الجوال <span class="text-danger">*</span></label>
-                            <div class="input-group input-group-lg">
-                                <span class="input-group-text">🇸🇦 +966</span>
-                                <input type="tel" class="form-control @error('phone') is-invalid @enderror" id="reg-mobile" wire:model="phone" inputmode="numeric" placeholder="5xxxxxxxx" @disabled(auth()->check())>
-                            </div>
-                            @error('phone')<div class="invalid-feedback d-block">{{ $message }}</div>@enderror
-                        </div>
-                    </div>
-
-                    <div class="mb-3 mt-3">
-                        <label class="form-label" for="reg-email">البريد الإلكتروني <span class="text-danger">*</span></label>
-                        <input type="email" class="form-control form-control-lg @error('email') is-invalid @enderror" id="reg-email" wire:model="email" dir="ltr" @disabled(auth()->check())>
-                        @error('email')<div class="invalid-feedback d-block">{{ $message }}</div>@enderror
-                    </div>
-
-                    @if ($academicFlow)
-                        <div class="row g-3 mb-3">
-                            <div class="col-md-6">
-                                <label class="form-label" for="reg-nat">الجنسية <span class="text-danger">*</span></label>
-                                <select id="reg-nat" class="form-select form-select-lg @error('nationality') is-invalid @enderror" wire:model="nationality">
-                                    <option value="">اختر الجنسية</option>
-                                    @foreach (AcademicRegistrationOptions::nationalities() as $value => $label)
-                                        <option value="{{ $value }}">{{ $label }}</option>
-                                    @endforeach
-                                </select>
-                                @error('nationality')<div class="invalid-feedback d-block">{{ $message }}</div>@enderror
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label" for="reg-city">المدينة <span class="text-danger">*</span></label>
-                                <select id="reg-city" class="form-select form-select-lg @error('city') is-invalid @enderror" wire:model="city">
-                                    <option value="">اختر المدينة</option>
-                                    @foreach (AcademicRegistrationOptions::cities() as $value => $label)
-                                        <option value="{{ $value }}">{{ $label }}</option>
-                                    @endforeach
-                                </select>
-                                @error('city')<div class="invalid-feedback d-block">{{ $message }}</div>@enderror
-                            </div>
-                        </div>
-
-                        <div class="mb-3">
-                            <span class="form-label d-block">الجنس <span class="text-danger">*</span></span>
-                            <div class="d-flex gap-4 flex-wrap">
-                                @foreach (['ذكر', 'أنثى'] as $g)
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" wire:model="gender" id="g-{{ $g }}" value="{{ $g }}">
-                                        <label class="form-check-label" for="g-{{ $g }}">{{ $g }}</label>
-                                    </div>
+                        @if ($academicFlow)
+                            <ol class="auth-stepper" aria-label="{{ $t('lead_academic') }}">
+                                @foreach ($steps as $n => $label)
+                                    <li @class(['auth-stepper__item', 'is-active' => $step === $n, 'is-done' => $step > $n])>
+                                        <span class="auth-stepper__num">{{ $step > $n ? '✓' : $n }}</span>
+                                        <span class="auth-stepper__label">{{ $label }}</span>
+                                    </li>
                                 @endforeach
-                            </div>
-                            @error('gender')<div class="text-danger small">{{ $message }}</div>@enderror
-                        </div>
-
-                        <div class="mb-3">
-                            <span class="form-label d-block">الحالة الوظيفية <span class="text-danger">*</span></span>
-                            <div class="d-flex gap-4 flex-wrap">
-                                @foreach (AcademicRegistrationOptions::employmentStatuses() as $value => $label)
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" wire:model="employmentStatus" id="emp-{{ $value }}" value="{{ $value }}">
-                                        <label class="form-check-label" for="emp-{{ $value }}">{{ $label }}</label>
-                                    </div>
-                                @endforeach
-                            </div>
-                            @error('employmentStatus')<div class="text-danger small">{{ $message }}</div>@enderror
-                        </div>
-
-                        <div class="mb-3">
-                            <span class="form-label d-block">فترة الدراسة <span class="text-danger">*</span></span>
-                            @foreach (AcademicRegistrationOptions::studyPeriods() as $value => $label)
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" wire:model="studyPeriod" id="study-{{ $value }}" value="{{ $value }}">
-                                    <label class="form-check-label" for="study-{{ $value }}">{{ $label }}</label>
-                                </div>
-                            @endforeach
-                        </div>
-                    @endif
-
-                    @unless(auth()->check())
-                        <div class="row g-3 mb-3">
-                            <div class="col-md-6">
-                                <label class="form-label" for="reg-pass">كلمة المرور <span class="text-danger">*</span></label>
-                                <input type="password" class="form-control form-control-lg @error('password') is-invalid @enderror" id="reg-pass" wire:model="password" autocomplete="new-password">
-                                @error('password')<div class="invalid-feedback d-block">{{ $message }}</div>@enderror
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label" for="reg-pass2">تأكيد كلمة المرور <span class="text-danger">*</span></label>
-                                <input type="password" class="form-control form-control-lg" id="reg-pass2" wire:model="passwordConfirmation" autocomplete="new-password">
-                            </div>
-                        </div>
-                    @endunless
-
-                    <div class="form-check mb-4">
-                        <input class="form-check-input @error('terms') is-invalid @enderror" type="checkbox" id="terms" wire:model="terms">
-                        <label class="form-check-label small" for="terms">أوافق على الشروط والأحكام وسياسة الخصوصية.</label>
-                        @error('terms')<div class="invalid-feedback d-block">{{ $message }}</div>@enderror
-                    </div>
-
-                    <button type="submit" class="btn btn-primary btn-lg w-100" wire:loading.attr="disabled">
-                        @if (auth()->check())
-                            <span wire:loading.remove wire:target="continueProfile">متابعة — اختيار البرنامج</span>
-                            <span wire:loading wire:target="continueProfile">جاري المعالجة…</span>
-                        @else
-                            <span wire:loading.remove wire:target="createAccount">
-                                {{ $academicFlow ? 'متابعة — اختيار البرنامج' : 'إنشاء الحساب' }}
-                            </span>
-                            <span wire:loading wire:target="createAccount">جاري المعالجة…</span>
+                            </ol>
                         @endif
-                    </button>
-                </form>
-            @elseif ($step === 2)
-                <h2 class="h6 fw-bold border-bottom pb-2 mb-4">اختر الدفعة الدراسية</h2>
 
-                @if ($batches->isEmpty())
-                    <p class="text-muted">لا توجد دفعات مفتوحة للتسجيل حالياً.</p>
-                @else
-                    <div class="portal-inst-batch-grid mb-3">
-                        @foreach ($batches as $batch)
-                            <button type="button" class="portal-inst-batch-card" wire:click="selectBatch({{ $batch->id }})">
-                                <strong>{{ $batch->program?->name_ar ?? $batch->name }}</strong>
-                                <span>{{ $batch->name }}</span>
-                                <span class="portal-inst-batch-card__fee">{{ number_format((float) $batch->tuition_amount, 0) }} ر.س</span>
-                            </button>
-                        @endforeach
+                        @if ($flowError)
+                            <div class="alert alert-warning d-flex align-items-center gap-2 py-2 small" role="alert">
+                                <i class="fa-solid fa-circle-exclamation"></i>
+                                <span>{{ $flowError }}</span>
+                            </div>
+                        @endif
+
+                        @if ($step === 1)
+                            @if (auth()->check())
+                            <form wire:submit="continueProfile" novalidate>
+                            @else
+                            <form wire:submit="createAccount" novalidate>
+                            @endif
+                                <section class="auth-section">
+                                    <h2 class="auth-section__title"><i class="fa-regular fa-id-card"></i> {{ $t('section_identity') }}</h2>
+
+                                    <div class="mb-3">
+                                        <label class="form-label auth-label" for="reg-name">{{ $t('name') }} <span class="text-danger">*</span></label>
+                                        <div class="auth-field input-group input-group-lg">
+                                            <span class="input-group-text auth-field__icon"><i class="fa-regular fa-user"></i></span>
+                                            <input type="text" class="form-control @error('nameAr') is-invalid @enderror" id="reg-name" wire:model="nameAr" autocomplete="name" @disabled(auth()->check())>
+                                        </div>
+                                        @error('nameAr')<div class="invalid-feedback d-block">{{ $message }}</div>@enderror
+                                    </div>
+
+                                    <div class="row g-3">
+                                        <div class="col-md-6">
+                                            <label class="form-label auth-label" for="reg-nid">{{ $t('national_id') }} <span class="text-danger">*</span></label>
+                                            <div class="auth-field input-group input-group-lg">
+                                                <span class="input-group-text auth-field__icon"><i class="fa-regular fa-id-card"></i></span>
+                                                <input type="text" class="form-control @error('nationalId') is-invalid @enderror" id="reg-nid" wire:model="nationalId" inputmode="numeric" maxlength="10" autocomplete="off" @disabled(auth()->check())>
+                                            </div>
+                                            <span class="auth-hint">{{ $t('national_id_hint') }}</span>
+                                            @error('nationalId')<div class="invalid-feedback d-block">{{ $message }}</div>@enderror
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label auth-label" for="reg-mobile">{{ $t('phone') }} <span class="text-danger">*</span></label>
+                                            <div class="auth-field input-group input-group-lg">
+                                                <span class="input-group-text auth-field__prefix" dir="ltr">🇸🇦 +966</span>
+                                                <input type="tel" class="form-control @error('phone') is-invalid @enderror" id="reg-mobile" wire:model="phone" inputmode="numeric" placeholder="5xxxxxxxx" autocomplete="tel" @disabled(auth()->check())>
+                                            </div>
+                                            @error('phone')<div class="invalid-feedback d-block">{{ $message }}</div>@enderror
+                                        </div>
+                                    </div>
+                                </section>
+
+                                <section class="auth-section">
+                                    <h2 class="auth-section__title"><i class="fa-regular fa-envelope"></i> {{ $t('section_contact') }}</h2>
+                                    <div class="mb-0">
+                                        <label class="form-label auth-label" for="reg-email">{{ $t('email') }} <span class="text-danger">*</span></label>
+                                        <div class="auth-field input-group input-group-lg">
+                                            <span class="input-group-text auth-field__icon"><i class="fa-regular fa-envelope"></i></span>
+                                            <input type="email" class="form-control @error('email') is-invalid @enderror" id="reg-email" wire:model="email" dir="ltr" autocomplete="email" placeholder="name@example.com" @disabled(auth()->check())>
+                                        </div>
+                                        @error('email')<div class="invalid-feedback d-block">{{ $message }}</div>@enderror
+                                    </div>
+                                </section>
+
+                                @if ($academicFlow)
+                                    <section class="auth-section">
+                                        <h2 class="auth-section__title"><i class="fa-solid fa-graduation-cap"></i> {{ $t('section_profile') }}</h2>
+                                        <div class="row g-3 mb-3">
+                                            <div class="col-md-6">
+                                                <label class="form-label auth-label" for="reg-nat">{{ $t('nationality') }} <span class="text-danger">*</span></label>
+                                                <select id="reg-nat" class="form-select form-select-lg @error('nationality') is-invalid @enderror" wire:model="nationality">
+                                                    <option value="">{{ $t('choose_nationality') }}</option>
+                                                    @foreach (AcademicRegistrationOptions::nationalities($locale) as $value => $label)
+                                                        <option value="{{ $value }}">{{ $label }}</option>
+                                                    @endforeach
+                                                </select>
+                                                @error('nationality')<div class="invalid-feedback d-block">{{ $message }}</div>@enderror
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label class="form-label auth-label" for="reg-city">{{ $t('city') }} <span class="text-danger">*</span></label>
+                                                <select id="reg-city" class="form-select form-select-lg @error('city') is-invalid @enderror" wire:model="city">
+                                                    <option value="">{{ $t('choose_city') }}</option>
+                                                    @foreach (AcademicRegistrationOptions::cities($locale) as $value => $label)
+                                                        <option value="{{ $value }}">{{ $label }}</option>
+                                                    @endforeach
+                                                </select>
+                                                @error('city')<div class="invalid-feedback d-block">{{ $message }}</div>@enderror
+                                            </div>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <span class="form-label auth-label d-block">{{ $t('gender') }} <span class="text-danger">*</span></span>
+                                            <div class="auth-choice-grid">
+                                                @foreach (AcademicRegistrationOptions::genders($locale) as $value => $label)
+                                                    <label class="auth-choice">
+                                                        <input type="radio" wire:model="gender" value="{{ $value }}">
+                                                        <span>{{ $label }}</span>
+                                                    </label>
+                                                @endforeach
+                                            </div>
+                                            @error('gender')<div class="text-danger small mt-1">{{ $message }}</div>@enderror
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <span class="form-label auth-label d-block">{{ $t('employment') }} <span class="text-danger">*</span></span>
+                                            <div class="auth-choice-grid">
+                                                @foreach (AcademicRegistrationOptions::employmentStatuses($locale) as $value => $label)
+                                                    <label class="auth-choice">
+                                                        <input type="radio" wire:model="employmentStatus" value="{{ $value }}">
+                                                        <span>{{ $label }}</span>
+                                                    </label>
+                                                @endforeach
+                                            </div>
+                                            @error('employmentStatus')<div class="text-danger small mt-1">{{ $message }}</div>@enderror
+                                        </div>
+
+                                        <div class="mb-0">
+                                            <span class="form-label auth-label d-block">{{ $t('study_period') }} <span class="text-danger">*</span></span>
+                                            <div class="auth-choice-grid">
+                                                @foreach (AcademicRegistrationOptions::studyPeriods($locale) as $value => $label)
+                                                    <label class="auth-choice">
+                                                        <input type="radio" wire:model="studyPeriod" value="{{ $value }}">
+                                                        <span>{{ $label }}</span>
+                                                    </label>
+                                                @endforeach
+                                            </div>
+                                        </div>
+                                    </section>
+                                @endif
+
+                                @unless(auth()->check())
+                                    <section class="auth-section">
+                                        <h2 class="auth-section__title"><i class="fa-solid fa-lock"></i> {{ $t('section_security') }}</h2>
+                                        <div class="row g-3">
+                                            <div class="col-md-6">
+                                                <label class="form-label auth-label" for="reg-pass">{{ $t('password') }} <span class="text-danger">*</span></label>
+                                                <div class="auth-field input-group input-group-lg">
+                                                    <span class="input-group-text auth-field__icon"><i class="fa-solid fa-lock"></i></span>
+                                                    <input type="password" class="form-control @error('password') is-invalid @enderror" id="reg-pass" wire:model="password" autocomplete="new-password">
+                                                    <button type="button" class="btn auth-field__toggle" data-password-toggle="reg-pass" aria-label="{{ $t('show_password') }}" aria-pressed="false"><i class="fa-solid fa-eye"></i></button>
+                                                </div>
+                                                <span class="auth-hint">{{ $t('password_hint') }}</span>
+                                                @error('password')<div class="invalid-feedback d-block">{{ $message }}</div>@enderror
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label class="form-label auth-label" for="reg-pass2">{{ $t('password_confirm') }} <span class="text-danger">*</span></label>
+                                                <div class="auth-field input-group input-group-lg">
+                                                    <span class="input-group-text auth-field__icon"><i class="fa-solid fa-lock"></i></span>
+                                                    <input type="password" class="form-control @error('passwordConfirmation') is-invalid @enderror" id="reg-pass2" wire:model="passwordConfirmation" autocomplete="new-password">
+                                                    <button type="button" class="btn auth-field__toggle" data-password-toggle="reg-pass2" aria-label="{{ $t('show_password') }}" aria-pressed="false"><i class="fa-solid fa-eye"></i></button>
+                                                </div>
+                                                @error('passwordConfirmation')<div class="invalid-feedback d-block">{{ $message }}</div>@enderror
+                                            </div>
+                                        </div>
+                                    </section>
+                                @endunless
+
+                                <div class="form-check auth-terms mb-4">
+                                    <input class="form-check-input @error('terms') is-invalid @enderror" type="checkbox" id="terms" wire:model="terms">
+                                    <label class="form-check-label small" for="terms">
+                                        {{ $t('terms_prefix') }}
+                                        <a href="{{ route('cms.page', ['locale' => $locale, 'slug' => 'terms-and-conditions']) }}" target="_blank" rel="noopener">{{ $t('terms') }}</a>
+                                        {{ $t('and') }}
+                                        <a href="{{ route('cms.page', ['locale' => $locale, 'slug' => 'privacy-policy']) }}" target="_blank" rel="noopener">{{ $t('privacy') }}</a>.
+                                    </label>
+                                    @error('terms')<div class="invalid-feedback d-block">{{ $message }}</div>@enderror
+                                </div>
+
+                                <button type="submit" class="btn btn-primary btn-lg w-100 auth-submit" wire:loading.attr="disabled">
+                                    @if (auth()->check())
+                                        <span wire:loading.remove wire:target="continueProfile">{{ $t('continue_program') }}</span>
+                                        <span wire:loading wire:target="continueProfile"><span class="spinner-border spinner-border-sm ms-2" role="status" aria-hidden="true"></span>{{ $t('processing') }}</span>
+                                    @else
+                                        <span wire:loading.remove wire:target="createAccount">
+                                            {{ $academicFlow ? $t('continue_program') : $t('create_account') }}
+                                        </span>
+                                        <span wire:loading wire:target="createAccount"><span class="spinner-border spinner-border-sm ms-2" role="status" aria-hidden="true"></span>{{ $t('processing') }}</span>
+                                    @endif
+                                </button>
+                                <p class="auth-secure"><i class="fa-solid fa-shield-halved"></i> {{ $t('secure_note') }}</p>
+                            </form>
+                        @elseif ($step === 2)
+                            <h2 class="h6 fw-bold mb-1">{{ $t('choose_batch') }}</h2>
+                            <p class="text-muted small mb-4">{{ $t('choose_batch_lead') }}</p>
+
+                            @if ($batches->isEmpty())
+                                <div class="alert alert-light border small mb-3">
+                                    {{ $t('no_batches') }}
+                                    <a href="{{ route('contact', ['locale' => $locale]) }}" class="fw-semibold">{{ $t('contact_us') }}</a>
+                                </div>
+                            @else
+                                <div class="auth-batch-grid mb-4">
+                                    @foreach ($batches as $batch)
+                                        @php
+                                            $programName = ($locale === 'en' && filled($batch->program?->name_en))
+                                                ? $batch->program->name_en
+                                                : ($batch->program?->name_ar ?? $batch->name);
+                                            $seats = $batch->availableSeats();
+                                        @endphp
+                                        <button type="button" @class(['auth-batch-card', 'is-selected' => (int) $batchId === $batch->id]) wire:click="selectBatch({{ $batch->id }})">
+                                            <span class="auth-batch-card__program">{{ $programName }}</span>
+                                            <span class="auth-batch-card__meta">{{ $batch->name }}@if ($batch->displaySemester()) · {{ $batch->displaySemester() }}@endif</span>
+                                            @if ($batch->start_date)
+                                                <span class="auth-batch-card__meta">{{ $batch->start_date->translatedFormat('Y/m/d') }}</span>
+                                            @endif
+                                            <span class="auth-batch-card__fee">{{ number_format((float) $batch->tuition_amount, 0) }} {{ $t('sar') }}</span>
+                                            @if ($seats !== null)
+                                                <span class="auth-batch-card__seats">{{ $seats }} {{ $t('seats') }}</span>
+                                            @endif
+                                        </button>
+                                    @endforeach
+                                </div>
+                            @endif
+
+                            @if (auth()->check())
+                                <button type="button" class="btn btn-outline-secondary" wire:click="back">{{ $t('back') }}</button>
+                            @endif
+                        @else
+                            <h2 class="h6 fw-bold mb-1">{{ $t('plan_title') }}</h2>
+                            <p class="text-muted small mb-3">{{ $t('plan_lead') }}</p>
+
+                            @if ($selectedBatch)
+                                @php
+                                    $selectedName = ($locale === 'en' && filled($selectedBatch->program?->name_en))
+                                        ? $selectedBatch->program->name_en
+                                        : ($selectedBatch->program?->name_ar ?? $selectedBatch->name);
+                                @endphp
+                                <div class="auth-summary">
+                                    <div>
+                                        <span>{{ $t('selected_program') }}</span>
+                                        <strong>{{ $selectedName }}</strong>
+                                        <span>{{ $selectedBatch->name }}</span>
+                                    </div>
+                                    <div class="text-lg-end">
+                                        <span>{{ $t('sar') }}</span>
+                                        <strong>{{ number_format((float) $selectedBatch->tuition_amount, 2) }}</strong>
+                                    </div>
+                                </div>
+                            @endif
+
+                            <div class="auth-plan-list mb-4">
+                                @foreach ($plans as $plan)
+                                    @php
+                                        $planName = ($locale === 'en' && filled($plan->name_en)) ? $plan->name_en : $plan->name_ar;
+                                        $preview = $selectedBatch
+                                            ? $plan->schedulePreview((float) $selectedBatch->tuition_amount)
+                                            : [];
+                                        $first = collect($preview)->first();
+                                    @endphp
+                                    <label class="auth-plan {{ (int) $installmentPlanId === $plan->id ? 'is-selected' : '' }}">
+                                        <input type="radio" wire:model.live="installmentPlanId" value="{{ $plan->id }}">
+                                        <span>
+                                            <strong>{{ $planName }}</strong>
+                                            <small>
+                                                {{ $plan->description_ar }}
+                                                — {{ $plan->items->count() }} {{ $t('payments') }}
+                                                @if ($first)
+                                                    · {{ $t('first_payment') }}: {{ number_format((float) $first['amount'], 0) }} {{ $t('sar') }}
+                                                @endif
+                                            </small>
+                                            @if ($preview !== [])
+                                                <ul class="auth-plan__schedule">
+                                                    @foreach ($preview as $row)
+                                                        <li>{{ $row['label'] }} · {{ number_format((float) $row['amount'], 0) }} {{ $t('sar') }}</li>
+                                                    @endforeach
+                                                </ul>
+                                            @endif
+                                        </span>
+                                    </label>
+                                @endforeach
+                            </div>
+                            @error('installmentPlanId')<div class="text-danger small mb-3">{{ $message }}</div>@enderror
+
+                            <div class="alert auth-note small mb-4">{{ $t('plan_note') }}</div>
+
+                            <div class="auth-actions">
+                                <button type="button" class="btn btn-outline-secondary" wire:click="back">{{ $t('back') }}</button>
+                                <button type="button" class="btn btn-primary flex-grow-1 auth-submit" wire:click="submitEnrollment" wire:loading.attr="disabled">
+                                    <span wire:loading.remove wire:target="submitEnrollment">{{ $t('confirm') }}</span>
+                                    <span wire:loading wire:target="submitEnrollment"><span class="spinner-border spinner-border-sm ms-2" role="status" aria-hidden="true"></span>{{ $t('processing') }}</span>
+                                </button>
+                            </div>
+                        @endif
+
+                        @if ($step === 1 && ! auth()->check())
+                            <div class="auth-alt">
+                                <p class="auth-alt__title mb-0">{{ $t('alt_title') }}</p>
+                                <p class="auth-alt__lead">{{ $t('alt_lead') }}</p>
+                                <div class="auth-alt__grid">
+                                    <a class="auth-alt__link" href="{{ route('apply.form', ['locale' => $locale, 'type' => 'client']) }}">{{ $t('alt_client') }}</a>
+                                    <a class="auth-alt__link" href="{{ route('apply.form', ['locale' => $locale, 'type' => 'company']) }}">{{ $t('alt_company') }}</a>
+                                    <a class="auth-alt__link" href="{{ route('apply.form', ['locale' => $locale, 'type' => 'instructor']) }}">{{ $t('alt_instructor') }}</a>
+                                </div>
+                            </div>
+                        @endif
+
+                        <p class="auth-login-row small text-muted">
+                            {{ $t('have_account') }}
+                            <a href="{{ route('login', ['locale' => $locale]) }}" class="fw-semibold text-primary text-decoration-none">{{ $t('login_link') }}</a>
+                        </p>
                     </div>
-                @endif
-
-                @if (auth()->check())
-                    <button type="button" class="btn btn-link" wire:click="back">رجوع</button>
-                @endif
-            @else
-                <h2 class="h6 fw-bold border-bottom pb-2 mb-4">خطة التقسيط والتأكيد</h2>
-
-                @if ($selectedBatch)
-                    <p class="text-muted small mb-3">
-                        {{ $selectedBatch->program?->name_ar }} — {{ $selectedBatch->name }}
-                        · {{ number_format((float) $selectedBatch->tuition_amount, 2) }} ر.س
-                    </p>
-                @endif
-
-                <div class="portal-inst-plan-list mb-4">
-                    @foreach ($plans as $plan)
-                        <label class="portal-inst-plan-option {{ (int) $installmentPlanId === $plan->id ? 'is-selected' : '' }}">
-                            <input type="radio" wire:model.live="installmentPlanId" value="{{ $plan->id }}">
-                            <span>
-                                <strong>{{ $plan->name_ar }}</strong>
-                                <small>{{ $plan->description_ar }} — {{ $plan->items->count() }} دفعات</small>
-                            </span>
-                        </label>
-                    @endforeach
                 </div>
-                @error('installmentPlanId')<div class="text-danger small mb-3">{{ $message }}</div>@enderror
 
-                <div class="alert alert-info small">بعد التأكيد ستوقّع على عقد التقسيط إلكترونياً ثم تسدّد الدفعة الأولى.</div>
-
-                <div class="d-flex gap-2">
-                    <button type="button" class="btn btn-outline-secondary" wire:click="back">رجوع</button>
-                    <button type="button" class="btn btn-primary flex-grow-1" wire:click="submitEnrollment" wire:loading.attr="disabled">
-                        <span wire:loading.remove wire:target="submitEnrollment">تأكيد التسجيل والمتابعة</span>
-                        <span wire:loading wire:target="submitEnrollment">جاري المعالجة…</span>
-                    </button>
-                </div>
-            @endif
-
-            <p class="text-center mt-4 mb-0 small text-muted">
-                لديك حساب بالفعل؟
-                <a href="{{ route('login', ['locale' => $locale]) }}" class="fw-semibold text-primary">تسجيل الدخول</a>
-            </p>
+            </div>
         </div>
     </div>
 </div>
@@ -527,17 +674,10 @@ class extends Component
 @push('styles')
     <link rel="stylesheet" href="{{ static_asset('css/portal-shell.css') }}">
     <link rel="stylesheet" href="{{ asset('css/portal-dashboard.css') }}">
-    <style>
-        .portal-auth-wide { max-width: 720px; }
-        .portal-reg-steps { display: flex; gap: 0.5rem; flex-wrap: wrap; }
-        .portal-reg-step { display: inline-flex; align-items: center; gap: 0.35rem; font-size: 0.8rem; color: #94a3b8; padding: 0.35rem 0.65rem; border-radius: 999px; background: #f8fafc; }
-        .portal-reg-step.is-active { color: #0d9488; background: #f0fdfa; font-weight: 600; }
-        .portal-reg-step.is-done { color: #64748b; }
-        .portal-reg-step__num { width: 1.25rem; height: 1.25rem; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; background: #e2e8f0; font-size: 0.7rem; }
-        .portal-reg-step.is-active .portal-reg-step__num { background: #0d9488; color: #fff; }
-    </style>
+    <link rel="stylesheet" href="{{ asset('css/auth-screen.css') }}?v=1">
 @endpush
 
 @push('scripts')
     <script src="{{ static_asset('assets/portal-shell.js') }}" defer></script>
 @endpush
+

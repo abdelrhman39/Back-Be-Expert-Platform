@@ -6,7 +6,7 @@
 <div class="breadcrumb-bar breadcrumb-bar-info breadcrumb-info cms-page-breadcrumb">
     <div class="breadcrumb-img">
         <div class="breadcrumb-left">
-            <img src="{{ static_asset('assets/banner-bg-03.png') }}" alt="">
+            <img src="{{ static_asset(platform_campus_path('aerial')) }}" alt="">
         </div>
     </div>
     <div class="container">

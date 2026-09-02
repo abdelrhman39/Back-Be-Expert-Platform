@@ -4,7 +4,7 @@ use App\Models\Certificate;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 
-new #[Title('التحقق من الشهادة | منصة مركز التعلم المستمر')]
+new #[Title('التحقق من الشهادة | مركز التعلم المستمر')]
 class extends Component
 {
     public string $code = '';

@@ -9,7 +9,7 @@ use Livewire\Attributes\Title;
 use Livewire\Component;
 
 new #[Layout('layouts.app-user')]
-#[Title('تقديم طلب | منصة مركز التعلم المستمر')]
+#[Title('تقديم طلب | مركز التعلم المستمر')]
 class extends Component
 {
     public string $type = 'deferral';

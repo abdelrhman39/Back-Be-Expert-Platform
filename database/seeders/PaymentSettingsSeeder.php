@@ -15,7 +15,7 @@ class PaymentSettingsSeeder extends Seeder
 <h6 class="mb-2">بيانات الحساب البنكي</h6>
 <ul class="mb-3">
     <li><strong>اسم البنك:</strong> البنك الأهلي السعودي</li>
-    <li><strong>اسم المستفيد:</strong> مركز التعلم المستمر - جامعة الامير مقرن</li>
+    <li><strong>اسم المستفيد:</strong> مركز التعلم المستمر - الجامعة العربية المفتوحة</li>
     <li><strong>رقم IBAN:</strong> SA00 0000 0000 0000 0000 0000</li>
 </ul>
 <p class="mb-2"><strong>خطوات التحويل:</strong></p>
@@ -32,7 +32,7 @@ HTML);
 <h6 class="mb-2">Bank account details</h6>
 <ul class="mb-3">
     <li><strong>Bank:</strong> Saudi National Bank</li>
-    <li><strong>Beneficiary:</strong> Continuing Learning Center - Muqrin University</li>
+    <li><strong>Beneficiary:</strong> Continuing Learning Center - Arab Open University</li>
     <li><strong>IBAN:</strong> SA00 0000 0000 0000 0000 0000</li>
 </ul>
 <p class="mb-2"><strong>Transfer steps:</strong></p>

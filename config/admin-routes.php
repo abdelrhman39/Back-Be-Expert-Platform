@@ -63,6 +63,7 @@ return [
     'admin.catalog-courses.lesson-file' => 'catalog.manage',
     'admin.catalog-courses.module-image' => 'catalog.view',
     'admin.settings' => 'settings.view',
+    'admin.identity-themes' => 'settings.view',
     'admin.system-settings' => 'system-settings.view',
     'admin.system-settings.section' => 'system-settings.view',
     'admin.payment-settings' => 'payment-settings.manage',

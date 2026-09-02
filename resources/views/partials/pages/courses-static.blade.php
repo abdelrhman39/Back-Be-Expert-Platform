@@ -8,7 +8,7 @@
 <div class="breadcrumb-bar">
     <div class="breadcrumb-img">
         <div class="breadcrumb-left">
-            <img src="{{ static_asset('assets/banner-bg-03.png') }}" alt="img">
+            <img src="{{ static_asset(platform_campus_path('aerial')) }}" alt="img">
         </div>
     </div>
     <div class="container">

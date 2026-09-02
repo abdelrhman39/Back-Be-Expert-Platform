@@ -11,7 +11,7 @@ use Livewire\Component;
 use Livewire\Features\SupportFileUploads\WithFileUploads;
 
 new #[Layout('layouts.app-user')]
-#[Title('تسليم الواجب | منصة مركز التعلم المستمر')]
+#[Title('تسليم الواجب | مركز التعلم المستمر')]
 class extends Component
 {
     use WithFileUploads;

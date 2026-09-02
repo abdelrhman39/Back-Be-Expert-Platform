@@ -185,7 +185,10 @@ class extends Component
             'home' => 'الرئيسية',
             'about' => 'عن المنصة',
             'contact' => 'تواصل معنا',
-            'courses.index' => 'البرامج',
+            'courses.index' => 'كل البرامج',
+            'courses.certificates' => 'الشهادات الاحترافية',
+            'courses.diplomas' => 'الدبلومات',
+            'fellowships.index' => 'الزمالات المهنية',
             'register' => 'التسجيل',
             'login' => 'تسجيل الدخول',
             'cart' => 'السلة',
@@ -277,7 +280,8 @@ class extends Component
                 @elseif ($linkType === 'url')
                     <div class="admin-field admin-field--wide">
                         <label>رابط URL</label>
-                        <input type="text" class="admin-control" wire:model="url" dir="ltr">
+                        <input type="text" class="admin-control" wire:model="url" dir="ltr" placeholder="/{locale}/courses أو https://...">
+                        <div class="admin-field-hint">للصفحات الداخلية استخدم نوع «مسار Laravel». يمكن كتابة <code dir="ltr">/{locale}/courses</code> ليتبدل حسب لغة الموقع.</div>
                     </div>
                 @endif
                 <div class="admin-field">

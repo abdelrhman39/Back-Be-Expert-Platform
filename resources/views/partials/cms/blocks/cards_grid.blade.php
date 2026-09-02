@@ -27,10 +27,14 @@
                     $body = $item['body'] ?? '';
                     $iconPath = $item['icon'] ?? null;
                     $fallbackIcon = $icons[$index % count($icons)];
+                    $iconIsFa = is_string($iconPath) && str_starts_with($iconPath, 'fa-');
+                    $iconIsImage = is_string($iconPath) && $iconPath !== '' && ! $iconIsFa;
                 @endphp
                 <article class="np-mvg__card" data-aos="fade-up" data-aos-delay="{{ $index * 80 }}">
                     <div class="np-mvg__icon" aria-hidden="true">
-                        @if ($iconPath)
+                        @if ($iconIsFa)
+                            <i class="{{ $iconPath }}"></i>
+                        @elseif ($iconIsImage)
                             <img src="{{ static_asset($iconPath) }}" alt="" width="56" height="56" loading="lazy">
                         @else
                             <i class="fa-solid {{ $fallbackIcon }}"></i>

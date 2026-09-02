@@ -36,6 +36,7 @@ class CmsPageBlocksSeeder extends Seeder
 
             $page->update([
                 'status' => 'published',
+                'content_mode' => 'blocks',
                 'published_at' => $page->published_at ?? now(),
             ]);
         }

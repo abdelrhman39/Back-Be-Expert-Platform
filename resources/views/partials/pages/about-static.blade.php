@@ -5,7 +5,7 @@
 <div class="breadcrumb-bar">
     <div class="breadcrumb-img">
         <div class="breadcrumb-left">
-            <img src="{{ static_asset('assets/banner-bg-03.png') }}" alt="img">
+            <img src="{{ static_asset(platform_campus_path('aerial')) }}" alt="img">
         </div>
     </div>
     <div class="container">
@@ -38,14 +38,14 @@
 
                     <div class="about-inner-img theiaStickySidebar" style="padding-top: 0px; padding-bottom: 1px; position: relative; transform: none; overflow: visible; box-sizing: border-box; min-height: 1px;">
                         
-                    <div class="theiaStickySidebar" style="padding-top: 0px; padding-bottom: 1px; position: static; transform: none;"><img src="{{ static_asset('assets/1853032368970233.png') }}" class="img-fluid" alt="img"></div></div>
+                    <div class="theiaStickySidebar" style="padding-top: 0px; padding-bottom: 1px; position: static; transform: none;"><img src="{{ static_asset(platform_campus_path('entrance')) }}" class="img-fluid" alt="{{ platform_org() }}"></div></div>
 
                 </div>
                 <div class="col-lg-6">
                     <div class="about-us-info">
                         <div class="about-us-head">
                             <h2>عن المنصة</h2>
-                            <p></p><p dir="rtl" style="text-align: justify;">منصة مركز التعلم المستمر هي منصة تعليمية متكاملة تابعة لجامعة الامير مقرن، تُعنى بتقديم برامج تعليمية وتدريبية احترافية تهدف إلى تنمية المهارات وبناء القدرات البشرية وفق متطلبات سوق العمل. توفر المنصة بيئة تعليمية رقمية حديثة تعتمد على أحدث أساليب التعلم، بما يضمن تجربة تعليمية مرنة وفعالة تلبي احتياجات المتعلمين والأفراد والمؤسسات.</p>
+                            <p></p><p dir="rtl" style="text-align: justify;">منصة مركز التعلم المستمر هي منصة تعليمية متكاملة تابعة لـ {{ platform_org() }}، تُعنى بتقديم برامج تعليمية وتدريبية احترافية تهدف إلى تنمية المهارات وبناء القدرات البشرية وفق متطلبات سوق العمل. توفر المنصة بيئة تعليمية رقمية حديثة تعتمد على أحدث أساليب التعلم، بما يضمن تجربة تعليمية مرنة وفعالة تلبي احتياجات المتعلمين والأفراد والمؤسسات.</p>
 <p dir="rtl" style="text-align: justify;">تسعى المنصة إلى تصميم وتقديم برامج تدريبية وتطويرية متخصصة بالشراكة مع خبراء وممارسين في مختلف المجالات، بهدف رفع كفاءة الكوادر وتنمية مهاراتها العملية والتطبيقية. كما تعمل على ردم الفجوة بين مهارات سوق العمل الحالية والمهارات المطلوبة مستقبلًا، من خلال محتوى تدريبي عالي الجودة يواكب التطورات المهنية والتقنية، بما يعزز فرص التطور المهني والاستقرار الوظيفي ويسهم في تحسين بيئات العمل وزيادة الإنتاجية.</p><p></p>
                         </div>
                         

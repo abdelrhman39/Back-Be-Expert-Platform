@@ -8,7 +8,7 @@ use Livewire\Attributes\Title;
 use Livewire\Component;
 
 new #[Layout('layouts.app-user')]
-#[Title('مراجعة الاختبار | منصة مركز التعلم المستمر')]
+#[Title('مراجعة الاختبار | مركز التعلم المستمر')]
 class extends Component
 {
     public ExamAttempt $attempt;

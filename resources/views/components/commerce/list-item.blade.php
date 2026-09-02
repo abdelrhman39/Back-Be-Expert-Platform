@@ -2,6 +2,7 @@
     $catalog = app(\App\Support\LegacyCourseCatalog::class);
     $meta = $catalog->resolveForItem($item);
     $locale = app()->getLocale();
+    $t = fn (string $key) => \App\Support\PublicCopy::cart($key, $locale);
     $courseUrl = $meta['url'];
     $imagePath = resolve_poster_url($meta['image'] ?? null);
     $price = isset($item->price_snapshot) ? (float) $item->price_snapshot : (isset($item->price) ? (float) $item->price : null);
@@ -12,7 +13,7 @@
 
 <article class="commerce-list-item commerce-list-item--{{ $mode }}" wire:key="commerce-item-{{ $mode }}-{{ $item->id }}">
     <div class="commerce-list-row">
-        <a href="{{ $courseUrl }}" class="commerce-list-thumb" title="عرض تفاصيل {{ $meta['title'] }}">
+        <a href="{{ $courseUrl }}" class="commerce-list-thumb" title="{{ $t('view_details') }}">
             <img src="{{ $imagePath }}" alt="{{ $meta['title'] }}" loading="lazy">
         </a>
 
@@ -27,7 +28,7 @@
             </div>
 
             <h4 class="commerce-list-title">
-                <a href="{{ $courseUrl }}" class="commerce-list-title__link" title="عرض تفاصيل البرنامج">
+                <a href="{{ $courseUrl }}" class="commerce-list-title__link" title="{{ $t('view_details') }}">
                     {{ $meta['title'] }}
                     <i class="fa-solid fa-arrow-up-left commerce-list-title__hint" aria-hidden="true"></i>
                 </a>
@@ -38,7 +39,7 @@
             @if ($price !== null && in_array($mode, ['cart', 'readonly'], true))
                 <div class="commerce-list-price" dir="ltr">
                     {{ number_format($price, 0) }}
-                    <small>ر.س</small>
+                    <small>{{ $t('sar') }}</small>
                 </div>
             @endif
 

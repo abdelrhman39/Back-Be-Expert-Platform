@@ -555,6 +555,7 @@ class extends Component
                             <input type="checkbox" wire:model="showInFooter">
                             <span>إظهار في فوتر السياسات</span>
                         </label>
+                        <p class="admin-field-hint">يظهر الرابط تلقائياً في الفوتر. العنوان يتبع ترجمة الصفحة حسب لغة الموقع.</p>
                     </div>
                     <div class="admin-field">
                         <label class="admin-checkbox">

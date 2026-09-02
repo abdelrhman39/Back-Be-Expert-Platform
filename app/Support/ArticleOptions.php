@@ -43,8 +43,18 @@ class ArticleOptions
         return self::statuses()[$status] ?? $status;
     }
 
-    public static function categoryLabel(string $category): string
+    public static function categoryLabel(string $category, ?string $locale = null): string
     {
+        $locale ??= app()->getLocale();
+
+        if ($locale === 'en') {
+            return match ($category) {
+                'news' => 'News',
+                'event' => 'Event',
+                default => $category,
+            };
+        }
+
         return self::categories()[$category] ?? $category;
     }
 
@@ -54,7 +64,7 @@ class ArticleOptions
             return $article->articleCategory->displayName($locale);
         }
 
-        return self::categoryLabel($article->category);
+        return self::categoryLabel($article->category, $locale);
     }
 
     public static function statusBadgeClass(string $status): string

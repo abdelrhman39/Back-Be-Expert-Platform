@@ -191,24 +191,28 @@ class CatalogCourse extends Model
 
     public function deliveryModesLabel(): string
     {
+        $isEn = app()->getLocale() === 'en';
+        $both = $isEn ? 'Remote and in-person' : 'عن بعد وحضوري';
+        $online = $isEn ? 'Remote' : 'عن بعد';
+        $onsite = $isEn ? 'In-person' : 'حضوري';
         $types = $this->availableDeliveryTypes();
 
         if ($types === ['online', 'onsite'] || $types === ['onsite', 'online']) {
-            return 'عن بعد وحضوري';
+            return $both;
         }
 
         if ($types === ['online'] || ($types === [] && $this->allowsOnline() && ! $this->allowsOnsite())) {
-            return 'عن بعد';
+            return $online;
         }
 
         if ($types === ['onsite'] || ($types === [] && $this->allowsOnsite() && ! $this->allowsOnline())) {
-            return 'حضوري';
+            return $onsite;
         }
 
         return match ($this->normalizedDeliveryType()) {
-            'online' => 'عن بعد',
-            'both' => 'عن بعد وحضوري',
-            default => 'حضوري',
+            'online' => $online,
+            'both' => $both,
+            default => $onsite,
         };
     }
 
@@ -290,7 +294,7 @@ class CatalogCourse extends Model
 
     public function hasCustomPoster(): bool
     {
-        return filled($this->image);
+        return filled($this->image) && ! \App\Support\PosterSettings::isLegacyPoster($this->image);
     }
 
     public function showSlug(): string

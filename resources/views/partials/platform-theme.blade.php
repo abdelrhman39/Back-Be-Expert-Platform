@@ -62,9 +62,17 @@
 }
 
 .footer-widget,
+.footer-widget h3,
+.footer-widget p,
 .footer-widget .menu-items li a,
-.footer-mini {
+.footer-mini,
+.footer-about,
+.footer-bottom-links ul li a {
     color: var(--platform-footer-text, #414040);
+}
+
+.footer-widget .menu-items li::before {
+    background: var(--secondary, var(--primary, #c5a572));
 }
 
 body {

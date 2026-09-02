@@ -55,10 +55,21 @@ class CmsMenuItem extends Model
     {
         $locale ??= app()->getLocale();
 
+        if ($this->page_id) {
+            $this->loadMissing('page.translations');
+            $fromPage = $this->page
+                ? \App\Support\PublicCopy::pageTitle($this->page, $locale)
+                : '';
+
+            if (filled($fromPage)) {
+                return $fromPage;
+            }
+        }
+
         if ($locale === 'en' && filled($this->label_en)) {
             return $this->label_en;
         }
 
-        return $this->label_ar;
+        return \App\Support\PublicCopy::fromArabic((string) $this->label_ar, $locale);
     }
 }

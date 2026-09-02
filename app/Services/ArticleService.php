@@ -25,12 +25,9 @@ class ArticleService
         $locale ??= app()->getLocale();
 
         return Article::query()
-            ->with([
-                'translations' => fn ($q) => $q->where('locale', $locale),
-                'articleCategory',
-            ])
+            ->with(['translations', 'articleCategory'])
             ->where('status', 'published')
-            ->whereHas('translations', fn ($q) => $q->where('locale', $locale))
+            ->whereHas('translations')
             ->orderByDesc('is_featured')
             ->orderByDesc('published_at')
             ->orderByDesc('sort_order')
@@ -50,12 +47,9 @@ class ArticleService
         $perPage = max(1, min(48, $perPage));
 
         return Article::query()
-            ->with([
-                'translations' => fn ($q) => $q->where('locale', $locale),
-                'articleCategory',
-            ])
+            ->with(['translations', 'articleCategory'])
             ->where('status', 'published')
-            ->whereHas('translations', fn ($q) => $q->where('locale', $locale))
+            ->whereHas('translations')
             ->when($categoryId, fn ($q) => $q->where('article_category_id', $categoryId))
             ->orderByDesc('is_featured')
             ->orderByDesc('published_at')

@@ -20,10 +20,16 @@ class ArticleSeeder extends Seeder
             'sort_order' => 10,
             'translations' => [
                 'ar' => [
-                    'title' => 'تكامل معرفي بين جامعة الامير مقرن ومؤسسة بيرلس ترينينغ آند ديفيلوبمنت لتطوير القدرات البشرية',
-                    'slug' => 'تكامل-معرفي-بين-معهد-البحوث-بجامعة-مقرن-ومؤسسة-بيرلس',
+                    'title' => 'تكامل معرفي بين الجامعة العربية المفتوحة ومؤسسة بيرلس ترينينغ آند ديفيلوبمنت لتطوير القدرات البشرية',
+                    'slug' => 'تكامل-معرفي-بين-الجامعة-العربية-المفتوحة-ومؤسسة-بيرلس',
                     'excerpt' => 'شراكة استراتيجية لتعزيز جودة البرامج التدريبية وتبادل الخبرات في تطوير القدرات البشرية.',
-                    'body' => '<p>أعلن جامعة الامير مقرن عن تكامل معرفي مع مؤسسة بيرلس ترينينغ آند ديفيلوبمنت، بهدف تطوير برامج تدريبية متقدمة تلبي احتياجات سوق العمل.</p>',
+                    'body' => '<p>أعلنت الجامعة العربية المفتوحة عن تكامل معرفي مع مؤسسة بيرلس ترينينغ آند ديفيلوبمنت، بهدف تطوير برامج تدريبية متقدمة تلبي احتياجات سوق العمل.</p>',
+                ],
+                'en' => [
+                    'title' => 'Knowledge partnership between Arab Open University and Perls Training & Development',
+                    'slug' => 'aou-perls-knowledge-partnership',
+                    'excerpt' => 'A strategic partnership to strengthen training quality and exchange expertise in human-capacity development.',
+                    'body' => '<p>Arab Open University announced a knowledge partnership with Perls Training & Development to advance training programs that meet labor-market needs.</p>',
                 ],
             ],
         ]);
@@ -35,10 +41,16 @@ class ArticleSeeder extends Seeder
             'sort_order' => 5,
             'translations' => [
                 'ar' => [
-                    'title' => 'جامعة الامير مقرن تطلق برنامجاً تدريبياً لرفع كفاءة الكوادر المهنية بشركة قزاز للتجارة',
+                    'title' => 'الجامعة العربية المفتوحة تطلق برنامجاً تدريبياً لرفع كفاءة الكوادر المهنية بشركة قزاز للتجارة',
                     'slug' => 'برنامج-تدريبي-شركة-قزاز-للتجارة',
                     'excerpt' => 'إطلاق برنامج تدريبي متخصص لرفع كفاءة الكوادر المهنية في بيئة العمل.',
                     'body' => '<p>نفّذ المعهد برنامجاً تدريبياً لرفع كفاءة الكوادر المهنية بشركة قزاز للتجارة، ضمن مبادرات التطوير المؤسسي والتعلم المستمر.</p>',
+                ],
+                'en' => [
+                    'title' => 'Arab Open University launches a professional-skills program with Qazzaz Trading',
+                    'slug' => 'qazzaz-trading-professional-skills-program',
+                    'excerpt' => 'A specialized training program to raise professional capability in the workplace.',
+                    'body' => '<p>The center delivered a professional-skills program for Qazzaz Trading as part of its organizational development and continuing-learning initiatives.</p>',
                 ],
             ],
         ]);

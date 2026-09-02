@@ -6,7 +6,7 @@ use Livewire\Attributes\Title;
 use Livewire\Component;
 
 new #[Layout('layouts.app-user')]
-#[Title('الإشعارات | منصة مركز التعلم المستمر')]
+#[Title('الإشعارات | مركز التعلم المستمر')]
 class extends Component
 {
     public function markRead(string $notificationId): void

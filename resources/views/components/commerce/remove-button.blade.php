@@ -67,7 +67,7 @@
     @endif
     wire:click="removeItem({{ $item->id }})"
     wire:loading.attr="disabled"
-    aria-label="إزالة من {{ $mode === 'wishlist' ? 'المفضلة' : 'السلة' }}">
+    aria-label="{{ $mode === 'wishlist' ? \App\Support\PublicCopy::cart('remove_wishlist') : \App\Support\PublicCopy::cart('remove_cart') }}">
     <span class="commerce-btn-remove__icon" wire:loading.remove wire:target="removeItem({{ $item->id }})">
         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
             <path class="cart-stroke" d="M7.5 18C8.32843 18 9 18.6716 9 19.5C9 20.3284 8.32843 21 7.5 21C6.67157 21 6 20.3284 6 19.5C6 18.6716 6.67157 18 7.5 18Z" stroke-width="1.5"/>
@@ -77,6 +77,6 @@
             <path class="cart-stroke" d="M15.5283 9L15.0001 12.1179" stroke-width="1.5" stroke-linecap="round"/>
         </svg>
     </span>
-    <span wire:loading.remove wire:target="removeItem({{ $item->id }})">إزالة</span>
-    <span wire:loading wire:target="removeItem({{ $item->id }})">...</span>
+    <span wire:loading.remove wire:target="removeItem({{ $item->id }})">{{ \App\Support\PublicCopy::cart('remove') }}</span>
+    <span wire:loading wire:target="removeItem({{ $item->id }})">{{ \App\Support\PublicCopy::cart('removing') }}</span>
 </button>

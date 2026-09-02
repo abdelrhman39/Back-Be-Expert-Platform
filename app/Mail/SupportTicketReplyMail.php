@@ -22,7 +22,7 @@ class SupportTicketReplyMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'رد على تذكرتك '.$this->ticket->reference_code.' | منصة مركز التعلم المستمر',
+            subject: 'رد على تذكرتك '.$this->ticket->reference_code.' | '.platform_name('ar'),
         );
     }
 

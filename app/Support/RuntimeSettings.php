@@ -287,7 +287,7 @@ class RuntimeSettings
         static::applyRuntimeConfig();
 
         Mail::raw(
-            'هذه رسالة اختبار من منصة مركز التعلم المستمر. إذا وصلتك، فإعدادات البريد صحيحة.',
+            'هذه رسالة اختبار من '.platform_name('ar').'. إذا وصلتك، فإعدادات البريد صحيحة.',
             fn ($message) => $message->to($toEmail)->subject('اختبار البريد — '.config('app.name'))
         );
     }

@@ -42,11 +42,13 @@ class PlatformSetting extends Model
             return $default;
         }
 
-        return Cache::rememberForever('platform_setting.'.$key, function () use ($key, $default) {
-            $value = static::query()->where('key', $key)->value('value');
+        $value = Cache::rememberForever('platform_setting.'.$key, function () use ($key, $default) {
+            $stored = static::query()->where('key', $key)->value('value');
 
-            return $value !== null && $value !== '' ? $value : $default;
+            return $stored !== null && $stored !== '' ? $stored : $default;
         });
+
+        return is_string($value) ? \App\Support\Utf8Text::repair($value) : $value;
     }
 
     public static function set(
@@ -60,6 +62,10 @@ class PlatformSetting extends Model
         ?int $updatedBy = null,
     ): void {
         $oldValue = static::get($key);
+
+        if (is_string($value)) {
+            $value = \App\Support\Utf8Text::repair($value);
+        }
 
         static::query()->updateOrCreate(
             ['key' => $key],

@@ -11,7 +11,7 @@ use Livewire\Attributes\Title;
 use Livewire\Component;
 
 new #[Layout('layouts.app-user')]
-#[Title('إعدادات الحساب | منصة مركز التعلم المستمر')]
+#[Title('إعدادات الحساب | مركز التعلم المستمر')]
 class extends Component
 {
     public string $nameAr = '';

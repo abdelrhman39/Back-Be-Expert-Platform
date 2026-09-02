@@ -62,13 +62,13 @@ class extends Component
 
     public function rendering($view): void
     {
-        $meta = RegistrationApplicationOptions::types()[$this->type] ?? [];
-        $pageTitle = $meta['page_title'] ?? 'تقديم طلب';
+        $pageTitle = RegistrationApplicationOptions::pageTitle($this->type);
+        $metaDescription = RegistrationApplicationOptions::metaDescription($this->type);
 
-        $view->title($pageTitle.' | مركز التعلم المستمر');
+        $view->title($pageTitle.' | '.platform_name());
 
-        if (filled($meta['meta_description'] ?? null)) {
-            $view->layoutData(['metaDescription' => $meta['meta_description']]);
+        if (filled($metaDescription)) {
+            $view->layoutData(['metaDescription' => $metaDescription]);
         }
     }
 
@@ -143,61 +143,67 @@ class extends Component
 ?>
 
 @php
-    $meta = RegistrationApplicationOptions::types()[$type];
     $fields = RegistrationApplicationOptions::fieldsFor($type);
     $locale = app()->getLocale();
-    $sections = $meta['sections'] ?? null;
+    $t = fn (string $key) => \App\Support\PublicCopy::apply($key, $locale);
+    $typed = fn (string $key) => \App\Support\PublicCopy::applyForType($key, $type, $locale);
+    $pageTitle = RegistrationApplicationOptions::pageTitle($type, $locale);
+    $pageIntro = RegistrationApplicationOptions::pageIntro($type, $locale);
+    $sections = RegistrationApplicationOptions::localizedSections($type, $locale);
     $groupedFields = $sections
         ? collect($fields)->groupBy(fn ($field) => $field['section'] ?? 'default')
         : collect(['default' => $fields]);
+    $paths = [
+        ['type' => 'client', 'label' => $t('path_client'), 'url' => route('apply.form', ['locale' => $locale, 'type' => 'client'])],
+        ['type' => 'company', 'label' => $t('path_company'), 'url' => route('apply.form', ['locale' => $locale, 'type' => 'company'])],
+        ['type' => 'instructor', 'label' => $t('path_instructor'), 'url' => route('apply.form', ['locale' => $locale, 'type' => 'instructor'])],
+        ['type' => 'cooperative', 'label' => $t('path_cooperative'), 'url' => route('apply.form', ['locale' => $locale, 'type' => 'cooperative'])],
+    ];
 @endphp
 
-<div>
-    <div class="breadcrumb-bar">
-        <div class="breadcrumb-img">
-            <div class="breadcrumb-left">
-                <img src="{{ static_asset('assets/banner-bg-03.png') }}" alt="">
-            </div>
-        </div>
+<div class="apply-page">
+    <header class="apply-hero">
         <div class="container">
-            <div class="row align-items-center">
-                <div class="col-md-12 col-12">
-                    <nav aria-label="breadcrumb" class="page-breadcrumb">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item">
-                                <a href="{{ route('home', ['locale' => $locale]) }}">الرئيسية</a>
-                            </li>
-                            <li class="breadcrumb-item active" aria-current="page">{{ $meta['page_title'] }}</li>
-                        </ol>
-                    </nav>
-                    <h1 class="breadcrumb-title">{{ $meta['page_title'] }}</h1>
-                </div>
+            <nav aria-label="breadcrumb" class="apply-hero__crumb">
+                <ol class="breadcrumb mb-0">
+                    <li class="breadcrumb-item">
+                        <a href="{{ route('home', ['locale' => $locale]) }}">{{ $t('home') }}</a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">{{ $pageTitle }}</li>
+                </ol>
+            </nav>
+            <p class="apply-hero__eyebrow">{{ platform_name() }}</p>
+            <h1 class="apply-hero__title">{{ $pageTitle }}</h1>
+            @if (filled($pageIntro))
+                <p class="apply-hero__lead">{{ $pageIntro }}</p>
+            @endif
+            <div class="apply-paths" role="tablist" aria-label="{{ $t('paths_title') }}">
+                @foreach ($paths as $path)
+                    <a href="{{ $path['url'] }}" @class(['apply-paths__item', 'is-active' => $type === $path['type']])>
+                        {{ $path['label'] }}
+                    </a>
+                @endforeach
+                <a href="{{ route('register', ['locale' => $locale]) }}" class="apply-paths__item">{{ $t('path_academic') }}</a>
             </div>
         </div>
-    </div>
+    </header>
 
     <div class="apply-form-page">
         <div class="container">
-            @if (! empty($meta['page_intro']))
-                <div class="apply-form-intro">
-                    <p>{{ $meta['page_intro'] }}</p>
-                </div>
-            @endif
-
             <div class="row g-4">
                 <div class="col-lg-8">
                     <div class="apply-form-card">
                         @if ($submittedReference)
                             <div class="apply-success-card">
-                                <div class="apply-success-card__icon" aria-hidden="true">✓</div>
-                                <h2 class="h4 fw-bold mb-2">تم إرسال طلبك بنجاح</h2>
-                                <p class="text-muted mb-2">احتفظ برقم الطلب للمتابعة:</p>
+                                <div class="apply-success-card__icon" aria-hidden="true"><i class="fa-solid fa-check"></i></div>
+                                <h2 class="h4 fw-bold mb-2">{{ $t('success_title') }}</h2>
+                                <p class="text-muted mb-2">{{ $t('success_keep') }}</p>
                                 <div class="apply-success-card__ref" dir="ltr">{{ $submittedReference }}</div>
-                                <p class="text-muted mb-4">سيتواصل معك فريق المنصة بعد مراجعة الطلب خلال أوقات العمل الرسمية.</p>
+                                <p class="text-muted mb-4">{{ $t('success_lead') }}</p>
                                 <div class="d-flex flex-wrap gap-2 justify-content-center">
-                                    <a href="{{ route('apply.track', ['locale' => $locale, 'application' => $submittedReference]) }}" class="btn btn-primary">متابعة الطلب</a>
-                                    <a href="{{ route('courses.index', ['locale' => $locale]) }}" class="btn btn-outline-primary">تصفّح البرامج</a>
-                                    <a href="{{ route('home', ['locale' => $locale]) }}" class="btn btn-outline-secondary">العودة للرئيسية</a>
+                                    <a href="{{ route('apply.track', ['locale' => $locale, 'application' => $submittedReference]) }}" class="btn btn-primary apply-submit">{{ $t('track') }}</a>
+                                    <a href="{{ route('courses.index', ['locale' => $locale]) }}" class="btn btn-outline-primary">{{ $t('browse') }}</a>
+                                    <a href="{{ route('home', ['locale' => $locale]) }}" class="btn btn-outline-secondary">{{ $t('home_link') }}</a>
                                 </div>
                             </div>
                         @else
@@ -205,7 +211,7 @@ class extends Component
                                 <div class="apply-course-card">
                                     <img src="{{ $linkedCourse->posterUrl() }}" alt="" class="apply-course-card__img">
                                     <div>
-                                        <p class="apply-course-card__meta mb-1">طلب تسجيل للبرنامج</p>
+                                        <p class="apply-course-card__meta mb-1">{{ $t('course_request') }}</p>
                                         <h3 class="apply-course-card__title">{{ $linkedCourse->displayTitle() }}</h3>
                                         @if ($linkedCourse->displayPrice())
                                             <p class="apply-course-card__meta">{{ $linkedCourse->displayPrice() }}</p>
@@ -216,13 +222,13 @@ class extends Component
                                 <div class="apply-course-card">
                                     <img src="{{ default_poster_url() }}" alt="" class="apply-course-card__img">
                                     <div>
-                                        <p class="apply-course-card__meta mb-1">البرنامج المطلوب</p>
+                                        <p class="apply-course-card__meta mb-1">{{ $t('course_wanted') }}</p>
                                         <h3 class="apply-course-card__title">{{ $courseName }}</h3>
                                     </div>
                                 </div>
                             @endif
 
-                            <form wire:submit="submit" enctype="multipart/form-data">
+                            <form wire:submit="submit" enctype="multipart/form-data" novalidate>
                                 @if ($sections)
                                     @foreach ($sections as $sectionKey => $sectionTitle)
                                         @php $sectionFields = $groupedFields->get($sectionKey, collect()); @endphp
@@ -234,7 +240,9 @@ class extends Component
                                                 </div>
                                                 <div class="row">
                                                     @foreach ($sectionFields as $field)
-                                                        @include('partials.apps.registration-form-field', ['field' => $field])
+                                                        @include('partials.apps.registration-form-field', [
+                                                            'field' => RegistrationApplicationOptions::localizeField($field, $locale),
+                                                        ])
                                                     @endforeach
                                                 </div>
                                             </div>
@@ -243,7 +251,9 @@ class extends Component
                                 @else
                                     <div class="row">
                                         @foreach ($fields as $field)
-                                            @include('partials.apps.registration-form-field', ['field' => $field])
+                                            @include('partials.apps.registration-form-field', [
+                                                'field' => RegistrationApplicationOptions::localizeField($field, $locale),
+                                            ])
                                         @endforeach
                                     </div>
                                 @endif
@@ -252,22 +262,26 @@ class extends Component
                                     <div class="form-check mb-0">
                                         <input type="checkbox" class="form-check-input" id="terms" wire:model="terms">
                                         <label class="form-check-label" for="terms">
-                                            أوافق على
-                                            <a href="{{ route('cms.page', ['locale' => $locale, 'slug' => 'terms-and-conditions']) }}" target="_blank" rel="noopener">الشروط والأحكام</a>
-                                            و
-                                            <a href="{{ route('cms.page', ['locale' => $locale, 'slug' => 'privacy-policy']) }}" target="_blank" rel="noopener">سياسة الخصوصية</a>
+                                            {{ $t('terms_prefix') }}
+                                            <a href="{{ route('cms.page', ['locale' => $locale, 'slug' => 'terms-and-conditions']) }}" target="_blank" rel="noopener">{{ $t('terms') }}</a>
+                                            {{ $t('and') }}
+                                            <a href="{{ route('cms.page', ['locale' => $locale, 'slug' => 'privacy-policy']) }}" target="_blank" rel="noopener">{{ $t('privacy') }}</a>
                                         </label>
                                     </div>
                                     @error('terms') <div class="text-danger small mt-2">{{ $message }}</div> @enderror
                                 </div>
 
                                 <div class="apply-form-actions">
-                                    <button type="submit" class="btn btn-primary" wire:loading.attr="disabled">
-                                        <span wire:loading.remove wire:target="submit">إرسال الطلب</span>
-                                        <span wire:loading wire:target="submit">جاري الإرسال…</span>
+                                    <button type="submit" class="btn btn-primary apply-submit" wire:loading.attr="disabled">
+                                        <span wire:loading.remove wire:target="submit">{{ $t('submit') }}</span>
+                                        <span wire:loading wire:target="submit">
+                                            <span class="spinner-border spinner-border-sm ms-1" role="status" aria-hidden="true"></span>
+                                            {{ $t('sending') }}
+                                        </span>
                                     </button>
-                                    <a href="{{ route('courses.index', ['locale' => $locale]) }}" class="btn btn-link text-muted">إلغاء والعودة للبرامج</a>
+                                    <a href="{{ route('courses.index', ['locale' => $locale]) }}" class="btn btn-link text-muted">{{ $t('cancel') }}</a>
                                 </div>
+                                <p class="apply-secure"><i class="fa-solid fa-shield-halved"></i> {{ $typed('secure') }}</p>
                             </form>
                         @endif
                     </div>
@@ -282,5 +296,6 @@ class extends Component
 </div>
 
 @push('styles')
-    <link rel="stylesheet" href="{{ static_asset('css/apply-form.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/apply-form.css') }}?v=3">
 @endpush
+

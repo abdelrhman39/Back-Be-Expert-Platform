@@ -113,7 +113,7 @@
     var $wrapper = $(".main-wrapper");
 
     function isMobileMainNav() {
-        return window.matchMedia("(max-width: 991.98px)").matches;
+        return window.matchMedia("(max-width: 1199.98px)").matches;
     }
 
     function closeMobileMainNav() {
@@ -121,6 +121,7 @@
         $(".sidebar-overlay").removeClass("opened");
         $wrapper.removeClass("slide-nav");
         $(".main-nav li.has-submenu.active").removeClass("active");
+        $("#mobile_btn").attr("aria-expanded", "false");
     }
 
     // Mobile submenu — delegated so it survives Livewire DOM updates
@@ -168,13 +169,15 @@
         }
     });
 
-    // Mobile menu sidebar overlay
-
-    $(".header-fixed").append('<div class="sidebar-overlay"></div>');
+    // Mobile menu sidebar overlay — keep the markup overlay; do not duplicate it.
+    if (!document.querySelector(".sidebar-overlay")) {
+        $("header.header, body").first().append('<div class="sidebar-overlay"></div>');
+    }
     $(document).on("click", "#mobile_btn", function () {
         $wrapper.toggleClass("slide-nav");
         $(".sidebar-overlay").toggleClass("opened");
         $("html").toggleClass("menu-opened");
+        $(this).attr("aria-expanded", $("html").hasClass("menu-opened") ? "true" : "false");
         return false;
     });
 
@@ -229,7 +232,9 @@
 
     // Mobile menu sidebar overlay
 
-    $("body").append('<div class="sidebar-overlay"></div>');
+    if (!document.querySelector(".sidebar-overlay")) {
+        $("body").append('<div class="sidebar-overlay"></div>');
+    }
     $(document).on("click", "#mobile_btns", function () {
         $wrapper.toggleClass("slide-nav");
         $(".sidebar-overlay").toggleClass("opened");

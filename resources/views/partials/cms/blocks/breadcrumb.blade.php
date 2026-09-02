@@ -1,7 +1,7 @@
 @php
     $data = $block['data'] ?? [];
     $locale = $locale ?? app()->getLocale();
-    $backgroundImage = $data['background_image'] ?? 'assets/banner-bg-03.png';
+    $backgroundImage = $data['background_image'] ?? platform_campus_path('aerial');
 @endphp
 
 <div class="breadcrumb-bar">

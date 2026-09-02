@@ -79,6 +79,19 @@ Route::prefix('{locale}')
         }
 
         Route::livewire('/courses', 'catalog.courses-index')->name('courses.index');
+        Route::get('/courses/certificates', function (string $locale) {
+            return redirect()->route('courses.index', [
+                'locale' => $locale,
+                'categories' => [\App\Services\CatalogCourseService::CATEGORY_PROFESSIONAL_CERTIFICATES],
+            ]);
+        })->name('courses.certificates');
+        Route::get('/courses/diplomas', function (string $locale) {
+            return redirect()->route('courses.index', [
+                'locale' => $locale,
+                'categories' => [\App\Services\CatalogCourseService::CATEGORY_DIPLOMAS],
+            ]);
+        })->name('courses.diplomas');
+        Route::livewire('/fellowships', 'pages.fellowships-index-page')->name('fellowships.index');
         Route::livewire('/courses/{course}/preview/{lesson}', 'catalog.course-preview-page')->name('courses.preview');
         Route::get('/courses/{course}/enroll', function (string $locale, string $course) {
             return redirect()->to(route('courses.show', [
@@ -219,6 +232,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::livewire('/orders', 'admin.orders-page')->name('orders');
         Route::livewire('/orders/{order}', 'admin.order-view-page')->name('orders.show');
         Route::livewire('/settings', 'admin.settings-page')->name('settings');
+        Route::livewire('/identity-themes', 'admin.identity-themes-page')->name('identity-themes');
         Route::livewire('/system-settings', 'admin.system-settings-hub-page')->name('system-settings');
         Route::livewire('/system-settings/{section}', 'admin.system-settings-section-page')->name('system-settings.section');
         Route::livewire('/payment-settings', 'admin.payment-settings-page')->name('payment-settings');

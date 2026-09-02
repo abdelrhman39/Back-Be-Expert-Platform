@@ -22,7 +22,7 @@ class extends Component
     #[Computed]
     public function relatedCourses()
     {
-        return app(CatalogCourseService::class)->related($this->course, 12);
+        return app(CatalogCourseService::class)->related($this->course, 6);
     }
 
     public function with(): array
@@ -33,14 +33,14 @@ class extends Component
             'metaDescription' => $brief
                 ? Str::limit(strip_tags($brief), 160)
                 : $this->course->displayTitle(),
-            'title' => $this->course->displayTitle().' | منصة مركز التعلم المستمر',
+            'title' => $this->course->displayTitle().' | مركز التعلم المستمر',
         ];
     }
 };
 ?>
 
 @php
-    $pageTitle = $course->displayTitle().' | منصة مركز التعلم المستمر';
+    $pageTitle = $course->displayTitle().' | مركز التعلم المستمر';
 @endphp
 
 <div>
@@ -65,9 +65,10 @@ class extends Component
 @push('scripts')
     <script>document.title = @json($pageTitle);</script>
     <script src="{{ asset('js/course-enroll-sheet.js') }}?v=1" defer></script>
+    <script src="{{ asset('js/course-show-tabs.js') }}?v=1" defer></script>
 @endpush
 
 @push('styles')
     <link rel="stylesheet" href="{{ asset('css/course-enroll.css') }}?v=4">
-    <link rel="stylesheet" href="{{ asset('css/course-show.css') }}?v=3">
+    <link rel="stylesheet" href="{{ asset('css/course-show.css') }}?v=5">
 @endpush

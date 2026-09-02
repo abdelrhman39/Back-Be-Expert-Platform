@@ -3,21 +3,34 @@
 
     $data = $block['data'] ?? [];
     $source = $data['source'] ?? 'latest_articles';
-    $limit = max(1, (int) ($data['limit'] ?? 6));
+    $limit = max(1, min(4, (int) ($data['limit'] ?? 4)));
     $badge = $data['badge'] ?? 'الاخبار والفعاليات';
     $locale = $locale ?? app()->getLocale();
+    $isEn = $locale === 'en';
     $allUrl = route('articles.index', ['locale' => $locale]);
 
     if ($source === 'latest_articles') {
-        $articles = collect($latestArticles ?? app(ArticleService::class)->latestPublished($limit, $locale))
+        $items = collect($latestArticles ?? app(ArticleService::class)->latestPublished($limit, $locale))
             ->filter(fn ($article) => (bool) $article->translate($locale))
             ->take($limit)
-            ->values();
-        $slideCount = $articles->count();
+            ->values()
+            ->map(fn ($article) => [
+                'title' => $article->translate($locale)?->title,
+                'excerpt' => $article->translate($locale)?->excerpt,
+                'url' => $article->publicUrl($locale),
+                'image' => $article->featuredImageUrl(),
+                'badge' => $article->categoryDisplayName($locale),
+                'date' => optional($article->published_at)->translatedFormat('d F Y'),
+            ]);
     } else {
-        $manualItems = collect($data['items'] ?? [])->values();
-        $slideCount = $manualItems->count();
-        $articles = collect();
+        $items = collect($data['items'] ?? [])->take($limit)->values()->map(fn ($item) => [
+            'title' => $item['title'] ?? '',
+            'excerpt' => $item['excerpt'] ?? '',
+            'url' => cms_href($item['url'] ?? '#'),
+            'image' => resolve_poster_url($item['image'] ?? null),
+            'badge' => $badge,
+            'date' => $item['date'] ?? null,
+        ]);
     }
 @endphp
 
@@ -31,83 +44,39 @@
             </div>
         @endif
 
-        @if ($slideCount === 0)
-            <div class="text-center py-4 text-muted">لا توجد أخبار منشورة حالياً.</div>
+        @if ($items->isEmpty())
+            <div class="text-center py-4 text-muted">{{ $isEn ? 'No news published yet.' : 'لا توجد أخبار منشورة حالياً.' }}</div>
         @else
-            <div class="blog home-catalog-slider-wrap" data-aos="fade-up">
-                <div
-                    class="js-home-catalog-slider owl-carousel owl-rtl"
-                    data-slides="{{ min(3, $slideCount) }}"
-                >
-                    @if ($source === 'latest_articles')
-                        @foreach ($articles as $article)
-                            @php $t = $article->translate($locale); @endphp
-                            <div class="home-catalog-slide">
-                                <article class="blog-grid home-news-card">
-                                    <div class="blog-img">
-                                        <a href="{{ $article->publicUrl($locale) }}">
-                                            <img src="{{ $article->featuredImageUrl() }}" class="img-fluid" alt="{{ $t->title }}" loading="lazy">
-                                        </a>
-                                    </div>
-                                    <div class="blog-content">
-                                        <div class="user-head">
-                                            <div class="badge-text">
-                                                <span class="badge bg-primary-light">{{ $article->categoryDisplayName($locale) }}</span>
-                                            </div>
-                                        </div>
-                                        <div class="blog-title">
-                                            <h3>
-                                                <a href="{{ $article->publicUrl($locale) }}">{{ $t->title }}</a>
-                                            </h3>
-                                        </div>
-                                        @if ($t->excerpt)
-                                            <p class="home-news-card__excerpt">{{ \Illuminate\Support\Str::limit($t->excerpt, 120) }}</p>
-                                        @endif
-                                        <div class="gigs-card-footer justify-content-start gap-2">
-                                            <a class="btn btn-primary" href="{{ $article->publicUrl($locale) }}">
-                                                مزيد من التفاصيل <i class="feather-eye pe-2"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </article>
+            <div class="lg-news-grid lg-news-grid--centered" data-aos="fade-up">
+                @foreach ($items as $item)
+                    <article class="lg-news-card">
+                        <a class="lg-news-card__media" href="{{ $item['url'] }}">
+                            <img src="{{ $item['image'] }}" alt="{{ $item['title'] }}" loading="lazy">
+                        </a>
+                        <div class="lg-news-card__body">
+                            @if ($item['badge'])
+                                <span class="lg-news-card__badge">{{ $item['badge'] }}</span>
+                            @endif
+                            <h3 class="lg-news-card__title">
+                                <a href="{{ $item['url'] }}">{{ $item['title'] }}</a>
+                            </h3>
+                            @if ($item['excerpt'])
+                                <p class="lg-news-card__excerpt">{{ \Illuminate\Support\Str::limit(strip_tags($item['excerpt']), 90) }}</p>
+                            @endif
+                            <div class="lg-news-card__meta">
+                                @if ($item['date'])
+                                    <span>{{ $item['date'] }}</span>
+                                @endif
+                                <a href="{{ $item['url'] }}">{{ $isEn ? 'Read more' : 'المزيد' }}</a>
                             </div>
-                        @endforeach
-                    @else
-                        @foreach ($manualItems as $item)
-                            <div class="home-catalog-slide">
-                                <article class="blog-grid home-news-card">
-                                    <div class="blog-img">
-                                        <a href="{{ cms_href($item['url'] ?? '#') }}">
-                                            <img src="{{ resolve_poster_url($item['image'] ?? null) }}" class="img-fluid" alt="{{ $item['title'] ?? '' }}">
-                                        </a>
-                                    </div>
-                                    <div class="blog-content">
-                                        <div class="user-head">
-                                            <div class="badge-text">
-                                                <span class="badge bg-primary-light">{{ $badge }}</span>
-                                            </div>
-                                        </div>
-                                        <div class="blog-title">
-                                            <h3>
-                                                <a href="{{ cms_href($item['url'] ?? '#') }}">{{ $item['title'] ?? '' }}</a>
-                                            </h3>
-                                        </div>
-                                        <div class="gigs-card-footer justify-content-start gap-2">
-                                            <a class="btn btn-primary" href="{{ cms_href($item['url'] ?? '#') }}">
-                                                مزيد من التفاصيل <i class="feather-eye pe-2"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </article>
-                            </div>
-                        @endforeach
-                    @endif
-                </div>
+                        </div>
+                    </article>
+                @endforeach
             </div>
 
             <div class="home-catalog-section__cta">
                 <a href="{{ $allUrl }}" class="btn btn-primary">
-                    جميع الأخبار والفعاليات
+                    {{ $isEn ? 'All news & events' : 'جميع الأخبار والفعاليات' }}
                     <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
                 </a>
             </div>

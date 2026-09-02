@@ -114,7 +114,7 @@
         }
 
         function resolveCourseCard(btn) {
-            return btn.closest('.trainingCard, .tooltip-coursecard, .gigs-grid, .gigs-card-slider, .gigs-card-cat, .card-tooltip-overlay, .modal-content');
+            return btn.closest('.atelier-program, .trainingCard, .tooltip-coursecard, .gigs-grid, .gigs-card-slider, .gigs-card-cat, .card-tooltip-overlay, .modal-content, .catalog-card, .diploma-card');
         }
 
         function resolveCourseTitle(btn) {

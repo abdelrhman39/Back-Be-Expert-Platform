@@ -53,6 +53,7 @@ class extends Component
             'professionalCertificates' => $this->professionalCertificates,
             'diplomas' => $this->diplomas,
             'latestArticles' => $this->latestArticles,
+            'heroMetrics' => app(HomePageService::class)->heroMetrics(),
         ],
     ])
 </div>

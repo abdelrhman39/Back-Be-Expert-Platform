@@ -154,7 +154,7 @@ class extends Component
 </section>
 
 @push('styles')
-<link rel="stylesheet" href="{{ asset('css/support-pages.css') }}">
+<link rel="stylesheet" href="{{ asset('css/support-pages.css') }}?v=2">
 @endpush
 
 @include('partials.admin.shell-end')

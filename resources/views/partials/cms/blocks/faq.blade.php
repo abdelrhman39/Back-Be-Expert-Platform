@@ -3,7 +3,7 @@
     $items = $data['items'] ?? [];
 @endphp
 
-<section class="counterSec">
+<section class="atelier-faq">
     <div class="container">
         @if ($data['title'] ?? null)
             <div class="section-header aos" data-aos="fade-up">

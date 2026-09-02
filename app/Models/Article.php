@@ -62,7 +62,7 @@ class Article extends Model
             return $this->articleCategory->displayName($locale);
         }
 
-        return ArticleOptions::categoryLabel($this->category);
+        return ArticleOptions::categoryLabel($this->category, $locale);
     }
 
     public function isPublished(): bool

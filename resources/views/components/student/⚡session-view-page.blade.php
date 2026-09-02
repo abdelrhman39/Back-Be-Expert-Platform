@@ -12,7 +12,7 @@ use Livewire\Attributes\Title;
 use Livewire\Component;
 
 new #[Layout('layouts.app-user')]
-#[Title('تفاصيل الحصة | منصة مركز التعلم المستمر')]
+#[Title('تفاصيل الحصة | مركز التعلم المستمر')]
 class extends Component
 {
     public AttendanceSession $session;

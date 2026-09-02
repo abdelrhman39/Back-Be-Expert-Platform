@@ -1,22 +1,35 @@
 @php
     $locale = app()->getLocale();
+    $isEn = $locale === 'en';
     $visibleCategories = $categories->where('sidebar_visible', true);
     $hiddenCategories = $categories->where('sidebar_visible', false);
     $visibleFields = $fields->where('sidebar_visible', true);
     $hiddenFields = $fields->where('sidebar_visible', false);
+    $showPrice = (int) ($priceRange['max'] ?? 0) > 0;
+    $hasSidebarContent = $categories->isNotEmpty() || $fields->isNotEmpty() || $courseTypes !== [] || $showPrice;
 @endphp
 
+@if ($hasSidebarContent)
 <div class="col-lg-4 theiaStickySidebar" wire:ignore.self>
     <div class="theiaStickySidebar">
-        <div class="sidebar-widget">
+        <aside class="sidebar-widget catalog-filter" aria-label="{{ $isEn ? 'Filter programs' : 'تصفية البرامج' }}">
+            <div class="catalog-filter__head">
+                <h2>{{ $isEn ? 'Filter results' : 'تصفية النتائج' }}</h2>
+                @if ($hasActiveFilters)
+                    <button type="button" class="catalog-filter__reset" wire:click="clearFilters">
+                        {{ $isEn ? 'Reset' : 'مسح الكل' }}
+                    </button>
+                @endif
+            </div>
+
             <div class="sidebar-body p-0">
                 @if ($categories->isNotEmpty())
                     <div class="collapse-card">
-                        <h4 class="card-title">
+                        <h3 class="card-title">
                             <a class="" data-bs-toggle="collapse" href="#categories" aria-expanded="true">
-                                <img src="{{ static_asset('assets/category-icon.svg') }}" alt="icon"> الأقسام
+                                {{ $isEn ? 'Categories' : 'الأقسام' }}
                             </a>
-                        </h4>
+                        </h3>
                         <div id="categories" class="collapse show">
                             <div class="collapse-body">
                                 <ul class="checkbox-list">
@@ -26,12 +39,15 @@
                                                 <input type="checkbox" wire:model.live="categoryFilters" value="{{ $category->id }}" id="category-{{ $category->id }}">
                                                 <span class="checkmark"></span>
                                                 <span class="checked-title">{{ $category->displayTitle() }}</span>
+                                                @if (($category->courses_count ?? 0) > 0)
+                                                    <span class="catalog-filter__count">{{ $category->courses_count }}</span>
+                                                @endif
                                             </label>
                                         </li>
                                     @endforeach
                                     @if ($hiddenCategories->isNotEmpty())
                                         <li>
-                                            <a href="javascript:void(0);" class="viewall-button-one" data-show_less="عرض أقل" data-show_all="عرض الكل"><span>عرض الكل</span></a>
+                                            <a href="javascript:void(0);" class="viewall-button-one" data-show_less="{{ $isEn ? 'Show less' : 'عرض أقل' }}" data-show_all="{{ $isEn ? 'Show all' : 'عرض الكل' }}"><span>{{ $isEn ? 'Show all' : 'عرض الكل' }}</span></a>
                                         </li>
                                         <li>
                                             <div class="view-content">
@@ -43,6 +59,9 @@
                                                                     <input type="checkbox" wire:model.live="categoryFilters" value="{{ $category->id }}" id="category-{{ $category->id }}">
                                                                     <span class="checkmark"></span>
                                                                     <span class="checked-title">{{ $category->displayTitle() }}</span>
+                                                                    @if (($category->courses_count ?? 0) > 0)
+                                                                        <span class="catalog-filter__count">{{ $category->courses_count }}</span>
+                                                                    @endif
                                                                 </label>
                                                             </li>
                                                         @endforeach
@@ -59,11 +78,11 @@
 
                 @if ($fields->isNotEmpty())
                     <div class="collapse-card">
-                        <h4 class="card-title">
+                        <h3 class="card-title">
                             <a class="" data-bs-toggle="collapse" href="#field" aria-expanded="true">
-                                <img src="{{ static_asset('assets/category-icon.svg') }}" alt="icon"> المجالات
+                                {{ $isEn ? 'Fields' : 'المجالات' }}
                             </a>
-                        </h4>
+                        </h3>
                         <div id="field" class="collapse show">
                             <div class="collapse-body">
                                 <ul class="checkbox-list">
@@ -73,12 +92,15 @@
                                                 <input type="checkbox" wire:model.live="fieldFilters" value="{{ $field->id }}" id="field-{{ $field->id }}">
                                                 <span class="checkmark"></span>
                                                 <span class="checked-title">{{ $field->displayTitle() }}</span>
+                                                @if (($field->courses_count ?? 0) > 0)
+                                                    <span class="catalog-filter__count">{{ $field->courses_count }}</span>
+                                                @endif
                                             </label>
                                         </li>
                                     @endforeach
                                     @if ($hiddenFields->isNotEmpty())
                                         <li>
-                                            <a href="javascript:void(0);" class="viewall-button-one" data-show_less="عرض أقل" data-show_all="عرض الكل"><span>عرض الكل</span></a>
+                                            <a href="javascript:void(0);" class="viewall-button-one" data-show_less="{{ $isEn ? 'Show less' : 'عرض أقل' }}" data-show_all="{{ $isEn ? 'Show all' : 'عرض الكل' }}"><span>{{ $isEn ? 'Show all' : 'عرض الكل' }}</span></a>
                                         </li>
                                         <li>
                                             <div class="view-content">
@@ -90,6 +112,9 @@
                                                                     <input type="checkbox" wire:model.live="fieldFilters" value="{{ $field->id }}" id="field-{{ $field->id }}">
                                                                     <span class="checkmark"></span>
                                                                     <span class="checked-title">{{ $field->displayTitle() }}</span>
+                                                                    @if (($field->courses_count ?? 0) > 0)
+                                                                        <span class="catalog-filter__count">{{ $field->courses_count }}</span>
+                                                                    @endif
                                                                 </label>
                                                             </li>
                                                         @endforeach
@@ -106,11 +131,11 @@
 
                 @if ($courseTypes !== [])
                     <div class="collapse-card">
-                        <h4 class="card-title">
+                        <h3 class="card-title">
                             <a class="" data-bs-toggle="collapse" href="#types" aria-expanded="true">
-                                <img src="{{ static_asset('assets/category-icon.svg') }}" alt="icon"> أنواع
+                                {{ $isEn ? 'Delivery' : 'طريقة الحضور' }}
                             </a>
-                        </h4>
+                        </h3>
                         <div id="types" class="collapse show">
                             <div class="collapse-body">
                                 <ul class="checkbox-list">
@@ -129,33 +154,34 @@
                     </div>
                 @endif
 
-                <div class="collapse-card">
-                    <h4 class="card-title">
-                        <a class="" data-bs-toggle="collapse" href="#budget" aria-expanded="true">
-                            <img src="{{ static_asset('assets/money-icon.svg') }}" alt="icon">
-                            السعر
-                        </a>
-                    </h4>
-                    <div id="budget" class="collapse show">
-                        <div class="collapse-body">
-                            <div class="d-flex gap-2 align-items-center">
-                                <span class="text-dark">السعر :</span>
-                                {{ number_format($priceRange['min']) }} : {{ number_format($priceRange['max']) }}
-                                @include('partials.catalog.sar-icon')
-                            </div>
-                            <div class="form-group search-group">
-                                <input type="number" min="0" class="form-control" wire:model.live.debounce.500ms="minPrice" placeholder="السعر الأدنى">
-                            </div>
-                            <div class="form-group search-group">
-                                <input type="number" min="0" class="form-control" wire:model.live.debounce.500ms="maxPrice" placeholder="السعر الأعلى">
+                @if ($showPrice)
+                    <div class="collapse-card">
+                        <h3 class="card-title">
+                            <a class="" data-bs-toggle="collapse" href="#budget" aria-expanded="true">
+                                {{ $isEn ? 'Price' : 'السعر' }}
+                            </a>
+                        </h3>
+                        <div id="budget" class="collapse show">
+                            <div class="collapse-body">
+                                <p class="catalog-filter__range">
+                                    {{ number_format($priceRange['min']) }}
+                                    –
+                                    {{ number_format($priceRange['max']) }}
+                                    @include('partials.catalog.sar-icon')
+                                </p>
+                                <div class="catalog-filter__prices">
+                                    <input type="number" min="0" class="form-control" wire:model.live.debounce.500ms="minPrice" placeholder="{{ $isEn ? 'Min' : 'الأدنى' }}" aria-label="{{ $isEn ? 'Minimum price' : 'السعر الأدنى' }}">
+                                    <input type="number" min="0" class="form-control" wire:model.live.debounce.500ms="maxPrice" placeholder="{{ $isEn ? 'Max' : 'الأعلى' }}" aria-label="{{ $isEn ? 'Maximum price' : 'السعر الأعلى' }}">
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                @endif
             </div>
-            <button type="button" class="btn btn-primary w-100" wire:click="$refresh">
-                <i class="fa-solid fa-caret-right"></i>تصفية
+            <button type="button" class="btn btn-primary w-100 catalog-filter__apply" wire:click="applyFilters">
+                <i class="fa-solid fa-filter" aria-hidden="true"></i>{{ $isEn ? 'Apply filters' : 'تصفية' }}
             </button>
-        </div>
+        </aside>
     </div>
 </div>
+@endif

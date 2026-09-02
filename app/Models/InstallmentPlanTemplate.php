@@ -123,7 +123,7 @@ class InstallmentPlanTemplate extends Model
 
             $rows[] = [
                 'sequence' => (int) $item->sequence,
-                'label' => $item->label_ar ?: ('قسط '.($index + 1)),
+                'label' => $item->displayLabel(),
                 'percent' => (float) $item->percent,
                 'amount' => $amount,
                 'is_first' => $index === 0,

@@ -10,7 +10,7 @@ use Livewire\Attributes\Url;
 use Livewire\Component;
 
 new #[Layout('layouts.app-user')]
-#[Title('طلباتي | منصة مركز التعلم المستمر')]
+#[Title('طلباتي | مركز التعلم المستمر')]
 class extends Component
 {
     #[Url(as: 'status')]

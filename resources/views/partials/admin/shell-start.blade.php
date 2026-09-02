@@ -19,11 +19,11 @@
                 <img
                     src="{{ platform_logo_url(\App\Support\LogoSettings::KEY_PRIMARY) }}"
                     class="{{ \App\Support\LogoSettings::cssClass(\App\Support\LogoSettings::KEY_PRIMARY) }}"
-                    alt="{{ \App\Models\PlatformSetting::get('platform_name_ar', 'منصة مركز التعلم المستمر') }}"
+                    alt="{{ platform_name('ar') }}"
                 >
             </a>
-            <p class="admin-sidebar__org">{{ \App\Models\PlatformSetting::get('platform_name_ar', 'منصة مركز التعلم المستمر') }}</p>
-            <p class="admin-sidebar__org-sub">{{ \App\Models\PlatformSetting::get('platform_org_ar', 'جامعة الامير مقرن') }}</p>
+            <p class="admin-sidebar__org">{{ platform_name('ar') }}</p>
+            <p class="admin-sidebar__org-sub">{{ platform_org('ar') }}</p>
         </div>
         <div class="admin-sidebar__scroll">
             <ul class="admin-side-nav"></ul>

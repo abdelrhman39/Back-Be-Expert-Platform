@@ -1,0 +1,397 @@
+/* Public footer + floating action rail — AOU navy/gold */
+
+.footer.footer--atelier {
+  --footer-ink: #f4eee6;
+  --footer-muted: rgba(244, 238, 230, 0.72);
+  --footer-line: rgba(197, 165, 114, 0.28);
+  --footer-gold: var(--atelier-gold, var(--secondary, #c5a572));
+  --footer-navy: var(--primary, #002d58);
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: 0;
+  color: var(--footer-ink);
+  background:
+    radial-gradient(circle at 12% 0%, color-mix(in oklab, var(--footer-gold) 16%, transparent), transparent 34%),
+    linear-gradient(180deg, #002d58 0%, #001a33 48%, #0a1220 100%) !important;
+}
+
+.footer.footer--atelier .section-bg {
+  display: none;
+}
+
+.footer.footer--atelier .footer-top {
+  padding: clamp(2.75rem, 5vw, 4rem) 0 0;
+}
+
+.footer.footer--atelier .footer-widget {
+  margin-bottom: clamp(1.5rem, 3vw, 2rem);
+}
+
+.footer.footer--atelier .footer-widget h3 {
+  position: relative;
+  margin: 0 0 1.15rem;
+  padding-bottom: 0.7rem;
+  color: #fff !important;
+  font-size: 1.05rem;
+  font-weight: 800;
+}
+
+.footer.footer--atelier .footer-widget h3::after {
+  content: "";
+  position: absolute;
+  inset-inline-start: 0;
+  bottom: 0;
+  width: 2.4rem;
+  height: 3px;
+  border-radius: 99px;
+  background: var(--footer-gold);
+}
+
+.footer.footer--atelier .footer-about,
+.footer.footer--atelier .footer-widget p {
+  max-width: 28rem;
+  margin: 1rem 0 0;
+  color: var(--footer-muted) !important;
+  font-size: 0.95rem;
+  line-height: 1.85;
+}
+
+.footer.footer--atelier .footer-logos {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: center;
+  gap: 0.85rem 1.1rem;
+  margin: 0;
+}
+
+.footer.footer--atelier .footer-logos.row > [class*="col"],
+.footer.footer--atelier .footer-logos__item {
+  flex: 0 0 auto !important;
+  width: auto !important;
+  max-width: none !important;
+  padding: 0 !important;
+}
+
+.footer.footer--atelier .footer-logos img.platform-logo,
+.footer.footer--atelier .footer-widget .footer-logos img {
+  width: auto !important;
+  height: auto !important;
+  max-height: 78px;
+  max-width: min(100%, 240px);
+  object-fit: contain;
+  display: block;
+}
+
+.footer.footer--atelier .footer-logos img.platform-logo--vision,
+.footer.footer--atelier .footer-logos img.vision-logo {
+  max-height: 68px;
+  max-width: min(100%, 180px);
+  filter: none;
+}
+
+.footer.footer--atelier .footer-widget .menu-items {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.footer.footer--atelier .footer-widget .menu-items li {
+  margin: 0 0 0.7rem;
+  padding-inline-start: 1rem;
+  align-items: flex-start;
+}
+
+.footer.footer--atelier .footer-widget .menu-items li:last-child {
+  margin-bottom: 0;
+}
+
+.footer.footer--atelier .footer-widget .menu-items li::before {
+  top: 0.55em;
+  width: 6px;
+  height: 6px;
+  background: var(--footer-gold) !important;
+}
+
+.footer.footer--atelier .footer-widget .menu-items li a {
+  color: var(--footer-ink) !important;
+  font-size: 0.94rem;
+  font-weight: 600;
+  line-height: 1.65;
+  text-decoration: none;
+}
+
+.footer.footer--atelier .footer-widget .menu-items li a:hover {
+  color: var(--footer-gold) !important;
+}
+
+.footer.footer--atelier .policies-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.15rem 1.5rem;
+}
+
+.footer.footer--atelier .footer__payments {
+  display: grid;
+  justify-items: center;
+  gap: 0.85rem;
+  margin: 0.35rem 0 1.5rem;
+  padding: 1.15rem 1rem;
+  border: 1px solid var(--footer-line);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.footer.footer--atelier .footer__eyebrow {
+  margin: 0;
+  color: var(--footer-gold);
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.footer.footer--atelier .paypal-icons {
+  margin: 0;
+  gap: 0.65rem;
+}
+
+.footer.footer--atelier .paypal-icons a,
+.footer.footer--atelier .paypal-icons span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.5rem;
+  padding: 0.35rem 0.7rem;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+}
+
+.footer.footer--atelier .paypal-icons img {
+  height: 22px;
+  width: auto;
+  max-width: 72px;
+  object-fit: contain;
+}
+
+.footer.footer--atelier .contact-widget {
+  margin-top: 0.25rem;
+  padding: 1.25rem 0 1.6rem;
+  border-top: 1px solid var(--footer-line);
+}
+
+.footer.footer--atelier .location-list {
+  gap: 0.85rem 1.25rem;
+  padding: 0;
+  margin: 0;
+}
+
+.footer.footer--atelier .location-list li {
+  min-height: 3.1rem;
+  padding-block: 0.45rem;
+  padding-inline: 0.45rem 0.75rem;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.footer.footer--atelier .location-list .footer-contact-icon,
+.footer.footer--atelier .location-list li > span {
+  width: 2.45rem;
+  height: 2.45rem;
+  border-radius: 12px;
+  color: var(--footer-gold) !important;
+  background: color-mix(in oklab, var(--footer-navy) 55%, #000) !important;
+  border: 1px solid var(--footer-line) !important;
+}
+
+.footer.footer--atelier .location-list li h6 {
+  margin: 0 0 0.1rem;
+  color: var(--footer-gold) !important;
+  font-size: 0.72rem;
+  font-weight: 800;
+}
+
+.footer.footer--atelier .location-list li p,
+.footer.footer--atelier .location-list li p a {
+  margin: 0;
+  color: #fff !important;
+  font-size: 0.92rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.footer.footer--atelier .location-list li p a:hover {
+  color: var(--footer-gold) !important;
+}
+
+.footer.footer--atelier .social-links ul {
+  justify-content: flex-end;
+  gap: 0.45rem;
+  margin: 0;
+  padding: 0;
+}
+
+.footer.footer--atelier .social-links ul li {
+  margin: 0;
+}
+
+.footer.footer--atelier .social-links ul li a {
+  width: 2.55rem;
+  height: 2.55rem;
+  border-radius: 50%;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--footer-line);
+}
+
+.footer.footer--atelier .social-links ul li a i {
+  color: #fff;
+  font-size: 0.95rem;
+}
+
+.footer.footer--atelier .social-links ul li a:hover,
+.footer.footer--atelier .social-links ul li a:hover i {
+  background: var(--footer-gold);
+  color: #001a33;
+  border-color: var(--footer-gold);
+}
+
+.footer.footer--atelier .footer-bottom {
+  padding: 1rem 0;
+  background: rgba(0, 0, 0, 0.28);
+  border-top: 1px solid var(--footer-line);
+}
+
+.footer.footer--atelier .copy-right p,
+.footer.footer--atelier .copy-right a,
+.footer.footer--atelier .footer-bottom-links ul li a {
+  color: var(--footer-muted) !important;
+  font-size: 0.86rem;
+  text-decoration: none;
+}
+
+.footer.footer--atelier .footer-bottom-links ul li a:hover,
+.footer.footer--atelier .copy-right a:hover {
+  color: var(--footer-gold) !important;
+}
+
+.footer.footer--atelier .footer-bottom-links ul {
+  gap: 1.1rem;
+}
+
+.footer.footer--atelier .footer-bottom-links ul li {
+  margin: 0;
+}
+
+@media (max-width: 1199.98px) {
+  .footer.footer--atelier .social-links ul {
+    justify-content: center;
+    margin-top: 0.85rem;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .footer.footer--atelier .policies-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .footer.footer--atelier .footer-bottom .row {
+    text-align: center;
+    gap: 0.65rem;
+  }
+
+  .footer.footer--atelier .footer-bottom-links ul {
+    justify-content: center;
+  }
+
+  .footer.footer--atelier .location-list li {
+    width: 100%;
+  }
+}
+
+/* Floating action rail */
+:root {
+  --float-rail-edge: 18px;
+  --float-rail-bottom: 22px;
+  --float-btn-size: 52px;
+  --float-btn-gap: 12px;
+}
+
+.float-actions-rail {
+  z-index: 1100;
+}
+
+.float-actions-rail .float-mail,
+.float-actions-rail .float-call,
+.float-actions-rail .float-whts,
+.float-actions-rail .back-to-top-icon,
+.float-actions-rail .ai-chat-fab,
+html.use-domain-a11y .float-actions-rail .domain-a11y-fab {
+  width: var(--float-btn-size) !important;
+  height: var(--float-btn-size) !important;
+  min-width: var(--float-btn-size);
+  border-radius: 50% !important;
+  border: 2px solid #fff !important;
+  box-shadow:
+    0 0 0 2px color-mix(in oklab, var(--primary, #002d58) 35%, #c5a572),
+    0 10px 24px rgba(0, 26, 51, 0.32) !important;
+  color: #fff !important;
+}
+
+.float-actions-rail .float-mail,
+.float-actions-rail .float-call,
+.float-actions-rail .back-to-top-icon {
+  background-color: var(--primary, #002d58) !important;
+  border-color: #fff !important;
+}
+
+.float-actions-rail .float-whts {
+  background-color: #1f9e4b !important;
+  border-color: #fff !important;
+}
+
+html.use-domain-a11y .float-actions-rail .domain-a11y-fab {
+  background: linear-gradient(145deg, #0d4a2a 0%, #1b8354 100%) !important;
+}
+
+.float-actions-rail .float-mail:hover,
+.float-actions-rail .float-call:hover,
+.float-actions-rail .float-whts:hover,
+.float-actions-rail .back-to-top-icon:hover,
+html.use-domain-a11y .float-actions-rail .domain-a11y-fab:hover {
+  transform: translateY(-3px) scale(1.04);
+  box-shadow:
+    0 0 0 2px var(--atelier-gold, #c5a572),
+    0 14px 28px rgba(0, 26, 51, 0.38) !important;
+}
+
+.float-actions-rail .float-mail svg,
+.float-actions-rail .float-call svg,
+.float-actions-rail .float-whts svg,
+html.use-domain-a11y .float-actions-rail .domain-a11y-fab svg {
+  width: 24px;
+  height: 24px;
+}
+
+.float-actions-rail .back-to-top-icon {
+  font-size: 1.05rem !important;
+}
+
+@media (max-width: 767.98px) {
+  :root {
+    --float-rail-edge: 12px;
+    --float-rail-bottom: 16px;
+    --float-btn-size: 48px;
+    --float-btn-gap: 10px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .float-actions-rail .float-mail:hover,
+  .float-actions-rail .float-call:hover,
+  .float-actions-rail .float-whts:hover,
+  .float-actions-rail .back-to-top-icon:hover,
+  html.use-domain-a11y .float-actions-rail .domain-a11y-fab:hover {
+    transform: none;
+  }
+}

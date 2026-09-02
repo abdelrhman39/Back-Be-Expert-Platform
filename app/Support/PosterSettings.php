@@ -6,14 +6,16 @@ use App\Models\PlatformSetting;
 
 class PosterSettings
 {
-    /** @var list<string> Legacy placeholder filenames — never render these; use default poster instead. */
+    /** @var list<string> Legacy placeholder filenames — never render these; use the university logo instead. */
     private const LEGACY_POSTER_BASENAMES = [
         '1861641489031145.png',
+        'site-favicon.png',
     ];
 
     public static function defaultAssetPath(): string
     {
-        return 'assets/vendor/images/site-favicon.png';
+        return LogoSettings::storedPath(LogoSettings::KEY_PRIMARY)
+            ?? LogoSettings::defaultPath(LogoSettings::KEY_PRIMARY);
     }
 
     public static function isLegacyPoster(?string $path): bool

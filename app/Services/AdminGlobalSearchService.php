@@ -190,6 +190,7 @@ class AdminGlobalSearchService
             ['route' => 'admin.certificates', 'title' => 'الشهادات', 'subtitle' => 'الإصدار والتحقق', 'icon' => 'certificate'],
             ['route' => 'admin.articles', 'title' => 'الأخبار والفعاليات', 'subtitle' => 'المحتوى', 'icon' => 'article'],
             ['route' => 'admin.settings', 'title' => 'إعدادات المنصة', 'subtitle' => 'الشعارات والهوية', 'icon' => 'settings'],
+            ['route' => 'admin.identity-themes', 'title' => 'قوالب الهوية', 'subtitle' => 'ثيمات الصفحة الرئيسية', 'icon' => 'settings'],
             ['route' => 'admin.notifications', 'title' => 'صندوق الإشعارات', 'subtitle' => 'التنبيهات', 'icon' => 'bell'],
         ];
 
@@ -259,6 +260,7 @@ class AdminGlobalSearchService
 
         foreach ([
             ['route' => 'admin.settings', 'label' => 'إعدادات المنصة', 'group' => 'النظام'],
+            ['route' => 'admin.identity-themes', 'label' => 'قوالب الهوية', 'group' => 'النظام'],
             ['route' => 'admin.system-settings', 'label' => 'إعدادات النظام', 'group' => 'النظام'],
             ['route' => 'admin.notifications', 'label' => 'صندوق الإشعارات', 'group' => 'النظام'],
             ['route' => 'admin.notification-rules', 'label' => 'قواعد الإشعارات', 'group' => 'النظام'],

@@ -35,11 +35,11 @@ class LogoSettings
     public static function defaults(): array
     {
         return [
-            self::KEY_PRIMARY => 'assets/ba5c2cc1-5c62-4b77-8607-bead454d224e.png',
+            self::KEY_PRIMARY => 'assets/branding/aou-logo.png',
             self::KEY_SECONDARY => 'assets/d8e8b170-8627-42bc-86e9-f3c2e5c73222.png',
-            self::KEY_FOOTER => 'assets/ba5c2cc1-5c62-4b77-8607-bead454d224e(1).png',
+            self::KEY_FOOTER => 'assets/branding/aou-logo-footer.png',
             self::KEY_VISION => 'assets/visionLogo.png',
-            self::KEY_FAVICON => 'assets/vendor/images/site-favicon.png',
+            self::KEY_FAVICON => 'assets/branding/aou-favicon.png',
         ];
     }
 
@@ -192,7 +192,7 @@ class LogoSettings
 
     public static function defaultVisible(string $logoKey): bool
     {
-        return $logoKey !== self::KEY_VISION;
+        return ! in_array($logoKey, [self::KEY_SECONDARY, self::KEY_VISION], true);
     }
 
     public static function url(string $key): string

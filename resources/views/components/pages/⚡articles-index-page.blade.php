@@ -93,14 +93,14 @@ class extends Component
                                 @endif
                                 <div class="gigs-card-footer justify-content-start gap-2">
                                     <a class="btn btn-primary" href="{{ $article->publicUrl() }}">
-                                        مزيد من التفاصيل <i class="feather-eye pe-2"></i>
+                                        {{ app()->getLocale() === 'en' ? 'Read more' : 'مزيد من التفاصيل' }} <i class="feather-eye pe-2"></i>
                                     </a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 @empty
-                    <div class="col-12 text-center py-5 text-muted">لا توجد أخبار منشورة حالياً.</div>
+                    <div class="col-12 text-center py-5 text-muted">{{ app()->getLocale() === 'en' ? 'No news published yet.' : 'لا توجد أخبار منشورة حالياً.' }}</div>
                 @endforelse
             </div>
             @if ($this->articles->hasPages())

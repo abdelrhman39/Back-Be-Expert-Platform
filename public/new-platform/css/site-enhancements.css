@@ -10,9 +10,9 @@
 
 /* ── شريط الأزرار العائمة (واتساب / بريد / وصول / أعلى) ── */
 :root {
-    --float-rail-edge: 14px;
-    --float-rail-bottom: 18px;
-    --float-btn-size: 44px;
+    --float-rail-edge: 18px;
+    --float-rail-bottom: 22px;
+    --float-btn-size: 52px;
     --float-btn-gap: 12px;
 }
 
@@ -125,9 +125,9 @@ html.use-domain-a11y .float-actions-rail .domain-a11y-fab svg {
 
 @media (max-width: 767.98px) {
     :root {
-        --float-rail-edge: 10px;
-        --float-rail-bottom: 14px;
-        --float-btn-size: 42px;
+        --float-rail-edge: 12px;
+        --float-rail-bottom: 16px;
+        --float-btn-size: 48px;
         --float-btn-gap: 10px;
     }
 }

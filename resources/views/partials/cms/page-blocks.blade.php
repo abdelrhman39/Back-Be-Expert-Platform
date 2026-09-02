@@ -11,12 +11,14 @@
     @php
         $type = $block['type'] ?? 'unknown';
         $partial = 'partials.cms.blocks.'.$type;
+        $blockLocale = $locale ?? app()->getLocale();
+        $block['data'] = cms_text_deep($block['data'] ?? [], $blockLocale);
     @endphp
 
     @if (view()->exists($partial))
         @include($partial, [
             'block' => $block,
-            'locale' => $locale ?? app()->getLocale(),
+            'locale' => $blockLocale,
             ...$context,
         ])
     @endif

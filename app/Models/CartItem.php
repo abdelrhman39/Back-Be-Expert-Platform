@@ -32,9 +32,11 @@ class CartItem extends Model
 
     public function deliveryLabel(): string
     {
+        $locale = app()->getLocale();
+
         return match ($this->delivery_type) {
-            'online' => 'عن بعد',
-            'onsite' => 'حضوري',
+            'online' => \App\Support\PublicCopy::cart('online', $locale),
+            'onsite' => \App\Support\PublicCopy::cart('onsite', $locale),
             default => $this->delivery_type,
         };
     }

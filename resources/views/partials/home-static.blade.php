@@ -12,7 +12,7 @@
                         <div class="owl-item active" style="width: 1915px; margin-left: 22px;">
                             <div class="home-item">
 
-                                <img class="sliderImg" src="{{ static_asset('assets/1857921787411122.jpeg') }}" alt="slider image1">
+                                <img class="sliderImg" src="{{ static_asset(platform_campus_path('aerial')) }}" alt="{{ platform_org() }}">
 
                                 <div class="container">
                                     <div class="row align-items-center">
@@ -26,7 +26,7 @@
                                                             التدريبية</span></h2>
                                                     <h2 style="text-align: center;"><span
                                                             style="font-size: 18pt; color: rgb(194, 224, 244);">بمعهد
-                                                            البحوث والدراسات الاستشارية بجامعة الامير مقرن</span></h2>
+                                                            البحوث والدراسات الاستشارية بالجامعة العربية المفتوحة</span></h2>
                                                     <p></p>
                                                 </div>
                                                 <div class="banner-form">
@@ -1633,7 +1633,7 @@
                                         <h3>
                                             <a
                                                 href="{{ legacy_page('ar/blog/%D8%AA%D9%83%D8%A7%D9%85%D9%84-%D9%85%D8%B9%D8%B1%D9%81%D9%8A-%D8%A8%D9%8A%D9%86-%D9%85%D8%B9%D9%87%D8%AF-%D8%A7%D9%84%D8%A8%D8%AD%D9%88%D8%AB-%D8%A8%D8%AC%D8%A7%D9%85%D8%B9%D8%A9-%D8%AD%D8%A7%D8%A6%D9%84-%D9%88%D9%85%D8%A4%D8%B3%D8%B3%D8%A9-%D8%A8%D9%8A%D8%B1%D9%84%D8%B3-%D8%AA%D8%B1%D9%8A%D9%86%D9%8A%D9%86%D8%BA-%D8%A2%D9%86%D8%AF-%D8%AF%D9%8A%D9%81%D9%8A%D9%84%D9%88%D8%A8%D9%85%D9%86%D8%AA-%D9%84%D8%AA%D8%B7%D9%88%D9%8A%D8%B1-%D8%A7%D9%84%D9%82%D8%AF%D8%B1%D8%A7%D8%AA-%D8%A7%D9%84%D8%A8%D8%B4%D8%B1%D9%8A%D8%A9.html') }}">
-                                                تكامل معرفي بين جامعة الامير مقرن ومؤسسة بيرلس ترينينغ آند
+                                                تكامل معرفي بين الجامعة العربية المفتوحة ومؤسسة بيرلس ترينينغ آند
                                                 ديفيلوبمنت لتطوير القدرات البشرية</a>
                                         </h3>
                                     </div>
@@ -1667,7 +1667,7 @@
                                         <h3>
                                             <a
                                                 href="{{ legacy_page('ar/blog/%D9%85%D8%B9%D9%87%D8%AF-%D8%A7%D9%84%D8%A8%D8%AD%D9%88%D8%AB-%D9%88%D8%A7%D9%84%D8%AF%D8%B1%D8%A7%D8%B3%D8%A7%D8%AA-%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D8%B4%D8%A7%D8%B1%D9%8A%D8%A9-%D8%AC%D8%A7%D9%85%D8%B9%D8%A9-%D8%AD%D8%A7%D8%A6%D9%84-%D8%AA%D8%B7%D9%84%D9%82-%D8%A8%D8%B1%D9%86%D8%A7%D9%85%D8%AC%D8%A7%D9%8B-%D8%AA%D8%AF%D8%B1%D9%8A%D8%A8%D9%8A%D8%A7%D9%8B-%D9%84%D8%B1%D9%81%D8%B9-%D9%83%D9%81%D8%A7%D8%A1%D8%A9-%D8%A7%D9%84%D9%83%D9%88%D8%A7%D8%AF%D8%B1-%D8%A7%D9%84%D9%85%D9%87%D9%86%D9%8A%D8%A9-%D8%A8%D8%B4%D8%B1%D9%83%D8%A9-%D9%82%D8%B2%D8%A7%D8%B2-%D9%84%D9%84%D8%AA%D8%AC%D8%A7%D8%B1%D8%A9-%D8%AD%D8%B3%D9%8A%D9%86-%D8%A8%D9%83%D8%B1%D9%8A-%D9%82%D8%B2%D8%A7%D8%B2-%D9%88%D8%B4%D8%B1%D9%83%D8%A7%D9%87.html') }}">
-                                                جامعة الامير مقرن تطلق برنامجاً تدريبياً لرفع
+                                                الجامعة العربية المفتوحة تطلق برنامجاً تدريبياً لرفع
                                                 كفاءة الكوادر المهنية بشركة قزاز للتجارة حسين بكري قزاز وشركاه</a>
                                         </h3>
                                     </div>
@@ -1702,7 +1702,7 @@
                                             <a
                                                 href="{{ legacy_page('ar/blog/%D8%AA%D8%B9%D8%A7%D9%88%D9%86-%D9%85%D8%B9-%D8%B4%D8%B1%D9%83%D8%A9-%D8%A7%D9%84%D9%85%D8%B4%D8%B1%D9%82-%D9%84%D9%84%D8%AE%D8%AF%D9%85%D8%A7%D8%AA-%D8%A7%D9%84%D9%81%D9%86%D9%8A%D8%A9-%D8%A7%D9%84%D9%85%D8%AD%D8%AF%D9%88%D8%AF%D8%A9-%D8%B6%D9%85%D9%86-%D8%A8%D8%B1%D8%A7%D9%85%D8%AC-%D8%AC%D8%A7%D9%85%D8%B9%D8%A9-%D8%AD%D8%A7%D8%A6%D9%84.html') }}">
                                                 تعاون مع شركة المشرق للخدمات الفنية المحدودة ضمن برامج مركز التعلم المستمر
-                                                والدراسات الاستشارية بجامعة الامير مقرن.</a>
+                                                والدراسات الاستشارية بالجامعة العربية المفتوحة.</a>
                                         </h3>
                                     </div>
 

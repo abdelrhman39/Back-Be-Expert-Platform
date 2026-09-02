@@ -11,7 +11,7 @@ use Livewire\Attributes\Url;
 use Livewire\Component;
 
 new #[Layout('layouts.app-user')]
-#[Title('متابعة التعلم | منصة مركز التعلم المستمر')]
+#[Title('متابعة التعلم | مركز التعلم المستمر')]
 class extends Component
 {
     public CatalogEnrollment $enrollment;

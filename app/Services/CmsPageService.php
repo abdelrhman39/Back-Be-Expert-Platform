@@ -7,7 +7,9 @@ use App\Models\CmsPageTranslation;
 use App\Models\User;
 use App\Support\CmsBlockDefaults;
 use App\Support\CmsOptions;
+use App\Support\PublicCopy;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
@@ -55,15 +57,55 @@ class CmsPageService
     /** @return Collection<int, CmsPage> */
     public function footerPages(?string $locale = null): Collection
     {
-        $locale ??= app()->getLocale();
-
         return CmsPage::query()
-            ->with(['translations' => fn ($q) => $q->where('locale', $locale)])
+            ->with('translations')
             ->where('show_in_footer', true)
             ->where('status', 'published')
             ->orderBy('sort_order')
             ->orderBy('id')
             ->get();
+    }
+
+    /**
+     * Published policy / CMS pages flagged for the footer, titled for the current locale.
+     *
+     * @return Collection<int, array{label: string, url: string, open_in_new_tab: bool}>
+     */
+    public function footerPolicyLinks(?string $locale = null): Collection
+    {
+        $locale ??= app()->getLocale();
+
+        $payload = Cache::remember("cms_footer_policies.{$locale}", 300, function () use ($locale) {
+            return $this->footerPages($locale)
+                ->map(function (CmsPage $page) use ($locale): ?array {
+                    $label = PublicCopy::pageTitle($page, $locale);
+                    $url = $this->urlForPage($page, $locale);
+
+                    if (! filled($label) || ! filled($url)) {
+                        return null;
+                    }
+
+                    return [
+                        'label' => $label,
+                        'url' => $url,
+                        'open_in_new_tab' => false,
+                    ];
+                })
+                ->filter()
+                ->values()
+                ->all();
+        });
+
+        return collect($payload);
+    }
+
+    public function forgetPublicCaches(): void
+    {
+        foreach (['ar', 'en'] as $locale) {
+            Cache::forget("cms_footer_policies.{$locale}");
+        }
+
+        app(CmsMenuService::class)->forgetCache();
     }
 
     /** @return array{total: int, published: int, draft: int, policies: int, footer: int} */
@@ -187,7 +229,7 @@ class CmsPageService
     {
         $actor ??= auth()->user();
 
-        return DB::transaction(function () use ($data, $page, $actor) {
+        $page = DB::transaction(function () use ($data, $page, $actor) {
             $isNew = ! $page;
 
             if (! $page) {
@@ -265,12 +307,18 @@ class CmsPageService
 
             return $page->fresh(['translations']);
         });
+
+        $this->forgetPublicCaches();
+
+        return $page;
     }
 
     public function delete(CmsPage $page, ?User $actor = null): void
     {
         $title = $page->translate()?->title;
         $page->delete();
+
+        $this->forgetPublicCaches();
 
         $this->audit->log(
             action: 'cms_page.deleted',

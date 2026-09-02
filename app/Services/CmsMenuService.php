@@ -112,7 +112,7 @@ class CmsMenuService
         return match ($item->link_type) {
             'route' => $item->route_name ? $this->safeRoute($item->route_name, $locale) : null,
             'page' => $item->page ? $this->pages->urlForPage($item->page, $locale) : null,
-            'url' => $item->url,
+            'url' => $this->resolveCustomUrl($item->url, $locale),
             default => null,
         };
     }
@@ -128,6 +128,38 @@ class CmsMenuService
         } catch (\Throwable) {
             return null;
         }
+    }
+
+    protected function resolveCustomUrl(?string $url, string $locale): ?string
+    {
+        $url = trim((string) $url);
+
+        if ($url === '') {
+            return null;
+        }
+
+        $fragment = parse_url($url, PHP_URL_FRAGMENT);
+        $sectionRoutes = [
+            'section-certificates' => 'courses.certificates',
+            'section-diplomas' => 'courses.diplomas',
+            'section-fellowships' => 'fellowships.index',
+        ];
+
+        if (is_string($fragment) && isset($sectionRoutes[$fragment])) {
+            return $this->safeRoute($sectionRoutes[$fragment], $locale);
+        }
+
+        $url = str_replace('{locale}', $locale, $url);
+
+        if (preg_match('#^https?://[^/]+(/.+)$#i', $url, $matches)) {
+            $url = $matches[1];
+        }
+
+        if (preg_match('#^/(ar|en)(/.*)?$#', $url, $matches)) {
+            return url('/'.$locale.($matches[2] ?? ''));
+        }
+
+        return $url;
     }
 
     public function forgetCache(?string $menuKey = null): void

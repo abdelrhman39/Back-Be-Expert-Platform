@@ -2,6 +2,10 @@
     $data = $block['data'] ?? [];
     $items = $data['items'] ?? [];
     $sectionId = $data['section_id'] ?? null;
+
+    if ($sectionId === 'section-mahara') {
+        return;
+    }
 @endphp
 
 <section @if($sectionId) id="{{ $sectionId }}" @endif class="explore-gigs-section">

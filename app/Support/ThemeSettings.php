@@ -13,31 +13,31 @@ class ThemeSettings
             // ——— ألوان المنصة العامة ———
             'theme_color_primary' => [
                 'label_ar' => 'اللون الأساسي',
-                'default' => '#1b8354',
+                'default' => '#002d58',
                 'group' => 'platform',
                 'css_vars' => ['--primary', '--sa-green', '--bs-primary', '--dash-teal', '--portal-teal'],
             ],
             'theme_color_secondary' => [
                 'label_ar' => 'اللون الثانوي (ذهبي)',
-                'default' => '#b8943f',
+                'default' => '#c5a572',
                 'group' => 'platform',
                 'css_vars' => ['--secondary', '--sa-gold', '--dash-pink'],
             ],
             'theme_color_primary_dark' => [
                 'label_ar' => 'اللون الأساسي الداكن',
-                'default' => '#135f3d',
+                'default' => '#001a33',
                 'group' => 'platform',
                 'css_vars' => ['--sa-green-dark', '--sa-flag-green', '--dash-navy', '--portal-footer-end'],
             ],
             'theme_color_primary_light' => [
                 'label_ar' => 'اللون الأساسي الفاتح',
-                'default' => '#2d9a6a',
+                'default' => '#1a4d7a',
                 'group' => 'platform',
                 'css_vars' => ['--sa-green-light', '--dash-blue', '--portal-teal-light'],
             ],
             'theme_color_page_bg' => [
                 'label_ar' => 'خلفية الصفحات',
-                'default' => '#f7faf8',
+                'default' => '#f4f6fa',
                 'group' => 'platform',
                 'css_vars' => ['--sa-mist', '--surface-page', '--dash-bg'],
             ],
@@ -49,13 +49,13 @@ class ThemeSettings
             ],
             'theme_color_footer_bg' => [
                 'label_ar' => 'خلفية الفوتر',
-                'default' => '#ffffff',
+                'default' => '#0b0b0b',
                 'group' => 'platform',
-                'css_vars' => ['--platform-footer-bg'],
+                'css_vars' => ['--platform-footer-bg', '--theme-color-footer-bg'],
             ],
             'theme_color_footer_text' => [
                 'label_ar' => 'لون نص الفوتر',
-                'default' => '#414040',
+                'default' => '#e8e0d8',
                 'group' => 'platform',
                 'css_vars' => ['--platform-footer-text'],
             ],
@@ -87,7 +87,7 @@ class ThemeSettings
             ],
             'theme_header_nav_hover' => [
                 'label_ar' => 'لون الروابط عند التمرير',
-                'default' => '#1b8354',
+                'default' => '#c5a572',
                 'group' => 'header',
                 'css_vars' => ['--platform-header-nav-hover'],
             ],
@@ -153,7 +153,65 @@ class ThemeSettings
             $variables['--bs-primary-rgb'] = self::hexToRgbTriplet($variables['--primary']);
         }
 
-        return $variables;
+        return array_merge($variables, self::derivedHomeVariables($variables));
+    }
+
+    /**
+     * Home-page atmosphere derived from the active identity palette.
+     * Keeps homepage CSS bound to tokens instead of hardcoded greens.
+     *
+     * @param  array<string, string>  $variables
+     * @return array<string, string>
+     */
+    public static function derivedHomeVariables(array $variables): array
+    {
+        $primary = $variables['--sa-green'] ?? $variables['--primary'] ?? '#1b8354';
+        $dark = $variables['--sa-green-dark'] ?? '#135f3d';
+        $light = $variables['--sa-green-light'] ?? '#2d9a6a';
+        $gold = $variables['--sa-gold'] ?? '#b8943f';
+
+        if (! isset($variables['--sa-green-soft'])) {
+            $variables['--sa-green-soft'] = self::mixWithWhite($primary, 0.90);
+        }
+
+        $accent = self::mixWithWhite($light, 0.35);
+
+        return [
+            '--sa-green-soft' => $variables['--sa-green-soft'],
+            '--np-hero-green' => $dark,
+            '--np-hero-green-mid' => $primary,
+            '--np-hero-accent' => $accent,
+            '--np-hero-text' => '#f8fafc',
+            '--np-hero-muted' => 'rgba(248, 250, 252, 0.82)',
+            '--np-hero-overlay-rgb' => self::hexToRgbTriplet($dark),
+            '--np-hero-primary-rgb' => self::hexToRgbTriplet($primary),
+            '--np-hero-accent-rgb' => self::hexToRgbTriplet($accent),
+            '--np-hero-gold' => $gold,
+            '--np-mvg-green' => $dark,
+            '--np-mvg-soft' => $variables['--sa-green-soft'],
+        ];
+    }
+
+    public static function mixWithWhite(string $hex, float $ratio): string
+    {
+        $normalized = self::normalizeColor($hex) ?? '#ffffff';
+
+        if ($normalized === 'transparent') {
+            return '#ffffff';
+        }
+
+        $hex = ltrim($normalized, '#');
+        $r = hexdec(substr($hex, 0, 2));
+        $g = hexdec(substr($hex, 2, 2));
+        $b = hexdec(substr($hex, 4, 2));
+        $ratio = max(0, min(1, $ratio));
+
+        return sprintf(
+            '#%02x%02x%02x',
+            (int) round($r + (255 - $r) * $ratio),
+            (int) round($g + (255 - $g) * $ratio),
+            (int) round($b + (255 - $b) * $ratio),
+        );
     }
 
     /** @return array<string, array{label_ar: string, default: string}> */

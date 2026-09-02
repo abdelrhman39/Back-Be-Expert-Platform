@@ -9,13 +9,13 @@
     $whatsappDigits = preg_replace('/\D+/', '', $whatsappNumber);
     $phoneDisplay = str_starts_with($phoneDigits, '966') ? '+'.$phoneDigits : '+966'.ltrim($phoneDigits, '0');
     $whatsappDisplay = str_starts_with($whatsappDigits, '966') ? '+'.$whatsappDigits : '+966'.ltrim($whatsappDigits, '0');
-    $mapEmbedUrl = 'https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d5517.257392055345!2d41.699758!3d27.564384!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x157645de57c7ca57%3A0x792bf416b54fe11d!2z2KzYp9mF2LnYqSDYrdin2KbZhA!5e1!3m2!1sen!2sus!4v1767522926725!5m2!1sen!2sus';
+    $mapEmbedUrl = \App\Support\CampusMap::embedUrl();
 @endphp
 
 <div class="breadcrumb-bar">
     <div class="breadcrumb-img">
         <div class="breadcrumb-left">
-            <img src="{{ static_asset('assets/banner-bg-03.png') }}" alt="">
+            <img src="{{ static_asset(platform_campus_path('entrance')) }}" alt="{{ platform_org() }}">
         </div>
     </div>
     <div class="container">
@@ -40,7 +40,7 @@
         <div class="row align-items-center g-4">
             <div class="col-lg-7">
                 <h2 class="h5 fw-bold text-dark mb-3">نرحب بتواصلكم</h2>
-                <p class="lead text-muted mb-0">يسر فريق جامعة الامير مقرن استقبال استفساراتكم بخصوص البرامج التدريبية، التسجيل، والدعم الفني. نسعى للرد خلال أوقات العمل الرسمية، ولطلبات تقنية يمكنكم فتح تذكرة دعم.</p>
+                <p class="lead text-muted mb-0">يسر فريق {{ platform_org() }} استقبال استفساراتكم بخصوص البرامج التدريبية، التسجيل، والدعم الفني. نسعى للرد خلال أوقات العمل الرسمية، ولطلبات تقنية يمكنكم فتح تذكرة دعم.</p>
             </div>
             <div class="col-lg-5">
                 <div class="d-flex flex-wrap gap-2 justify-content-lg-end">
@@ -114,7 +114,7 @@
                         </div>
                         <div class="contact-details contact-details-address">
                             <h6>العنوان</h6>
-                            <p>مقرن — المملكة العربية السعودية</p>
+                            <p>{{ platform_org() }}</p>
                         </div>
                     </div>
                 </div>
@@ -134,7 +134,7 @@
                             allowfullscreen
                             loading="lazy"
                             referrerpolicy="no-referrer-when-downgrade"
-                            title="موقع جامعة الامير مقرن"
+                            title="{{ platform_org() }}"
                         ></iframe>
                     </div>
                 </div>

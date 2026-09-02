@@ -12,7 +12,7 @@ use Livewire\Component;
 use Livewire\WithFileUploads;
 
 new #[Layout('layouts.app-user')]
-#[Title('أداء الاختبار | منصة مركز التعلم المستمر')]
+#[Title('أداء الاختبار | مركز التعلم المستمر')]
 class extends Component
 {
     use WithFileUploads;

@@ -8,7 +8,7 @@ use Livewire\Attributes\Title;
 use Livewire\Component;
 
 new #[Layout('layouts.app-user')]
-#[Title('اختباراتي | منصة مركز التعلم المستمر')]
+#[Title('اختباراتي | مركز التعلم المستمر')]
 class extends Component
 {
     #[Computed]

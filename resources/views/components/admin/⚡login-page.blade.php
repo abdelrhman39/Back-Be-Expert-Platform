@@ -85,11 +85,11 @@ class extends Component
 <aside class="admin-login-brand" aria-hidden="false">
     <div class="brand-logos">
         @if (\App\Support\LogoSettings::isVisible(\App\Support\LogoSettings::KEY_PRIMARY))
-        <img src="{{ platform_logo_url(\App\Support\LogoSettings::KEY_PRIMARY) }}" class="{{ \App\Support\LogoSettings::cssClass(\App\Support\LogoSettings::KEY_PRIMARY) }}" alt="مركز التعلم المستمر">
+        <img src="{{ platform_logo_url(\App\Support\LogoSettings::KEY_FOOTER) }}" class="{{ \App\Support\LogoSettings::cssClass(\App\Support\LogoSettings::KEY_FOOTER) }}" alt="{{ platform_name('ar') }}">
         @endif
     </div>
     <h1>لوحة تحكم المنصة</h1>
-    <p>إدارة البرامج التدريبية، المتدربين، الطلبات، والمحتوى — منصة مركز التعلم المستمر · جامعة الامير مقرن.</p>
+    <p>إدارة البرامج التدريبية، المتدربين، الطلبات، والمحتوى — {{ platform_name('ar') }} · {{ platform_org('ar') }}.</p>
     <ul>
         <li>واجهة عربية كاملة (RTL)</li>
         <li>صلاحيات إدارية آمنة</li>

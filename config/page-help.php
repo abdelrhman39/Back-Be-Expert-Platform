@@ -146,7 +146,7 @@ return [
             'steps' => ['استخدم الفترة والفلاتر المناسبة', 'افتح السجل لمراجعة التفاصيل', 'أكد أي إجراء مالي قبل تنفيذه'],
         ],
         [
-            'patterns' => ['admin.settings*', 'admin.system-settings*', 'admin.teams-settings*', 'admin.zoom-settings*', 'admin.zoxagent-settings*', 'admin.notification-rules*', 'admin.audit-log*'],
+            'patterns' => ['admin.settings*', 'admin.identity-themes*', 'admin.system-settings*', 'admin.teams-settings*', 'admin.zoom-settings*', 'admin.zoxagent-settings*', 'admin.notification-rules*', 'admin.audit-log*'],
             'title' => 'دليل الإعدادات والحوكمة',
             'description' => 'ضبط سلوك المنصة والتكاملات والصلاحيات ومراجعة سجل العمليات.',
             'steps' => ['راجع تأثير الإعداد', 'غيّر القيمة المطلوبة فقط', 'احفظ وتحقق من النتيجة'],

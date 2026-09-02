@@ -8,7 +8,7 @@ use Livewire\Attributes\Title;
 use Livewire\Component;
 
 new #[Layout('layouts.app-inner')]
-#[Title('لاستفسارات التدريب والدورات | مركز التعلم المستمر جامعة الامير مقرن')]
+#[Title('تواصل معنا | مركز التعلم المستمر')]
 class extends Component
 {
     #[Computed]
@@ -34,7 +34,7 @@ class extends Component
     );
 @endphp
 
-<div>
+<div class="atelier-contact">
     @include('partials.cms.page-render', [
         'page' => $cmsPage,
         'pageType' => 'contact',
@@ -44,7 +44,7 @@ class extends Component
 
 @if ($useBlocks || filled($cmsTranslation?->body))
     @push('styles')
-        <link rel="stylesheet" href="{{ asset('css/contact-page.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/contact-page.css') }}?v=9">
     @endpush
 @endif
 

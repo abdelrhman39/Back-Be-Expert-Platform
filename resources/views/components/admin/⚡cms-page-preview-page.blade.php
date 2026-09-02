@@ -52,7 +52,7 @@ class extends Component
 @endphp
 
 <div class="cms-preview-shell">
-    <div class="cms-preview-canvas" dir="{{ $previewLocale === 'ar' ? 'rtl' : 'ltr' }}" lang="{{ $previewLocale }}">
+    <div class="cms-preview-canvas{{ in_array($page->type, ['contact', 'about'], true) ? ' atelier-'.$page->type : '' }}" dir="{{ $previewLocale === 'ar' ? 'rtl' : 'ltr' }}" lang="{{ $previewLocale }}">
         @if ($translation)
             @php
                 $blockContext = in_array($page->type, ['home'], true)
@@ -61,6 +61,7 @@ class extends Component
                         'professionalCertificates' => app(\App\Services\HomePageService::class)->professionalCertificates(),
                         'diplomas' => app(\App\Services\HomePageService::class)->diplomas(),
                         'latestArticles' => app(\App\Services\ArticleService::class)->latestPublished(6, $previewLocale),
+                        'heroMetrics' => app(\App\Services\HomePageService::class)->heroMetrics($previewLocale),
                     ]
                     : [];
             @endphp
@@ -103,7 +104,10 @@ class extends Component
     <link rel="stylesheet" href="{{ asset('css/cms-public.css') }}">
     <link rel="stylesheet" href="{{ asset('css/cms-preview.css') }}">
     @if ($page->type === 'contact')
-        <link rel="stylesheet" href="{{ asset('css/contact-page.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/contact-page.css') }}?v=8">
+    @endif
+    @if ($page->type === 'about')
+        <link rel="stylesheet" href="{{ asset('css/about-page.css') }}?v=3">
     @endif
 @endpush
 

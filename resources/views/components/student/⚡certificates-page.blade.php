@@ -9,7 +9,7 @@ use Livewire\Attributes\Title;
 use Livewire\Component;
 
 new #[Layout('layouts.app-user')]
-#[Title('شهاداتي | منصة مركز التعلم المستمر')]
+#[Title('شهاداتي | مركز التعلم المستمر')]
 class extends Component
 {
     public function mount(): void

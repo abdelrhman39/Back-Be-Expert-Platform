@@ -56,6 +56,6 @@ class PlatformAlertNotification extends Notification implements ShouldQueue
             $mail->action('عرض التفاصيل', $this->actionUrl);
         }
 
-        return $mail->salutation('منصة مركز التعلم المستمر');
+        return $mail->salutation(platform_name('ar'));
     }
 }

@@ -34,7 +34,7 @@ class CertificateVariables
             'certificate.start_date' => ['label' => 'تاريخ البداية المعتمد', 'group' => 'التواريخ', 'sample' => '01 يناير 2026'],
             'certificate.end_date' => ['label' => 'تاريخ النهاية المعتمد', 'group' => 'التواريخ', 'sample' => '31 ديسمبر 2026'],
             'certificate.verify_url' => ['label' => 'رابط التحقق', 'group' => 'الشهادة', 'sample' => 'https://example.com/ar/certificate-verify/secure-token'],
-            'platform.name_ar' => ['label' => 'اسم المنصة بالعربية', 'group' => 'المنصة', 'sample' => 'منصة مركز التعلم المستمر'],
+            'platform.name_ar' => ['label' => 'اسم المنصة بالعربية', 'group' => 'المنصة', 'sample' => 'مركز التعلم المستمر'],
             'platform.name_en' => ['label' => 'اسم المنصة بالإنجليزية', 'group' => 'المنصة', 'sample' => 'Continuing Learning Center'],
             'issuer.name' => ['label' => 'اسم مصدر الشهادة', 'group' => 'الشهادة', 'sample' => 'مدير مركز التعلم المستمر'],
         ];

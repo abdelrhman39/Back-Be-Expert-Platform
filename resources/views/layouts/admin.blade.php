@@ -7,7 +7,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="robots" content="noindex, nofollow">
     <title>{{ $title ?? platform_title('لوحة التحكم') }}</title>
-    <link rel="icon" href="{{ platform_logo_url(\App\Support\LogoSettings::KEY_PRIMARY) }}" type="image/png">
+    <link rel="icon" href="{{ platform_logo_url(\App\Support\LogoSettings::KEY_FAVICON) }}" type="image/png">
     <link rel="stylesheet" href="{{ static_asset('assets/vendor/fonts/google-fonts-local.css') }}">
     <link rel="stylesheet" href="{{ static_asset('assets/all.css') }}">
     <link rel="stylesheet" href="{{ static_asset('admin/css/admin.css') }}?v=11">
@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="{{ asset('css/admin-status-badges.css') }}?v=1">
     <link rel="stylesheet" href="{{ asset('css/admin-toast.css') }}?v=2">
     <link rel="stylesheet" href="{{ asset('css/notification-bell.css') }}?v=1">
-    <link rel="stylesheet" href="{{ asset('css/site-header.css') }}?v=9">
+    <link rel="stylesheet" href="{{ asset('css/site-header.css') }}?v=15">
     <link rel="stylesheet" href="{{ asset('css/media-picker.css') }}?v=1">
     @include('partials.platform-theme')
     @livewireStyles

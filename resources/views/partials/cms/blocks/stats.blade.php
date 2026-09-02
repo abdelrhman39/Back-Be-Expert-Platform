@@ -3,7 +3,7 @@
     $items = $data['items'] ?? [];
 @endphp
 
-<section class="counterSec">
+<section class="counterSec atelier-stats">
     <div class="container">
         @if ($data['platform_name'] ?? null)
             <div class="section-header aos" data-aos="fade-up">

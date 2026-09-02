@@ -10,7 +10,7 @@ use Livewire\Attributes\Title;
 use Livewire\Component;
 
 new #[Layout('layouts.app-user')]
-#[Title('تفاصيل الطلب | منصة مركز التعلم المستمر')]
+#[Title('تفاصيل الطلب | مركز التعلم المستمر')]
 class extends Component
 {
     public Order $order;

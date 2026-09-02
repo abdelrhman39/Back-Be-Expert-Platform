@@ -42,7 +42,9 @@ class LegacyCourseCatalog
                 'slug' => $course->showSlug(),
                 'url' => route('courses.show', ['locale' => $locale, 'course' => $course->showSlug()]),
                 'is_diploma' => $isDiploma,
-                'type_label' => $isDiploma ? 'دبلوم' : 'شهادة احترافية',
+                'type_label' => $isDiploma
+                    ? \App\Support\PublicCopy::cart('diploma', $locale)
+                    : \App\Support\PublicCopy::cart('certificate', $locale),
             ];
         }
 
@@ -58,7 +60,7 @@ class LegacyCourseCatalog
                 ? route('courses.show', ['locale' => $locale, 'course' => $slugClean])
                 : route('courses.index', ['locale' => $locale]),
             'is_diploma' => false,
-            'type_label' => 'برنامج تدريبي',
+            'type_label' => \App\Support\PublicCopy::cart('program', $locale),
         ];
     }
 

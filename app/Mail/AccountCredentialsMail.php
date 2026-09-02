@@ -28,7 +28,7 @@ class AccountCredentialsMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'تم إنشاء حسابك | منصة مركز التعلم المستمر',
+            subject: 'تم إنشاء حسابك | '.platform_name('ar'),
         );
     }
 

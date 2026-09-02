@@ -13,7 +13,7 @@ use Illuminate\Validation\ValidationException;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 
-new #[Title('إتمام الشراء | منصة مركز التعلم المستمر')]
+new #[Title('إتمام الشراء | مركز التعلم المستمر')]
 class extends Component
 {
     public function layout(): string

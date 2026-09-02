@@ -48,7 +48,7 @@
 .diploma-card {
     display: flex;
     flex-direction: column;
-    border: 1px solid rgba(22, 93, 49, 0.12);
+    border: 1px solid rgba(var(--np-hero-primary-rgb, 22, 93, 49), 0.12);
     border-radius: 16px;
     overflow: hidden;
     background:
@@ -62,8 +62,8 @@
 
 .diploma-card:hover {
     transform: translateY(-4px);
-    border-color: rgba(27, 131, 84, 0.28);
-    box-shadow: 0 14px 32px rgba(19, 95, 61, 0.12);
+    border-color: rgba(var(--np-hero-primary-rgb, 27, 131, 84), 0.28);
+    box-shadow: 0 14px 32px rgba(var(--np-hero-overlay-rgb, 19, 95, 61), 0.12);
 }
 
 .diploma-card__media {
@@ -72,8 +72,8 @@
     aspect-ratio: 16 / 10;
     overflow: hidden;
     background:
-        radial-gradient(circle at 20% 20%, rgba(27, 131, 84, 0.18), transparent 45%),
-        linear-gradient(135deg, #0f3d2a 0%, #1b8354 48%, #145c3c 100%);
+        radial-gradient(circle at 20% 20%, rgba(var(--np-hero-primary-rgb, 27, 131, 84), 0.18), transparent 45%),
+        linear-gradient(135deg, var(--sa-green-dark, #0f3d2a) 0%, var(--sa-green, #1b8354) 48%, var(--sa-green-dark, #145c3c) 100%);
 }
 
 .diploma-card__media img {
@@ -118,8 +118,8 @@
 .diploma-card__pill--open {
     inset-inline-start: auto;
     inset-inline-end: 0.7rem;
-    background: #1b8354;
-    box-shadow: 0 4px 12px rgba(27, 131, 84, 0.35);
+    background: var(--sa-green, #1b8354);
+    box-shadow: 0 4px 12px rgba(var(--np-hero-primary-rgb, 27, 131, 84), 0.35);
 }
 
 .diploma-card__body {
@@ -155,7 +155,7 @@
 .diploma-card__title {
     margin: 0;
     font-size: 1.02rem;
-    font-weight: 800;
+    font-weight: 700;
     line-height: 1.45;
     color: #123528;
 }
@@ -228,8 +228,8 @@
 
 .diploma-card__price strong {
     font-size: 1.15rem;
-    font-weight: 800;
-    color: #0f3d2a;
+    font-weight: 700;
+    color: var(--sa-green-dark, #0f3d2a);
     line-height: 1;
 }
 
@@ -242,11 +242,11 @@
     font-style: normal;
     font-size: 0.72rem;
     font-weight: 700;
-    color: #1b8354;
+    color: var(--primary, #1b8354);
     background: #fff;
     border-radius: 999px;
     padding: 0.15rem 0.5rem;
-    border: 1px solid rgba(27, 131, 84, 0.18);
+    border: 1px solid rgba(var(--np-hero-primary-rgb, 27, 131, 84), 0.18);
 }
 
 .diploma-card__actions {
@@ -272,11 +272,11 @@
 .diploma-card__btn--ghost {
     background: #fff;
     color: var(--primary, #1b8354);
-    border: 1px solid rgba(27, 131, 84, 0.35);
+    border: 1px solid rgba(var(--np-hero-primary-rgb, 27, 131, 84), 0.35);
 }
 
 .diploma-card__btn--ghost:hover {
-    background: rgba(27, 131, 84, 0.08);
+    background: rgba(var(--np-hero-primary-rgb, 27, 131, 84), 0.08);
     color: var(--primary, #1b8354);
 }
 
@@ -284,12 +284,12 @@
     background: var(--primary, #1b8354);
     color: #fff;
     border: 1px solid var(--primary, #1b8354);
-    box-shadow: 0 6px 16px rgba(27, 131, 84, 0.22);
+    box-shadow: 0 6px 16px rgba(var(--np-hero-primary-rgb, 27, 131, 84), 0.22);
 }
 
 .diploma-card__btn--solid:hover {
-    background: #146944;
-    border-color: #146944;
+    background: var(--sa-green-dark, #146944);
+    border-color: var(--sa-green-dark, #146944);
     color: #fff;
 }
 

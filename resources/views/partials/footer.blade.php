@@ -4,24 +4,20 @@
 
     $locale = app()->getLocale();
     $footerPrograms = app(\App\Services\CmsMenuService::class)->tree('footer_programs', $locale);
-    $footerPolicies = app(\App\Services\CmsMenuService::class)->tree('footer_policies', $locale);
+    $footerPolicies = app(\App\Services\CmsPageService::class)->footerPolicyLinks($locale);
     $footerCopyright = FooterSettings::copyrightHtml($locale);
     $socialLinks = FooterSettings::socialLinks($locale);
     $phone = FooterSettings::contactPhone();
     $whatsapp = FooterSettings::contactWhatsapp();
     $email = FooterSettings::contactEmail();
 @endphp
-<footer id="footer" class="footer" dir="{{ $locale === 'en' ? 'ltr' : 'rtl' }}">
-
-    <div class="section-bg">
-        <img src="{{ static_asset('assets/footer-bg-02.png') }}" class="footer-bg-two" alt="">
-    </div>
+<footer id="footer" class="footer footer--atelier" dir="{{ $locale === 'en' ? 'ltr' : 'rtl' }}">
 
     <div class="container">
         <div class="footer-top">
             <div class="row">
 
-                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12" data-aoss="fade-up" data-aoss-delay="500">
+                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
                     <div class="footer-widget">
                         @if (LogoSettings::showFooterPrimaryLogo() || LogoSettings::showFooterSecondaryLogo())
                             <div class="row g-3 footer-logos align-items-center">
@@ -29,7 +25,7 @@
                                     <div class="col-auto d-flex align-items-center justify-content-center footer-logos__item">
                                         <a href="{{ route('home', ['locale' => $locale]) }}">
                                             <img src="{{ platform_logo_url(LogoSettings::KEY_FOOTER) }}"
-                                                class="{{ LogoSettings::cssClass(LogoSettings::KEY_FOOTER) }}" alt="{{ \App\Models\PlatformSetting::get('platform_name_ar', 'منصة مركز التعلم المستمر') }}">
+                                                class="{{ LogoSettings::cssClass(LogoSettings::KEY_FOOTER) }}" alt="{{ platform_name($locale) }}">
                                         </a>
                                     </div>
                                 @endif
@@ -44,13 +40,13 @@
                         @endif
 
                         @if (filled(FooterSettings::text('about', $locale)))
-                            <p class="footer-about mt-3 mb-0">{{ FooterSettings::text('about', $locale) }}</p>
+                            <p class="footer-about">{{ FooterSettings::text('about', $locale) }}</p>
                         @endif
                     </div>
                 </div>
 
                 @if ($footerPrograms->isNotEmpty())
-                    <div class="col-xl-3 col-lg-2 col-md-6 col-sm-6" data-aoss="fade-up" data-aoss-delay="600">
+                    <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
                         <div class="footer-widget">
                             <h3>{{ FooterSettings::text('programs_title', $locale) }}</h3>
                             <ul class="menu-items">
@@ -61,7 +57,7 @@
                 @endif
 
                 @if ($footerPolicies->isNotEmpty())
-                    <div class="col-xl-5 col-lg-2 col-md-6 col-sm-6" data-aoss="fade-up" data-aoss-delay="600">
+                    <div class="col-xl-5 col-lg-4 col-md-12 col-sm-12">
                         <div class="footer-widget">
                             <h3>{{ FooterSettings::text('policies_title', $locale) }}</h3>
                             <ul class="menu-items policies-grid">
@@ -73,12 +69,15 @@
 
                 @if (FooterSettings::showPaymentIcons())
                     <div class="col-12">
-                        <div class="paypal-icons">
-                            <a href="{{ route('home', ['locale' => $locale]) }}#"><img src="{{ static_asset('assets/mada_mini.webp') }}" alt="Mada"></a>
-                            <a href="{{ route('home', ['locale' => $locale]) }}#"><img src="{{ static_asset('assets/credit_card_mini.png') }}" alt="Credit Card"></a>
-                            <a href="{{ route('home', ['locale' => $locale]) }}#"><img src="{{ static_asset('assets/tabby_installment_mini.png') }}" alt="Tabby"></a>
-                            <a href="{{ route('home', ['locale' => $locale]) }}#"><img src="{{ static_asset('assets/jeel.png') }}" alt="Jeel"></a>
-                            <a href="{{ route('home', ['locale' => $locale]) }}#"><img src="{{ static_asset('assets/tamara.png') }}" alt="Tamara"></a>
+                        <div class="footer__payments">
+                            <p class="footer__eyebrow">{{ FooterSettings::text('payments_title', $locale) }}</p>
+                            <div class="paypal-icons">
+                                <span><img src="{{ static_asset('assets/mada_mini.webp') }}" alt="Mada"></span>
+                                <span><img src="{{ static_asset('assets/credit_card_mini.png') }}" alt="Visa / Mastercard"></span>
+                                <span><img src="{{ static_asset('assets/tabby_installment_mini.png') }}" alt="Tabby"></span>
+                                <span><img src="{{ static_asset('assets/jeel.png') }}" alt="Jeel"></span>
+                                <span><img src="{{ static_asset('assets/tamara.png') }}" alt="Tamara"></span>
+                            </div>
                         </div>
                     </div>
                 @endif
@@ -172,68 +171,3 @@
     </div>
 
 </footer>
-
-<style>
-    .vision-logo { max-height: 100px; }
-    @media (max-width: 768px) { .vision-logo { max-height: 80px; } }
-    .footer-logos {
-        display: flex !important;
-        flex-wrap: wrap !important;
-        align-items: center;
-        gap: 0.75rem 1rem;
-        margin: 0;
-    }
-    .footer-logos.row > [class*="col"] ,
-    .footer-logos__item {
-        flex: 0 0 auto !important;
-        width: auto !important;
-        max-width: none !important;
-        padding: 0 !important;
-    }
-    .footer-logos img.platform-logo,
-    .footer-widget .footer-logos img {
-        width: auto !important;
-        height: auto !important;
-        max-height: 90px;
-        max-width: min(100%, 280px);
-        object-fit: contain;
-        display: block;
-    }
-    .footer-logos img.platform-logo--vision,
-    .footer-logos img.vision-logo {
-        max-height: 80px;
-        max-width: min(100%, 200px);
-    }
-    .footer-about { line-height: 1.7; color: var(--platform-footer-text, #414040); }
-    .footer .location-list .footer-contact-icon,
-    .footer .location-list li > span {
-        width: 38px;
-        height: 38px;
-        border-radius: 10px;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        color: var(--primary, #1b8354);
-        background: color-mix(in oklab, var(--primary, #1b8354) 10%, #fff);
-        border: 1px solid color-mix(in oklab, var(--primary, #1b8354) 22%, #fff);
-        margin-inline-end: 0.65rem;
-        flex-shrink: 0;
-    }
-    .footer .location-list .footer-contact-icon i,
-    .footer .location-list li > span i {
-        font-size: 1rem;
-        line-height: 1;
-        font-style: normal;
-        display: inline-block;
-    }
-    .footer .location-list .footer-contact-icon .fa-solid,
-    .footer .location-list li > span .fa-solid {
-        font-family: "Font Awesome 6 Free" !important;
-        font-weight: 900;
-    }
-    .footer .location-list .footer-contact-icon .fa-brands,
-    .footer .location-list li > span .fa-brands {
-        font-family: "Font Awesome 6 Brands" !important;
-        font-weight: 400;
-    }
-</style>

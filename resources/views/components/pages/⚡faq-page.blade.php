@@ -24,5 +24,5 @@ class extends Component
 </div>
 
 @push('styles')
-<link rel="stylesheet" href="{{ asset('css/support-pages.css') }}">
+<link rel="stylesheet" href="{{ asset('css/support-pages.css') }}?v=2">
 @endpush

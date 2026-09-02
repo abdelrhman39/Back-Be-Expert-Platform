@@ -56,37 +56,53 @@ class CatalogCourseService
     /** @return Collection<int, CatalogCategory> */
     public function sidebarCategories(): Collection
     {
-        return CatalogCategory::query()
-            ->whereHas('courses', fn (Builder $q) => $q->where('status', 'published'))
+        $query = CatalogCategory::query()
             ->withCount(['courses as courses_count' => fn (Builder $q) => $q->where('status', 'published')])
             ->orderBy('sort_order')
-            ->orderBy('id')
+            ->orderBy('id');
+
+        $withPublished = (clone $query)
+            ->whereHas('courses', fn (Builder $q) => $q->where('status', 'published'))
             ->get();
+
+        return $withPublished->isNotEmpty()
+            ? $withPublished
+            : $query->get();
     }
 
     /** @return Collection<int, CatalogField> */
     public function sidebarFields(): Collection
     {
-        return CatalogField::query()
-            ->whereHas('courses', fn (Builder $q) => $q->where('status', 'published'))
+        $query = CatalogField::query()
             ->withCount(['courses as courses_count' => fn (Builder $q) => $q->where('status', 'published')])
             ->orderBy('sort_order')
-            ->orderBy('id')
+            ->orderBy('id');
+
+        $withPublished = (clone $query)
+            ->whereHas('courses', fn (Builder $q) => $q->where('status', 'published'))
             ->get();
+
+        return $withPublished->isNotEmpty()
+            ? $withPublished
+            : $query->get();
     }
 
     /** @return Collection<int, CatalogField> */
-    public function homePopularFields(int $limit = 6): Collection
+    public function homePopularFields(int $limit = 8): Collection
     {
-        return CatalogField::query()
-            ->where('home_visible', true)
-            ->whereHas('courses', fn (Builder $q) => $q->where('status', 'published'))
+        $base = CatalogField::query()
             ->withCount(['courses as courses_count' => fn (Builder $q) => $q->where('status', 'published')])
-            ->orderByDesc('courses_count')
             ->orderBy('sort_order')
-            ->orderBy('id')
+            ->orderBy('id');
+
+        $visible = (clone $base)
+            ->where('home_visible', true)
             ->limit($limit)
             ->get();
+
+        return $visible->isNotEmpty()
+            ? $visible
+            : $base->limit($limit)->get();
     }
 
     /** @return \Illuminate\Support\Collection<int, CatalogCourse> */
@@ -100,24 +116,41 @@ class CatalogCourseService
             ->get();
     }
 
+    public function publishedCount(): int
+    {
+        return CatalogCourse::query()->where('status', 'published')->count();
+    }
+
+    public function publishedCountByCategory(int $categoryId): int
+    {
+        return CatalogCourse::query()
+            ->where('status', 'published')
+            ->whereHas('categories', fn (Builder $q) => $q->whereKey($categoryId))
+            ->count();
+    }
+
     /** @return array<int, string> */
     public function courseTypeOptions(): array
     {
+        $en = app()->getLocale() === 'en';
+
         return [
-            'online' => 'عن بعد',
-            'offline' => 'حضوري',
-            'self_learning' => 'التعلم الذاتي',
+            'online' => $en ? 'Online' : 'عن بعد',
+            'offline' => $en ? 'On campus' : 'حضوري',
+            'self_learning' => $en ? 'Self-paced' : 'التعلم الذاتي',
         ];
     }
 
     /** @return array<string, string> */
     public function sortOptions(): array
     {
+        $en = app()->getLocale() === 'en';
+
         return [
-            'latest' => 'الأحدث',
-            'oldest' => 'الأقدم',
-            'price_asc' => 'السعر: الأقل',
-            'price_desc' => 'السعر: الأعلى',
+            'latest' => $en ? 'Newest' : 'الأحدث',
+            'oldest' => $en ? 'Oldest' : 'الأقدم',
+            'price_asc' => $en ? 'Price: low to high' : 'السعر: الأقل',
+            'price_desc' => $en ? 'Price: high to low' : 'السعر: الأعلى',
         ];
     }
 

@@ -80,91 +80,121 @@ class extends Component
 };
 ?>
 
+@php
+    $locale = app()->getLocale();
+    $isEn = $locale === 'en';
+@endphp
+
 <div class="support-page">
     @include('partials.support.nav', ['active' => 'new'])
 
     <div class="container support-page__container">
         @if ($createdReference)
             <div class="support-success">
-                <div class="support-success__icon">✓</div>
-                <h1>تم إرسال تذكرتك بنجاح</h1>
-                <p>رقم التذكرة:</p>
-                <code class="support-success__ref">{{ $createdReference }}</code>
-                <p class="support-success__hint">احفظ الرقم — ستحتاجه مع بريدك لمتابعة التذكرة.</p>
+                <div class="support-success__icon" aria-hidden="true">
+                    <i class="fa-solid fa-check"></i>
+                </div>
+                <h1>{{ $isEn ? 'Your ticket was sent' : 'تم إرسال تذكرتك بنجاح' }}</h1>
+                <p>{{ $isEn ? 'Ticket number' : 'رقم التذكرة' }}</p>
+                <code class="support-success__ref" dir="ltr">{{ $createdReference }}</code>
+                <p class="support-success__hint">
+                    {{ $isEn
+                        ? 'Save this number. You will need it with your email to follow up.'
+                        : 'احفظ الرقم — ستحتاجه مع بريدك لمتابعة التذكرة.' }}
+                </p>
                 <div class="support-success__actions">
-                    <a href="{{ route('support.ticket.view', ['locale' => app()->getLocale(), 'ticket' => $createdReference]) }}" class="btn btn-primary">متابعة التذكرة</a>
-                    <a href="{{ route('support.ticket.search', ['locale' => app()->getLocale()]) }}" class="btn btn-outline-secondary">بحث لاحقاً</a>
+                    <a href="{{ route('support.ticket.view', ['locale' => $locale, 'ticket' => $createdReference]) }}" class="btn btn-primary">{{ $isEn ? 'Open ticket' : 'متابعة التذكرة' }}</a>
+                    <a href="{{ route('support.ticket.search', ['locale' => $locale]) }}" class="btn btn-outline-secondary">{{ $isEn ? 'Find later' : 'بحث لاحقاً' }}</a>
                 </div>
             </div>
         @else
-            <div class="row g-4 align-items-start">
-                <div class="col-lg-7 order-2 order-lg-1">
-                    <h1 class="support-page__title">مرحباً</h1>
-                    <p class="support-page__lead">برجاء إملاء البيانات المطلوبة لتسهيل حل المشكلة.</p>
+            <header class="support-head">
+                <span class="support-head__eyebrow">{{ platform_org() }}</span>
+                <h1 class="support-page__title">{{ $isEn ? 'Create a support ticket' : 'إنشاء تذكرة دعم' }}</h1>
+                <p class="support-page__lead">
+                    {{ $isEn
+                        ? 'Fill in the required details so the support team can review your request more quickly.'
+                        : 'عبّئ البيانات المطلوبة لتسهيل معالجة طلبك من فريق الدعم.' }}
+                </p>
+            </header>
 
-                    <form wire:submit="submit" class="support-form-card">
-                        <div class="row g-3">
-                            <div class="col-md-6">
-                                <label class="form-label">الاسم *</label>
-                                <input type="text" class="form-control" wire:model="name">
-                                @error('name') <span class="text-danger small">{{ $message }}</span> @enderror
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label">البريد الإلكتروني *</label>
-                                <input type="email" class="form-control" wire:model="email" dir="ltr">
-                                @error('email') <span class="text-danger small">{{ $message }}</span> @enderror
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label">رقم الهوية</label>
-                                <input type="text" class="form-control" wire:model="nationalId" dir="ltr">
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label">رقم الجوال</label>
-                                <input type="tel" class="form-control" wire:model="phone" dir="ltr">
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label">الفئة *</label>
-                                <select class="form-select" wire:model="category">
-                                    <option value="">اختر</option>
-                                    @foreach (SupportTicketOptions::categories() as $value => $label)
-                                        <option value="{{ $value }}">{{ $label }}</option>
-                                    @endforeach
-                                </select>
-                                @error('category') <span class="text-danger small">{{ $message }}</span> @enderror
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label">التخصص</label>
-                                <input type="text" class="form-control" wire:model="specialization">
-                            </div>
-                            <div class="col-12">
-                                <label class="form-label">الموضوع *</label>
-                                <input type="text" class="form-control" wire:model="subject">
-                                @error('subject') <span class="text-danger small">{{ $message }}</span> @enderror
-                            </div>
-                            <div class="col-12">
-                                <label class="form-label">الوصف *</label>
-                                <textarea class="form-control" wire:model="body" rows="7" placeholder="صف المشكلة أو الاستفسار بتفصيل..."></textarea>
-                                @error('body') <span class="text-danger small">{{ $message }}</span> @enderror
-                            </div>
+            <div class="support-compose">
+                <form wire:submit="submit" class="support-form-card">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label" for="ticket-name">{{ $isEn ? 'Name' : 'الاسم' }} <span class="text-danger">*</span></label>
+                            <input id="ticket-name" type="text" class="form-control" wire:model="name" autocomplete="name">
+                            @error('name') <span class="support-field__error">{{ $message }}</span> @enderror
                         </div>
-                        <button type="submit" class="btn btn-primary btn-lg w-100 mt-4" wire:loading.attr="disabled">
-                            <span wire:loading.remove wire:target="submit">إرسال التذكرة</span>
-                            <span wire:loading wire:target="submit">جاري الإرسال…</span>
-                        </button>
-                    </form>
-                </div>
-                <div class="col-lg-5 order-1 order-lg-2">
-                    <aside class="support-aside">
-                        <div class="support-aside__icon">💻</div>
-                        <h2>إنشاء تذكرة</h2>
-                        <p>تتيح لك هذه الخدمة إنشاء تذكرة دعم فني بسهولة للتواصل مع فريق الدعم وحل المشكلات التقنية أو الاستفسارات المتعلقة بالمنصة.</p>
-                    </aside>
-                </div>
+                        <div class="col-md-6">
+                            <label class="form-label" for="ticket-email">{{ $isEn ? 'Email' : 'البريد الإلكتروني' }} <span class="text-danger">*</span></label>
+                            <input id="ticket-email" type="email" class="form-control" wire:model="email" dir="ltr" autocomplete="email">
+                            @error('email') <span class="support-field__error">{{ $message }}</span> @enderror
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label" for="ticket-nid">{{ $isEn ? 'ID number' : 'رقم الهوية' }}</label>
+                            <input id="ticket-nid" type="text" class="form-control" wire:model="nationalId" dir="ltr">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label" for="ticket-phone">{{ $isEn ? 'Mobile' : 'رقم الجوال' }}</label>
+                            <input id="ticket-phone" type="tel" class="form-control" wire:model="phone" dir="ltr" autocomplete="tel">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label" for="ticket-category">{{ $isEn ? 'Category' : 'الفئة' }} <span class="text-danger">*</span></label>
+                            <select id="ticket-category" class="form-select" wire:model="category">
+                                <option value="">{{ $isEn ? 'Select' : 'اختر' }}</option>
+                                @foreach (SupportTicketOptions::categories() as $value => $label)
+                                    <option value="{{ $value }}">{{ $label }}</option>
+                                @endforeach
+                            </select>
+                            @error('category') <span class="support-field__error">{{ $message }}</span> @enderror
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label" for="ticket-spec">{{ $isEn ? 'Specialization' : 'التخصص' }}</label>
+                            <input id="ticket-spec" type="text" class="form-control" wire:model="specialization">
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label" for="ticket-subject">{{ $isEn ? 'Subject' : 'الموضوع' }} <span class="text-danger">*</span></label>
+                            <input id="ticket-subject" type="text" class="form-control" wire:model="subject">
+                            @error('subject') <span class="support-field__error">{{ $message }}</span> @enderror
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label" for="ticket-body">{{ $isEn ? 'Description' : 'الوصف' }} <span class="text-danger">*</span></label>
+                            <textarea id="ticket-body" class="form-control" wire:model="body" rows="7" placeholder="{{ $isEn ? 'Describe the issue or inquiry in detail…' : 'صف المشكلة أو الاستفسار بتفصيل…' }}"></textarea>
+                            @error('body') <span class="support-field__error">{{ $message }}</span> @enderror
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-lg w-100 support-submit mt-4" wire:loading.attr="disabled">
+                        <span wire:loading.remove wire:target="submit">
+                            <i class="fa-solid fa-paper-plane" aria-hidden="true"></i>
+                            {{ $isEn ? 'Send ticket' : 'إرسال التذكرة' }}
+                        </span>
+                        <span wire:loading wire:target="submit">{{ $isEn ? 'Sending…' : 'جاري الإرسال…' }}</span>
+                    </button>
+                </form>
+
+                <aside class="support-panel">
+                    <div class="support-panel__icon" aria-hidden="true">
+                        <i class="fa-solid fa-headset"></i>
+                    </div>
+                    <h2>{{ $isEn ? 'How it works' : 'كيف تتم المعالجة' }}</h2>
+                    <ol class="support-panel__steps">
+                        <li>{{ $isEn ? 'Choose the closest category to your request.' : 'اختر التصنيف الأقرب لطلبك.' }}</li>
+                        <li>{{ $isEn ? 'Describe the issue clearly so we can respond faster.' : 'صف المشكلة بوضوح لتسريع الرد.' }}</li>
+                        <li>{{ $isEn ? 'Save the ticket number after sending.' : 'احفظ رقم التذكرة بعد الإرسال.' }}</li>
+                    </ol>
+                    <a class="support-panel__link" href="{{ route('support.faq', ['locale' => $locale]) }}">
+                        {{ $isEn ? 'Check the FAQ first' : 'راجع الأسئلة الشائعة أولاً' }}
+                    </a>
+                    <a class="support-panel__link" href="{{ route('support.ticket.search', ['locale' => $locale]) }}">
+                        {{ $isEn ? 'Already have a ticket?' : 'لديك تذكرة قائمة؟' }}
+                    </a>
+                </aside>
             </div>
         @endif
     </div>
 </div>
 
 @push('styles')
-<link rel="stylesheet" href="{{ asset('css/support-pages.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/support-pages.css') }}?v=2">
 @endpush

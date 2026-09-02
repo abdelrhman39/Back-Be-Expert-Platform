@@ -12,8 +12,8 @@ class FooterSettings
         return [
             'about' => [
                 'label_ar' => 'نبذة عن المنصة (تحت الشعارات)',
-                'ar' => 'منصة مركز التعلم المستمر التابعة لجامعة الامير مقرن تقدم برامج تعليمية وتدريبية مبتكرة لدعم مختلف القطاعات وتعزيز نشر المعرفة.',
-                'en' => 'The Continuing Learning Center Platform at Muqrin University offers innovative educational and training programs to support various sectors and spread knowledge.',
+                'ar' => '{platform_name} التابع لـ {platform_org} يقدّم برامج تعليمية وتدريبية مبتكرة لدعم مختلف القطاعات وتعزيز نشر المعرفة.',
+                'en' => '{platform_name} at {platform_org} offers innovative educational and training programs to support various sectors and spread knowledge.',
             ],
             'programs_title' => [
                 'label_ar' => 'عنوان عمود البرامج',
@@ -24,6 +24,11 @@ class FooterSettings
                 'label_ar' => 'عنوان عمود السياسات',
                 'ar' => 'السياسات',
                 'en' => 'Policies',
+            ],
+            'payments_title' => [
+                'label_ar' => 'عنوان وسائل الدفع',
+                'ar' => 'وسائل الدفع',
+                'en' => 'Payment methods',
             ],
             'contact_phone_label' => [
                 'label_ar' => 'تسمية رقم الجوال',
@@ -139,10 +144,13 @@ class FooterSettings
         $stored = PlatformSetting::get($key);
 
         if (filled($stored)) {
-            return $stored;
+            return Utf8Text::interpolate($stored, $locale);
         }
 
-        return self::textFields()[$stem][$locale] ?? self::textFields()[$stem]['ar'] ?? '';
+        return Utf8Text::interpolate(
+            self::textFields()[$stem][$locale] ?? self::textFields()[$stem]['ar'] ?? '',
+            $locale,
+        );
     }
 
     public static function linkUrl(string $stem, ?string $locale = null): string
@@ -233,8 +241,8 @@ class FooterSettings
     public static function defaultCopyright(string $locale): string
     {
         return match ($locale) {
-            'en' => 'All Rights Reserved Muqrin University, Developed and Designed by <span class="fw-blod">مركز التعلم المستمر</span>',
-            default => 'جميع الحقوق محفوظة جامعة الامير مقرن، تطوير وتصميم <span class="fw-blod">مركز التعلم المستمر</span>',
+            'en' => 'All rights reserved, {platform_org}. Designed and developed by <span class="fw-bold">{platform_name}</span>',
+            default => 'جميع الحقوق محفوظة {platform_org}، تطوير وتصميم <span class="fw-bold">{platform_name}</span>',
         };
     }
 
@@ -244,7 +252,9 @@ class FooterSettings
         $key = $locale === 'en' ? 'footer_copyright_en' : 'footer_copyright_ar';
         $stored = PlatformSetting::get($key);
 
-        return filled($stored) ? $stored : self::defaultCopyright($locale);
+        $html = filled($stored) ? $stored : self::defaultCopyright($locale);
+
+        return Utf8Text::interpolate($html, $locale);
     }
 
     protected static function resolveLocale(?string $locale): string

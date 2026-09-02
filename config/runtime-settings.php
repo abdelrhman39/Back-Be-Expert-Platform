@@ -385,6 +385,12 @@ return [
             'permission' => 'settings.manage',
             'description' => 'الاسم، الدعم، وضع الصيانة',
         ],
+        [
+            'route' => 'admin.identity-themes',
+            'label' => 'قوالب الهوية',
+            'permission' => 'settings.manage',
+            'description' => 'ثيمات الصفحة الرئيسية حسب الجهة',
+        ],
     ],
 
 ];

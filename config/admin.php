@@ -185,6 +185,7 @@ return [
                     'label' => 'النظام والحوكمة',
                     'items' => [
                         ['route' => 'admin.settings', 'label' => 'إعدادات المنصة'],
+                        ['route' => 'admin.identity-themes', 'label' => 'قوالب الهوية'],
                         ['route' => 'admin.system-settings', 'label' => 'إعدادات النظام'],
                         ['route' => 'admin.teams-settings', 'label' => 'Microsoft Teams'],
                         ['route' => 'admin.zoom-settings', 'label' => 'Zoom'],

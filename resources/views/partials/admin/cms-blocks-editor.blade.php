@@ -142,6 +142,11 @@
                                     'previewUrl' => ! empty($data['image']) ? cms_media_url($data['image']) : null,
                                 ])
                             </div>
+                            <p class="admin-field-hint">خلفية الهيرو تتنقّل تلقائياً بين صورة الخلفية وصور حرم الجامعة. لعرض فيديو في بطاقة الحرم ضع الملف في <code dir="ltr">public/new-platform/assets/branding/aou-campus.mp4</code> أو أدخل مساره أدناه.</p>
+                            <div class="admin-field admin-field--wide">
+                                <label>فيديو بطاقة الحرم (اختياري)</label>
+                                <input type="text" class="admin-control" dir="ltr" placeholder="assets/branding/aou-campus.mp4" wire:model="{{ $blocksProp }}.{{ $index }}.data.showcase_video">
+                            </div>
                             @break
 
                         @case('catalog_section')
@@ -150,17 +155,59 @@
 
                         @case('cards_grid')
                         @case('features_grid')
+                            <div class="admin-field admin-field--wide"><label>عنوان القسم</label><input type="text" class="admin-control" wire:model="{{ $blocksProp }}.{{ $index }}.data.title"></div>
+                            @if ($type === 'features_grid')
+                                <div class="admin-field"><label>وسم صغير</label><input type="text" class="admin-control" wire:model="{{ $blocksProp }}.{{ $index }}.data.eyebrow"></div>
+                            @endif
+                            @if ($type === 'cards_grid' || $type === 'features_grid')
+                                <div class="admin-field admin-field--wide"><label>مقدمة القسم</label><textarea class="admin-control" rows="2" wire:model="{{ $blocksProp }}.{{ $index }}.data.lead"></textarea></div>
+                            @endif
                             @foreach ($data['items'] ?? [] as $itemIndex => $item)
                                 <fieldset class="cms-block-subgroup">
                                     <legend>بطاقة {{ $itemIndex + 1 }}</legend>
                                     <div class="admin-field"><label>العنوان</label><input type="text" class="admin-control" wire:model="{{ $blocksProp }}.{{ $index }}.data.items.{{ $itemIndex }}.title"></div>
                                     <div class="admin-field"><label>النص</label><textarea class="admin-control" rows="3" wire:model="{{ $blocksProp }}.{{ $index }}.data.items.{{ $itemIndex }}.body"></textarea></div>
-                                    <div class="admin-field"><label>الأيقونة (مسار assets)</label><input type="text" class="admin-control" wire:model="{{ $blocksProp }}.{{ $index }}.data.items.{{ $itemIndex }}.icon" dir="ltr"></div>
+                    <div class="admin-field"><label>الأيقونة (Font Awesome أو مسار صورة)</label><input type="text" class="admin-control" wire:model="{{ $blocksProp }}.{{ $index }}.data.items.{{ $itemIndex }}.icon" dir="ltr" placeholder="fa-solid fa-certificate"></div>
                                 </fieldset>
                             @endforeach
-                            @if ($type === 'features_grid')
-                                <div class="admin-field admin-field--wide"><label>عنوان القسم</label><input type="text" class="admin-control" wire:model="{{ $blocksProp }}.{{ $index }}.data.title"></div>
-                            @endif
+                            @break
+
+                        @case('path_cards')
+                            <div class="admin-field admin-field--wide"><label>عنوان القسم</label><input type="text" class="admin-control" wire:model="{{ $blocksProp }}.{{ $index }}.data.title"></div>
+                            <div class="admin-field admin-field--wide"><label>مقدمة القسم</label><textarea class="admin-control" rows="2" wire:model="{{ $blocksProp }}.{{ $index }}.data.lead"></textarea></div>
+                            @foreach ($data['items'] ?? [] as $itemIndex => $item)
+                                <fieldset class="cms-block-subgroup">
+                                    <legend>مسار {{ $itemIndex + 1 }}</legend>
+                                    <div class="admin-field"><label>العنوان</label><input type="text" class="admin-control" wire:model="{{ $blocksProp }}.{{ $index }}.data.items.{{ $itemIndex }}.title"></div>
+                                    <div class="admin-field"><label>النص</label><textarea class="admin-control" rows="2" wire:model="{{ $blocksProp }}.{{ $index }}.data.items.{{ $itemIndex }}.body"></textarea></div>
+                                    <div class="admin-field"><label>الأيقونة (Font Awesome أو مسار صورة)</label><input type="text" class="admin-control" wire:model="{{ $blocksProp }}.{{ $index }}.data.items.{{ $itemIndex }}.icon" dir="ltr" placeholder="fa-solid fa-user-graduate"></div>
+                                    <div class="admin-field"><label>نص الرابط</label><input type="text" class="admin-control" wire:model="{{ $blocksProp }}.{{ $index }}.data.items.{{ $itemIndex }}.cta_label"></div>
+                                    <div class="admin-field"><label>الرابط</label><input type="text" class="admin-control" wire:model="{{ $blocksProp }}.{{ $index }}.data.items.{{ $itemIndex }}.url" dir="ltr" placeholder="courses.index أو apply/company"></div>
+                                </fieldset>
+                            @endforeach
+                            @break
+
+                        @case('steps_grid')
+                            <div class="admin-field admin-field--wide"><label>عنوان القسم</label><input type="text" class="admin-control" wire:model="{{ $blocksProp }}.{{ $index }}.data.title"></div>
+                            <div class="admin-field admin-field--wide"><label>مقدمة القسم</label><textarea class="admin-control" rows="2" wire:model="{{ $blocksProp }}.{{ $index }}.data.lead"></textarea></div>
+                            @foreach ($data['items'] ?? [] as $itemIndex => $item)
+                                <fieldset class="cms-block-subgroup">
+                                    <legend>خطوة {{ $itemIndex + 1 }}</legend>
+                                    <div class="admin-field"><label>رقم الخطوة</label><input type="number" class="admin-control" wire:model="{{ $blocksProp }}.{{ $index }}.data.items.{{ $itemIndex }}.step"></div>
+                                    <div class="admin-field"><label>العنوان</label><input type="text" class="admin-control" wire:model="{{ $blocksProp }}.{{ $index }}.data.items.{{ $itemIndex }}.title"></div>
+                                    <div class="admin-field"><label>النص</label><textarea class="admin-control" rows="2" wire:model="{{ $blocksProp }}.{{ $index }}.data.items.{{ $itemIndex }}.body"></textarea></div>
+                                </fieldset>
+                            @endforeach
+                            @break
+
+                        @case('cta_banner')
+                            <div class="admin-field"><label>سطر علوي</label><input type="text" class="admin-control" wire:model="{{ $blocksProp }}.{{ $index }}.data.eyebrow"></div>
+                            <div class="admin-field admin-field--wide"><label>العنوان</label><input type="text" class="admin-control" wire:model="{{ $blocksProp }}.{{ $index }}.data.title"></div>
+                            <div class="admin-field admin-field--wide"><label>النص</label><textarea class="admin-control" rows="2" wire:model="{{ $blocksProp }}.{{ $index }}.data.body"></textarea></div>
+                            <div class="admin-field"><label>نص الزر الأساسي</label><input type="text" class="admin-control" wire:model="{{ $blocksProp }}.{{ $index }}.data.primary_label"></div>
+                            <div class="admin-field"><label>رابط الزر الأساسي</label><input type="text" class="admin-control" wire:model="{{ $blocksProp }}.{{ $index }}.data.primary_url" dir="ltr"></div>
+                            <div class="admin-field"><label>نص الزر الثانوي</label><input type="text" class="admin-control" wire:model="{{ $blocksProp }}.{{ $index }}.data.secondary_label"></div>
+                            <div class="admin-field"><label>رابط الزر الثانوي</label><input type="text" class="admin-control" wire:model="{{ $blocksProp }}.{{ $index }}.data.secondary_url" dir="ltr"></div>
                             @break
 
                         @case('image_cards')
@@ -350,14 +397,24 @@
                             @break
 
                         @case('rich_text_split')
+                            <div class="admin-field"><label>السطر العلوي</label><input type="text" class="admin-control" wire:model="{{ $blocksProp }}.{{ $index }}.data.eyebrow"></div>
                             <div class="admin-field"><label>العنوان</label><input type="text" class="admin-control" wire:model="{{ $blocksProp }}.{{ $index }}.data.title"></div>
                             <div class="admin-field"><label>الصورة</label><input type="text" class="admin-control" wire:model="{{ $blocksProp }}.{{ $index }}.data.image" dir="ltr"></div>
+                            <div class="admin-field"><label>شارة الصورة</label><input type="text" class="admin-control" wire:model="{{ $blocksProp }}.{{ $index }}.data.image_badge"></div>
                             @foreach ($data['paragraphs'] ?? [] as $pIndex => $paragraph)
                                 <div class="admin-field"><label>فقرة {{ $pIndex + 1 }}</label><textarea class="admin-control" rows="3" wire:model="{{ $blocksProp }}.{{ $index }}.data.paragraphs.{{ $pIndex }}"></textarea></div>
                             @endforeach
+                            @foreach ($data['highlights'] ?? [] as $hIndex => $highlight)
+                                <div class="admin-field"><label>نقطة تمييز {{ $hIndex + 1 }}</label><input type="text" class="admin-control" wire:model="{{ $blocksProp }}.{{ $index }}.data.highlights.{{ $hIndex }}"></div>
+                            @endforeach
+                            <div class="admin-field"><label>نص الزر الأساسي</label><input type="text" class="admin-control" wire:model="{{ $blocksProp }}.{{ $index }}.data.primary_label"></div>
+                            <div class="admin-field"><label>رابط الزر الأساسي</label><input type="text" class="admin-control" wire:model="{{ $blocksProp }}.{{ $index }}.data.primary_url" dir="ltr"></div>
+                            <div class="admin-field"><label>نص الزر الثانوي</label><input type="text" class="admin-control" wire:model="{{ $blocksProp }}.{{ $index }}.data.secondary_label"></div>
+                            <div class="admin-field"><label>رابط الزر الثانوي</label><input type="text" class="admin-control" wire:model="{{ $blocksProp }}.{{ $index }}.data.secondary_url" dir="ltr"></div>
                             @break
 
                         @case('download_cta')
+                            <div class="admin-field"><label>السطر العلوي</label><input type="text" class="admin-control" wire:model="{{ $blocksProp }}.{{ $index }}.data.eyebrow"></div>
                             <div class="admin-field"><label>العنوان</label><input type="text" class="admin-control" wire:model="{{ $blocksProp }}.{{ $index }}.data.title"></div>
                             <div class="admin-field"><label>الوصف</label><textarea class="admin-control" rows="2" wire:model="{{ $blocksProp }}.{{ $index }}.data.description"></textarea></div>
                             <div class="admin-field"><label>نص الزر</label><input type="text" class="admin-control" wire:model="{{ $blocksProp }}.{{ $index }}.data.button_label"></div>

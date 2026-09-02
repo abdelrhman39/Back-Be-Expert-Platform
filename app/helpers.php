@@ -16,6 +16,41 @@ if (! function_exists('static_asset')) {
     }
 }
 
+if (! function_exists('platform_campus_path')) {
+    /** Relative campus photo path used by CMS blocks and public banners. */
+    function platform_campus_path(string $which = 'aerial'): string
+    {
+        return $which === 'entrance'
+            ? 'assets/branding/aou-campus-entrance.jpg'
+            : 'assets/branding/aou-campus-aerial.jpg';
+    }
+}
+
+if (! function_exists('platform_campus_gallery')) {
+    /** Ordered campus stills for the homepage hero slider. */
+    function platform_campus_gallery(): array
+    {
+        return [
+            platform_campus_path('aerial'),
+            platform_campus_path('entrance'),
+        ];
+    }
+}
+
+if (! function_exists('platform_campus_video_path')) {
+    /** Optional campus motion clip when the file exists in branding assets. */
+    function platform_campus_video_path(): ?string
+    {
+        foreach (['assets/branding/aou-campus.mp4', 'assets/branding/aou-campus.webm'] as $relative) {
+            if (is_file(public_path('new-platform/'.$relative))) {
+                return $relative;
+            }
+        }
+
+        return null;
+    }
+}
+
 if (! function_exists('cms_media_url')) {
     /**
      * Resolve a CMS media path: absolute URL, /storage/…, or New-Platform static asset.
@@ -164,14 +199,14 @@ if (! function_exists('platform_name')) {
         if ($locale === 'en') {
             return PlatformSetting::get(
                 'platform_name_en',
-                'Continuing Learning Center Platform'
-            ) ?: 'Continuing Learning Center Platform';
+                'Continuing Learning Center'
+            ) ?: 'Continuing Learning Center';
         }
 
         return PlatformSetting::get(
             'platform_name_ar',
-            'منصة مركز التعلم المستمر'
-        ) ?: 'منصة مركز التعلم المستمر';
+            'مركز التعلم المستمر'
+        ) ?: 'مركز التعلم المستمر';
     }
 }
 
@@ -182,12 +217,38 @@ if (! function_exists('platform_org')) {
         $locale ??= app()->getLocale();
 
         if ($locale === 'en') {
-            return PlatformSetting::get('platform_org_en', 'Muqrin University')
-                ?: 'Muqrin University';
+            return PlatformSetting::get('platform_org_en', 'Arab Open University')
+                ?: 'Arab Open University';
         }
 
-        return PlatformSetting::get('platform_org_ar', 'جامعة الامير مقرن')
-            ?: 'جامعة الامير مقرن';
+        return PlatformSetting::get('platform_org_ar', 'الجامعة العربية المفتوحة')
+            ?: 'الجامعة العربية المفتوحة';
+    }
+}
+
+if (! function_exists('cms_text')) {
+    function cms_text(?string $text, ?string $locale = null): string
+    {
+        if ($text === null || $text === '') {
+            return '';
+        }
+
+        return \App\Support\Utf8Text::interpolate($text, $locale);
+    }
+}
+
+if (! function_exists('cms_text_deep')) {
+    function cms_text_deep(mixed $value, ?string $locale = null): mixed
+    {
+        return \App\Support\Utf8Text::deep($value, $locale);
+    }
+}
+
+if (! function_exists('public_copy')) {
+    /** Locale-aware public chrome string (header / toolbar / fallbacks). */
+    function public_copy(string $key, ?string $locale = null): string
+    {
+        return \App\Support\PublicCopy::chrome($key, $locale);
     }
 }
 

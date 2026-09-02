@@ -29,8 +29,14 @@ class InstallmentPlanTemplateItem extends Model
         return $this->belongsTo(InstallmentPlanTemplate::class, 'template_id');
     }
 
-    public function displayLabel(): string
+    public function displayLabel(?string $locale = null): string
     {
-        return $this->label_ar ?: 'قسط '.$this->sequence;
+        $locale ??= app()->getLocale();
+
+        if ($locale === 'en' && filled($this->label_en)) {
+            return $this->label_en;
+        }
+
+        return $this->label_ar ?: (($locale === 'en' ? 'Installment ' : 'قسط ').$this->sequence);
     }
 }
