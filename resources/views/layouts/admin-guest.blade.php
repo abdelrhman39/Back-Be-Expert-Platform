@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="{{ static_asset('assets/vendor/fonts/google-fonts-local.css') }}">
     <link rel="stylesheet" href="{{ static_asset('assets/all.css') }}">
     <link rel="stylesheet" href="{{ static_asset('admin/css/admin.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/site-header.css') }}?v=15">
+    <link rel="stylesheet" href="{{ asset('css/site-header.css') }}?v=16">
     @include('partials.platform-theme')
     @livewireStyles
 </head>

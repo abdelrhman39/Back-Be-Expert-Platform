@@ -819,9 +819,18 @@ img.platform-logo--favicon {
 }
 
 @media (max-width: 1199.98px) {
+    .header,
+    html.menu-opened .header {
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        filter: none !important;
+        transform: none !important;
+    }
+
     .header .sidebar-overlay.opened,
     .sidebar-overlay.opened {
         display: block;
+        z-index: 1070;
     }
 
     .header .menu-header {
@@ -860,9 +869,12 @@ img.platform-logo--favicon {
         top: 0;
         bottom: 0;
         inset-inline-start: 0;
+        height: 100vh;
+        height: 100dvh;
+        max-height: 100dvh;
         overflow-x: hidden;
         overflow-y: auto;
-        z-index: 30;
+        z-index: 1080;
         margin: 0 !important;
         padding: 0;
         background: #fff !important;

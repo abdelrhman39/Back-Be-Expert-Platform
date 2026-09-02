@@ -17,14 +17,14 @@
     <link rel="stylesheet" href="{{ static_asset('assets/style.css') }}">
     <link rel="stylesheet" href="{{ static_asset('assets/components.css') }}">
     <link rel="stylesheet" href="{{ static_asset('css/site-enhancements.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/site-header.css') }}?v=15">
+    <link rel="stylesheet" href="{{ asset('css/site-header.css') }}?v=16">
     <link rel="stylesheet" href="{{ asset('css/home-hero.css') }}?v=12">
     <link rel="stylesheet" href="{{ asset('css/home-mvg.css') }}?v=2">
     <link rel="stylesheet" href="{{ asset('css/home-catalog-slider.css') }}?v=11">
     <link rel="stylesheet" href="{{ asset('css/home-diplomas.css') }}?v=4">
     <link rel="stylesheet" href="{{ asset('css/home-identity-blocks.css') }}?v=4">
     @include('partials.platform-theme')
-    <link rel="stylesheet" href="{{ asset('css/public-atelier.css') }}?v=16">
+    <link rel="stylesheet" href="{{ asset('css/public-atelier.css') }}?v=17">
     <link rel="stylesheet" href="{{ asset('css/home-features.css') }}?v=1">
     <link rel="stylesheet" href="{{ static_asset('assets/domain-a11y-panel.css') }}">
     <link rel="stylesheet" href="{{ asset('css/site-footer.css') }}?v=1">

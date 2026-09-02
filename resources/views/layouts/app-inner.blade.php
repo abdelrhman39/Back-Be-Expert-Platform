@@ -18,11 +18,11 @@
     <link rel="stylesheet" href="{{ static_asset('assets/style.css') }}">
     <link rel="stylesheet" href="{{ static_asset('assets/components.css') }}">
     <link rel="stylesheet" href="{{ static_asset('css/site-enhancements.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/site-header.css') }}?v=15">
+    <link rel="stylesheet" href="{{ asset('css/site-header.css') }}?v=16">
     <link rel="stylesheet" href="{{ asset('css/catalog-public.css') }}?v=7">
     <link rel="stylesheet" href="{{ asset('css/home-diplomas.css') }}?v=5">
     @include('partials.platform-theme')
-    <link rel="stylesheet" href="{{ asset('css/public-atelier.css') }}?v=16">
+    <link rel="stylesheet" href="{{ asset('css/public-atelier.css') }}?v=17">
     <link rel="stylesheet" href="{{ static_asset('assets/domain-a11y-panel.css') }}">
     <link rel="stylesheet" href="{{ asset('css/site-footer.css') }}?v=1">
     <style id="theia-sticky-sidebar-stylesheet-TSS">
