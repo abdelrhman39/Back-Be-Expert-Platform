@@ -5,7 +5,9 @@
 
 @switch($source)
     @case('popular_fields')
-        @include('partials.catalog.home-popular-fields', ['fields' => $popularFields ?? collect()])
+        @if (\App\Support\IdentityThemes::activeKey() !== 'taibah-green')
+            @include('partials.catalog.home-popular-fields', ['fields' => $popularFields ?? collect()])
+        @endif
         @break
     @case('certificates')
         @include('partials.catalog.home-featured-courses', ['courses' => $professionalCertificates ?? collect()])

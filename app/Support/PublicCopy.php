@@ -119,7 +119,7 @@ class PublicCopy
             return $key;
         }
 
-        return $row[$locale] ?? $row['ar'];
+        return IdentityOverlay::rewriteText($row[$locale] ?? $row['ar']);
     }
 
     /** @return array<string, array{ar: string, en: string}> */

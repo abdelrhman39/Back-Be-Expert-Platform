@@ -3,6 +3,53 @@
     $headerMenuItems = app(\App\Services\CmsMenuService::class)->tree('header_main');
 @endphp
 <header @class(['header', 'new-header', 'fixed', 'profile-header', 'site-header--auth' => portal_authenticated()])>
+    @if (\App\Support\IdentityThemes::activeKey() === 'taibah-green')
+        @php
+            $barEmail = \App\Support\FooterSettings::contactEmail();
+            $barPhone = '0000000000';
+            $barWhatsapp = '0000000000';
+            $barSocial = [
+                ['icon' => 'fa-brands fa-facebook-f', 'label' => 'Facebook'],
+                ['icon' => 'fa-brands fa-x-twitter', 'label' => 'X'],
+                ['icon' => 'fa-brands fa-instagram', 'label' => 'Instagram'],
+                ['icon' => 'fa-brands fa-linkedin-in', 'label' => 'LinkedIn'],
+                ['icon' => 'fa-brands fa-whatsapp', 'label' => 'WhatsApp'],
+                ['icon' => 'fa-brands fa-tiktok', 'label' => 'TikTok'],
+            ];
+        @endphp
+        <div class="sa-govbar">
+            <div class="sa-govbar__inner">
+                <div class="sa-govbar__contacts">
+                    @if (filled($barEmail))
+                        <a href="mailto:{{ $barEmail }}" class="sa-govbar__contact">
+                            <i class="fa-regular fa-envelope" aria-hidden="true"></i>
+                            <span class="sa-govbar__label">{{ $locale === 'en' ? 'Email' : 'البريد' }}</span>
+                            <span dir="ltr">{{ $barEmail }}</span>
+                        </a>
+                    @endif
+                    <a href="#" class="sa-govbar__contact">
+                        <i class="fa-solid fa-mobile-screen" aria-hidden="true"></i>
+                        <span class="sa-govbar__label">{{ $locale === 'en' ? 'Mobile' : 'الجوال' }}</span>
+                        <span dir="ltr">{{ $barPhone }}</span>
+                    </a>
+                    <a href="#" class="sa-govbar__contact">
+                        <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+                        <span class="sa-govbar__label">{{ $locale === 'en' ? 'WhatsApp' : 'واتساب' }}</span>
+                        <span dir="ltr">{{ $barWhatsapp }}</span>
+                    </a>
+                </div>
+                @if ($barSocial !== [])
+                    <div class="sa-govbar__social" aria-label="{{ $locale === 'en' ? 'Social media' : 'التواصل الاجتماعي' }}">
+                        @foreach ($barSocial as $social)
+                            <a href="#" class="sa-govbar__social-link" aria-label="{{ $social['label'] }}">
+                                <i class="{{ $social['icon'] }}" aria-hidden="true"></i>
+                            </a>
+                        @endforeach
+                    </div>
+                @endif
+            </div>
+        </div>
+    @endif
     <div class="container-fluid">
         <nav class="navbar navbar-expand-lg header-nav" aria-label="{{ app()->getLocale() === 'en' ? 'Primary' : 'القائمة الرئيسية' }}">
             <div class="navbar-header">

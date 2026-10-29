@@ -14,7 +14,7 @@ return [
 
     'allowed_emails' => array_filter(array_map(
         'trim',
-        explode(',', (string) env('STUDENT_IMPERSONATION_ALLOWED_EMAILS', 'admin@local.invalid'))
+        explode(',', (string) env('STUDENT_IMPERSONATION_ALLOWED_EMAILS', 'admin@local.invalid,admin@example.com'))
     )),
 
 ];

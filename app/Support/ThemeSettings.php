@@ -129,6 +129,14 @@ class ThemeSettings
 
         $stored = PlatformSetting::get($key);
 
+        if (IdentityThemes::keyForHost()) {
+            $fromPack = IdentityThemes::active()['colors'][$key] ?? null;
+
+            if (filled($fromPack)) {
+                return (string) $fromPack;
+            }
+        }
+
         return filled($stored) ? $stored : $definition['default'];
     }
 

@@ -7,7 +7,7 @@ use Livewire\Component;
 
 new #[Layout('layouts.admin', [
     'adminPageTitle' => 'قوالب الهوية',
-    'adminPageDesc' => 'تبديل هوية الصفحة الرئيسية دون المساس بالعناصر أو البرمجة',
+    'adminPageDesc' => 'هويات مستقلة لكل جهة: الشعار والألوان تُحفظ ولا يُحذف تقسيم عند تفعيل آخر',
     'adminLayout' => 'app',
     'adminBreadcrumb' => [
         ['href' => '/admin', 'label' => 'الرئيسية'],
@@ -36,7 +36,10 @@ class extends Component
         abort_unless(auth()->user()?->canAdmin('settings.manage'), 403);
 
         IdentityThemes::apply($key);
-        $this->savedMessage = 'تم تطبيق قالب «'.(IdentityThemes::find($key)['name_ar'] ?? $key).'» على الصفحة الرئيسية. المحتوى والعناصر الأساسية لم تتغير.';
+        $name = IdentityThemes::find($key)['name_ar'] ?? $key;
+        $this->savedMessage = IdentityThemes::hasBranding(IdentityThemes::find($key) ?? [])
+            ? 'تم تفعيل هوية «'.$name.'». الشعار واسم الجهة والألوان الخاصة بها أصبحت نشطة، والهويات الأخرى ما زالت محفوظة.'
+            : 'تم تطبيق ألوان «'.$name.'» على الصفحة الرئيسية دون تغيير الشعار أو اسم الجهة.';
     }
 
     public function saveCurrentAsCustom(): void
@@ -57,7 +60,7 @@ class extends Component
         $this->customNameAr = '';
         $this->customNameEn = '';
         $this->filter = 'custom';
-        $this->savedMessage = 'حُفظت الهوية الحالية كقالب يمكن إعادة تفعيله لاحقاً.';
+        $this->savedMessage = 'حُفظت الهوية الحالية (الألوان والشعار واسم الجهة) كتقسيم يمكن إعادة تفعيله لاحقاً.';
     }
 
     public function deleteCustom(string $key): void
@@ -71,16 +74,18 @@ class extends Component
 ?>
 
 @php
-    $packs = collect(\App\Support\IdentityThemes::all())
+    $divisions = collect(\App\Support\IdentityThemes::divisions())->values();
+    $packs = collect(\App\Support\IdentityThemes::palettes())
         ->when($filter !== 'all', fn ($c) => $c->filter(fn ($pack) => ($pack['category'] ?? '') === $filter))
         ->values();
     $active = \App\Support\IdentityThemes::active();
     $activeSwatches = \App\Support\IdentityThemes::swatches($active);
     $customized = \App\Support\IdentityThemes::isCustomized();
+    $activeLogo = \App\Support\IdentityThemes::logoUrl($active);
 @endphp
 
 @push('styles')
-    <link rel="stylesheet" href="{{ asset('css/identity-themes.css') }}?v=1">
+    <link rel="stylesheet" href="{{ asset('css/identity-themes.css') }}?v=3">
 @endpush
 
 @include('partials.admin.shell-start', [
@@ -102,26 +107,29 @@ class extends Component
 
     <section class="admin-crud-card">
         <div class="admin-crud-card__head">
-            <h2>استوديو هوية الصفحة الرئيسية</h2>
-            <p class="admin-crud-card__meta">القوالب تغيّر الألوان وأجواء الهيرو فقط. البلوكات، القوائم، الشعارات، واسم الجهة تبقى كما هي ويمكن ضبطها من إعدادات المنصة.</p>
+            <h2>استوديو هويات الجهات</h2>
+            <p class="admin-crud-card__meta">كل جامعة تقسيم مستقل: الشعار والاسم والألوان محفوظة. تفعيل جامعة طيبة أو جامعة الملك خالد لا يحذف هوية الجامعة العربية المفتوحة، والعكس صحيح.</p>
         </div>
         <div class="identity-studio__intro">
             <ol class="identity-studio__howto">
                 <li>
                     <span class="identity-studio__step">1</span>
-                    <span>اختر قالباً يناسب الجهة (جامعة، معهد، شركة، جهة حكومية) من المعرض أدناه.</span>
+                    <span>فعّل هوية الجامعة المطلوبة من قسم «هويات الجامعات» أدناه. كل هوية تبقى محفوظة بعد التبديل.</span>
                 </li>
                 <li>
                     <span class="identity-studio__step">2</span>
-                    <span>اضغط «تفعيل» لتطبيق الألوان فوراً على الصفحة الرئيسية دون تغيير البرمجة أو العناصر.</span>
+                    <span>لحفظ تقسيم إضافي لجهة جديدة: اضبط الشعار والاسم من الإعدادات ثم اضغط «حفظ كهوية مخصصة».</span>
                 </li>
                 <li>
                     <span class="identity-studio__step">3</span>
-                    <span>إن احتجت ضبطاً دقيقاً: عدّل الألوان أو الشعارات من <a href="{{ route('admin.settings') }}">إعدادات المنصة</a> ثم احفظ النتيجة كهوية مخصصة.</span>
+                    <span>لوحات الألوان تغيّر الأجواء فقط دون المساس بشعار الجامعة النشطة. المحتوى والبلوكات لا تتغير.</span>
                 </li>
             </ol>
             <aside class="identity-active">
-                <p class="identity-active__label">القالب النشط الآن</p>
+                <p class="identity-active__label">الهوية النشطة الآن</p>
+                @if ($activeLogo)
+                    <img src="{{ $activeLogo }}" alt="{{ $active['name_ar'] }}" class="identity-active__logo">
+                @endif
                 <h3 class="identity-active__name">{{ $active['name_ar'] }}</h3>
                 <p class="identity-active__meta">
                     {{ $active['tagline_ar'] }}
@@ -144,8 +152,20 @@ class extends Component
 
     <section class="admin-crud-card">
         <div class="admin-crud-card__head">
-            <h2>حفظ الهوية الحالية</h2>
-            <p class="admin-crud-card__meta">بعد ضبط الألوان لجهة معيّنة احفظها باسم واضح لتعيد تفعيلها لاحقاً دون إعادة الضبط.</p>
+            <h2>هويات الجامعات</h2>
+            <p class="admin-crud-card__meta">{{ $divisions->count() }} تقسيم مستقل · التفعيل يبدّل الشعار واسم الجهة والألوان دون حذف الباقي.</p>
+        </div>
+        <div class="identity-grid">
+            @foreach ($divisions as $pack)
+                @include('partials.admin.identity-card', ['pack' => $pack])
+            @endforeach
+        </div>
+    </section>
+
+    <section class="admin-crud-card">
+        <div class="admin-crud-card__head">
+            <h2>حفظ تقسيم جديد</h2>
+            <p class="admin-crud-card__meta">بعد ضبط شعار وألوان جهة جديدة احفظها باسم واضح لتعيد تفعيلها لاحقاً بجانب الجامعات المحفوظة.</p>
         </div>
         <form class="identity-save" wire:submit.prevent="saveCurrentAsCustom">
             <div class="admin-field">
@@ -163,8 +183,8 @@ class extends Component
 
     <section class="admin-crud-card">
         <div class="admin-crud-card__head">
-            <h2>معرض القوالب</h2>
-            <p class="admin-crud-card__meta">{{ $packs->count() }} قالب · التفعيل يستبدل الألوان فقط.</p>
+            <h2>لوحات الألوان</h2>
+            <p class="admin-crud-card__meta">{{ $packs->count() }} لوحة · تغيّر الألوان فقط دون استبدال شعار الجامعة النشطة.</p>
         </div>
 
         <div class="identity-filters" role="tablist" aria-label="تصنيف القوالب">
@@ -180,55 +200,7 @@ class extends Component
         @else
             <div class="identity-grid" style="margin-top:1rem;">
                 @foreach ($packs as $pack)
-                    @php
-                        $swatches = \App\Support\IdentityThemes::swatches($pack);
-                        $isActive = \App\Support\IdentityThemes::isActive($pack['id']);
-                        $hero = $pack['colors']['theme_color_primary_dark'] ?? '#135f3d';
-                        $mid = $pack['colors']['theme_color_primary'] ?? '#1b8354';
-                    @endphp
-                    <article @class(['identity-card', 'is-active' => $isActive])>
-                        <div class="identity-card__preview">
-                            <div class="identity-card__hero" style="background: linear-gradient(115deg, {{ $hero }} 0%, {{ $mid }} 58%, {{ $pack['colors']['theme_color_primary_light'] ?? $mid }} 100%);"></div>
-                            <div class="identity-card__bar"></div>
-                            <div class="identity-card__title-block">
-                                <div class="identity-card__line"></div>
-                                <div class="identity-card__line identity-card__line--short"></div>
-                            </div>
-                            @if ($isActive)
-                                <span class="identity-card__badge">نشط</span>
-                            @endif
-                        </div>
-                        <div class="identity-card__body">
-                            <h3 class="identity-card__name">{{ $pack['name_ar'] }}</h3>
-                            <p class="identity-card__tagline">{{ $pack['tagline_ar'] }}</p>
-                            <p class="identity-card__audience">{{ $pack['audience_ar'] }}</p>
-                            <div class="identity-card__swatches" aria-hidden="true">
-                                @foreach ($swatches as $swatch)
-                                    <span class="identity-swatch" style="background: {{ $swatch }}"></span>
-                                @endforeach
-                            </div>
-                            <div class="identity-card__actions">
-                                @if ($isActive)
-                                    <button type="button" class="admin-btn-secondary admin-btn-secondary--sm" disabled>مفعّل حالياً</button>
-                                @else
-                                    <button
-                                        type="button"
-                                        class="admin-btn-primary admin-btn-primary--sm"
-                                        wire:click="applyTheme('{{ $pack['id'] }}')"
-                                        wire:confirm="سيتم تطبيق ألوان «{{ $pack['name_ar'] }}» على الصفحة الرئيسية دون تغيير المحتوى أو العناصر. المتابعة؟"
-                                    >تفعيل</button>
-                                @endif
-                                @if (empty($pack['builtin']))
-                                    <button
-                                        type="button"
-                                        class="admin-btn-secondary admin-btn-secondary--sm"
-                                        wire:click="deleteCustom('{{ $pack['id'] }}')"
-                                        wire:confirm="حذف قالب «{{ $pack['name_ar'] }}»؟ لن يؤثر ذلك على المحتوى."
-                                    >حذف</button>
-                                @endif
-                            </div>
-                        </div>
-                    </article>
+                    @include('partials.admin.identity-card', ['pack' => $pack])
                 @endforeach
             </div>
         @endif

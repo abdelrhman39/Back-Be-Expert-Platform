@@ -10,6 +10,10 @@
     $phone = FooterSettings::contactPhone();
     $whatsapp = FooterSettings::contactWhatsapp();
     $email = FooterSettings::contactEmail();
+    if (\App\Support\IdentityThemes::activeKey() === 'taibah-green') {
+        $phone = '0000000000';
+        $whatsapp = '0000000000';
+    }
 @endphp
 <footer id="footer" class="footer footer--atelier" dir="{{ $locale === 'en' ? 'ltr' : 'rtl' }}">
 
@@ -94,7 +98,7 @@
                                         <span class="footer-contact-icon" aria-hidden="true"><i class="fa-solid fa-phone"></i></span>
                                         <div class="location-info">
                                             <h6>{{ FooterSettings::text('contact_phone_label', $locale) }}</h6>
-                                            <p><a href="tel:+{{ ltrim($phone, '+') }}">+{{ ltrim($phone, '+') }}</a></p>
+                                            <p><a href="{{ $phone === '0000000000' ? '#' : 'tel:+'.ltrim($phone, '+') }}">{{ $phone === '0000000000' ? $phone : '+'.ltrim($phone, '+') }}</a></p>
                                         </div>
                                     </li>
                                 @endif
@@ -104,7 +108,7 @@
                                         <span class="footer-contact-icon" aria-hidden="true"><i class="fa-brands fa-whatsapp"></i></span>
                                         <div class="location-info">
                                             <h6>{{ FooterSettings::text('contact_whatsapp_label', $locale) }}</h6>
-                                            <p><a href="https://wa.me/{{ ltrim($whatsapp, '+') }}">+{{ ltrim($whatsapp, '+') }}</a></p>
+                                            <p><a href="{{ $whatsapp === '0000000000' ? '#' : 'https://wa.me/'.ltrim($whatsapp, '+') }}">{{ $whatsapp === '0000000000' ? $whatsapp : '+'.ltrim($whatsapp, '+') }}</a></p>
                                         </div>
                                     </li>
                                 @endif

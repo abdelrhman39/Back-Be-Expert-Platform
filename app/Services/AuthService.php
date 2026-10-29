@@ -62,7 +62,10 @@ class AuthService
                 ->where('national_id', $credentials['national_id'])
                 ->first(),
             'phone' => User::query()
-                ->where('phone', PhoneNormalizer::toE164($credentials['phone']))
+                ->where('phone', PhoneNormalizer::toE164(
+                    $credentials['phone'],
+                    $credentials['dial_iso'] ?? null
+                ))
                 ->first(),
             'email' => User::query()
                 ->whereRaw('LOWER(email) = ?', [mb_strtolower(trim($credentials['email']))])

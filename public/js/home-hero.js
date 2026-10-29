@@ -13,9 +13,12 @@
     return Array.prototype.slice.call(root.querySelectorAll('[data-hero-slide]'));
   }
 
-  function showSlide(slides, index) {
+  function showSlide(root, slides, index) {
     slides.forEach(function (slide, i) {
       slide.classList.toggle('is-active', i === index);
+    });
+    root.querySelectorAll('[data-hero-dot]').forEach(function (dot, i) {
+      dot.classList.toggle('is-active', i === index);
     });
   }
 
@@ -25,7 +28,15 @@
       return;
     }
 
-    showSlide(slides, 0);
+    var index = 0;
+    showSlide(root, slides, 0);
+
+    root.querySelectorAll('[data-hero-dot]').forEach(function (dot, dotIndex) {
+      dot.addEventListener('click', function () {
+        index = dotIndex;
+        showSlide(root, slides, index);
+      });
+    });
 
     if (reduceMotion.matches) {
       return;
@@ -36,13 +47,12 @@
       interval = 7000;
     }
 
-    var index = 0;
     var timer = window.setInterval(function () {
-      if (document.hidden) {
+      if (document.hidden || root.matches(':hover')) {
         return;
       }
       index = (index + 1) % slides.length;
-      showSlide(slides, index);
+      showSlide(root, slides, index);
     }, interval);
 
     timers.push(timer);

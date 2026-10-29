@@ -2056,8 +2056,6 @@ section.counterSec:not(.atelier-faq) .counter-item h3 {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .lg-logo-marquee__track,
-  .lg-logo-marquee.is-ready .lg-logo-marquee__track,
   .np-home-hero--logistics .np-home-hero__image,
   .np-home-hero--logistics .np-home-hero__media::after,
   .np-home-hero__eyebrow::after,

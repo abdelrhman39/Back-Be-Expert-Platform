@@ -164,6 +164,14 @@ class LogoSettings
             return true;
         }
 
+        if (IdentityThemes::keyForHost()) {
+            $branding = IdentityThemes::resolvedBranding();
+
+            if (array_key_exists($visibilityKey, $branding)) {
+                return $branding[$visibilityKey] !== '0';
+            }
+        }
+
         return PlatformSetting::get(
             $visibilityKey,
             self::defaultVisible($logoKey) ? '1' : '0'
@@ -197,6 +205,22 @@ class LogoSettings
 
     public static function url(string $key): string
     {
+        if (IdentityThemes::keyForHost()) {
+            $branding = IdentityThemes::resolvedBranding();
+            $map = [
+                self::KEY_PRIMARY => 'platform_logo_primary',
+                self::KEY_FOOTER => 'platform_logo_footer',
+                self::KEY_FAVICON => 'platform_favicon',
+                self::KEY_SECONDARY => 'platform_logo_secondary',
+                self::KEY_VISION => 'platform_logo_vision',
+            ];
+            $path = $branding[$map[$key] ?? ''] ?? null;
+
+            if (filled($path)) {
+                return self::resolve((string) $path, $key);
+            }
+        }
+
         return self::resolve(self::storedPath($key), $key);
     }
 

@@ -627,7 +627,7 @@
 }
 
 .np-home-hero__panel-video {
-  background: #001a33;
+  background: var(--sa-green-dark, #001a33);
 }
 
 .np-home-hero__panel-body {
@@ -648,7 +648,7 @@
 
 .np-home-hero__panel-title {
   margin: 0;
-  color: #002d58;
+  color: var(--primary, #002d58);
   font-size: 1.18rem;
   font-weight: 800;
   line-height: 1.4;
@@ -682,7 +682,7 @@
 }
 
 .np-home-hero__facts strong {
-  color: #002d58;
+  color: var(--primary, #002d58);
   margin-inline-end: 0.25rem;
 }
 
@@ -694,7 +694,7 @@
   margin-top: 0.2rem;
   padding: 0.72rem 0.95rem;
   border-radius: 12px;
-  background: #002d58;
+  background: var(--primary, #002d58);
   color: #fff;
   font-size: 0.9rem;
   font-weight: 800;
@@ -703,7 +703,7 @@
 
 .np-home-hero__panel-cta:hover {
   color: #fff;
-  background: #001a33;
+  background: var(--sa-green-dark, #001a33);
 }
 
 .np-home-hero__panel-cta i {

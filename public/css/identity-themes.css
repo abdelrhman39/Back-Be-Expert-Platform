@@ -61,11 +61,51 @@
     letter-spacing: 0.04em;
 }
 
+.identity-active__logo {
+    max-height: 72px;
+    max-width: 180px;
+    width: auto;
+    object-fit: contain;
+    align-self: flex-start;
+}
+
 .identity-active__name {
     margin: 0;
     font-size: 1.15rem;
     font-weight: 800;
     color: #0f172a;
+}
+
+.identity-card--branded .identity-card__preview {
+    height: 148px;
+}
+
+.identity-card__logo-wrap {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.1rem 0.9rem 0.85rem;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.18) 0%, rgba(0, 0, 0, 0.45) 100%);
+}
+
+.identity-card__logo {
+    max-height: 96px;
+    max-width: 82%;
+    width: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.28));
+}
+
+.identity-card[data-pack="taibah-green"] .identity-card__logo-wrap {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.96) 0%, rgba(249, 250, 251, 0.92) 100%);
+}
+
+.identity-card[data-pack="taibah-green"] .identity-card__logo {
+    filter: none;
+    max-height: 42px;
+    max-width: 88%;
 }
 
 .identity-active__meta {

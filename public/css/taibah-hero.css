@@ -1,0 +1,267 @@
+/* مقدمة جامعة طيبة: شريط أخضر مستقل، ثم صورة، ثم شبكة مجالات. */
+
+html[data-identity-theme="taibah-green"] .tu-hero {
+    background: #ffffff;
+    color: #161616;
+}
+
+html[data-identity-theme="taibah-green"] .tu-hero__banner {
+    background: #074d31;
+    color: #ffffff;
+    padding: 3.25rem 1.25rem 2.75rem;
+}
+
+html[data-identity-theme="taibah-green"] .tu-hero__banner-inner {
+    width: min(820px, 100%);
+    margin-inline: auto;
+    text-align: center;
+}
+
+html[data-identity-theme="taibah-green"] .tu-hero__kicker {
+    margin: 0 0 0.85rem;
+    color: #ffffff;
+    font-size: 0.95rem;
+    font-weight: 500;
+    letter-spacing: 0;
+}
+
+html[data-identity-theme="taibah-green"] .tu-hero__title {
+    margin: 0;
+    color: #ffffff;
+    font-size: clamp(2.3rem, 5vw, 3.75rem);
+    font-weight: 700;
+    line-height: 1.25;
+}
+
+html[data-identity-theme="taibah-green"] .tu-hero__lead {
+    display: grid;
+    gap: 0.2rem;
+    max-width: 38rem;
+    margin: 1rem auto 0;
+    color: rgba(255, 255, 255, 0.88);
+    font-size: 1.05rem;
+    line-height: 1.8;
+}
+
+html[data-identity-theme="taibah-green"] .tu-hero__search {
+    display: grid;
+    grid-template-columns: 11.5rem minmax(0, 1fr) auto;
+    gap: 0;
+    max-width: 720px;
+    margin: 1.75rem auto 0;
+    background: #ffffff;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+html[data-identity-theme="taibah-green"] .tu-hero__search select,
+html[data-identity-theme="taibah-green"] .tu-hero__search input {
+    height: 3.15rem;
+    border: 0;
+    background: #ffffff;
+    color: #161616;
+    font: inherit;
+    font-size: 0.95rem;
+    padding-inline: 0.95rem;
+    outline: none;
+}
+
+html[data-identity-theme="taibah-green"] .tu-hero__search select {
+    border-inline-end: 1px solid #e5e7eb;
+}
+
+html[data-identity-theme="taibah-green"] .tu-hero__search button {
+    border: 0;
+    background: #161616;
+    color: #ffffff;
+    padding-inline: 1.35rem;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+html[data-identity-theme="taibah-green"] .tu-hero__search button:hover {
+    background: #000000;
+}
+
+html[data-identity-theme="taibah-green"] .tu-hero__actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.25rem;
+    margin-top: 1.15rem;
+}
+
+html[data-identity-theme="taibah-green"] .tu-hero__btn,
+html[data-identity-theme="taibah-green"] .tu-hero__textlink {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+html[data-identity-theme="taibah-green"] .tu-hero__btn {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.5rem;
+    padding: 0 1rem;
+    background: #ffffff;
+    color: #074d31;
+    border-radius: 4px;
+}
+
+html[data-identity-theme="taibah-green"] .tu-hero__btn:hover {
+    color: #000000;
+}
+
+html[data-identity-theme="taibah-green"] .tu-hero__textlink {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
+html[data-identity-theme="taibah-green"] .tu-hero__stats {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin: 1.75rem 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+html[data-identity-theme="taibah-green"] .tu-hero__stats li {
+    display: grid;
+    gap: 0.15rem;
+    min-width: 6.5rem;
+}
+
+html[data-identity-theme="taibah-green"] .tu-hero__stats strong {
+    color: #ffffff;
+    font-size: 1.65rem;
+    font-weight: 700;
+    line-height: 1;
+}
+
+html[data-identity-theme="taibah-green"] .tu-hero__stats span {
+    color: rgba(255, 255, 255, 0.82);
+    font-size: 0.85rem;
+}
+
+html[data-identity-theme="taibah-green"] .tu-hero__sheet {
+    width: min(1120px, calc(100% - 2rem));
+    margin: 1.75rem auto 2.5rem;
+}
+
+html[data-identity-theme="taibah-green"] .tu-hero__campus {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    text-decoration: none;
+}
+
+html[data-identity-theme="taibah-green"] .tu-hero__campus img {
+    display: block;
+    width: 100%;
+    height: 340px;
+    object-fit: cover;
+}
+
+html[data-identity-theme="taibah-green"] .tu-hero__campus span {
+    position: absolute;
+    inset-inline-start: 1rem;
+    bottom: 1rem;
+    padding: 0.35rem 0.7rem;
+    background: #ffffff;
+    color: #161616;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+html[data-identity-theme="taibah-green"] .tu-hero__fields {
+    margin-top: 1.5rem;
+}
+
+html[data-identity-theme="taibah-green"] .tu-hero__fields > p {
+    margin: 0 0 0.85rem;
+    color: #161616;
+    font-size: 1.15rem;
+    font-weight: 700;
+}
+
+html[data-identity-theme="taibah-green"] .tu-hero__field-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0.75rem;
+}
+
+html[data-identity-theme="taibah-green"] .tu-hero__field-grid a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    min-height: 3.4rem;
+    padding: 0.75rem 0.95rem;
+    border: 1px solid #e5e7eb;
+    background: #ffffff;
+    color: #161616;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+html[data-identity-theme="taibah-green"] .tu-hero__field-grid a:hover {
+    border-color: #074d31;
+    color: #074d31;
+}
+
+html[data-identity-theme="taibah-green"] .tu-hero__field-grid b {
+    color: #074d31;
+    font-weight: 700;
+}
+
+html[data-identity-theme="taibah-green"] .tu-hero__field-grid a.is-all {
+    background: #074d31;
+    border-color: #074d31;
+    color: #ffffff;
+}
+
+html[data-identity-theme="taibah-green"] .tu-hero__field-grid a.is-all:hover {
+    background: #000000;
+    border-color: #000000;
+    color: #ffffff;
+}
+
+@media (max-width: 900px) {
+    html[data-identity-theme="taibah-green"] .tu-hero__search {
+        grid-template-columns: 1fr;
+    }
+
+    html[data-identity-theme="taibah-green"] .tu-hero__search select {
+        border-inline-end: 0;
+        border-bottom: 1px solid #e5e7eb;
+    }
+
+    html[data-identity-theme="taibah-green"] .tu-hero__search button {
+        height: 3.15rem;
+    }
+
+    html[data-identity-theme="taibah-green"] .tu-hero__field-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    html[data-identity-theme="taibah-green"] .tu-hero__campus img {
+        height: 220px;
+    }
+}
+
+@media (max-width: 640px) {
+    html[data-identity-theme="taibah-green"] .tu-hero__banner {
+        padding-top: 2.25rem;
+    }
+
+    html[data-identity-theme="taibah-green"] .tu-hero__stats {
+        flex-wrap: wrap;
+        gap: 1rem 1.5rem;
+    }
+
+    html[data-identity-theme="taibah-green"] .tu-hero__field-grid {
+        grid-template-columns: 1fr;
+    }
+}

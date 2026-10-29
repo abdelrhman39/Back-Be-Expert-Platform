@@ -1,0 +1,941 @@
+/* جامعة طيبة — أخضر #074d31، أبيض، أسود. نظام التصميم السعودي. */
+
+html[data-identity-theme="taibah-green"] {
+    --primary: #074d31;
+    --sa-green: #074d31;
+    --sa-green-dark: #000000;
+    --sa-green-light: #074d31;
+    --secondary: #161616;
+    --sa-gold: #161616;
+    --atelier-gold: #074d31;
+    --atelier-deep: #074d31;
+    --atelier-ink: #161616;
+    --sa-ink: #161616;
+    --sa-mist: #ffffff;
+    --np-hero-green: #074d31;
+    --np-hero-green-mid: #074d31;
+    --np-hero-gold: #ffffff;
+    --np-hero-overlay-rgb: 7, 77, 49;
+    --np-hero-primary-rgb: 7, 77, 49;
+    --np-hero-accent-rgb: 255, 255, 255;
+    --platform-footer-bg: #161616;
+    --platform-footer-text: #ffffff;
+    --platform-header-bg: #ffffff;
+    --platform-header-nav-color: #161616;
+    --platform-header-nav-hover: #074d31;
+    --sa-neutral-900: #161616;
+    --sa-neutral-700: #384250;
+    --sa-neutral-500: #6c737f;
+    --sa-neutral-300: #d2d6db;
+    --sa-neutral-200: #e5e7eb;
+    --sa-neutral-100: #f3f4f6;
+    --sa-neutral-50: #ffffff;
+}
+
+html[data-identity-theme="taibah-green"] body {
+    font-family: "IBM Plex Sans Arabic", "IBM Plex Sans", sans-serif;
+    color: #161616;
+    background-color: #ffffff;
+    letter-spacing: 0;
+}
+
+html[data-identity-theme="taibah-green"] .sa-govbar {
+    background: #f3f4f6;
+    border-bottom: 1px solid #e5e7eb;
+    color: #161616;
+    min-height: 40px;
+}
+
+html[data-identity-theme="taibah-green"] .sa-govbar__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    width: min(100%, 1440px);
+    margin-inline: auto;
+    padding: 0.45rem 1.25rem;
+    font-size: 0.95rem;
+    font-weight: 700;
+    line-height: 1.4;
+    color: #000000;
+}
+
+html[data-identity-theme="taibah-green"] .sa-govbar__contacts,
+html[data-identity-theme="taibah-green"] .sa-govbar__social {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    min-width: 0;
+}
+
+html[data-identity-theme="taibah-green"] .sa-govbar__contact,
+html[data-identity-theme="taibah-green"] .sa-govbar__social-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: #000000;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+html[data-identity-theme="taibah-green"] .sa-govbar__label {
+    color: #384250;
+    font-size: 0.78rem;
+    font-weight: 600;
+}
+
+html[data-identity-theme="taibah-green"] .sa-govbar__contact i {
+    color: #074d31;
+    font-size: 0.9rem;
+}
+
+html[data-identity-theme="taibah-green"] .sa-govbar__contact:hover {
+    color: #074d31;
+}
+
+html[data-identity-theme="taibah-green"] .sa-govbar__social {
+    gap: 0.35rem;
+}
+
+html[data-identity-theme="taibah-green"] .sa-govbar__social-link {
+    justify-content: center;
+    width: 1.75rem;
+    height: 1.75rem;
+    border-radius: 4px;
+}
+
+html[data-identity-theme="taibah-green"] .sa-govbar__social-link:hover {
+    background: #074d31;
+    color: #ffffff;
+}
+
+html[data-identity-theme="taibah-green"] .float-actions-rail .float-mail,
+html[data-identity-theme="taibah-green"] .float-actions-rail .float-call,
+html[data-identity-theme="taibah-green"] .float-actions-rail .float-whts,
+html[data-identity-theme="taibah-green"] .float-actions-rail .back-to-top-icon,
+html[data-identity-theme="taibah-green"] .float-actions-rail .ai-chat-fab,
+html[data-identity-theme="taibah-green"].use-domain-a11y .float-actions-rail .domain-a11y-fab {
+    background: #074d31 !important;
+    background-image: none !important;
+    border-color: #ffffff !important;
+    box-shadow: 0 8px 18px rgba(7, 77, 49, 0.28) !important;
+    color: #ffffff !important;
+}
+
+html[data-identity-theme="taibah-green"] .header.new-header,
+html[data-identity-theme="taibah-green"] .header.fixed,
+html[data-identity-theme="taibah-green"] .header.not-home,
+html[data-identity-theme="taibah-green"] .header.profile-header {
+    background: #ffffff !important;
+    border-bottom: 1px solid #e5e7eb !important;
+    box-shadow: none !important;
+}
+
+html[data-identity-theme="taibah-green"] .header .main-nav li a,
+html[data-identity-theme="taibah-green"] .header .main-nav > li > a.nav-link {
+    color: #161616 !important;
+    font-size: 1rem !important;
+    font-weight: 500 !important;
+    letter-spacing: 0 !important;
+}
+
+html[data-identity-theme="taibah-green"] .header .main-nav li a:hover,
+html[data-identity-theme="taibah-green"] .header .main-nav > li.active > a {
+    color: #074d31 !important;
+}
+
+html[data-identity-theme="taibah-green"] .site-header-actions__lang,
+html[data-identity-theme="taibah-green"] .site-header-actions__tools,
+html[data-identity-theme="taibah-green"] .site-header-actions__icon {
+    border-radius: 4px !important;
+    border-color: #d2d6db !important;
+    background: #ffffff !important;
+    color: #161616 !important;
+    box-shadow: none !important;
+}
+
+html[data-identity-theme="taibah-green"] .header .site-header-actions__login.btn-primary,
+html[data-identity-theme="taibah-green"] .btn-primary,
+html[data-identity-theme="taibah-green"] .np-home-hero__submit,
+html[data-identity-theme="taibah-green"] .np-home-hero__panel-cta,
+html[data-identity-theme="taibah-green"] .diploma-list-card__btn--solid {
+    background: #074d31 !important;
+    border-color: #074d31 !important;
+    color: #ffffff !important;
+    border-radius: 4px !important;
+    font-weight: 500 !important;
+    box-shadow: none !important;
+}
+
+html[data-identity-theme="taibah-green"] .header .site-header-actions__login.btn-primary:hover,
+html[data-identity-theme="taibah-green"] .btn-primary:hover,
+html[data-identity-theme="taibah-green"] .np-home-hero__submit:hover,
+html[data-identity-theme="taibah-green"] .np-home-hero__panel-cta:hover,
+html[data-identity-theme="taibah-green"] .diploma-list-card__btn--solid:hover {
+    background: #000000 !important;
+    border-color: #000000 !important;
+    color: #ffffff !important;
+}
+
+/* البطل: عنوان وبحث فقط، بدون البطاقة المكررة أو الزر الثانوي */
+html[data-identity-theme="taibah-green"] .np-home-hero__shade {
+    background:
+        linear-gradient(100deg, rgba(7, 77, 49, 0.9) 0%, rgba(7, 77, 49, 0.62) 52%, rgba(0, 0, 0, 0.28) 100%) !important;
+}
+
+html[data-identity-theme="taibah-green"] .np-home-hero__aside,
+html[data-identity-theme="taibah-green"] .np-home-hero__trust,
+html[data-identity-theme="taibah-green"] .np-home-hero__btn--ghost {
+    display: none !important;
+}
+
+html[data-identity-theme="taibah-green"] .np-home-hero--logistics {
+    min-height: min(68svh, 620px);
+}
+
+html[data-identity-theme="taibah-green"] .np-home-hero--logistics .np-home-hero__container {
+    grid-template-columns: minmax(0, 1fr);
+    max-width: 1180px;
+}
+
+html[data-identity-theme="taibah-green"] .np-home-hero--logistics .np-home-hero__content {
+    padding-bottom: clamp(4.5rem, 8vh, 6rem);
+}
+
+html[data-identity-theme="taibah-green"] .np-home-hero__main {
+    align-self: center;
+    gap: 1.15rem;
+}
+
+html[data-identity-theme="taibah-green"] .tu-hero-tools {
+    display: flex;
+    align-items: stretch;
+    gap: 0.75rem;
+}
+
+html[data-identity-theme="taibah-green"] .tu-hero-tools .np-home-hero__search {
+    flex: 1;
+    min-width: 0;
+    margin: 0;
+}
+
+html[data-identity-theme="taibah-green"] .tu-hero-tools .np-home-hero__btn--solid {
+    align-self: stretch;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 9.5rem;
+    white-space: nowrap;
+}
+
+html[data-identity-theme="taibah-green"] .tu-fields-rail {
+    overflow: hidden;
+    margin-top: 0.15rem;
+    mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
+}
+
+html[data-identity-theme="taibah-green"] .tu-fields-rail__track {
+    display: flex;
+    width: max-content;
+    animation: tuFieldsSlide 32s linear infinite;
+}
+
+html[data-identity-theme="taibah-green"] .tu-fields-rail:hover .tu-fields-rail__track {
+    animation-play-state: paused;
+}
+
+html[data-identity-theme="taibah-green"] .tu-fields-rail__set {
+    display: flex;
+    gap: 0.7rem;
+    padding-inline-end: 0.7rem;
+}
+
+html[data-identity-theme="taibah-green"] .tu-fields-rail__item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    min-height: 3.35rem;
+    padding: 0.4rem 0.9rem 0.4rem 0.45rem;
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.96);
+    color: #161616;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+html[data-identity-theme="taibah-green"] .tu-fields-rail__item:hover {
+    color: #074d31;
+}
+
+html[data-identity-theme="taibah-green"] .tu-fields-rail__icon {
+    display: grid;
+    place-items: center;
+    width: 2.35rem;
+    height: 2.35rem;
+    border-radius: 999px;
+    background: #f4f8f5;
+}
+
+html[data-identity-theme="taibah-green"] .tu-fields-rail__icon img {
+    width: 1.25rem;
+    height: 1.25rem;
+    object-fit: contain;
+}
+
+html[data-identity-theme="taibah-green"] .tu-fields-rail__item strong {
+    color: inherit;
+    font-size: 0.92rem;
+    font-weight: 700;
+}
+
+@keyframes tuFieldsSlide {
+    from { transform: translateX(0); }
+    to { transform: translateX(50%); }
+}
+
+@media (max-width: 767.98px) {
+    html[data-identity-theme="taibah-green"] .tu-hero-tools {
+        flex-direction: column;
+    }
+}
+
+html[data-identity-theme="taibah-green"] .tu-fields__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+}
+
+html[data-identity-theme="taibah-green"] .tu-fields__head h2 {
+    margin: 0;
+    color: #074d31 !important;
+    font-size: 1.15rem;
+    font-weight: 700;
+}
+
+html[data-identity-theme="taibah-green"] .tu-fields__head a {
+    color: #074d31;
+    font-size: 0.86rem;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+html[data-identity-theme="taibah-green"] .tu-fields__head a:hover {
+    color: #000000;
+}
+
+html[data-identity-theme="taibah-green"] .tu-fields__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.65rem;
+    flex: 1;
+}
+
+html[data-identity-theme="taibah-green"] .tu-fields__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+    min-height: 6.4rem;
+    padding: 0.75rem 0.45rem;
+    border-radius: 16px;
+    background: #f4f8f5;
+    color: #161616;
+    text-align: center;
+    text-decoration: none;
+}
+
+html[data-identity-theme="taibah-green"] .tu-fields__item:hover {
+    background: #ffffff;
+    box-shadow: 0 10px 22px rgba(7, 77, 49, 0.12);
+    color: #161616;
+}
+
+html[data-identity-theme="taibah-green"] .tu-fields__icon {
+    display: grid;
+    place-items: center;
+    width: 3.15rem;
+    height: 3.15rem;
+    border-radius: 999px;
+    background: #ffffff;
+    border: 1px solid rgba(7, 77, 49, 0.12);
+}
+
+html[data-identity-theme="taibah-green"] .tu-fields__icon img {
+    width: 1.7rem;
+    height: 1.7rem;
+    object-fit: contain;
+}
+
+html[data-identity-theme="taibah-green"] .tu-fields__item strong {
+    color: #161616;
+    font-size: 0.86rem;
+    font-weight: 700;
+    line-height: 1.45;
+}
+
+@media (max-width: 991.98px) {
+    html[data-identity-theme="taibah-green"] .np-home-hero--logistics .np-home-hero__container {
+        grid-template-columns: 1fr;
+        max-width: 40rem;
+    }
+}
+
+html[data-identity-theme="taibah-green"] .np-home-hero--logistics .np-home-hero__brand {
+    font-size: clamp(2.2rem, 4.2vw, 3.35rem);
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+html[data-identity-theme="taibah-green"] .np-home-hero--logistics .np-home-hero__lead {
+    max-width: 34rem;
+    font-size: 1.05rem;
+    line-height: 1.85;
+    opacity: 0.92;
+}
+
+html[data-identity-theme="taibah-green"] .np-home-hero--logistics .np-home-hero__search {
+    animation: none;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.12);
+}
+
+html[data-identity-theme="taibah-green"] .np-home-hero,
+html[data-identity-theme="taibah-green"] .np-home-hero__brand,
+html[data-identity-theme="taibah-green"] .np-home-hero__lead,
+html[data-identity-theme="taibah-green"] .np-home-hero__trust,
+html[data-identity-theme="taibah-green"] .np-home-hero__eyebrow {
+    color: #ffffff;
+}
+
+html[data-identity-theme="taibah-green"] .np-home-hero__eyebrow {
+    color: #ffffff;
+    background: transparent;
+    border: 0;
+    padding: 0;
+    letter-spacing: 0;
+}
+
+html[data-identity-theme="taibah-green"] .np-home-hero__eyebrow::after,
+html[data-identity-theme="taibah-green"] .np-home-hero__brand::after {
+    background: #ffffff;
+}
+
+html[data-identity-theme="taibah-green"] .np-home-hero__btn--solid {
+    min-height: 2.75rem;
+    padding: 0.55rem 1.15rem;
+    border-radius: 4px;
+    background: #ffffff;
+    color: #161616;
+    font-weight: 500;
+    box-shadow: none;
+}
+
+html[data-identity-theme="taibah-green"] .np-home-hero__btn--solid:hover {
+    background: #f3f4f6;
+    color: #000000;
+    filter: none;
+}
+
+html[data-identity-theme="taibah-green"] .np-home-hero__btn--ghost {
+    color: #ffffff;
+}
+
+html[data-identity-theme="taibah-green"] .np-home-hero__play {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 4px;
+    background: #ffffff;
+    color: #074d31;
+}
+
+html[data-identity-theme="taibah-green"] .np-home-hero__play::after {
+    display: none;
+}
+
+html[data-identity-theme="taibah-green"] .np-home-hero__search,
+html[data-identity-theme="taibah-green"] .np-home-hero--logistics .np-home-hero__search,
+html[data-identity-theme="taibah-green"] .np-home-hero__panel {
+    background: #ffffff !important;
+    border: 1px solid #e5e7eb;
+    border-radius: 16px;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+    color: #161616;
+}
+
+html[data-identity-theme="taibah-green"] .np-home-hero__panel-kicker {
+    color: #074d31;
+}
+
+html[data-identity-theme="taibah-green"] .np-home-hero__panel-title,
+html[data-identity-theme="taibah-green"] .np-home-hero__facts,
+html[data-identity-theme="taibah-green"] .np-home-hero__facts strong {
+    color: #161616 !important;
+}
+
+html[data-identity-theme="taibah-green"] .np-home-hero__facts i {
+    color: #074d31;
+}
+
+html[data-identity-theme="taibah-green"] .np-home-hero__control select,
+html[data-identity-theme="taibah-green"] .np-home-hero__control input,
+html[data-identity-theme="taibah-green"] .form-control,
+html[data-identity-theme="taibah-green"] input[type="text"],
+html[data-identity-theme="taibah-green"] input[type="search"],
+html[data-identity-theme="taibah-green"] input[type="email"],
+html[data-identity-theme="taibah-green"] input[type="password"],
+html[data-identity-theme="taibah-green"] select,
+html[data-identity-theme="taibah-green"] textarea {
+    border-radius: 4px;
+    border-color: #9da4ae;
+    color: #161616;
+    background: #ffffff;
+}
+
+html[data-identity-theme="taibah-green"] input:focus,
+html[data-identity-theme="taibah-green"] select:focus,
+html[data-identity-theme="taibah-green"] textarea:focus {
+    border-color: #161616;
+    outline: 2px solid #161616;
+    outline-offset: 2px;
+    box-shadow: none;
+}
+
+/* البطاقات والأقسام: أبيض وأسود، واللون يظهر في الزر والخط فقط */
+html[data-identity-theme="taibah-green"] .home-catalog-slider-wrap--cards .diploma-list-card,
+html[data-identity-theme="taibah-green"] .diploma-list-card,
+html[data-identity-theme="taibah-green"] .atelier-program,
+html[data-identity-theme="taibah-green"] .diploma-card,
+html[data-identity-theme="taibah-green"] .catalog-card,
+html[data-identity-theme="taibah-green"] .cms-features__card,
+html[data-identity-theme="taibah-green"] .np-home-section,
+html[data-identity-theme="taibah-green"] .atelier-section {
+    background: #ffffff;
+    color: #161616;
+    border: 1px solid #d2d6db;
+}
+
+html[data-identity-theme="taibah-green"] .diploma-list-card__title,
+html[data-identity-theme="taibah-green"] .diploma-list-card__title a,
+html[data-identity-theme="taibah-green"] .cms-features__card h3,
+html[data-identity-theme="taibah-green"] h1,
+html[data-identity-theme="taibah-green"] h2,
+html[data-identity-theme="taibah-green"] h3 {
+    color: #161616;
+}
+
+html[data-identity-theme="taibah-green"] .np-home-hero h1,
+html[data-identity-theme="taibah-green"] .np-home-hero h2,
+html[data-identity-theme="taibah-green"] .np-home-hero p {
+    color: #ffffff;
+}
+
+html[data-identity-theme="taibah-green"] .np-home-hero__panel h2,
+html[data-identity-theme="taibah-green"] .np-home-hero__panel p,
+html[data-identity-theme="taibah-green"] .np-home-hero__search,
+html[data-identity-theme="taibah-green"] .np-home-hero__search * {
+    color: #161616;
+}
+
+html[data-identity-theme="taibah-green"] .np-home-hero__search .np-home-hero__submit,
+html[data-identity-theme="taibah-green"] .np-home-hero__search .np-home-hero__submit * {
+    color: #ffffff !important;
+}
+
+html[data-identity-theme="taibah-green"] .home-catalog-slider-wrap--cards .diploma-list-card__media::after {
+    background: #074d31;
+}
+
+html[data-identity-theme="taibah-green"] .cms-features--home .cms-features__card--featured {
+    background: #074d31;
+    color: #ffffff;
+    box-shadow: none;
+}
+
+html[data-identity-theme="taibah-green"] .cms-features--home .cms-features__card--featured h3,
+html[data-identity-theme="taibah-green"] .cms-features--home .cms-features__card--featured p,
+html[data-identity-theme="taibah-green"] .cms-features--home .cms-features__card--featured .cms-features__card-body {
+    color: #ffffff;
+}
+
+html[data-identity-theme="taibah-green"] .np-cta__panel {
+    background: #074d31;
+    color: #ffffff;
+    border-radius: 16px;
+}
+
+html[data-identity-theme="taibah-green"] .np-cta__panel .np-cta__title,
+html[data-identity-theme="taibah-green"] .np-cta__panel .np-cta__body,
+html[data-identity-theme="taibah-green"] .np-cta--banner .np-cta__eyebrow {
+    color: #ffffff !important;
+    text-shadow: none;
+}
+
+html[data-identity-theme="taibah-green"] .footer.footer--atelier {
+    --footer-ink: #ffffff;
+    --footer-muted: rgba(255, 255, 255, 0.72);
+    --footer-line: rgba(255, 255, 255, 0.16);
+    --footer-gold: #074d31;
+    --footer-navy: #161616;
+    background: #161616 !important;
+    color: #ffffff;
+    border-top: 4px solid #074d31;
+}
+
+html[data-identity-theme="taibah-green"] .footer.footer--atelier .footer-widget h3,
+html[data-identity-theme="taibah-green"] .footer.footer--atelier a,
+html[data-identity-theme="taibah-green"] .footer.footer--atelier p {
+    color: #ffffff;
+}
+
+html[data-identity-theme="taibah-green"] .footer.footer--atelier a:hover {
+    color: #ffffff !important;
+    text-decoration: underline;
+}
+
+html[data-identity-theme="taibah-green"] .footer.footer--atelier .footer-widget h3::after,
+html[data-identity-theme="taibah-green"] .footer-widget .menu-items li::before {
+    background: #074d31 !important;
+}
+
+html[data-identity-theme="taibah-green"] .footer.footer--atelier .location-list li h6,
+html[data-identity-theme="taibah-green"] .footer.footer--atelier .location-list li p,
+html[data-identity-theme="taibah-green"] .footer.footer--atelier .location-list li p a {
+    color: #ffffff !important;
+}
+
+html[data-identity-theme="taibah-green"] .footer.footer--atelier .location-list li p a {
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+html[data-identity-theme="taibah-green"] .footer.footer--atelier .location-list .footer-contact-icon,
+html[data-identity-theme="taibah-green"] .footer.footer--atelier .location-list li > span {
+    color: #ffffff !important;
+    background: #074d31 !important;
+    border-color: #074d31 !important;
+}
+
+html[data-identity-theme="taibah-green"] a {
+    text-underline-offset: 3px;
+}
+
+html[data-identity-theme="taibah-green"] .np-paths {
+    background: #f7f8f7;
+    padding-block: clamp(3.25rem, 6vw, 5rem);
+}
+
+html[data-identity-theme="taibah-green"] .np-paths__intro {
+    max-width: 36rem;
+    margin-bottom: clamp(1.5rem, 3vw, 2.25rem);
+}
+
+html[data-identity-theme="taibah-green"] .np-paths__title {
+    color: #074d31;
+    font-size: clamp(1.7rem, 3vw, 2.15rem);
+    font-weight: 700;
+}
+
+html[data-identity-theme="taibah-green"] .np-paths__lead {
+    color: #384250;
+    font-size: 1rem;
+    line-height: 1.8;
+}
+
+html[data-identity-theme="taibah-green"] .np-paths__grid {
+    align-items: stretch;
+    gap: 1.15rem;
+}
+
+html[data-identity-theme="taibah-green"] .np-paths__card {
+    position: relative;
+    gap: 0.8rem;
+    padding: 1.5rem 1.35rem 1.15rem;
+    border: 1px solid #e7e5df;
+    border-radius: 20px;
+    background: #ffffff;
+    box-shadow: none;
+    overflow: hidden;
+}
+
+html[data-identity-theme="taibah-green"] .np-paths__card::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto 0;
+    width: 100%;
+    height: 3px;
+    background: #074d31;
+}
+
+html[data-identity-theme="taibah-green"] .np-paths__card:hover {
+    transform: translateY(-4px);
+    border-color: #074d31;
+    box-shadow: 0 16px 36px rgba(7, 77, 49, 0.1);
+}
+
+html[data-identity-theme="taibah-green"] .np-paths__icon {
+    width: 3.15rem;
+    height: 3.15rem;
+    margin-top: 0.35rem;
+    border-radius: 12px;
+    background: #074d31;
+    color: #ffffff;
+    font-size: 1.15rem;
+}
+
+html[data-identity-theme="taibah-green"] .np-paths__card-title {
+    color: #161616;
+    font-size: 1.12rem;
+    font-weight: 700;
+}
+
+html[data-identity-theme="taibah-green"] .np-paths__card-body {
+    color: #384250;
+    font-size: 0.92rem;
+    line-height: 1.8;
+}
+
+html[data-identity-theme="taibah-green"] .np-paths__link {
+    width: 100%;
+    margin-top: auto;
+    padding-top: 0.85rem;
+    border-top: 1px solid #e7e5df;
+    justify-content: space-between;
+    color: #074d31;
+    font-weight: 700;
+}
+
+html[data-identity-theme="taibah-green"] .np-paths__link:hover {
+    color: #000000;
+    gap: 0.55rem;
+}
+
+@media (max-width: 640px) {
+    html[data-identity-theme="taibah-green"] .sa-govbar__inner {
+        font-size: 0.75rem;
+        padding-inline: 0.85rem;
+    }
+}
+
+html[data-identity-theme="taibah-green"] .lg-fields-section--saudi {
+    background: #f7f8f7;
+    padding-block: clamp(3rem, 6vw, 4.5rem);
+}
+
+html[data-identity-theme="taibah-green"] .lg-fields-section--saudi .section-header {
+    text-align: center;
+    max-width: 40rem;
+    margin-inline: auto;
+}
+
+html[data-identity-theme="taibah-green"] .lg-fields-section--saudi h2 {
+    color: #074d31;
+    font-size: clamp(1.7rem, 3vw, 2.15rem);
+    font-weight: 700;
+}
+
+html[data-identity-theme="taibah-green"] .lg-fields-section--saudi .home-catalog-section__lead {
+    color: #384250;
+    margin-top: 0.55rem;
+}
+
+html[data-identity-theme="taibah-green"] .lg-fields-section--saudi .lg-fields-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.15rem;
+    margin-top: 2rem;
+}
+
+@media (min-width: 768px) {
+    html[data-identity-theme="taibah-green"] .lg-fields-section--saudi .lg-fields-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+@media (min-width: 1100px) {
+    html[data-identity-theme="taibah-green"] .lg-fields-section--saudi .lg-fields-grid {
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+    }
+}
+
+html[data-identity-theme="taibah-green"] .lg-fields-section--saudi .lg-fields-card {
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0.85rem;
+    min-height: 14.5rem;
+    padding: 1.55rem 1rem 1.2rem;
+    border: 1px solid rgba(7, 77, 49, 0.1);
+    border-radius: 24px;
+    background: linear-gradient(180deg, #f4f8f5 0%, #ffffff 46%);
+    box-shadow: 0 10px 24px rgba(22, 22, 22, 0.04);
+    text-align: center;
+}
+
+html[data-identity-theme="taibah-green"] .lg-fields-section--saudi .lg-fields-card:hover {
+    transform: translateY(-6px);
+    border-color: #074d31;
+    box-shadow: 0 18px 36px rgba(7, 77, 49, 0.12);
+    color: #161616;
+}
+
+html[data-identity-theme="taibah-green"] .lg-fields-section--saudi .lg-fields-card__icon {
+    width: 5rem;
+    height: 5rem;
+    border-radius: 999px;
+    background: #ffffff;
+    border: 1px solid rgba(7, 77, 49, 0.14);
+    box-shadow: 0 8px 18px rgba(7, 77, 49, 0.08);
+}
+
+html[data-identity-theme="taibah-green"] .lg-fields-section--saudi .lg-fields-card:hover .lg-fields-card__icon {
+    background: #e7f2eb;
+    border-color: #074d31;
+}
+
+html[data-identity-theme="taibah-green"] .lg-fields-section--saudi .lg-fields-card__icon img {
+    width: 2.55rem;
+    height: 2.55rem;
+}
+
+html[data-identity-theme="taibah-green"] .lg-fields-section--saudi .lg-fields-card h3 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 2.9em;
+    margin: 0;
+    color: #161616;
+    font-size: 0.98rem;
+    font-weight: 700;
+    line-height: 1.45;
+    text-wrap: balance;
+}
+
+html[data-identity-theme="taibah-green"] .lg-fields-section--saudi .lg-fields-card__meta {
+    display: inline-flex;
+    align-items: center;
+    margin-top: auto;
+    padding: 0.2rem 0.65rem;
+    border-radius: 999px;
+    background: #ffffff;
+    color: #074d31;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+html[data-identity-theme="taibah-green"] .lg-fields-section--saudi .home-catalog-section__cta {
+    text-align: center;
+    margin-top: 1.5rem;
+}
+
+html[data-identity-theme="taibah-green"] .lg-fields-section__link {
+    color: #074d31;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+html[data-identity-theme="taibah-green"] .lg-fields-section__link:hover {
+    color: #000000;
+}
+
+html[data-identity-theme="taibah-green"] .tu-accredit {
+    background: #074d31;
+    color: #ffffff;
+    padding-block: clamp(3rem, 6vw, 4.75rem);
+}
+
+html[data-identity-theme="taibah-green"] .tu-accredit__head {
+    text-align: center;
+    max-width: 38rem;
+    margin: 0 auto 1.75rem;
+}
+
+html[data-identity-theme="taibah-green"] .tu-accredit__head h2 {
+    margin: 0;
+    color: #ffffff;
+    font-size: clamp(1.7rem, 3vw, 2.15rem);
+    font-weight: 700;
+}
+
+html[data-identity-theme="taibah-green"] .tu-accredit__head p {
+    margin: 0.55rem 0 0;
+    color: rgba(255, 255, 255, 0.82);
+}
+
+html[data-identity-theme="taibah-green"] .tu-accredit__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.9rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+@media (min-width: 900px) {
+    html[data-identity-theme="taibah-green"] .tu-accredit__grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+@media (min-width: 1200px) {
+    html[data-identity-theme="taibah-green"] .tu-accredit__grid {
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+    }
+}
+
+html[data-identity-theme="taibah-green"] .tu-accredit__card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.7rem;
+    min-height: 13.5rem;
+    padding: 1.35rem 0.85rem 1.1rem;
+    border-radius: 18px;
+    background: #ffffff;
+    color: #161616;
+    text-align: center;
+}
+
+html[data-identity-theme="taibah-green"] .tu-accredit__num {
+    position: absolute;
+    top: 0.75rem;
+    inset-inline-end: 0.75rem;
+    width: 1.55rem;
+    height: 1.55rem;
+    display: grid;
+    place-items: center;
+    border-radius: 999px;
+    background: #074d31;
+    color: #ffffff;
+    font-size: 0.78rem;
+    font-weight: 700;
+}
+
+html[data-identity-theme="taibah-green"] .tu-accredit__art {
+    display: grid;
+    place-items: center;
+    width: 4.6rem;
+    height: 4.6rem;
+    margin-top: 0.45rem;
+    transition: transform 0.25s ease;
+}
+
+html[data-identity-theme="taibah-green"] .tu-accredit__art svg {
+    width: 4.6rem;
+    height: 4.6rem;
+}
+
+html[data-identity-theme="taibah-green"] .tu-accredit__card:hover .tu-accredit__art {
+    transform: translateY(-3px);
+}
+
+html[data-identity-theme="taibah-green"] .tu-accredit__card strong {
+    color: #161616;
+    font-size: 0.98rem;
+}
+
+html[data-identity-theme="taibah-green"] .tu-accredit__card span {
+    color: #384250;
+    font-size: 0.78rem;
+    line-height: 1.55;
+}

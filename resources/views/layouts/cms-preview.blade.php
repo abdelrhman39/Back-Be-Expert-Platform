@@ -18,16 +18,17 @@
     <link rel="stylesheet" href="{{ static_asset('assets/components.css') }}">
     <link rel="stylesheet" href="{{ static_asset('css/site-enhancements.css') }}">
     <link rel="stylesheet" href="{{ asset('css/site-header.css') }}?v=17">
-    <link rel="stylesheet" href="{{ asset('css/home-hero.css') }}?v=12">
+    <link rel="stylesheet" href="{{ asset('css/home-hero.css') }}?v=13">
     <link rel="stylesheet" href="{{ asset('css/home-mvg.css') }}?v=2">
-    <link rel="stylesheet" href="{{ asset('css/home-catalog-slider.css') }}?v=11">
+    <link rel="stylesheet" href="{{ asset('css/home-catalog-slider.css') }}?v=12">
     <link rel="stylesheet" href="{{ asset('css/home-diplomas.css') }}?v=4">
     <link rel="stylesheet" href="{{ asset('css/home-identity-blocks.css') }}?v=4">
     @include('partials.platform-theme')
-    <link rel="stylesheet" href="{{ asset('css/public-atelier.css') }}?v=17">
-    <link rel="stylesheet" href="{{ asset('css/home-features.css') }}?v=1">
+    <link rel="stylesheet" href="{{ asset('css/public-atelier.css') }}?v=18">
+    <link rel="stylesheet" href="{{ asset('css/home-features.css') }}?v=2">
     <link rel="stylesheet" href="{{ static_asset('assets/domain-a11y-panel.css') }}">
     <link rel="stylesheet" href="{{ asset('css/site-footer.css') }}?v=1">
+    <link rel="stylesheet" href="{{ asset('css/taibah-saudi.css') }}?v=15">
     <style id="theia-sticky-sidebar-stylesheet-TSS">
         .theiaStickySidebar:after {
             content: "";
@@ -69,7 +70,7 @@
     <script src="{{ static_asset('assets/muneer.min.js') }}" async></script>
     <script src="{{ asset('js/home-hero.js') }}?v=1" defer></script>
     <script src="{{ asset('js/home-catalog-slider.js') }}?v=7" defer></script>
-    <script src="{{ asset('js/logo-marquee.js') }}?v=1" defer></script>
+    <script src="{{ asset('js/logo-marquee.js') }}?v=2" defer></script>
 
     @livewireScripts
     @include('partials.commerce-bridge')

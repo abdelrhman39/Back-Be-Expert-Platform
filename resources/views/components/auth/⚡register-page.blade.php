@@ -26,6 +26,8 @@ class extends Component
 
     public string $phone = '';
 
+    public string $phoneDialIso = \App\Support\CountryDialCodes::DEFAULT_ISO;
+
     public string $email = '';
 
     public string $password = '';
@@ -52,6 +54,7 @@ class extends Component
 
     public function mount(AcademicRegistrationService $registration): void
     {
+        $this->phoneDialIso = \App\Support\VisitorDialCode::iso(request());
         $this->academicFlow = InstallmentSettings::academicRegistrationEnabled();
         $isAcademicRoute = request()->routeIs('academic-registration');
 
@@ -165,7 +168,7 @@ class extends Component
             'studyPeriod' => 'فترة الدراسة',
         ]);
 
-        $phoneE164 = \App\Support\PhoneNormalizer::toE164($validated['phone']);
+        $phoneE164 = \App\Support\PhoneNormalizer::toE164($validated['phone'], $this->phoneDialIso);
 
         if (\App\Models\User::query()->where('phone', $phoneE164)->exists()) {
             $this->addError('phone', 'رقم الجوال مستخدم مسبقاً.');
@@ -406,8 +409,8 @@ class extends Component
                                         </div>
                                         <div class="col-md-6">
                                             <label class="form-label auth-label" for="reg-mobile">{{ $t('phone') }} <span class="text-danger">*</span></label>
-                                            <div class="auth-field input-group input-group-lg">
-                                                <span class="input-group-text auth-field__prefix" dir="ltr">🇸🇦 +966</span>
+                                            <div class="auth-field input-group input-group-lg auth-field--phone" dir="ltr">
+                                                @include('partials.auth.country-dial-picker')
                                                 <input type="tel" class="form-control @error('phone') is-invalid @enderror" id="reg-mobile" wire:model="phone" inputmode="numeric" placeholder="5xxxxxxxx" autocomplete="tel" @disabled(auth()->check())>
                                             </div>
                                             @error('phone')<div class="invalid-feedback d-block">{{ $message }}</div>@enderror
@@ -674,7 +677,7 @@ class extends Component
 @push('styles')
     <link rel="stylesheet" href="{{ static_asset('css/portal-shell.css') }}">
     <link rel="stylesheet" href="{{ asset('css/portal-dashboard.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/auth-screen.css') }}?v=1">
+    <link rel="stylesheet" href="{{ asset('css/auth-screen.css') }}?v=2">
 @endpush
 
 @push('scripts')

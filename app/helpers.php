@@ -20,6 +20,12 @@ if (! function_exists('platform_campus_path')) {
     /** Relative campus photo path used by CMS blocks and public banners. */
     function platform_campus_path(string $which = 'aerial'): string
     {
+        $fromIdentity = \App\Support\IdentityThemes::campusPath($which);
+
+        if ($fromIdentity) {
+            return $fromIdentity;
+        }
+
         return $which === 'entrance'
             ? 'assets/branding/aou-campus-entrance.jpg'
             : 'assets/branding/aou-campus-aerial.jpg';
@@ -57,7 +63,7 @@ if (! function_exists('cms_media_url')) {
      */
     function cms_media_url(?string $path, string $fallback = ''): string
     {
-        $path = trim((string) $path);
+        $path = trim((string) \App\Support\IdentityOverlay::rewriteAssetPath($path));
 
         if ($path === '') {
             return $fallback;
@@ -215,14 +221,15 @@ if (! function_exists('platform_org')) {
     function platform_org(?string $locale = null): string
     {
         $locale ??= app()->getLocale();
+        $branding = \App\Support\IdentityThemes::resolvedBranding();
 
         if ($locale === 'en') {
-            return PlatformSetting::get('platform_org_en', 'Arab Open University')
-                ?: 'Arab Open University';
+            return ($branding['platform_org_en'] ?? null)
+                ?: (PlatformSetting::get('platform_org_en', 'Arab Open University') ?: 'Arab Open University');
         }
 
-        return PlatformSetting::get('platform_org_ar', 'الجامعة العربية المفتوحة')
-            ?: 'الجامعة العربية المفتوحة';
+        return ($branding['platform_org_ar'] ?? null)
+            ?: (PlatformSetting::get('platform_org_ar', 'الجامعة العربية المفتوحة') ?: 'الجامعة العربية المفتوحة');
     }
 }
 

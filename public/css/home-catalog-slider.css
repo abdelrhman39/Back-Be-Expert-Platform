@@ -350,7 +350,7 @@
   border-radius: 999px;
   border: 1px solid #d7dee8;
   background: #fff;
-  color: #002d58;
+  color: var(--primary, #002d58);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -359,8 +359,8 @@
 
 .home-program-nav__btn:hover,
 .home-program-nav__btn:focus-visible {
-  background: #002d58;
-  border-color: #002d58;
+  background: var(--primary, #002d58);
+  border-color: var(--primary, #002d58);
   color: #fff;
 }
 
@@ -392,7 +392,7 @@ html[dir="rtl"] .home-program-nav__btn .fa-chevron-right {
   inset-inline: 0;
   bottom: 0;
   height: 4px;
-  background: linear-gradient(90deg, #002d58 0%, #c5a572 100%);
+  background: linear-gradient(90deg, var(--primary, #002d58) 0%, var(--secondary, #c5a572) 100%);
 }
 
 .home-catalog-slider-wrap--cards .diploma-list-card__media img {
@@ -407,7 +407,7 @@ html[dir="rtl"] .home-program-nav__btn .fa-chevron-right {
 }
 
 .home-catalog-slider-wrap--cards .diploma-list-card__pill {
-  background: rgba(0, 26, 51, 0.88);
+  background: rgba(var(--np-hero-overlay-rgb, 0, 26, 51), 0.88);
 }
 
 .home-catalog-slider-wrap--cards .diploma-list-card__pill--featured,

@@ -40,7 +40,7 @@
                         <svg class="admin-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
                             <path d="M4 6h16v12H4V6z"/><path d="m4 7 8 6 8-6"/>
                         </svg>
-                        <input type="email" id="admin-email" name="email" class="admin-input" placeholder="admin@example.com" autocomplete="username" required>
+                        <input type="email" id="admin-email" name="email" class="admin-input" placeholder="name@example.com" autocomplete="username" required>
                     </div>
                     <span class="admin-field-hint" data-for="admin-email">يرجى إدخال بريد إلكتروني صالح</span>
                 </div>
@@ -75,17 +75,14 @@
                 </button>
             </form>
 
-            <p class="admin-demo-note">
-                بيئة تجريبية: استخدم <code>admin@local.invalid</code> وكلمة المرور <code>Admin@123</code> حتى ربط الخادم.
-            </p>
-
             <div class="admin-login-footer">
                 <a href="../index.html">← العودة إلى الموقع</a>
             </div>
         </div>
     </main>
 
-    <script src="./js/admin-auth.js"></script>
-    <script></script>
+    <script>
+        window.location.replace('/admin/login');
+    </script>
 </body>
 </html>

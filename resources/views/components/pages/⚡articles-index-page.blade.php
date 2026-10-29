@@ -29,6 +29,7 @@ class extends Component
         return app(ArticleCategoryService::class)->active();
     }
 
+    #[Computed]
     public function articles()
     {
         $categoryId = filled($this->category) ? (int) $this->category : null;
@@ -38,6 +39,7 @@ class extends Component
 };
 ?>
 
+<div>
 <section class="breadcrumb-bar">
     <div class="container">
         <nav aria-label="breadcrumb" class="page-breadcrumb">
@@ -111,3 +113,4 @@ class extends Component
         </div>
     </div>
 </section>
+</div>

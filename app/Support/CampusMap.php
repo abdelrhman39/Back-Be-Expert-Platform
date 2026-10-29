@@ -4,10 +4,12 @@ namespace App\Support;
 
 class CampusMap
 {
-    /** Google Maps embed for Arab Open University — Saudi Arabia (Riyadh, Hittin). */
     public static function embedUrl(): string
     {
-        return 'https://www.google.com/maps?q='.rawurlencode('الجامعة العربية المفتوحة السعودية، حطين، الرياض').'&hl=ar&z=16&output=embed';
+        $query = IdentityThemes::resolvedBranding()['map_query']
+            ?? 'الجامعة العربية المفتوحة السعودية، حطين، الرياض';
+
+        return 'https://www.google.com/maps?q='.rawurlencode((string) $query).'&hl=ar&z=16&output=embed';
     }
 
     public static function isLegacyHailEmbed(?string $url): bool

@@ -97,4 +97,15 @@ class CatalogPublicProgramsTest extends TestCase
             ->assertSee('Digital Marketing Professional Certificate')
             ->assertDontSee('شهادة محترف التسويق الرقمي');
     }
+
+    public function test_kku_host_listing_uses_king_khalid_poster_and_copy(): void
+    {
+        $this->seed(CatalogPublicProgramsSeeder::class);
+
+        $this->get('http://kku.platformuni.com/ar/courses?categories[]='.CatalogCourseService::CATEGORY_PROFESSIONAL_CERTIFICATES)
+            ->assertOk()
+            ->assertSee('kku-logo.png', false)
+            ->assertDontSee('aou-logo.png', false)
+            ->assertDontSee('الجامعة العربية المفتوحة');
+    }
 }

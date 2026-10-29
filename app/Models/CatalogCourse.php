@@ -294,7 +294,12 @@ class CatalogCourse extends Model
 
     public function hasCustomPoster(): bool
     {
-        return filled($this->image) && ! \App\Support\PosterSettings::isLegacyPoster($this->image);
+        if (! filled($this->image) || \App\Support\PosterSettings::isLegacyPoster($this->image)) {
+            return false;
+        }
+
+        return ! (\App\Support\IdentityOverlay::enabled()
+            && \App\Support\IdentityOverlay::isForeignUniversityAsset($this->image));
     }
 
     public function showSlug(): string

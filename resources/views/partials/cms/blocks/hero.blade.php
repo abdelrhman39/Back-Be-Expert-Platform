@@ -50,6 +50,24 @@
     $aboutUrl = route('about', ['locale' => $locale]);
     $howUrl = '#how-it-works';
     $eyebrow = platform_org();
+    $activeIdentity = \App\Support\IdentityThemes::active();
+    $identityCampus = \App\Support\IdentityThemes::campusPath('aerial');
+    if (
+        \App\Support\IdentityThemes::hasBranding($activeIdentity)
+        && \App\Support\IdentityThemes::activeKey() !== \App\Support\IdentityThemes::DEFAULT
+        && filled($identityCampus)
+    ) {
+        $identityEntrance = \App\Support\IdentityThemes::campusPath('entrance') ?: $identityCampus;
+        $heroSlides = collect([$identityCampus, $identityEntrance])
+            ->map(fn ($path) => cms_media_url($path))
+            ->filter()
+            ->unique()
+            ->values();
+        $showcaseImage = cms_media_url($identityEntrance);
+        $panelSlides = collect([$showcaseImage]);
+        $showcaseVideo = '';
+    }
+    $isTaibah = \App\Support\IdentityThemes::activeKey() === 'taibah-green';
     $heroMetrics = collect($heroMetrics ?? []);
     if ($heroMetrics->isEmpty()) {
         $heroMetrics = collect(app(\App\Services\HomePageService::class)->heroMetrics($locale));
@@ -102,6 +120,7 @@
                 <p class="np-home-hero__trust">{{ $isEn ? 'Accredited programs for individuals, companies, and institutions.' : 'برامج معتمدة للأفراد والشركات والجهات، بتجربة تسجيل واضحة.' }}</p>
             </div>
 
+            @unless ($isTaibah)
             <div class="np-home-hero__buttons">
                 <a href="{{ $coursesUrl }}" class="np-home-hero__btn np-home-hero__btn--solid">
                     {{ $isEn ? 'Browse programs' : 'تصفح البرامج' }}
@@ -113,8 +132,10 @@
                     {{ $isEn ? 'How it works?' : 'كيف تبدأ؟' }}
                 </a>
             </div>
+            @endunless
 
             @if ($searchEnabled)
+                <div @class(['tu-hero-tools' => $isTaibah])>
                 <form class="np-home-hero__search" action="{{ $coursesUrl }}" method="get" role="search">
                     <div class="np-home-hero__field">
                         <label class="visually-hidden" for="np-home-hero-field">{{ $isEn ? 'Field' : 'المجال' }}</label>
@@ -150,9 +171,20 @@
                         </button>
                     </div>
                 </form>
+                @if ($isTaibah)
+                    <a href="{{ $coursesUrl }}" class="np-home-hero__btn np-home-hero__btn--solid">
+                        {{ $isEn ? 'Browse programs' : 'تصفح البرامج' }}
+                    </a>
+                @endif
+                </div>
+                @if ($isTaibah)
+                    @include('partials.catalog.home-hero-fields')
+                @endif
             @endif
             </div>
 
+            @if ($isTaibah)
+            @else
             <aside class="np-home-hero__aside">
                 <article class="np-home-hero__panel">
                     <a
@@ -219,8 +251,13 @@
                     </div>
                 </article>
             </aside>
+            @endif
         </div>
     </div>
 </section>
 
-@include('partials.catalog.home-fields-bar', ['fields' => $popularFields ?? collect()])
+@if (\App\Support\IdentityThemes::activeKey() === 'taibah-green')
+    @include('partials.catalog.home-accreditations')
+@else
+    @include('partials.catalog.home-fields-bar', ['fields' => $popularFields ?? collect()])
+@endif

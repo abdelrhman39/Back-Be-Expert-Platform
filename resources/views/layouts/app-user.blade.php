@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="{{ asset('css/notification-bell.css') }}?v=1">
     @include('partials.platform-theme')
     <link rel="stylesheet" href="{{ asset('css/site-footer.css') }}?v=1">
+    <link rel="stylesheet" href="{{ asset('css/taibah-saudi.css') }}?v=5">
     <style id="theia-sticky-sidebar-stylesheet-TSS">
         .theiaStickySidebar:after {
             content: "";

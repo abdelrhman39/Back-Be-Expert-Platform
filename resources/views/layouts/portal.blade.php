@@ -20,6 +20,7 @@
     @include('partials.platform-theme')
     <link rel="stylesheet" href="{{ static_asset('assets/domain-a11y-panel.css') }}">
     <link rel="stylesheet" href="{{ asset('css/site-footer.css') }}?v=1">
+    <link rel="stylesheet" href="{{ asset('css/taibah-saudi.css') }}?v=5">
 
     @livewireStyles
     @stack('styles')

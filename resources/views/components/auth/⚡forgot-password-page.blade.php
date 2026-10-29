@@ -14,6 +14,8 @@ class extends Component
 
     public string $phone = '';
 
+    public string $phoneDialIso = \App\Support\CountryDialCodes::DEFAULT_ISO;
+
     public string $otp = '';
 
     public string $newPassword = '';
@@ -25,6 +27,11 @@ class extends Component
     public string $phoneStep = 'request';
 
     public bool $phoneOtpSent = false;
+
+    public function mount(): void
+    {
+        $this->phoneDialIso = \App\Support\VisitorDialCode::iso(request());
+    }
 
     public function sendEmailResetLink(): void
     {
@@ -43,7 +50,7 @@ class extends Component
             'phone' => ['required', 'string', 'min:9'],
         ], [], ['phone' => 'رقم الجوال']);
 
-        $reset->sendOtp($this->phone);
+        $reset->sendOtp(\App\Support\PhoneNormalizer::toE164($this->phone, $this->phoneDialIso));
 
         $this->phoneOtpSent = true;
         $this->phoneStep = 'reset';
@@ -61,13 +68,13 @@ class extends Component
             'newPassword' => 'كلمة المرور',
         ]);
 
-        if (! $reset->verifyOtp($this->phone, $this->otp)) {
+        if (! $reset->verifyOtp(\App\Support\PhoneNormalizer::toE164($this->phone, $this->phoneDialIso), $this->otp)) {
             $this->addError('otp', 'رمز التحقق غير صحيح أو منتهي الصلاحية.');
 
             return;
         }
 
-        $reset->resetPassword($this->phone, $this->newPassword);
+        $reset->resetPassword(\App\Support\PhoneNormalizer::toE164($this->phone, $this->phoneDialIso), $this->newPassword);
 
         session()->flash('auth_message', 'تم تغيير كلمة المرور بنجاح. يمكنك تسجيل الدخول الآن.');
 
@@ -117,8 +124,8 @@ class extends Component
                 @if ($phoneStep === 'request')
                     <form wire:submit="sendPhoneOtp" novalidate>
                         <label class="form-label" for="reset-mobile">رقم الجوال</label>
-                        <div class="input-group input-group-lg mb-4">
-                            <span class="input-group-text">🇸🇦 +966</span>
+                        <div class="input-group input-group-lg mb-4 auth-field auth-field--phone" dir="ltr">
+                            @include('partials.auth.country-dial-picker')
                             <input type="tel" class="form-control @error('phone') is-invalid @enderror" id="reset-mobile" wire:model="phone" inputmode="numeric" placeholder="5xxxxxxxx">
                         </div>
                         @error('phone')<div class="invalid-feedback d-block mb-3">{{ $message }}</div>@enderror
@@ -167,6 +174,7 @@ class extends Component
 
 @push('styles')
     <link rel="stylesheet" href="{{ static_asset('css/portal-shell.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/auth-screen.css') }}?v=2">
 @endpush
 
 @push('scripts')

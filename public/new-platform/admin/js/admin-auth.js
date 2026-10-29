@@ -3,9 +3,14 @@
  */
 (function (global) {
     var STORAGE_KEY = 'domain_admin_session';
+    var DEMO_USERS = [
+        'admin@local.invalid',
+        'admin@example.com',
+    ];
+    var DEMO_PASSWORD = 'Admin@123';
     var DEMO_USER = {
-        email: 'admin@local.invalid',
-        password: 'Admin@123',
+        email: 'admin@example.com',
+        password: DEMO_PASSWORD,
         name: 'مسؤول المنصة',
         role: 'super_admin',
     };
@@ -36,8 +41,8 @@
         login: function (email, password) {
             var normalized = (email || '').trim().toLowerCase();
             if (
-                normalized !== DEMO_USER.email ||
-                password !== DEMO_USER.password
+                DEMO_USERS.indexOf(normalized) === -1 ||
+                password !== DEMO_PASSWORD
             ) {
                 return {
                     ok: false,

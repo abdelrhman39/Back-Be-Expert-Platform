@@ -24,7 +24,7 @@
         @if ($logos->isEmpty())
             <p class="cms-logo-carousel__empty">لا توجد شعارات معروضة حالياً.</p>
         @else
-            <div class="lg-logo-marquee" data-logo-marquee data-marquee-speed="{{ $variant === 'accredited' ? '36' : '42' }}" data-marquee-reverse="{{ $variant === 'accredited' ? 'true' : 'false' }}">
+            <div class="lg-logo-marquee" data-logo-marquee data-marquee-speed="{{ $variant === 'accredited' ? '10' : '14' }}" data-marquee-reverse="{{ $variant === 'accredited' ? 'true' : 'false' }}">
                 <div class="lg-logo-marquee__viewport" dir="ltr">
                     <div class="lg-logo-marquee__track" data-logo-marquee-track>
                         <div class="lg-logo-marquee__group" data-logo-marquee-group>

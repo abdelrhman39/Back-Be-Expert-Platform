@@ -22,6 +22,9 @@ class IdentityThemesPageTest extends TestCase
             ->assertOk()
             ->assertSee('قوالب الهوية')
             ->assertSee('الجامعة العربية المفتوحة')
+            ->assertSee('جامعة الملك خالد')
+            ->assertSee('جامعة طيبة')
+            ->assertSee('هويات الجامعات')
             ->assertSee('الأخضر الوطني')
             ->assertSee('الكحلي والذهبي')
             ->assertSee('حفظ كهوية مخصصة');
@@ -38,12 +41,13 @@ class IdentityThemesPageTest extends TestCase
 
         Livewire::actingAs($admin)
             ->test('admin.identity-themes-page')
-            ->call('applyTheme', 'oasis-teal')
+            ->call('applyTheme', 'kku-green')
             ->assertHasNoErrors()
-            ->assertSee('تم تطبيق قالب');
+            ->assertSee('تم تفعيل هوية');
 
-        $this->assertSame('oasis-teal', IdentityThemes::activeKey());
-        $this->assertSame('#0e7c7b', ThemeSettings::effective('theme_color_primary'));
+        $this->assertSame('kku-green', IdentityThemes::activeKey());
+        $this->assertSame('#006838', ThemeSettings::effective('theme_color_primary'));
+        $this->assertSame('جامعة الملك خالد', \App\Models\PlatformSetting::get('platform_org_ar'));
     }
 
     public function test_home_page_exposes_active_identity_theme(): void

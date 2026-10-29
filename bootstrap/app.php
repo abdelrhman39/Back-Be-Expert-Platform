@@ -7,6 +7,7 @@ use App\Http\Middleware\EnsureNotInstallmentSuspended;
 use App\Http\Middleware\EnsurePortalAuth;
 use App\Http\Middleware\RedirectIfPortalAuthenticated;
 use App\Http\Middleware\SetLocale;
+use App\Http\Middleware\OverlayIdentityHtml;
 use App\Http\Middleware\TrackPlatformAnalytics;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -40,6 +41,7 @@ return Application::configure(basePath: dirname(__DIR__))
 
         $middleware->web(append: [
             TrackPlatformAnalytics::class,
+            OverlayIdentityHtml::class,
         ]);
 
         $middleware->redirectGuestsTo(function ($request) {

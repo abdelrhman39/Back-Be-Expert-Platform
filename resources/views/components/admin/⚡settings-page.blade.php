@@ -352,7 +352,7 @@ class extends Component
             </div>
         </div>
         <div class="admin-filter-actions" style="margin:0;">
-            <a href="{{ route('admin.identity-themes') }}" class="admin-btn-primary admin-btn-primary--sm">معرض القوالب والتفعيل</a>
+            <a href="{{ route('admin.identity-themes') }}" class="admin-btn-primary admin-btn-primary--sm">هويات الجامعات والتفعيل</a>
             <a href="{{ route('home', ['locale' => 'ar']) }}" class="admin-btn-secondary admin-btn-secondary--sm" target="_blank" rel="noopener">معاينة الرئيسية</a>
         </div>
     </div>

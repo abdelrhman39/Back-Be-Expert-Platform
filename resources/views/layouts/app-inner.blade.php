@@ -22,9 +22,10 @@
     <link rel="stylesheet" href="{{ asset('css/catalog-public.css') }}?v=7">
     <link rel="stylesheet" href="{{ asset('css/home-diplomas.css') }}?v=5">
     @include('partials.platform-theme')
-    <link rel="stylesheet" href="{{ asset('css/public-atelier.css') }}?v=17">
+    <link rel="stylesheet" href="{{ asset('css/public-atelier.css') }}?v=18">
     <link rel="stylesheet" href="{{ static_asset('assets/domain-a11y-panel.css') }}">
     <link rel="stylesheet" href="{{ asset('css/site-footer.css') }}?v=1">
+    <link rel="stylesheet" href="{{ asset('css/taibah-saudi.css') }}?v=15">
     <style id="theia-sticky-sidebar-stylesheet-TSS">
         .theiaStickySidebar:after {
             content: "";
@@ -63,7 +64,7 @@
     <script src="{{ static_asset('assets/sweetalert2-all.min.js') }}"></script>
     <script src="{{ static_asset('assets/toastr.min.js') }}"></script>
     <script src="{{ static_asset('assets/muneer.min.js') }}" async></script>
-    <script src="{{ asset('js/logo-marquee.js') }}?v=1" defer></script>
+    <script src="{{ asset('js/logo-marquee.js') }}?v=2" defer></script>
 
     @livewireScripts
     @include('partials.commerce-bridge')

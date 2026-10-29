@@ -33,14 +33,14 @@ class Utf8Text
     {
         $text = self::repair($text);
 
-        if (! str_contains($text, '{')) {
-            return $text;
+        if (str_contains($text, '{')) {
+            $text = strtr($text, [
+                '{platform_name}' => platform_name($locale),
+                '{platform_org}' => platform_org($locale),
+            ]);
         }
 
-        return strtr($text, [
-            '{platform_name}' => platform_name($locale),
-            '{platform_org}' => platform_org($locale),
-        ]);
+        return IdentityOverlay::rewriteText($text);
     }
 
     public static function deep(mixed $value, ?string $locale = null): mixed

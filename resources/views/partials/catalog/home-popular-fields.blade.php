@@ -2,14 +2,17 @@
     $locale = app()->getLocale();
     $isEn = $locale === 'en';
     $fields = collect($fields ?? []);
+    $saudiLayout = (bool) ($saudiLayout ?? false);
 @endphp
 
-<section id="section-fields" class="popular-section lg-fields-section">
+<section id="section-fields" @class(['popular-section', 'lg-fields-section', 'lg-fields-section--saudi' => $saudiLayout])>
     <div class="container">
         <div class="section-header" data-aos="fade-up">
-            <p class="home-catalog-section__eyebrow">{{ $isEn ? 'Platform specialties' : 'تخصصات المنصة' }}</p>
-            <h2>{{ $isEn ? 'Explore our fields' : 'المجالات التدريبية' }}</h2>
-            <p class="home-catalog-section__lead">{{ $isEn ? 'Choose a field and browse matching certificates and diplomas.' : 'اختر المجال ثم تصفّح الشهادات والدبلومات المناسبة لمسارك.' }}</p>
+            @unless ($saudiLayout)
+                <p class="home-catalog-section__eyebrow">{{ $isEn ? 'Platform specialties' : 'تخصصات المنصة' }}</p>
+            @endunless
+            <h2>{{ $saudiLayout ? ($isEn ? 'Browse all fields' : 'تصفح جميع المجالات') : ($isEn ? 'Explore our fields' : 'المجالات التدريبية') }}</h2>
+            <p class="home-catalog-section__lead">{{ $saudiLayout ? ($isEn ? 'Training fields, from management to the job market. Choose a field to get started.' : 'مجالات التدريب من الإدارة والتسويق حتى المسار المهني. اختر مجالاً لتبدأ.') : ($isEn ? 'Choose a field and browse matching certificates and diplomas.' : 'اختر المجال ثم تصفّح الشهادات والدبلومات المناسبة لمسارك.') }}</p>
         </div>
 
         @if ($fields->isNotEmpty())
@@ -33,9 +36,11 @@
         @endif
 
         <div class="home-catalog-section__cta">
-            <a href="{{ route('courses.index', ['locale' => $locale]) }}" class="btn btn-primary">
-                {{ $isEn ? 'All fields' : 'جميع المجالات' }}
-                <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+            <a href="{{ route('courses.index', ['locale' => $locale]) }}" @class(['btn btn-primary' => ! $saudiLayout, 'lg-fields-section__link' => $saudiLayout])>
+                {{ $saudiLayout ? ($isEn ? 'Explore all training fields' : 'اكتشف جميع المجالات التدريبية') : ($isEn ? 'All fields' : 'جميع المجالات') }}
+                @unless ($saudiLayout)
+                    <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+                @endunless
             </a>
         </div>
     </div>

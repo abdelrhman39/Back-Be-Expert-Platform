@@ -2,6 +2,7 @@
 
 use App\Models\User;
 use App\Services\PlatformAnalyticsRecorder;
+use App\Support\AccessControl;
 use App\Support\AdminPermissions;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -36,8 +37,10 @@ class extends Component
             'password' => 'كلمة المرور',
         ]);
 
+        $email = mb_strtolower(trim($validated['email']));
+
         $user = User::query()
-            ->where('email', strtolower($validated['email']))
+            ->whereRaw('LOWER(email) = ?', [$email])
             ->first();
 
         if (! $user || ! Hash::check($validated['password'], $user->password)) {
@@ -58,18 +61,31 @@ class extends Component
             return;
         }
 
+        if ($user->role === 'admin' && ! AdminPermissions::canAccessAdmin($user)) {
+            AccessControl::grantAllPermissions($user);
+            $user->refresh();
+        }
+
         if (! AdminPermissions::canAccessAdmin($user)) {
             $this->addError('credentials', 'هذا الحساب لا يملك صلاحية دخول لوحة الإدارة.');
 
             return;
         }
 
-        Auth::login($user, $this->remember);
+        Auth::guard('web')->login($user, $this->remember);
 
-        $user->forceFill(['last_login_at' => now()])->save();
+        if (request()->hasSession()) {
+            request()->session()->regenerate();
+        }
+
+        $user->forceFill([
+            'failed_login_attempts' => 0,
+            'locked_until' => null,
+            'last_login_at' => now(),
+        ])->save();
         app(PlatformAnalyticsRecorder::class)->recordLogin($user, request(), 'web');
 
-        $this->redirect($this->landingRoute($user));
+        $this->redirect($this->landingRoute($user), navigate: false);
     }
 
     private function landingRoute(User $user): string
@@ -115,7 +131,7 @@ class extends Component
                     <svg class="admin-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
                         <path d="M4 6h16v12H4V6z"/><path d="m4 7 8 6 8-6"/>
                     </svg>
-                    <input type="email" id="admin-email" wire:model="email" class="admin-input @error('email') is-invalid @enderror" placeholder="admin@example.com" autocomplete="username" required>
+                    <input type="email" id="admin-email" wire:model="email" class="admin-input @error('email') is-invalid @enderror" placeholder="name@example.com" autocomplete="username" required>
                 </div>
                 @error('email')<span class="admin-field-hint" style="color:#b42318">{{ $message }}</span>@enderror
             </div>
@@ -144,10 +160,6 @@ class extends Component
                 <span class="btn-text" wire:loading wire:target="login">جاري الدخول…</span>
             </button>
         </form>
-
-        <p class="admin-demo-note">
-            بيئة تجريبية: استخدم <code>admin@local.invalid</code> وكلمة المرور <code>Admin@123</code>
-        </p>
 
         <div class="admin-login-footer">
             <a href="{{ route('home', ['locale' => 'ar']) }}">← العودة إلى الموقع</a>

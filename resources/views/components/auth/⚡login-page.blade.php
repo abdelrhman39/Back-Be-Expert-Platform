@@ -1,6 +1,8 @@
 <?php
 
 use App\Services\AuthService;
+use App\Support\CountryDialCodes;
+use App\Support\VisitorDialCode;
 use Illuminate\Validation\ValidationException;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
@@ -13,6 +15,8 @@ class extends Component
     public string $national_id = '';
 
     public string $phone = '';
+
+    public string $phoneDialIso = CountryDialCodes::DEFAULT_ISO;
 
     public string $email = '';
 
@@ -27,6 +31,11 @@ class extends Component
     public bool $remember_phone = false;
 
     public bool $remember_email = false;
+
+    public function mount(): void
+    {
+        $this->phoneDialIso = VisitorDialCode::iso(request());
+    }
 
     public function loginByNationalId(AuthService $auth): void
     {
@@ -57,16 +66,19 @@ class extends Component
     public function loginByPhone(AuthService $auth): void
     {
         $validated = $this->validate([
-            'phone' => ['required', 'string', 'min:9'],
+            'phone' => ['required', 'string', 'min:6'],
+            'phoneDialIso' => ['required', 'string', 'size:2'],
             'password_phone' => ['required', 'string'],
         ], [], [
             'phone' => 'رقم الجوال',
+            'phoneDialIso' => 'مفتاح الدولة',
             'password_phone' => 'كلمة السر',
         ]);
 
         try {
             $auth->attempt('phone', [
                 'phone' => $validated['phone'],
+                'dial_iso' => $validated['phoneDialIso'],
                 'password' => $validated['password_phone'],
             ], $this->remember_phone);
         } catch (ValidationException $exception) {
@@ -212,8 +224,8 @@ class extends Component
                             <form wire:submit="loginByPhone" novalidate>
                                 <div class="mb-3">
                                     <label class="form-label auth-label" for="login-mobile">رقم الجوال</label>
-                                    <div class="auth-field input-group input-group-lg">
-                                        <span class="input-group-text auth-field__prefix" dir="ltr">🇸🇦 +966</span>
+                                    <div class="auth-field input-group input-group-lg auth-field--phone" dir="ltr">
+                                        @include('partials.auth.country-dial-picker')
                                         <input type="tel" class="form-control @error('phone') is-invalid @enderror" id="login-mobile" wire:model="phone" inputmode="numeric" autocomplete="tel" placeholder="5xxxxxxxx">
                                     </div>
                                     @error('phone')<div class="invalid-feedback d-block">{{ $message }}</div>@enderror
@@ -290,7 +302,7 @@ class extends Component
 
 @push('styles')
     <link rel="stylesheet" href="{{ static_asset('css/portal-shell.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/auth-screen.css') }}?v=1">
+    <link rel="stylesheet" href="{{ asset('css/auth-screen.css') }}?v=2">
 @endpush
 
 @push('scripts')

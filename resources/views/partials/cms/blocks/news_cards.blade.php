@@ -15,8 +15,8 @@
             ->take($limit)
             ->values()
             ->map(fn ($article) => [
-                'title' => $article->translate($locale)?->title,
-                'excerpt' => $article->translate($locale)?->excerpt,
+                'title' => cms_text($article->translate($locale)?->title),
+                'excerpt' => cms_text($article->translate($locale)?->excerpt),
                 'url' => $article->publicUrl($locale),
                 'image' => $article->featuredImageUrl(),
                 'badge' => $article->categoryDisplayName($locale),
@@ -24,8 +24,8 @@
             ]);
     } else {
         $items = collect($data['items'] ?? [])->take($limit)->values()->map(fn ($item) => [
-            'title' => $item['title'] ?? '',
-            'excerpt' => $item['excerpt'] ?? '',
+            'title' => cms_text($item['title'] ?? ''),
+            'excerpt' => cms_text($item['excerpt'] ?? ''),
             'url' => cms_href($item['url'] ?? '#'),
             'image' => resolve_poster_url($item['image'] ?? null),
             'badge' => $badge,

@@ -180,4 +180,46 @@ class HomePageBlocksTest extends TestCase
         $response->assertDontSee('شهادات معتمدة');
         $response->assertDontSee('لا توجد أخبار منشورة حالياً');
     }
+
+    public function test_kku_host_renders_king_khalid_hero_campus_photo(): void
+    {
+        $this->seed([CmsSeeder::class, CmsPageBlocksSeeder::class]);
+
+        $response = $this->get('http://kku.platformuni.com/ar');
+
+        $response->assertOk();
+        $response->assertSee('data-identity-theme="kku-green"', false);
+        $response->assertSee('kku-campus.jpg', false);
+        $response->assertSee('جامعة الملك خالد');
+        $response->assertDontSee('aou-campus-aerial.jpg', false);
+        $response->assertDontSee('الجامعة العربية المفتوحة');
+        $response->assertDontSee('aou-logo.png', false);
+        $response->assertSee('kku-logo.png', false);
+    }
+
+    public function test_kku_host_rewrites_seeded_news_titles(): void
+    {
+        $this->seed([
+            CmsSeeder::class,
+            CmsPageBlocksSeeder::class,
+            \Database\Seeders\ArticleSeeder::class,
+        ]);
+
+        $response = $this->get('http://kku.platformuni.com/ar');
+
+        $response->assertOk();
+        $response->assertSee('جامعة الملك خالد');
+        $response->assertDontSee('الجامعة العربية المفتوحة');
+        $response->assertSee('تكامل معرفي بين جامعة الملك خالد');
+    }
+
+    public function test_kku_news_index_rewrites_arab_open_university_copy(): void
+    {
+        $this->seed(\Database\Seeders\ArticleSeeder::class);
+
+        $this->get('http://kku.platformuni.com/ar/news')
+            ->assertOk()
+            ->assertDontSee('الجامعة العربية المفتوحة')
+            ->assertSee('جامعة الملك خالد');
+    }
 }

@@ -79,4 +79,16 @@ body {
     color: var(--sa-ink, #1a1a1a);
     background-color: var(--sa-mist, #f7faf8);
 }
+
+html[data-identity-theme="taibah-green"] .header.new-header,
+html[data-identity-theme="taibah-green"] .header.not-home,
+html[data-identity-theme="taibah-green"] .header.fixed {
+    background-color: #ffffff !important;
+    border-bottom: 1px solid #d2d6db;
+    box-shadow: none;
+}
+
+html[data-identity-theme="taibah-green"] .footer {
+    color: #ffffff;
+}
 </style>

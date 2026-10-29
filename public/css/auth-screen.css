@@ -184,6 +184,134 @@
   color: var(--sa-ink, #1a1a1a);
 }
 
+.auth-field--phone {
+  position: relative;
+  overflow: visible;
+}
+
+.country-dial {
+  position: relative;
+  flex: 0 0 auto;
+}
+
+.country-dial__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  height: 100%;
+  min-height: 3rem;
+  padding: 0 0.75rem;
+  border: 1px solid var(--surface-input-border, #d8e2dc);
+  border-inline-end: 0;
+  background: var(--sa-mist, #f7faf8);
+  color: var(--sa-ink, #1a1a1a);
+  font-size: 0.88rem;
+  font-weight: 700;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.input-group.auth-field--phone > .country-dial:first-child .country-dial__btn {
+  border-start-start-radius: var(--bs-border-radius-lg, 0.5rem);
+  border-end-start-radius: var(--bs-border-radius-lg, 0.5rem);
+}
+
+.country-dial__btn:hover,
+.country-dial__btn:focus-visible {
+  background: #eef3f8;
+  outline: none;
+}
+
+.country-dial__caret {
+  font-size: 0.65rem;
+  opacity: 0.7;
+}
+
+.country-dial__panel {
+  position: absolute;
+  z-index: 40;
+  top: calc(100% + 0.4rem);
+  inset-inline-start: 0;
+  width: min(22.5rem, 82vw);
+  max-height: 22rem;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--surface-input-border, #d8e2dc);
+  border-radius: 0.85rem;
+  background: #fff;
+  box-shadow: 0 18px 48px rgba(15, 23, 42, 0.18);
+}
+
+.country-dial__search {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 0.75rem;
+  border-bottom: 1px solid #e8eee9;
+  color: #5c6b64;
+}
+
+.country-dial__search input {
+  flex: 1;
+  border: 0;
+  outline: none;
+  font-size: 0.88rem;
+  background: transparent;
+}
+
+.country-dial__list {
+  margin: 0;
+  padding: 0.35rem;
+  list-style: none;
+  overflow: auto;
+  max-height: 16.5rem;
+}
+
+.country-dial__option {
+  display: grid;
+  grid-template-columns: 1.6rem 1fr auto;
+  align-items: center;
+  gap: 0.55rem;
+  width: 100%;
+  padding: 0.55rem 0.65rem;
+  border: 0;
+  border-radius: 0.55rem;
+  background: transparent;
+  color: inherit;
+  text-align: start;
+  cursor: pointer;
+}
+
+.country-dial__option:hover,
+.country-dial__option.is-active {
+  background: var(--sa-green-soft, #eef3f8);
+}
+
+.country-dial__name {
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.country-dial__code {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #4b6356;
+  font-variant-numeric: tabular-nums;
+}
+
+.country-dial__empty {
+  margin: 0;
+  padding: 0.85rem;
+  font-size: 0.8rem;
+  color: #5c6b64;
+  text-align: center;
+}
+
+[x-cloak] {
+  display: none !important;
+}
+
 .auth-field .form-control:focus,
 .auth-field .form-select:focus {
   border-color: var(--sa-green, #002d58);

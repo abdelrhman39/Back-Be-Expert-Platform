@@ -67,12 +67,12 @@
     duplicateGroup(track, group);
 
     var distance = group.getBoundingClientRect().width;
-    var pixelsPerSecond = parseFloat(root.getAttribute('data-marquee-speed') || '40') || 40;
-    var duration = Math.max(14, distance / pixelsPerSecond);
+    var pixelsPerSecond = parseFloat(root.getAttribute('data-marquee-speed') || '14') || 14;
+    var duration = Math.max(36, distance / pixelsPerSecond);
 
     track.style.setProperty('--marquee-distance', distance + 'px');
     track.style.setProperty('--marquee-duration', duration + 's');
-    root.classList.toggle('is-static', reduceMotion.matches);
+    root.classList.remove('is-static');
     root.classList.add('is-ready');
   }
 

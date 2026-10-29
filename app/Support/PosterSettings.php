@@ -14,6 +14,12 @@ class PosterSettings
 
     public static function defaultAssetPath(): string
     {
+        $fromIdentity = IdentityThemes::resolvedBranding()['platform_logo_primary'] ?? null;
+
+        if (filled($fromIdentity)) {
+            return (string) $fromIdentity;
+        }
+
         return LogoSettings::storedPath(LogoSettings::KEY_PRIMARY)
             ?? LogoSettings::defaultPath(LogoSettings::KEY_PRIMARY);
     }
@@ -31,7 +37,7 @@ class PosterSettings
 
     public static function storedPath(): ?string
     {
-        $value = PlatformSetting::get('default_poster_image');
+        $value = IdentityOverlay::rewriteAssetPath(PlatformSetting::get('default_poster_image'));
 
         if (filled($value) && self::isLegacyPoster($value)) {
             return null;
@@ -47,6 +53,12 @@ class PosterSettings
 
     public static function resolve(?string $path): string
     {
+        $path = IdentityOverlay::rewriteAssetPath($path);
+
+        if (filled($path) && IdentityOverlay::isForeignUniversityAsset($path) && IdentityOverlay::enabled()) {
+            $path = null;
+        }
+
         if (filled($path) && ! self::isLegacyPoster($path)) {
             if (str_starts_with($path, 'http://') || str_starts_with($path, 'https://')) {
                 return $path;
