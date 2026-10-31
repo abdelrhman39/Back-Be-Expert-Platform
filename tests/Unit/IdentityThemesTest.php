@@ -120,6 +120,8 @@ class IdentityThemesTest extends TestCase
         $this->assertSame('#161616', $pack['colors']['theme_color_footer_bg']);
         $this->assertSame('#ffffff', $pack['colors']['theme_header_bg']);
         $this->assertSame('جامعة طيبة', $pack['branding']['platform_org_ar']);
+        $this->assertSame('الكلية التطبيقية', $pack['branding']['platform_name_ar']);
+        $this->assertSame('Applied College', $pack['branding']['platform_name_en']);
         $this->assertSame('assets/branding/taibah-logo.svg', $pack['branding']['platform_logo_primary']);
         $this->assertSame('assets/branding/taibah-campus.jpg', $pack['campus']['aerial']);
         $this->assertSame('taibah-green', IdentityThemes::keyForHost('taibah.platformuni.com'));

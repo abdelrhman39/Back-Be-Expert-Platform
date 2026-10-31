@@ -91,13 +91,26 @@ class IdentityOverlay
         $orgAr = platform_org('ar');
         $orgEn = platform_org('en');
 
-        return [
+        $replacements = [
             'الجامعة العربية المفتوحة السعودية' => $orgAr,
             'الجامعة العربية المفتوحة' => $orgAr,
             'الجامعة العربيه المفتوحه' => $orgAr,
             'Arab Open University Saudi Arabia' => $orgEn,
             'Arab Open University' => $orgEn,
         ];
+
+        if (IdentityThemes::activeKey() === 'taibah-green') {
+            $replacements['Continuing Learning Center'] = 'Applied College';
+            $replacements['يقدّمه مركز التعلم المستمر'] = 'تقدّمه الكلية التطبيقية';
+            $replacements['يقدمه مركز التعلم المستمر'] = 'تقدمه الكلية التطبيقية';
+            $replacements['المتابعة الأكاديمية في المركز'] = 'المتابعة الأكاديمية في الكلية';
+            $replacements['مركز التعلم المستمر منصة التعليم المستمر'] = 'الكلية التطبيقية';
+            $replacements['منصة التعليم المستمر'] = 'الكلية التطبيقية';
+            $replacements['مركز التعلم المستمر'] = 'الكلية التطبيقية';
+            $replacements['معهد البحوث والدراسات الاستشارية'] = 'معهد البحوث والاستشارات';
+        }
+
+        return $replacements;
     }
 
     /** @return array<string, string> */

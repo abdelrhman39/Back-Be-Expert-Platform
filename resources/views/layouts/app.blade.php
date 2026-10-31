@@ -30,7 +30,7 @@
     <link rel="stylesheet" href="{{ asset('css/public-atelier.css') }}?v=18">
     <link rel="stylesheet" href="{{ asset('css/home-features.css') }}?v=2">
     <link rel="stylesheet" href="{{ asset('css/site-footer.css') }}?v=1">
-    <link rel="stylesheet" href="{{ asset('css/taibah-saudi.css') }}?v=17">
+    <link rel="stylesheet" href="{{ asset('css/taibah-saudi.css') }}?v=27">
     <style id="theia-sticky-sidebar-stylesheet-TSS">
         .theiaStickySidebar:after {
             content: "";

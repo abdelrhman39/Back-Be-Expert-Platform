@@ -13,6 +13,7 @@
         $partial = 'partials.cms.blocks.'.$type;
         $blockLocale = $locale ?? app()->getLocale();
         $block['data'] = cms_text_deep($block['data'] ?? [], $blockLocale);
+        $block = \App\Support\TaibahCopy::applyToBlock($block, $blockLocale);
     @endphp
 
     @if (view()->exists($partial))

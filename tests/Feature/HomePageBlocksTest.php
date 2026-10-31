@@ -92,6 +92,21 @@ class HomePageBlocksTest extends TestCase
         $response->assertSee('js/home-catalog-slider.js', false);
     }
 
+    public function test_taibah_home_speaks_for_the_applied_college(): void
+    {
+        $this->seed([CmsSeeder::class, CmsPageBlocksSeeder::class]);
+
+        $response = $this->get('http://taibah.platformuni.com/ar');
+
+        $response->assertOk();
+        $response->assertSee('الكلية التطبيقية');
+        $response->assertSee('معهد البحوث والاستشارات');
+        $response->assertSee('إدارة أنظمة الشبكات');
+        $response->assertSee('لماذا تختار الكلية التطبيقية؟');
+        $response->assertSee('taibah-saudi.css?v=27"', false);
+        $response->assertDontSee('مركز التعلم المستمر');
+    }
+
     public function test_home_certificates_and_diplomas_render_as_split_card_slider(): void
     {
         $this->seed([CmsSeeder::class, CmsPageBlocksSeeder::class]);

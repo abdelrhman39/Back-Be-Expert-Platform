@@ -2,6 +2,7 @@
 
 html[data-identity-theme="taibah-green"] {
     --primary: #074d31;
+    --tu-accent: #7080ea;
     --sa-green: #074d31;
     --sa-green-dark: #000000;
     --sa-green-light: #074d31;
@@ -199,7 +200,7 @@ html[data-identity-theme="taibah-green"] .np-home-hero--logistics .np-home-hero_
 }
 
 html[data-identity-theme="taibah-green"] .np-home-hero--logistics .np-home-hero__content {
-    padding-bottom: clamp(4.5rem, 8vh, 6rem);
+    padding-bottom: clamp(8rem, 14vh, 10.5rem);
 }
 
 html[data-identity-theme="taibah-green"] .np-home-hero__main {
@@ -294,9 +295,17 @@ html[data-identity-theme="taibah-green"] .tu-fields-rail__item strong {
     to { transform: translateX(50%); }
 }
 
-@media (max-width: 767.98px) {
+@media (max-width: 991.98px) {
     html[data-identity-theme="taibah-green"] .tu-hero-tools {
         flex-direction: column;
+        align-items: stretch;
+    }
+
+    html[data-identity-theme="taibah-green"] .tu-hero-tools .np-home-hero__btn--solid {
+        align-self: stretch;
+        width: 100%;
+        min-height: 3rem;
+        height: auto;
     }
 }
 
@@ -417,7 +426,10 @@ html[data-identity-theme="taibah-green"] .np-home-hero__eyebrow {
     letter-spacing: 0;
 }
 
-html[data-identity-theme="taibah-green"] .np-home-hero__eyebrow::after,
+html[data-identity-theme="taibah-green"] .np-home-hero__eyebrow::after {
+    background: #7080ea;
+}
+
 html[data-identity-theme="taibah-green"] .np-home-hero__brand::after {
     background: #ffffff;
 }
@@ -547,6 +559,137 @@ html[data-identity-theme="taibah-green"] .home-catalog-slider-wrap--cards .diplo
     background: #074d31;
 }
 
+html[data-identity-theme="taibah-green"] #section-certificates .diploma-list-card {
+    border-color: #e5e7eb;
+    border-radius: 22px;
+    box-shadow: 0 14px 34px rgba(22, 22, 22, 0.05);
+}
+
+html[data-identity-theme="taibah-green"] #section-certificates .diploma-list-card:hover {
+    border-color: #c9cff6;
+    box-shadow: 0 18px 40px rgba(7, 77, 49, 0.1);
+}
+
+html[data-identity-theme="taibah-green"] #section-certificates .diploma-list-card__pill:not(.diploma-list-card__pill--featured) {
+    display: none;
+}
+
+html[data-identity-theme="taibah-green"] #section-certificates .diploma-list-card__pill--featured {
+    background: #7080ea;
+}
+
+html[data-identity-theme="taibah-green"] #section-certificates .diploma-list-card__body {
+    gap: 0.8rem;
+    padding: 1.05rem 1.05rem 1.1rem;
+}
+
+html[data-identity-theme="taibah-green"] #section-certificates .diploma-list-card__meta {
+    gap: 0.4rem;
+}
+
+html[data-identity-theme="taibah-green"] #section-certificates .diploma-list-card__meta span {
+    padding: 0.28rem 0.6rem;
+    border-radius: 999px;
+    background: #f3f7f5;
+    color: #384250;
+    font-size: 0.72rem;
+    font-weight: 700;
+    line-height: 1.4;
+}
+
+html[data-identity-theme="taibah-green"] #section-certificates .diploma-list-card__meta i {
+    color: #074d31;
+}
+
+html[data-identity-theme="taibah-green"] #section-certificates .diploma-list-card__title,
+html[data-identity-theme="taibah-green"] #section-certificates .diploma-list-card__title a {
+    color: #074d31;
+    font-size: 1.05rem;
+    line-height: 1.5;
+}
+
+html[data-identity-theme="taibah-green"] #section-certificates .diploma-list-card__summary {
+    color: #384250;
+    font-size: 0.84rem;
+    line-height: 1.75;
+}
+
+html[data-identity-theme="taibah-green"] #section-certificates .diploma-list-card__price {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.35rem 0.6rem;
+    padding: 0.7rem 0.85rem;
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+    background: #f8faf9;
+}
+
+html[data-identity-theme="taibah-green"] #section-certificates .diploma-list-card__installment {
+    flex-basis: 100%;
+    margin-inline-start: 0;
+}
+
+html[data-identity-theme="taibah-green"] #section-certificates .diploma-list-card__price-label {
+    margin: 0;
+    color: #6c737f;
+    font-size: 0.72rem;
+}
+
+html[data-identity-theme="taibah-green"] #section-certificates .diploma-list-card__price strong {
+    color: #074d31;
+    font-size: 1.15rem;
+}
+
+html[data-identity-theme="taibah-green"] #section-certificates .diploma-list-card__btn {
+    border-radius: 10px !important;
+}
+
+html[data-identity-theme="taibah-green"] #section-certificates .diploma-list-card__media--schedule {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 16 / 9;
+    padding: 1.15rem 1.2rem;
+    background:
+        radial-gradient(circle at 100% 0%, rgba(112, 128, 234, 0.42), transparent 46%),
+        linear-gradient(165deg, #074d31 0%, #063d27 100%);
+    text-align: center;
+    text-decoration: none;
+}
+
+html[data-identity-theme="taibah-green"] #section-certificates .diploma-list-card__media--schedule::after {
+    display: none;
+}
+
+html[data-identity-theme="taibah-green"] #section-certificates .diploma-list-card__schedule {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.2rem;
+}
+
+html[data-identity-theme="taibah-green"] #section-certificates .diploma-list-card__schedule strong {
+    color: #ffffff;
+    font-size: 2.05rem;
+    font-weight: 700;
+    line-height: 1.15;
+}
+
+html[data-identity-theme="taibah-green"] #section-certificates .diploma-list-card__schedule span {
+    color: rgba(255, 255, 255, 0.84);
+    font-size: 0.95rem;
+    font-weight: 700;
+}
+
+html[data-identity-theme="taibah-green"] #section-certificates .diploma-list-card__summary {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+}
+
 html[data-identity-theme="taibah-green"] .cms-features--home .cms-features__card--featured {
     background: #074d31;
     color: #ffffff;
@@ -622,63 +765,86 @@ html[data-identity-theme="taibah-green"] a {
 }
 
 html[data-identity-theme="taibah-green"] .np-paths {
-    background: #f7f8f7;
-    padding-block: clamp(3.25rem, 6vw, 5rem);
+    background: #f4f6f5;
+    padding-block: clamp(3.5rem, 6vw, 5.25rem);
 }
 
 html[data-identity-theme="taibah-green"] .np-paths__intro {
-    max-width: 36rem;
-    margin-bottom: clamp(1.5rem, 3vw, 2.25rem);
+    max-width: 38rem;
+    margin-bottom: clamp(1.75rem, 3vw, 2.5rem);
 }
 
 html[data-identity-theme="taibah-green"] .np-paths__title {
     color: #074d31;
-    font-size: clamp(1.7rem, 3vw, 2.15rem);
+    font-size: clamp(1.75rem, 3vw, 2.3rem);
     font-weight: 700;
+}
+
+html[data-identity-theme="taibah-green"] .np-paths__title::after {
+    width: 2.5rem;
+    height: 3px;
+    margin-top: 0.75rem;
+    background: #7080ea;
 }
 
 html[data-identity-theme="taibah-green"] .np-paths__lead {
     color: #384250;
-    font-size: 1rem;
-    line-height: 1.8;
+    font-size: 1.02rem;
+    line-height: 1.85;
 }
 
 html[data-identity-theme="taibah-green"] .np-paths__grid {
     align-items: stretch;
-    gap: 1.15rem;
+    gap: 1rem;
+    counter-reset: tu-path;
 }
 
 html[data-identity-theme="taibah-green"] .np-paths__card {
     position: relative;
-    gap: 0.8rem;
-    padding: 1.5rem 1.35rem 1.15rem;
-    border: 1px solid #e7e5df;
-    border-radius: 20px;
-    background: #ffffff;
-    box-shadow: none;
+    gap: 0.7rem;
+    padding: 1.55rem 1.35rem 1.3rem;
     overflow: hidden;
+    border: 1px solid #e5e7eb;
+    border-radius: 22px;
+    background: #ffffff;
+    box-shadow: 0 14px 34px rgba(22, 22, 22, 0.05);
+    counter-increment: tu-path;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 }
 
 html[data-identity-theme="taibah-green"] .np-paths__card::before {
     content: "";
     position: absolute;
-    inset: 0 0 auto 0;
-    width: 100%;
+    top: 0;
+    inset-inline-start: 1.35rem;
+    width: 2.4rem;
     height: 3px;
-    background: #074d31;
+    border-radius: 0 0 4px 4px;
+    background: #7080ea;
+}
+
+html[data-identity-theme="taibah-green"] .np-paths__card::after {
+    content: counter(tu-path, decimal-leading-zero);
+    position: absolute;
+    top: 1.2rem;
+    inset-inline-end: 1.25rem;
+    color: #7080ea;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
 }
 
 html[data-identity-theme="taibah-green"] .np-paths__card:hover {
     transform: translateY(-4px);
-    border-color: #074d31;
-    box-shadow: 0 16px 36px rgba(7, 77, 49, 0.1);
+    border-color: #c9cff6;
+    box-shadow: 0 18px 40px rgba(7, 77, 49, 0.1);
 }
 
 html[data-identity-theme="taibah-green"] .np-paths__icon {
-    width: 3.15rem;
-    height: 3.15rem;
-    margin-top: 0.35rem;
-    border-radius: 12px;
+    width: 3.25rem;
+    height: 3.25rem;
+    margin-top: 0.55rem;
+    border-radius: 16px;
     background: #074d31;
     color: #ffffff;
     font-size: 1.15rem;
@@ -686,35 +852,61 @@ html[data-identity-theme="taibah-green"] .np-paths__icon {
 
 html[data-identity-theme="taibah-green"] .np-paths__card-title {
     color: #161616;
-    font-size: 1.12rem;
+    font-size: 1.16rem;
     font-weight: 700;
 }
 
 html[data-identity-theme="taibah-green"] .np-paths__card-body {
     color: #384250;
-    font-size: 0.92rem;
-    line-height: 1.8;
+    font-size: 0.94rem;
+    line-height: 1.85;
 }
 
 html[data-identity-theme="taibah-green"] .np-paths__link {
-    width: 100%;
+    align-self: flex-start;
+    width: auto;
     margin-top: auto;
-    padding-top: 0.85rem;
-    border-top: 1px solid #e7e5df;
-    justify-content: space-between;
+    padding: 0.55rem 0.95rem;
+    border-top: 0;
+    border-radius: 999px;
+    background: #f3f7f5;
     color: #074d31;
     font-weight: 700;
+    justify-content: flex-start;
+    transition: background 0.2s ease, color 0.2s ease;
 }
 
 html[data-identity-theme="taibah-green"] .np-paths__link:hover {
-    color: #000000;
+    background: #074d31;
+    color: #ffffff;
     gap: 0.55rem;
 }
 
-@media (max-width: 640px) {
+@media (max-width: 767.98px) {
     html[data-identity-theme="taibah-green"] .sa-govbar__inner {
-        font-size: 0.75rem;
-        padding-inline: 0.85rem;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        row-gap: 0.45rem;
+        column-gap: 0.75rem;
+        padding: 0.5rem 0.75rem;
+        font-size: 0.78rem;
+    }
+
+    html[data-identity-theme="taibah-green"] .sa-govbar__contacts,
+    html[data-identity-theme="taibah-green"] .sa-govbar__social {
+        flex: 1 1 100%;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        min-width: 0;
+    }
+
+    html[data-identity-theme="taibah-green"] .sa-govbar__contacts {
+        gap: 0.35rem 0.85rem;
+    }
+
+    html[data-identity-theme="taibah-green"] .sa-govbar__contact {
+        flex-shrink: 0;
+        white-space: nowrap;
     }
 }
 
@@ -938,4 +1130,254 @@ html[data-identity-theme="taibah-green"] .tu-accredit__card span {
     color: #384250;
     font-size: 0.78rem;
     line-height: 1.55;
+}
+
+html[data-identity-theme="taibah-green"] .tu-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    margin: 0 0 0.7rem;
+    color: #7080ea;
+    font-size: 0.82rem;
+    font-weight: 700;
+}
+
+html[data-identity-theme="taibah-green"] .tu-kicker::before {
+    content: "";
+    width: 1.5rem;
+    height: 2px;
+    border-radius: 999px;
+    background: #7080ea;
+}
+
+html[data-identity-theme="taibah-green"] .tu-college,
+html[data-identity-theme="taibah-green"] .tu-institute {
+    padding-left: 4.75rem;
+    background: #f4f6f5;
+    color: #161616;
+}
+
+html[data-identity-theme="taibah-green"] .tu-college {
+    padding-top: 3.25rem;
+    padding-bottom: 0.5rem;
+}
+
+html[data-identity-theme="taibah-green"] .tu-college__panel {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    gap: 2.25rem;
+    align-items: center;
+    padding: 2.15rem 2.35rem;
+    overflow: hidden;
+    border: 1px solid #e5e7eb;
+    border-radius: 28px;
+    background: #ffffff;
+    box-shadow: 0 18px 44px rgba(7, 77, 49, 0.07);
+}
+
+html[data-identity-theme="taibah-green"] .tu-college__panel::before {
+    content: "";
+    position: absolute;
+    inset-inline-start: 0;
+    inset-block: 0;
+    width: 6px;
+    background: linear-gradient(180deg, #074d31 0%, #7080ea 100%);
+}
+
+html[data-identity-theme="taibah-green"] .tu-college h2,
+html[data-identity-theme="taibah-green"] .tu-institute h2 {
+    margin: 0;
+    color: #074d31;
+    font-size: clamp(1.7rem, 3vw, 2.35rem);
+    font-weight: 700;
+    line-height: 1.35;
+}
+
+html[data-identity-theme="taibah-green"] .tu-college__copy > p,
+html[data-identity-theme="taibah-green"] .tu-institute__lead {
+    margin: 0.85rem 0 0;
+    color: #384250;
+    font-size: 1.02rem;
+    line-height: 1.9;
+}
+
+html[data-identity-theme="taibah-green"] .tu-college__stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+    margin-top: 1.25rem;
+}
+
+html[data-identity-theme="taibah-green"] .tu-college__stats div {
+    min-width: 7rem;
+    padding: 0.75rem 0.95rem;
+    border-radius: 16px;
+    background: #f3f7f5;
+}
+
+html[data-identity-theme="taibah-green"] .tu-college__stats strong {
+    display: block;
+    color: #074d31;
+    font-size: 1.45rem;
+    line-height: 1;
+}
+
+html[data-identity-theme="taibah-green"] .tu-college__stats span {
+    display: block;
+    margin-top: 0.3rem;
+    color: #384250;
+    font-size: 0.78rem;
+    font-weight: 700;
+}
+
+html[data-identity-theme="taibah-green"] .tu-college__branches {
+    margin-top: 1.15rem;
+}
+
+html[data-identity-theme="taibah-green"] .tu-college__branches > span {
+    display: block;
+    margin-bottom: 0.55rem;
+    color: #074d31;
+    font-size: 0.85rem;
+    font-weight: 700;
+}
+
+html[data-identity-theme="taibah-green"] .tu-college__branches ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+html[data-identity-theme="taibah-green"] .tu-college__branches li {
+    padding: 0.32rem 0.75rem;
+    border: 1px solid #d2d6db;
+    border-radius: 999px;
+    background: #ffffff;
+    color: #161616;
+    font-size: 0.82rem;
+    font-weight: 700;
+}
+
+html[data-identity-theme="taibah-green"] .tu-college__programs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.7rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+html[data-identity-theme="taibah-green"] .tu-college__programs li {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    min-height: 4.35rem;
+    padding: 0.75rem 0.85rem;
+    border: 1px solid #e5e7eb;
+    border-radius: 16px;
+    background: #f8faf9;
+    color: #161616;
+    font-weight: 700;
+    line-height: 1.45;
+    transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+html[data-identity-theme="taibah-green"] .tu-college__programs li:hover {
+    border-color: #7080ea;
+    background: #ffffff;
+    box-shadow: 0 10px 22px rgba(112, 128, 234, 0.14);
+    transform: translateY(-2px);
+}
+
+html[data-identity-theme="taibah-green"] .tu-college__num {
+    display: grid;
+    flex: 0 0 auto;
+    place-items: center;
+    width: 2.15rem;
+    height: 2.15rem;
+    border-radius: 999px;
+    background: #074d31;
+    color: #ffffff;
+    font-size: 0.72rem;
+    font-weight: 700;
+}
+
+html[data-identity-theme="taibah-green"] .tu-institute {
+    padding-top: 2.25rem;
+    padding-bottom: 4.5rem;
+}
+
+html[data-identity-theme="taibah-green"] .tu-institute__head {
+    max-width: 44rem;
+    margin-bottom: 1.6rem;
+}
+
+html[data-identity-theme="taibah-green"] .tu-institute__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+html[data-identity-theme="taibah-green"] .tu-institute__card {
+    position: relative;
+    padding: 1.55rem 1.3rem 1.45rem;
+    overflow: hidden;
+    border: 1px solid #e5e7eb;
+    border-radius: 22px;
+    background: #ffffff;
+    box-shadow: 0 12px 30px rgba(22, 22, 22, 0.04);
+}
+
+html[data-identity-theme="taibah-green"] .tu-institute__card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    inset-inline-start: 1.3rem;
+    width: 2.4rem;
+    height: 3px;
+    border-radius: 0 0 4px 4px;
+    background: #7080ea;
+}
+
+html[data-identity-theme="taibah-green"] .tu-institute__index {
+    display: inline-block;
+    margin-bottom: 0.8rem;
+    color: #7080ea;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+}
+
+html[data-identity-theme="taibah-green"] .tu-institute__card h3 {
+    margin: 0;
+    color: #161616;
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+html[data-identity-theme="taibah-green"] .tu-institute__card p {
+    margin: 0.6rem 0 0;
+    color: #384250;
+    line-height: 1.85;
+}
+
+@media (max-width: 900px) {
+    html[data-identity-theme="taibah-green"] .tu-college__panel,
+    html[data-identity-theme="taibah-green"] .tu-institute__grid {
+        grid-template-columns: 1fr;
+    }
+
+    html[data-identity-theme="taibah-green"] .tu-college__panel {
+        padding: 1.45rem 1.15rem;
+    }
+}
+
+@media (max-width: 640px) {
+    html[data-identity-theme="taibah-green"] .tu-college__programs {
+        grid-template-columns: 1fr;
+    }
 }

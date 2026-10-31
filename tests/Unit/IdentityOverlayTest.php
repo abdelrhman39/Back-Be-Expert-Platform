@@ -57,8 +57,41 @@ class IdentityOverlayTest extends TestCase
         );
     }
 
+    public function test_taibah_host_uses_the_applied_college_and_research_institute(): void
+    {
+        $this->bindTaibahRequest();
+
+        $this->assertSame('الكلية التطبيقية', platform_name('ar'));
+        $this->assertSame('Applied College', platform_name('en'));
+        $this->assertSame(
+            'الكلية التطبيقية — جامعة طيبة',
+            Utf8Text::interpolate('{platform_name} — الجامعة العربية المفتوحة', 'ar'),
+        );
+        $this->assertSame(
+            'الكلية التطبيقية',
+            IdentityOverlay::rewriteText('مركز التعلم المستمر'),
+        );
+        $this->assertSame(
+            'الكلية التطبيقية التابعة لجامعة طيبة',
+            IdentityOverlay::rewriteText('منصة التعليم المستمر التابعة لجامعة طيبة'),
+        );
+        $this->assertSame(
+            'تقدّمه الكلية التطبيقية في جامعة طيبة',
+            IdentityOverlay::rewriteText('يقدّمه مركز التعلم المستمر في جامعة طيبة'),
+        );
+        $this->assertSame(
+            'معهد البحوث والاستشارات',
+            IdentityOverlay::rewriteText('معهد البحوث والدراسات الاستشارية'),
+        );
+    }
+
     protected function bindKkuRequest(): void
     {
         $this->app->instance('request', Request::create('https://kku.platformuni.com/ar', 'GET'));
+    }
+
+    protected function bindTaibahRequest(): void
+    {
+        $this->app->instance('request', Request::create('https://taibah.platformuni.com/ar', 'GET'));
     }
 }

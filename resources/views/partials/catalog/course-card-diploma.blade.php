@@ -14,9 +14,44 @@
         default => 'fa-building',
     };
     $brief = $course->details?->tabContent('brief');
-    $summary = $brief ? \Illuminate\Support\Str::limit(strip_tags($brief), 96) : null;
+    $briefText = trim(preg_replace('/\s+/u', ' ', strip_tags(str_ireplace(
+        ['</p>', '</div>', '</li>', '<br>', '<br/>', '<br />'],
+        ' ',
+        (string) $brief
+    ))) ?? '');
+    $taibahCertificate = ($presentation ?? null) === 'taibah-certificate';
+    if ($taibahCertificate && $briefText !== '') {
+        $summary = preg_match('/^.*?[.!?؟]/u', $briefText, $summaryMatch)
+            ? trim($summaryMatch[0])
+            : $briefText;
+    } else {
+        $summary = $briefText !== '' ? \Illuminate\Support\Str::limit($briefText, 96) : null;
+    }
+    $usesBrandPoster = ! $course->hasCustomPoster();
+    $scheduleMedia = $taibahCertificate && $usesBrandPoster && filled($course->duration_label);
+    $durationPrimary = null;
+    $durationSecondary = null;
+    if ($scheduleMedia) {
+        $stripMode = static function (?string $value): ?string {
+            $value = trim(preg_replace('/\s*(حضورية|حضوري|عن بعد|in-person|online)\s*/iu', ' ', (string) $value) ?? '');
+            $value = trim(preg_replace('/\s+/u', ' ', $value) ?? '');
+
+            return $value !== '' ? $value : null;
+        };
+        $durationParts = preg_split('/\s*\/\s*/u', trim((string) $course->duration_label), 2) ?: [];
+        $durationPrimary = $stripMode($durationParts[0] ?? null);
+        $durationSecondary = $stripMode($durationParts[1] ?? null);
+    }
+    $summaryMentionsPlace = $taibahCertificate && $summary && $course->city && str_contains($summary, (string) $course->city);
+    $summaryMentionsDelivery = $taibahCertificate && $summary && preg_match('/عن بعد|حضو|online|in-person/iu', $summary);
     $inWishlist = app(\App\Services\WishlistService::class)->isInWishlist($course->id);
     $hours = $course->duration_hours ?: ($schedule['hours'] ?? null);
+    $hoursNumber = null;
+    if ($hours !== null && $hours !== '') {
+        $hoursNumber = ((float) $hours == (int) $hours) ? (string) (int) $hours : (string) $hours;
+    }
+    $hoursAlreadyInLabel = $hoursNumber
+        && preg_match('/(?<!\d)'.preg_quote($hoursNumber, '/').'(?!\d)/u', (string) ($course->duration_label ?? ''));
     $isDiploma = $course->categories->contains('id', \App\Services\CatalogCourseService::CATEGORY_DIPLOMAS);
     $isCertificate = $course->categories->contains('id', \App\Services\CatalogCourseService::CATEGORY_PROFESSIONAL_CERTIFICATES);
     $typePill = $isDiploma
@@ -24,32 +59,54 @@
         : ($isCertificate
             ? ($isEn ? 'Professional Certificate' : 'شهادة احترافية')
             : ($course->primaryCategory()?->displayTitle() ?: ($isEn ? 'Program' : 'برنامج')));
-    $usesBrandPoster = ! $course->hasCustomPoster();
     $deliveryType = $course->delivery_type === 'onsite' ? 'offline' : 'online';
 @endphp
 
 <article class="diploma-list-card">
-    <a @class(['diploma-list-card__media', 'diploma-list-card__media--brand' => $usesBrandPoster]) href="{{ $showUrl }}">
-        <img src="{{ $course->posterUrl() }}" alt="{{ $course->displayTitle() }}" loading="lazy">
-        <span class="diploma-list-card__pill">{{ $typePill }}</span>
-        @if ($course->is_featured)
-            <span class="diploma-list-card__pill diploma-list-card__pill--featured">{{ $isEn ? 'Featured' : 'مميز' }}</span>
+    <a @class([
+        'diploma-list-card__media',
+        'diploma-list-card__media--brand' => $usesBrandPoster && ! $scheduleMedia,
+        'diploma-list-card__media--schedule' => $scheduleMedia,
+    ]) href="{{ $showUrl }}">
+        @if ($scheduleMedia)
+            @if ($durationPrimary)
+                <span class="diploma-list-card__schedule">
+                    <strong>{{ $durationPrimary }}</strong>
+                    @if ($durationSecondary)
+                        <span>{{ $durationSecondary }}</span>
+                    @endif
+                </span>
+            @endif
+        @else
+            <img src="{{ $course->posterUrl() }}" alt="{{ $course->displayTitle() }}" loading="lazy">
+            @unless ($taibahCertificate)
+                <span class="diploma-list-card__pill">{{ $typePill }}</span>
+                @if ($course->is_featured)
+                    <span class="diploma-list-card__pill diploma-list-card__pill--featured">{{ $isEn ? 'Featured' : 'مميز' }}</span>
+                @endif
+            @endunless
         @endif
     </a>
 
     <div class="diploma-list-card__body">
         <div class="diploma-list-card__meta">
-            @if ($course->duration_label)
-                <span><i class="fa-solid fa-hourglass-half" aria-hidden="true"></i>{{ $course->duration_label }}</span>
-            @endif
-            @if ($hours)
-                <span><i class="fa-solid fa-clock" aria-hidden="true"></i>{{ $hours }} {{ $isEn ? 'hours' : 'ساعة' }}</span>
-            @endif
-            @if ($course->city)
+            @unless ($scheduleMedia)
+                @if ($course->duration_label)
+                    <span><i class="fa-solid fa-hourglass-half" aria-hidden="true"></i>{{ $course->duration_label }}</span>
+                @endif
+                @if ($hoursNumber && ! $hoursAlreadyInLabel)
+                    <span><i class="fa-solid fa-clock" aria-hidden="true"></i>{{ $hoursNumber }} {{ $isEn ? 'hours' : 'ساعة' }}</span>
+                @endif
+            @endunless
+            @if ($course->city && ! $summaryMentionsPlace && (! $taibahCertificate || $course->normalizedDeliveryType() !== 'online'))
                 <span><i class="fa-solid fa-location-dot" aria-hidden="true"></i>{{ $course->city }}</span>
             @endif
-            <span><i class="fa-solid {{ $deliveryIconClass }}" aria-hidden="true"></i>{{ $deliveryLabel }}</span>
-            <span><i class="fa-solid {{ $course->installmentOffered() ? 'fa-calendar-check' : 'fa-money-bill-wave' }}" aria-hidden="true"></i>{{ $course->installmentOffered() ? ($isEn ? 'Payment plan available' : 'تقسيط متاح') : ($isEn ? 'Full payment' : 'سداد كامل') }}</span>
+            @unless ($summaryMentionsDelivery)
+                <span><i class="fa-solid {{ $deliveryIconClass }}" aria-hidden="true"></i>{{ $deliveryLabel }}</span>
+            @endunless
+            @unless ($taibahCertificate || $course->installmentOffered())
+                <span><i class="fa-solid fa-money-bill-wave" aria-hidden="true"></i>{{ $isEn ? 'Full payment' : 'سداد كامل' }}</span>
+            @endunless
         </div>
 
         <h3 class="diploma-list-card__title">

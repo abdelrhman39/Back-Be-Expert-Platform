@@ -20,6 +20,7 @@
                 'items' => $courses,
                 'slides' => 2,
                 'label' => $isEn ? 'Professional certificates' : 'الشهادات الاحترافية',
+                'presentation' => \App\Support\IdentityThemes::activeKey() === 'taibah-green' ? 'taibah-certificate' : null,
             ])
         @else
             <a class="lg-program-teaser" href="{{ $allUrl }}" data-aos="fade-up">

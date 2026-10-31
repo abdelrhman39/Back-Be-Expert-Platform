@@ -201,18 +201,15 @@ if (! function_exists('platform_name')) {
     function platform_name(?string $locale = null): string
     {
         $locale ??= app()->getLocale();
+        $branding = \App\Support\IdentityThemes::resolvedBranding();
 
         if ($locale === 'en') {
-            return PlatformSetting::get(
-                'platform_name_en',
-                'Continuing Learning Center'
-            ) ?: 'Continuing Learning Center';
+            return ($branding['platform_name_en'] ?? null)
+                ?: (PlatformSetting::get('platform_name_en', 'Continuing Learning Center') ?: 'Continuing Learning Center');
         }
 
-        return PlatformSetting::get(
-            'platform_name_ar',
-            'مركز التعلم المستمر'
-        ) ?: 'مركز التعلم المستمر';
+        return ($branding['platform_name_ar'] ?? null)
+            ?: (PlatformSetting::get('platform_name_ar', 'مركز التعلم المستمر') ?: 'مركز التعلم المستمر');
     }
 }
 

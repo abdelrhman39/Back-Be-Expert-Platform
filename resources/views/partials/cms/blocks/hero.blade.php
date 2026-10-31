@@ -258,6 +258,7 @@
 
 @if (\App\Support\IdentityThemes::activeKey() === 'taibah-green')
     @include('partials.catalog.home-accreditations')
+    @include('partials.catalog.home-taibah-institute')
 @else
     @include('partials.catalog.home-fields-bar', ['fields' => $popularFields ?? collect()])
 @endif

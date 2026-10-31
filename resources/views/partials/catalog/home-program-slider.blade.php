@@ -1,6 +1,7 @@
 @php
     $items = collect($items ?? []);
     $label = $label ?? '';
+    $presentation = $presentation ?? null;
     $isEn = app()->getLocale() === 'en';
 @endphp
 
@@ -15,7 +16,7 @@
     >
         @foreach ($items as $course)
             <div class="home-catalog-slide">
-                @include('partials.catalog.course-card-diploma', ['course' => $course])
+                @include('partials.catalog.course-card-diploma', ['course' => $course, 'presentation' => $presentation])
             </div>
         @endforeach
     </div>
