@@ -28,7 +28,7 @@
     <link rel="stylesheet" href="{{ asset('css/home-features.css') }}?v=2">
     <link rel="stylesheet" href="{{ static_asset('assets/domain-a11y-panel.css') }}">
     <link rel="stylesheet" href="{{ asset('css/site-footer.css') }}?v=1">
-    <link rel="stylesheet" href="{{ asset('css/taibah-saudi.css') }}?v=28">
+    <link rel="stylesheet" href="{{ asset('css/taibah-saudi.css') }}?v=29">
     <style id="theia-sticky-sidebar-stylesheet-TSS">
         .theiaStickySidebar:after {
             content: "";

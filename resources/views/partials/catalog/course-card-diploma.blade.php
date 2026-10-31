@@ -28,28 +28,31 @@
         $summary = $briefText !== '' ? \Illuminate\Support\Str::limit($briefText, 96) : null;
     }
     $usesBrandPoster = ! $course->hasCustomPoster();
-    $scheduleMedia = $taibahCertificate && $usesBrandPoster && filled($course->duration_label);
-    $durationPrimary = null;
-    $durationSecondary = null;
-    if ($scheduleMedia) {
-        $stripMode = static function (?string $value): ?string {
-            $value = trim(preg_replace('/\s*(حضورية|حضوري|عن بعد|in-person|online)\s*/iu', ' ', (string) $value) ?? '');
-            $value = trim(preg_replace('/\s+/u', ' ', $value) ?? '');
-
-            return $value !== '' ? $value : null;
-        };
-        $durationParts = preg_split('/\s*\/\s*/u', trim((string) $course->duration_label), 2) ?: [];
-        $durationPrimary = $stripMode($durationParts[0] ?? null);
-        $durationSecondary = $stripMode($durationParts[1] ?? null);
+    $daysCount = $course->duration_days ? (int) $course->duration_days : null;
+    $dateLabel = null;
+    if ($daysCount) {
+        $dateLabel = $isEn
+            ? $daysCount.' '.($daysCount === 1 ? 'day' : 'days')
+            : $daysCount.' '.($daysCount === 1 ? 'يوم' : ($daysCount === 2 ? 'يومان' : ($daysCount <= 10 ? 'أيام' : 'يوماً')));
+    } elseif (filled($course->duration_label)) {
+        $dateParts = preg_split('/\s*\/\s*/u', trim((string) $course->duration_label), 2) ?: [];
+        $dateLabel = trim(preg_replace('/\s*(حضورية|حضوري|عن بعد|نحو\s*\d+\s*ساعة)\s*/iu', ' ', (string) ($dateParts[0] ?? '')) ?? '');
+        $dateLabel = $dateLabel !== '' ? $dateLabel : null;
     }
-    $summaryMentionsPlace = $taibahCertificate && $summary && $course->city && str_contains($summary, (string) $course->city);
-    $summaryMentionsDelivery = $taibahCertificate && $summary && preg_match('/عن بعد|حضو|online|in-person/iu', $summary);
+    $attendanceLabel = match ($course->normalizedDeliveryType()) {
+        'online' => $isEn ? 'Remote' : 'عن بعد',
+        'onsite' => $isEn ? 'In person' : 'حضوري',
+        default => $isEn ? 'Remote or in person' : 'عن بعد أو حضوري',
+    };
     $inWishlist = app(\App\Services\WishlistService::class)->isInWishlist($course->id);
     $hours = $course->duration_hours ?: ($schedule['hours'] ?? null);
     $hoursNumber = null;
     if ($hours !== null && $hours !== '') {
         $hoursNumber = ((float) $hours == (int) $hours) ? (string) (int) $hours : (string) $hours;
     }
+    $scheduleMedia = $taibahCertificate && $usesBrandPoster && ($dateLabel || $hoursNumber);
+    $summaryMentionsPlace = $taibahCertificate && $summary && $course->city && str_contains($summary, (string) $course->city);
+    $summaryMentionsDelivery = $taibahCertificate;
     $hoursAlreadyInLabel = $hoursNumber
         && preg_match('/(?<!\d)'.preg_quote($hoursNumber, '/').'(?!\d)/u', (string) ($course->duration_label ?? ''));
     $isDiploma = $course->categories->contains('id', \App\Services\CatalogCourseService::CATEGORY_DIPLOMAS);
@@ -69,14 +72,24 @@
         'diploma-list-card__media--schedule' => $scheduleMedia,
     ]) href="{{ $showUrl }}">
         @if ($scheduleMedia)
-            @if ($durationPrimary)
-                <span class="diploma-list-card__schedule">
-                    <strong>{{ $durationPrimary }}</strong>
-                    @if ($durationSecondary)
-                        <span>{{ $durationSecondary }}</span>
-                    @endif
+            <span class="diploma-list-card__facts">
+                @if ($dateLabel)
+                    <span>
+                        <small>{{ $isEn ? 'Date' : 'التاريخ' }}</small>
+                        <strong>{{ $dateLabel }}</strong>
+                    </span>
+                @endif
+                @if ($hoursNumber)
+                    <span>
+                        <small>{{ $isEn ? 'Hours' : 'عدد الساعات' }}</small>
+                        <strong>{{ $hoursNumber }} {{ $isEn ? 'hours' : 'ساعة' }}</strong>
+                    </span>
+                @endif
+                <span>
+                    <small>{{ $isEn ? 'Attendance' : 'الحضور' }}</small>
+                    <strong>{{ $attendanceLabel }}</strong>
                 </span>
-            @endif
+            </span>
         @else
             <img src="{{ $course->posterUrl() }}" alt="{{ $course->displayTitle() }}" loading="lazy">
             @unless ($taibahCertificate)
@@ -89,6 +102,7 @@
     </a>
 
     <div class="diploma-list-card__body">
+        @unless ($scheduleMedia)
         <div class="diploma-list-card__meta">
             @unless ($scheduleMedia)
                 @if ($course->duration_label)
@@ -98,7 +112,7 @@
                     <span><i class="fa-solid fa-clock" aria-hidden="true"></i>{{ $hoursNumber }} {{ $isEn ? 'hours' : 'ساعة' }}</span>
                 @endif
             @endunless
-            @if ($course->city && ! $summaryMentionsPlace && (! $taibahCertificate || $course->normalizedDeliveryType() !== 'online'))
+            @if ($course->city && ! $taibahCertificate && ! $summaryMentionsPlace)
                 <span><i class="fa-solid fa-location-dot" aria-hidden="true"></i>{{ $course->city }}</span>
             @endif
             @unless ($summaryMentionsDelivery)
@@ -108,6 +122,7 @@
                 <span><i class="fa-solid fa-money-bill-wave" aria-hidden="true"></i>{{ $isEn ? 'Full payment' : 'سداد كامل' }}</span>
             @endunless
         </div>
+        @endunless
 
         <h3 class="diploma-list-card__title">
             <a href="{{ $showUrl }}">{{ $course->displayTitle() }}</a>
