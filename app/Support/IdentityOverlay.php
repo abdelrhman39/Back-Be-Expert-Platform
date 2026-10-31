@@ -26,7 +26,16 @@ class IdentityOverlay
             return (string) $text;
         }
 
-        return strtr($text, self::textReplacements());
+        $text = strtr($text, self::textReplacements());
+
+        if (IdentityThemes::activeKey() === 'taibah-green') {
+            $text = strtr($text, [
+                'الكلية التطبيقية التابع لـ جامعة طيبة يقدّم' => 'الكلية التطبيقية التابعة لجامعة طيبة تقدّم',
+                'الكلية التطبيقية التابع لـ' => 'الكلية التطبيقية التابعة لـ',
+            ]);
+        }
+
+        return $text;
     }
 
     public static function rewriteAssetPath(?string $path): ?string

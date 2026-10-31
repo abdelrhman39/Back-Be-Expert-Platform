@@ -80,6 +80,10 @@ class IdentityOverlayTest extends TestCase
             IdentityOverlay::rewriteText('يقدّمه مركز التعلم المستمر في جامعة طيبة'),
         );
         $this->assertSame(
+            'الكلية التطبيقية التابعة لجامعة طيبة تقدّم برامج',
+            IdentityOverlay::rewriteText('مركز التعلم المستمر التابع لـ جامعة طيبة يقدّم برامج'),
+        );
+        $this->assertSame(
             'معهد البحوث والاستشارات',
             IdentityOverlay::rewriteText('معهد البحوث والدراسات الاستشارية'),
         );
