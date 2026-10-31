@@ -559,6 +559,25 @@ html[data-identity-theme="taibah-green"] .home-catalog-slider-wrap--cards .diplo
     background: #074d31;
 }
 
+html[data-identity-theme="taibah-green"] .diploma-list-card__media--brand {
+    aspect-ratio: auto;
+    height: auto;
+    background: #ffffff;
+}
+
+html[data-identity-theme="taibah-green"] .diploma-list-card__media--brand img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    object-position: center;
+    padding: 1.15rem 0.7rem 1.3rem;
+    background: #ffffff;
+}
+
+html[data-identity-theme="taibah-green"] .diploma-list-card:hover .diploma-list-card__media--brand img {
+    transform: none;
+}
+
 html[data-identity-theme="taibah-green"] :is(#section-certificates, #section-diplomas) .diploma-list-card {
     border-color: #e5e7eb;
     border-radius: 22px;
