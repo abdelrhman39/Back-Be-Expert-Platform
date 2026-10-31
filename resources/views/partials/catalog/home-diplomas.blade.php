@@ -20,6 +20,7 @@
                 'items' => $diplomas,
                 'slides' => 2,
                 'label' => $isEn ? 'Diplomas' : 'الدبلومات',
+                'presentation' => \App\Support\IdentityThemes::activeKey() === 'taibah-green' ? 'taibah-home' : null,
             ])
         @else
             <a class="lg-program-teaser lg-program-teaser--diploma" href="{{ $allUrl }}" data-aos="fade-up">

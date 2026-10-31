@@ -19,8 +19,8 @@
         ' ',
         (string) $brief
     ))) ?? '');
-    $taibahCertificate = ($presentation ?? null) === 'taibah-certificate';
-    if ($taibahCertificate && $briefText !== '') {
+    $taibahHomeCard = in_array(($presentation ?? null), ['taibah-certificate', 'taibah-home'], true);
+    if ($taibahHomeCard && $briefText !== '') {
         $summary = preg_match('/^.*?[.!?؟]/u', $briefText, $summaryMatch)
             ? trim($summaryMatch[0])
             : $briefText;
@@ -49,9 +49,12 @@
     $hoursNumber = null;
     if ($hours !== null && $hours !== '') {
         $hoursNumber = ((float) $hours == (int) $hours) ? (string) (int) $hours : (string) $hours;
+    } elseif ($taibahHomeCard && preg_match('/(\d+(?:[.,]\d+)?)\s*ساعة/u', (string) ($course->duration_label ?? ''), $hoursMatch)) {
+        $parsedHours = str_replace(',', '.', $hoursMatch[1]);
+        $hoursNumber = ((float) $parsedHours == (int) $parsedHours) ? (string) (int) $parsedHours : $hoursMatch[1];
     }
-    $summaryMentionsPlace = $taibahCertificate && $summary && $course->city && str_contains($summary, (string) $course->city);
-    $summaryMentionsDelivery = $taibahCertificate;
+    $summaryMentionsPlace = $taibahHomeCard && $summary && $course->city && str_contains($summary, (string) $course->city);
+    $summaryMentionsDelivery = $taibahHomeCard;
     $factCount = ($dateLabel ? 1 : 0) + ($hoursNumber ? 1 : 0) + 1;
     $hoursAlreadyInLabel = $hoursNumber
         && preg_match('/(?<!\d)'.preg_quote($hoursNumber, '/').'(?!\d)/u', (string) ($course->duration_label ?? ''));
@@ -71,7 +74,7 @@
         'diploma-list-card__media--brand' => $usesBrandPoster,
     ]) href="{{ $showUrl }}">
         <img src="{{ $course->posterUrl() }}" alt="{{ $course->displayTitle() }}" loading="lazy">
-        @unless ($taibahCertificate)
+        @unless ($taibahHomeCard)
             <span class="diploma-list-card__pill">{{ $typePill }}</span>
             @if ($course->is_featured)
                 <span class="diploma-list-card__pill diploma-list-card__pill--featured">{{ $isEn ? 'Featured' : 'مميز' }}</span>
@@ -80,7 +83,7 @@
     </a>
 
     <div class="diploma-list-card__body">
-        @unless ($taibahCertificate)
+        @unless ($taibahHomeCard)
         <div class="diploma-list-card__meta">
             @if ($course->duration_label)
                 <span><i class="fa-solid fa-hourglass-half" aria-hidden="true"></i>{{ $course->duration_label }}</span>
@@ -88,13 +91,13 @@
             @if ($hoursNumber && ! $hoursAlreadyInLabel)
                 <span><i class="fa-solid fa-clock" aria-hidden="true"></i>{{ $hoursNumber }} {{ $isEn ? 'hours' : 'ساعة' }}</span>
             @endif
-            @if ($course->city && ! $taibahCertificate && ! $summaryMentionsPlace)
+            @if ($course->city && ! $taibahHomeCard && ! $summaryMentionsPlace)
                 <span><i class="fa-solid fa-location-dot" aria-hidden="true"></i>{{ $course->city }}</span>
             @endif
             @unless ($summaryMentionsDelivery)
                 <span><i class="fa-solid {{ $deliveryIconClass }}" aria-hidden="true"></i>{{ $deliveryLabel }}</span>
             @endunless
-            @unless ($taibahCertificate || $course->installmentOffered())
+            @unless ($taibahHomeCard || $course->installmentOffered())
                 <span><i class="fa-solid fa-money-bill-wave" aria-hidden="true"></i>{{ $isEn ? 'Full payment' : 'سداد كامل' }}</span>
             @endunless
         </div>
@@ -121,7 +124,7 @@
             @endif
         </div>
 
-        @if ($taibahCertificate)
+        @if ($taibahHomeCard)
             <div class="diploma-list-card__facts" style="--facts: {{ $factCount }}">
                 @if ($dateLabel)
                     <span>
