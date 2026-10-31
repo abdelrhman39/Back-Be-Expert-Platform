@@ -50,9 +50,9 @@
     if ($hours !== null && $hours !== '') {
         $hoursNumber = ((float) $hours == (int) $hours) ? (string) (int) $hours : (string) $hours;
     }
-    $scheduleMedia = $taibahCertificate && $usesBrandPoster && ($dateLabel || $hoursNumber);
     $summaryMentionsPlace = $taibahCertificate && $summary && $course->city && str_contains($summary, (string) $course->city);
     $summaryMentionsDelivery = $taibahCertificate;
+    $factCount = ($dateLabel ? 1 : 0) + ($hoursNumber ? 1 : 0) + 1;
     $hoursAlreadyInLabel = $hoursNumber
         && preg_match('/(?<!\d)'.preg_quote($hoursNumber, '/').'(?!\d)/u', (string) ($course->duration_label ?? ''));
     $isDiploma = $course->categories->contains('id', \App\Services\CatalogCourseService::CATEGORY_DIPLOMAS);
@@ -68,50 +68,26 @@
 <article class="diploma-list-card">
     <a @class([
         'diploma-list-card__media',
-        'diploma-list-card__media--brand' => $usesBrandPoster && ! $scheduleMedia,
-        'diploma-list-card__media--schedule' => $scheduleMedia,
+        'diploma-list-card__media--brand' => $usesBrandPoster,
     ]) href="{{ $showUrl }}">
-        @if ($scheduleMedia)
-            <span class="diploma-list-card__facts">
-                @if ($dateLabel)
-                    <span>
-                        <small>{{ $isEn ? 'Date' : 'التاريخ' }}</small>
-                        <strong>{{ $dateLabel }}</strong>
-                    </span>
-                @endif
-                @if ($hoursNumber)
-                    <span>
-                        <small>{{ $isEn ? 'Hours' : 'عدد الساعات' }}</small>
-                        <strong>{{ $hoursNumber }} {{ $isEn ? 'hours' : 'ساعة' }}</strong>
-                    </span>
-                @endif
-                <span>
-                    <small>{{ $isEn ? 'Attendance' : 'الحضور' }}</small>
-                    <strong>{{ $attendanceLabel }}</strong>
-                </span>
-            </span>
-        @else
-            <img src="{{ $course->posterUrl() }}" alt="{{ $course->displayTitle() }}" loading="lazy">
-            @unless ($taibahCertificate)
-                <span class="diploma-list-card__pill">{{ $typePill }}</span>
-                @if ($course->is_featured)
-                    <span class="diploma-list-card__pill diploma-list-card__pill--featured">{{ $isEn ? 'Featured' : 'مميز' }}</span>
-                @endif
-            @endunless
-        @endif
+        <img src="{{ $course->posterUrl() }}" alt="{{ $course->displayTitle() }}" loading="lazy">
+        @unless ($taibahCertificate)
+            <span class="diploma-list-card__pill">{{ $typePill }}</span>
+            @if ($course->is_featured)
+                <span class="diploma-list-card__pill diploma-list-card__pill--featured">{{ $isEn ? 'Featured' : 'مميز' }}</span>
+            @endif
+        @endunless
     </a>
 
     <div class="diploma-list-card__body">
-        @unless ($scheduleMedia)
+        @unless ($taibahCertificate)
         <div class="diploma-list-card__meta">
-            @unless ($scheduleMedia)
-                @if ($course->duration_label)
-                    <span><i class="fa-solid fa-hourglass-half" aria-hidden="true"></i>{{ $course->duration_label }}</span>
-                @endif
-                @if ($hoursNumber && ! $hoursAlreadyInLabel)
-                    <span><i class="fa-solid fa-clock" aria-hidden="true"></i>{{ $hoursNumber }} {{ $isEn ? 'hours' : 'ساعة' }}</span>
-                @endif
-            @endunless
+            @if ($course->duration_label)
+                <span><i class="fa-solid fa-hourglass-half" aria-hidden="true"></i>{{ $course->duration_label }}</span>
+            @endif
+            @if ($hoursNumber && ! $hoursAlreadyInLabel)
+                <span><i class="fa-solid fa-clock" aria-hidden="true"></i>{{ $hoursNumber }} {{ $isEn ? 'hours' : 'ساعة' }}</span>
+            @endif
             @if ($course->city && ! $taibahCertificate && ! $summaryMentionsPlace)
                 <span><i class="fa-solid fa-location-dot" aria-hidden="true"></i>{{ $course->city }}</span>
             @endif
@@ -144,6 +120,30 @@
                 <strong>{{ $isEn ? 'Shown on the details page' : 'تُعرض في صفحة التفاصيل' }}</strong>
             @endif
         </div>
+
+        @if ($taibahCertificate)
+            <div class="diploma-list-card__facts" style="--facts: {{ $factCount }}">
+                @if ($dateLabel)
+                    <span>
+                        <i class="fa-solid fa-calendar-days" aria-hidden="true"></i>
+                        <small>{{ $isEn ? 'Date' : 'التاريخ' }}</small>
+                        <strong>{{ $dateLabel }}</strong>
+                    </span>
+                @endif
+                @if ($hoursNumber)
+                    <span>
+                        <i class="fa-solid fa-clock" aria-hidden="true"></i>
+                        <small>{{ $isEn ? 'Hours' : 'عدد الساعات' }}</small>
+                        <strong>{{ $hoursNumber }} {{ $isEn ? 'hours' : 'ساعة' }}</strong>
+                    </span>
+                @endif
+                <span>
+                    <i class="fa-solid {{ $deliveryIconClass }}" aria-hidden="true"></i>
+                    <small>{{ $isEn ? 'Attendance' : 'الحضور' }}</small>
+                    <strong>{{ $attendanceLabel }}</strong>
+                </span>
+            </div>
+        @endif
 
         <div class="diploma-list-card__actions">
             <button type="button"

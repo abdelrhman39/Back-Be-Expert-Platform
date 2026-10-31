@@ -646,47 +646,44 @@ html[data-identity-theme="taibah-green"] #section-certificates .diploma-list-car
     border-radius: 10px !important;
 }
 
-html[data-identity-theme="taibah-green"] #section-certificates .diploma-list-card__media--schedule {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    aspect-ratio: 16 / 9;
-    padding: 1.15rem 1.2rem;
-    background:
-        radial-gradient(circle at 100% 0%, rgba(112, 128, 234, 0.42), transparent 46%),
-        linear-gradient(165deg, #074d31 0%, #063d27 100%);
-    text-align: center;
-    text-decoration: none;
-}
-
-html[data-identity-theme="taibah-green"] #section-certificates .diploma-list-card__media--schedule::after {
-    display: none;
-}
-
 html[data-identity-theme="taibah-green"] #section-certificates .diploma-list-card__facts {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 0.55rem;
-    width: 100%;
+    grid-template-columns: repeat(var(--facts, 3), minmax(0, 1fr));
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+    background: #f8faf9;
+    overflow: hidden;
 }
 
 html[data-identity-theme="taibah-green"] #section-certificates .diploma-list-card__facts > span {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.28rem;
+    gap: 0.12rem;
     min-width: 0;
+    padding: 0.55rem 0.3rem 0.6rem;
+    text-align: center;
+}
+
+html[data-identity-theme="taibah-green"] #section-certificates .diploma-list-card__facts > span + span {
+    border-inline-start: 1px solid #e5e7eb;
+}
+
+html[data-identity-theme="taibah-green"] #section-certificates .diploma-list-card__facts i {
+    color: #074d31;
+    font-size: 0.82rem;
 }
 
 html[data-identity-theme="taibah-green"] #section-certificates .diploma-list-card__facts small {
-    color: rgba(255, 255, 255, 0.78);
-    font-size: 0.72rem;
+    color: #6c737f;
+    font-size: 0.68rem;
     font-weight: 700;
+    line-height: 1.3;
 }
 
 html[data-identity-theme="taibah-green"] #section-certificates .diploma-list-card__facts strong {
-    color: #ffffff;
-    font-size: 0.98rem;
+    color: #161616;
+    font-size: 0.78rem;
     font-weight: 700;
     line-height: 1.35;
 }
