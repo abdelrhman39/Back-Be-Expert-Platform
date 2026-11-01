@@ -103,7 +103,7 @@ class HomePageBlocksTest extends TestCase
         $response->assertSee('معهد البحوث والاستشارات');
         $response->assertSee('إدارة أنظمة الشبكات');
         $response->assertSee('لماذا تختار الكلية التطبيقية؟');
-        $response->assertSee('taibah-saudi.css?v=35"', false);
+        $response->assertSee('taibah-saudi.css?v=36"', false);
         $response->assertDontSee('مركز التعلم المستمر');
     }
 

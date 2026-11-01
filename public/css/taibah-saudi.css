@@ -110,6 +110,12 @@ html[data-identity-theme="taibah-green"] .sa-govbar__social-link:hover {
     color: #ffffff;
 }
 
+html[data-identity-theme="taibah-green"] {
+    --float-btn-size: 44px;
+    --float-btn-gap: 10px;
+    --domain-a11y-fab-size: 44px;
+}
+
 html[data-identity-theme="taibah-green"] .float-actions-rail .float-mail,
 html[data-identity-theme="taibah-green"] .float-actions-rail .float-call,
 html[data-identity-theme="taibah-green"] .float-actions-rail .float-whts,
@@ -121,6 +127,17 @@ html[data-identity-theme="taibah-green"].use-domain-a11y .float-actions-rail .do
     border-color: #ffffff !important;
     box-shadow: 0 8px 18px rgba(7, 77, 49, 0.28) !important;
     color: #ffffff !important;
+}
+
+html[data-identity-theme="taibah-green"] .float-actions-rail .float-mail svg,
+html[data-identity-theme="taibah-green"] .float-actions-rail .float-whts svg,
+html[data-identity-theme="taibah-green"].use-domain-a11y .float-actions-rail .domain-a11y-fab svg {
+    width: 20px;
+    height: 20px;
+}
+
+html[data-identity-theme="taibah-green"] .float-actions-rail .back-to-top-icon {
+    font-size: 0.9rem !important;
 }
 
 html[data-identity-theme="taibah-green"] .header.new-header,
