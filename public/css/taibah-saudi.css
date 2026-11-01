@@ -688,7 +688,7 @@ html[data-identity-theme="taibah-green"] :is(#section-certificates, #section-dip
 
 html[data-identity-theme="taibah-green"] #section-certificates,
 html[data-identity-theme="taibah-green"] #section-diplomas {
-    background: #9faaf1;
+    background: #ffffff;
 }
 
 html[data-identity-theme="taibah-green"] #section-certificates .home-catalog-section__eyebrow,
@@ -824,7 +824,7 @@ html[data-identity-theme="taibah-green"] a {
 }
 
 html[data-identity-theme="taibah-green"] .np-paths {
-    background: #9faaf1;
+    background: #ffffff;
     padding-block: clamp(3.5rem, 6vw, 5.25rem);
 }
 
@@ -1092,7 +1092,7 @@ html[data-identity-theme="taibah-green"] .lg-fields-section__link:hover {
 }
 
 html[data-identity-theme="taibah-green"] .tu-accredit {
-    background: #9faaf1;
+    background: #ffffff;
     color: #161616;
     padding-block: clamp(3rem, 6vw, 4.75rem);
     border-top: 0;
@@ -1221,7 +1221,7 @@ html[data-identity-theme="taibah-green"] .tu-kicker::before {
 html[data-identity-theme="taibah-green"] .tu-college,
 html[data-identity-theme="taibah-green"] .tu-institute {
     padding-left: 4.75rem;
-    background: #9faaf1;
+    background: #ffffff;
     color: #161616;
 }
 
