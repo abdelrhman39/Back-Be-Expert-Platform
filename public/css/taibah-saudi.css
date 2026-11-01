@@ -800,6 +800,112 @@ html[data-identity-theme="taibah-green"] .np-cta--banner .np-cta__eyebrow {
     text-shadow: none;
 }
 
+html[data-identity-theme="taibah-green"] .atelier-stats {
+    background: #074d31;
+    padding-block: clamp(3.25rem, 6vw, 4.75rem);
+}
+
+html[data-identity-theme="taibah-green"] .atelier-stats .section-header {
+    margin-bottom: 1.75rem;
+}
+
+html[data-identity-theme="taibah-green"] .atelier-stats .section-header h2 {
+    font-size: clamp(1.65rem, 3vw, 2.15rem);
+    font-weight: 700;
+}
+
+html[data-identity-theme="taibah-green"] .atelier-stats .section-header h2::after {
+    width: 3rem;
+    height: 3px;
+    margin-top: 0.75rem;
+    background: #9faaf1;
+}
+
+html[data-identity-theme="taibah-green"] .atelier-stats .counter-item {
+    height: 100%;
+    margin-bottom: 1rem !important;
+    padding: 1.45rem 1rem 1.25rem;
+    border: 2px solid #9faaf1;
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.08);
+}
+
+html[data-identity-theme="taibah-green"] .atelier-stats .counter-item i {
+    display: none;
+}
+
+html[data-identity-theme="taibah-green"] .atelier-stats .counter-item h6 {
+    margin-bottom: 0.4rem !important;
+    font-size: 0.95rem;
+    font-weight: 700;
+}
+
+html[data-identity-theme="taibah-green"] .atelier-stats .counter-item h3 {
+    font-size: clamp(2rem, 3.2vw, 2.7rem);
+    font-weight: 700;
+}
+
+html[data-identity-theme="taibah-green"] .about-profile {
+    padding-bottom: 1.5rem;
+}
+
+html[data-identity-theme="taibah-green"] .about-profile__panel {
+    background: #ffffff;
+    color: #161616;
+    border: 2px solid #9faaf1;
+    box-shadow: 0 14px 34px rgba(22, 22, 22, 0.05);
+}
+
+html[data-identity-theme="taibah-green"] .about-profile__panel::before {
+    display: none;
+}
+
+html[data-identity-theme="taibah-green"] .about-profile__visual {
+    background: #9faaf1;
+    color: #074d31;
+}
+
+html[data-identity-theme="taibah-green"] .about-profile__title {
+    color: #074d31;
+}
+
+html[data-identity-theme="taibah-green"] .about-profile__body {
+    color: #384250;
+}
+
+html[data-identity-theme="taibah-green"] .about-profile .about-cta--on-dark {
+    background: #074d31;
+    color: #ffffff;
+    border-radius: 10px;
+}
+
+html[data-identity-theme="taibah-green"] .about-profile .about-cta--on-dark:hover {
+    background: #161616;
+    color: #ffffff;
+}
+
+html[data-identity-theme="taibah-green"] .atelier-about .np-cta__panel {
+    border: 2px solid #9faaf1;
+    background: #074d31;
+    box-shadow: 0 14px 34px rgba(22, 22, 22, 0.06);
+}
+
+html[data-identity-theme="taibah-green"] .atelier-about .np-cta__eyebrow {
+    color: #9faaf1 !important;
+}
+
+html[data-identity-theme="taibah-green"] .atelier-about .np-cta__btn--ghost {
+    background: #9faaf1;
+    border-color: #9faaf1;
+    color: #161616;
+}
+
+html[data-identity-theme="taibah-green"] .atelier-about .np-cta__btn--ghost:hover {
+    background: #ffffff;
+    border-color: #ffffff;
+    color: #074d31;
+}
+
 html[data-identity-theme="taibah-green"] .footer.footer--atelier {
     --footer-ink: #ffffff;
     --footer-muted: rgba(255, 255, 255, 0.72);

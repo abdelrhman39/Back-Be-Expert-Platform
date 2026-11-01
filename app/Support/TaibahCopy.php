@@ -82,12 +82,24 @@ class TaibahCopy
                 ];
         }
 
+        if (in_array($id, ['about_stats', 'stats'], true)) {
+            $data['title_prefix'] = '';
+            $data['platform_name'] = $isEn ? 'The Applied College' : 'الكلية التطبيقية';
+            $data['title_suffix'] = $isEn ? 'in numbers' : 'في أرقام';
+        }
+
         if ($id === 'company_profile') {
             $data['eyebrow'] = $isEn ? 'College profile' : 'ملف الكلية';
+            $data['description'] = $isEn
+                ? 'See the Applied College identity, its programs, and its academic model. Download the profile to share with your organization.'
+                : 'اطّلع على هوية الكلية التطبيقية وبرامجها ونموذج عملها الأكاديمي. حمّل الملف التعريفي للاستخدام المؤسسي أو المشاركة مع جهتك.';
         }
 
         if ($id === 'about_cta') {
             $data['title'] = $isEn ? 'Start with the Applied College' : 'ابدأ رحلتك مع الكلية التطبيقية';
+            $data['body'] = $isEn
+                ? 'Choose a program that fits your goal, or contact the college to design a track for your organization.'
+                : 'اختر برنامجاً يناسب هدفك، أو تواصل مع الكلية التطبيقية لتصميم مسار تدريبي لجهتك.';
         }
 
         $block['data'] = $data;

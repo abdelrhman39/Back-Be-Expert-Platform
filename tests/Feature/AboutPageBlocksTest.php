@@ -58,4 +58,18 @@ class AboutPageBlocksTest extends TestCase
         $response->assertDontSee('{platform_name}');
         $response->assertDontSee('برنامج مهارات');
     }
+
+    public function test_taibah_about_names_the_applied_college(): void
+    {
+        $this->seed([CmsSeeder::class, CmsPageBlocksSeeder::class]);
+
+        $response = $this->get('http://taibah.platformuni.com/ar/about');
+
+        $response->assertOk();
+        $response->assertSee('الكلية التطبيقية');
+        $response->assertSee('في أرقام');
+        $response->assertSee('وبرامجها ونموذج عملها');
+        $response->assertSee('ابدأ رحلتك مع الكلية التطبيقية');
+        $response->assertDontSee('مركز التعلم المستمر');
+    }
 }
